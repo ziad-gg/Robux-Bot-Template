@@ -4,6 +4,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
 .setName("ping")
 .setDescription("Test Bot By Ping it And Wait For Response")
+.setCategory("public")
 .InteractionOn(new SlashCommandBuilder())
 .setInteractionExecution(InteractionExecute)
 .setMessageExecution(MessageExecute)

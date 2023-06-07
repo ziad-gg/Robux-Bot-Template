@@ -3,13 +3,7 @@ const { Application } = require('handler.djs');
 const { Zoblox } = require('zoblox.js');
 const path = require('node:path');
 
-const client = new Client({ intents: [
-    GatewayIntentBits.Guilds, 
-    GatewayIntentBits.MessageContent, 
-    GatewayIntentBits.GuildMessages
-    ] 
-});
-
+const client = new Client({ intents: 3276799 });
 const zoblox = new Zoblox()
 
 new Application(client, {
@@ -22,7 +16,7 @@ client.Application.setPrefix("!");
 client.Application.build();
 
 client.Application.setData({
-  zob: zoblox
+  roblox: zoblox
 });
 
 client.login(process.env.Token);
