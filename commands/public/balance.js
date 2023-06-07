@@ -20,6 +20,7 @@ async function GlobalExecute (message, interaction) {
   let user = controller.author;
 
   if (args) user = await controller.getUser(args.toId());
+  console.log(args, user)
   if (!user) return controller.replyNoMention({ content: "> 🤔 **لا يمكنني العثور علي هذا العضو**" });
   if (user.bot) return controller.replyNoMention({ content: "> 🤔 **البوتات لا تملك حساب**" });
   
