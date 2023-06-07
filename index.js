@@ -17,7 +17,8 @@ client.Application.setPrefix("!");
 client.Application.build();
 
 client.Application.setData({
-  roblox: zoblox
+  roblox: zoblox, 
+  users: require('./src/models/Users.js')
 });
 
 zoblox.on('userReady', () => console.log(`Logged is as: ${zoblox.me.username}`));
@@ -26,3 +27,5 @@ mongoose.connection.on('connected', () => console.log('Connect to mongoose datab
 mongoose.connect(process.env.db);
 zoblox.login(process.env.Cookie);
 client.login(process.env.Token);
+
+require('./src/util.js');
