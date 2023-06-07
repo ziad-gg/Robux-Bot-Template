@@ -13,28 +13,25 @@ new Application(client, {
 });
 
 client.Application.setCooldown({ 
- message: "**{Username}**, Cool down (**{counter}** left)", 
+ message: "**{Username}**, Cooldown (**{counter}** left)", 
  reference: true, 
  long: true, 
- Mdelete: "3s",
+ Mdelete: "1s",
  EphemeralReply: true,
  once: true 
 });
 
 client.Application.setPrefix("!");
-
 client.Application.build();
-
 client.Application.setData({
   roblox: zoblox, 
   users: require('./src/models/Users.js')
 });
 
-zoblox.on('userReady', () => console.log(`Logged is as: ${zoblox.me.username}`));
-mongoose.connection.on('connected', () => console.log('Connect to mongoose database successfully'));
+zoblox.on('userReady', () => console.log(`Logged is as: ${zoblox.me.username} !`));
+mongoose.connection.on('connected', () => console.log('Connected to database !'));
 
 mongoose.connect(process.env.db);
 zoblox.login(process.env.Cookie);
 client.login(process.env.Token);
-
 require('./src/util.js');

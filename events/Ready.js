@@ -6,5 +6,5 @@ module.exports = new EventBuilder()
 .setExecution(Execute)
 
 function Execute(client) {
-  console.log(`Client ${client.user.tag} Is Ready`);
+  console.log(`${client.user.tag} Is Online !`);
 }

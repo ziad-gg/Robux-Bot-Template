@@ -33,7 +33,6 @@ async function GlobalExecute (message, interaction) {
   
 };
 
-
 function InteractionExecute(interaction, global) {
   interaction.replyNoMention({embeds: [global]});
 };
