@@ -17,14 +17,20 @@ async function GlobalExecute (message, interaction) {
   
   const args = controller[0];
   
-  if (args) {
-    return console.log(args)  
-  };
+  let user = controller.author
+
+  if (args) user = await controller.guild.members.fetch(args.toId()).then(data => data.user).catch(e => null);
   
-  const user = await controller.getUser(args.toId());
-  if (!user) return controller.replyNoMention({ content: "> 🤔 **لا يمكنني العثور علي هذا العضو**" })
-  const embed = new EmbedBuilder().setColor().setTitle(`رصيك الحالي هو ${user.balance}`)
+  if (!user) return controller.replyNoMention({ content: "> 🤔 **لا يمكنني العثور علي هذا العضو**" });
+    
+  if (user.bot) return controller.replyNoMention({ content: "> 🤔 **البوتات لا تملك حساب**" });
+  
+  const embed = new EmbedBuilder().setColor().setTitle((controller.author.id === user.id) ? `رصيدك الحالي هو ${data.balance}` : ``)
    
+  return {
+    message: embed,
+    interaction: embed ?? "Num"
+  }
   
 }
 
@@ -34,6 +40,7 @@ function InteractionExecute(interaction, global) {
 };
 
 function MessageExecute(message, global) {   
+  console.log("Hello From Message")
   message.replyNoMention({embeds: [global]});
 };
 
