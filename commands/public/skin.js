@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
 .setName("skin")
-.setDescription("To get your roblox skin")
+.setDescription("Get your roblox skin.")
 .setCategory("public")
 .setCooldown('10s')
 .InteractionOn(new SlashCommandBuilder().addStringOption(option => option.setName('username').setDescription('please write player username here').setRequired(true)))

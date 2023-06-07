@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
 .setName("balance")
-.setDescription("Get Your Current Currency")
+.setDescription("Shows user balance.")
 .setCategory("public")
 .setCooldown('10s')
 .InteractionOn(new SlashCommandBuilder().addUserOption(option => option.setName('user').setDescription('User To Get Information of His Currency')))
@@ -19,7 +19,7 @@ async function GlobalExecute (message, interaction) {
   const args = controller[0];
   let user = controller.author;
 
-  if (args) user = await controller.guild.members.fetch(args.toId()).then(data => data.user).catch(e => null);
+  if (args) user = await controller.getUser(args.toId());
   if (!user) return controller.replyNoMention({ content: "> 🤔 **لا يمكنني العثور علي هذا العضو**" });
   if (user.bot) return controller.replyNoMention({ content: "> 🤔 **البوتات لا تملك حساب**" });
   

@@ -12,13 +12,13 @@ new Application(client, {
   EventsPath: path.join(__dirname, 'events')
 });
 
-client.Application.setCooldown({ 
- message: "**{Username}**, Cooldown (**{counter}** left)", 
- reference: true, 
- long: true, 
- Mdelete: "1s",
- EphemeralReply: true,
- once: true 
+client.Application.setCooldown({   
+  message: "**{Username}**, Cooldown (**{counter}** left)", 
+  reference: true, 
+  long: true, 
+  Mdelete: 2500,
+  EphemeralReply: true,
+  once: true 
 });
 
 client.Application.setPrefix("!");
