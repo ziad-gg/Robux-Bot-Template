@@ -1,4 +1,3 @@
-
 const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
@@ -6,59 +5,42 @@ module.exports = new CommandBuilder()
 .setName("skin")
 .setDescription("To get your roblox skin")
 .setCategory("public")
-.InteractionOn(new SlashCommandBuilder().addStringOption(option => option.setName('username').setDescription('please write player username here')))
+.InteractionOn(new SlashCommandBuilder().addStringOption(option => option.setName('username').setDescription('please write player username here').setRequired(true)))
 .setGlobal(GlobalExecute)
 .setInteractionExecution(InteractionExecute)
 .setMessageExecution(MessageExecute)
 
 async function GlobalExecute (message, interaction) {
   
-  const roblox = message.getData('roblox');
+  const roblox = message ? message.getData('roblox') : interaction.getData('roblox');
   const username = message ? message[0] : interaction['username'];
+  
+  const m = message ?? interaction;
   
   let user = await roblox.users.find({ userNames: username });
   if (!user) return message.replyNoMention({content: '**لم يتم العثور على هذا الاسم في روبلوكس، قم بالمحاولة مرة اخرى**'});
   user = await roblox.users.get(user.id);
 
+  const embed = new EmbedBuilder()
+  .setAuthor({ name: user.name, iconURL: user.avatarURL() })
+  .setTitle(user.name)
+  .setURL('https://www.roblox.com/users' + user.id)
+  .setImage(user.avatarURL())
+  .setFooter({ text: m.author.username, iconURL: m.author.avatarURL() })
+  .setTimestamp();
+  
   return {
-    message: user,    
-    interaction: user
+    message: embed,    
+    interaction: embed
   };
   
 }
 
-async function InteractionExecute(interaction, global) {
-  const user = global;
-  
-  const embed = new EmbedBuilder()
-  .setAuthor({ name: user.naem, iconURL: user.avatarURL() })
-  .setColor('green')
-  .setImage(user.avatarURL())
-  .setFooter({ Text: interaction.author.username, iconURL: interaction.author.avatarURL() })
-  .setTimestamp();
-   
-  interaction.replyNoMention({ embeds: [embed] });
+function InteractionExecute(interaction, global) {
+  interaction.replyNoMention({ embeds: [global] });
 };
 
-async function MessageExecute(message, global) {
-//   const roblox = message.getData('roblox');
-//   let user = await roblox.users.find({ userNames: message[0] });
-  
-//   if (!user) return message.replyNoMention({content: '**لم يتم العثور على هذا الاسم في روبلوكس، قم بالمحاولة مرة اخرى**'});
-  
-//   user = await roblox.users.get(user.id);
-  
-  const user = global;
-  
-  // return console.log(user)
-  
-  const embed = new EmbedBuilder()
-  .setAuthor({ name: user.name, iconURL: user.avatarURL() })
-  .setTitle(user.
-  .setImage(user.avatarURL())
-  .setFooter({ text: message.author.username, iconURL: message.author.avatarURL() })
-  .setTimestamp();
-   
-  message.replyNoMention({ embeds: [embed] });
+function MessageExecute(message, global) {   
+  message.replyNoMention({ embeds: [global] });
 };
 
