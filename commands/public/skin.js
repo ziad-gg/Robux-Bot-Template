@@ -11,7 +11,7 @@ module.exports = new CommandBuilder()
 .setInteractionExecution(InteractionExecute)
 .setMessageExecution(MessageExecute)
 
-async function GlobalExecute (message, interaction) {
+async function GlobalExecute(message, interaction) {
   
   const roblox = message ? message.getData('roblox') : interaction.getData('roblox');
   const username = message ? message[0] : interaction['username'];
@@ -25,7 +25,7 @@ async function GlobalExecute (message, interaction) {
   const embed = new EmbedBuilder()
   .setAuthor({ name: user.name, iconURL: user.avatarURL() })
   .setTitle(user.name)
-  .setURL('https://www.roblox.com/users' + user.id)
+  .setURL('https://www.roblox.com/users/' + user.id)
   .setImage(user.avatarURL())
   .setFooter({ text: m.author.username, iconURL: m.author.avatarURL() })
   .setTimestamp();
