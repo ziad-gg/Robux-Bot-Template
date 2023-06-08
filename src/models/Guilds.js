@@ -11,8 +11,7 @@ const GuildsSchema = new mongoose.Schema({
     type: String,
     default: prefix
   },
-  cookie: { type: String },
-  groupId: { type: Number },
+  groupId: { type: Number }
 });
 
 

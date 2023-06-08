@@ -4,8 +4,8 @@ const UsersSchema = new mongoose.Schema({
   id: {
     type: String,
     required: true,
+    unique: true
   },
-  guildId: { type: Number },
   balance: { type: Number, default: 0 },
 });
 

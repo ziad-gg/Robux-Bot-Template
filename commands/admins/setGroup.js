@@ -12,17 +12,10 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
-  
-  
-  const cookies = controller.getData('cookies');
+  const roblox = controller.getData('roblox');
   const Guilds = controller.getData('guilds');
   
-  const roblox = cookies.get(controller.guild.id);
-  if (!roblox) return controller.replyNoMention({ content: '❌ **يحب ان تقوم بتسجيل الكوكي اولا**' });
-  
-  if (!await roblox.isLoged()) return controller.replyNoMention({ content: '❌ ** يجب ان تقوم بتسجيل كوكي صالح للاستخدام**' });
-  
-  const GroupId = controller[0] || controller['id'];
+  const GroupId = controller[0];
   if (!GroupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
   
   const Group = await roblox.groups.get(GroupId);
@@ -39,7 +32,7 @@ async function GlobalExecute(message, interaction) {
   return {
     message: "**✅ تم تحديد الجروب بنجاح!**",
     interaction: "**✅ تم تحديد الجروب بنجاح!**",
-  };
+  }
 };
 
 function InteractionExecute(interaction, global) {
