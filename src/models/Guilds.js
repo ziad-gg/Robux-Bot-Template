@@ -6,6 +6,7 @@ const GuildsSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  groupId: { type: Number }
 });
 
 const Guilds = mongoose.model("Guilds", GuildsSchema);

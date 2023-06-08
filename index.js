@@ -25,7 +25,8 @@ client.Application.setPrefix("!");
 client.Application.build();
 client.Application.setData({
   roblox: zoblox, 
-  users: require('./src/models/Users.js')
+  guilds: require('./src/models/Guilds.js'),
+  users: require('./src/models/Users.js'),
 });
 
 zoblox.on('userReady', () => console.log(`Logged is as: ${zoblox.me.username} !`));
