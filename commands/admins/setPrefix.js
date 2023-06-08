@@ -18,21 +18,23 @@ async function GlobalExecute(message, interaction) {
   const prefix = controller[0];
   
   if (!prefix) {
+    if (Guild.prefix === config.prefix) return controller.replyNoMention({ content: '❌ **هذه البادئة محددة من قبل!**' });
     Guild.prefix = config.prefix;
     await Guild.save()
   } else {
+    if (Guild.prefix === prefix) return controller.replyNoMention({ content: '❌ **هذه البادئة محددة من قبل!**' });
     Guild.prefix = prefix;
     await Guild.save()
   }
   
   return {
-    interaction: "✅ **Done!**",
-    message: "✅ **Done!**"
+    interaction: "✅",
+    message: "✅"
   }
 }
 
 function InteractionExecute(interaction, global) {
-  interaction.replyNoMention({ content: global, ephemeral: true });
+  interaction.replyNoMention({ content: global });
 }
 
 function MessageExecute(message, global) {
