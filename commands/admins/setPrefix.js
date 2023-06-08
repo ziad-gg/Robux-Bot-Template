@@ -17,6 +17,8 @@ async function GlobalExecute(message, interaction) {
   const Guild = await Guilds.get(controller.guild.id);
   const prefix = controller[0];
   
+  console.log(prefix)
+  
   if (!prefix) {
     Guild.prefix = config.prefix;
     await Guild.save()

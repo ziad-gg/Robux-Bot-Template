@@ -16,11 +16,11 @@ async function GlobalExecute(message, interaction) {
   const msg = await controller.replyNoMention({ content: '**🏓 Pong...**' });
   const embed = new EmbedBuilder()
     .setColor(0x0068ff)
-    .setDescription(`**⏰ Discord API: ${message.client.ws.ping}ms\n📊 Time Taken: ${msg.createdTimestamp - message.createdTimestamp}ms**`)
+    .setDescription(`**⏰ Discord API: ${message.client.ws.ping}ms\n📊 Time Taken: ${message.createdTimestamp - msg.createdTimestamp}ms**`)
     .setTimestamp()
   
   return {
-    message: embed,
+    message: {msg, embed}, 
     interaction: embed
   };
 };
@@ -31,5 +31,5 @@ function InteractionExecute(interaction, global) {
 
 function MessageExecute(message, global) {
   console.log(message);
-  message.edit({ embeds: [global] });
+  global.msg.edit({ embeds: [global.embed] });
 };
