@@ -22,7 +22,7 @@ async function GlobalExecute(message, interaction) {
     Guild.prefix = config.prefix;
     await Guild.save()
   } else {
-    if (Guild.prefix === prefix) return controller.replyNoMention({ content: '❌ **هذه البادئة محددة من قبل!**' });
+    if (Guild.prefix === prefix || Guild.prefix === config.prefix) return controller.replyNoMention({ content: '❌ **هذه البادئة محددة من قبل!**' });
     Guild.prefix = prefix;
     await Guild.save()
   }
