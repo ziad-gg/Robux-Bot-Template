@@ -20,10 +20,10 @@ async function GlobalExecute(message, interaction) {
   
   const Group = await roblox.groups.get(GroupId);
   if (!Group) return controller.replyNoMention({ content: "يبدو ان اي دي الجروب غير صحيح" });
-  
+
   const owner = await Group.members.me;
-  console.log(owner);
-  if (!owner || !owner.isOwner()) return controller.replyNoMention({ content: "يجب ان يكون المستخدم صاحب الجروب" });
+  
+  if (!owner || !owner.isOwner()) controller.replyNoMention({ content: "يجب ان يكون المستخدم صاحب الجروب" });
   
   return {
     message: 0,
