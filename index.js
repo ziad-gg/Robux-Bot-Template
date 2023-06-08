@@ -26,6 +26,7 @@ client.Application.setData({
   roblox: zoblox, 
   guilds: require('./src/models/Guilds.js'),
   users: require('./src/models/Users.js'),
+  config: require('./src/config.js')
 });
 
 zoblox.on(Events.UserReady, () => console.log(`Logged is as: ${zoblox.me.username} !`));
