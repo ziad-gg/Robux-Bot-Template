@@ -1,5 +1,6 @@
 const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const wait = require('node:timers/promises').setTimeout;
 
 module.exports = new CommandBuilder() 
   .setName("buy")
@@ -22,7 +23,8 @@ async function GlobalExecute(message, interaction) {
   
   if (Tickets.has(key)) return controller.replyNoMention({ content: '❌ **لديك عمليه شراء بالفعل**' });
   
-  const amount = controller[0]
+  const amount = controller[0];
+  const time = 300000;
   
   const Guild = await Guilds.get(controller.guild.id);
   const User = await Users.get(controller.author.id);
@@ -41,22 +43,42 @@ async function GlobalExecute(message, interaction) {
     `).setFooter({ text: `لديك 5 دقائق للتحويل` }).setTimestamp()
   
    const filter = m => m.author.id === '282859044593598464' && m.content.includes(price) && m.content.includes(`<@!${ownerId}>`) ;
-   const collector = controller.channel.createMessageCollector(filter, { time: 300000 });
+   const collector = controller.channel.createMessageCollector(filter, { time });
   
-   controller.replyNoMention({ embeds: [embed] }); 
   
-  Tickets.set(key, {
-    channelId: controller.channel.id,
-    messageId: 
-  })
+   const BuyMessageGui = await controller.replyNoMention({ embeds: [embed] }); 
+  
+   Tickets.set(key, {
+     channelId: controller.channel.id,
+     messageId: BuyMessageGui.id,
+     collector
+   });
+  
+   let timout
   
    collector.on("collect", async() => {
-       console.log("collected")
+       collector.stop()
+       User.balance += +amount;
+       await User.save();
+       BuyMessageGui.delete();
+       controller.replyNoMention(`**تمت عمليه الشراء سوف يتم قفل التكت 😊❤**`);
+       await wait(5000);
+       controller.channel.delete();
+       Tickets.delete(key)
    });
   
-   collector.once("end", async() => {
-    
-   });
+  
+   collector.on('buyEnd', () => {
+        controller.replyNoMention(`**لقد انتهي وقت التحويل 😒**`);
+        Tickets.delete(key)
+        BuyMessageGui.delete()
+   })
+  
+    timeout = setTimeout(() => {
+       if (!Tickets.has(key)) return
+      collector.emit('buyEnd')
+    }, time)
+  
   
   return {
     message: collector, 
@@ -65,7 +87,6 @@ async function GlobalExecute(message, interaction) {
 }
 
 function InteractionExecute(interaction, global) {
-  
 };
 
 function MessageExecute(message, global) {
