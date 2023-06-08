@@ -17,8 +17,8 @@ async function Execute(client) {
     const roblox = new Zoblox();
     const LoggedData = await roblox.login(Guild.cookie).then((me) => me).catch(e => null);
     if (LoggedData) {
-      console.log(`Logged is as: (${roblox.me.username})`)
-      cookies.set(Guild.id, roblox)
+      console.log(`Logged is as: (${roblox.me.username})`);
+      cookies.set(Guild.id, roblox);
     }
   });
   
