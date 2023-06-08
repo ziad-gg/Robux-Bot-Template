@@ -10,9 +10,7 @@ module.exports = new CommandBuilder()
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute)
 
-
 async function GlobalExecute(message, interaction) {
-  
   const controller = message ?? interaction;
   const config = controller.getData('config');
   const Guilds = controller.getData('guilds');
@@ -28,15 +26,15 @@ async function GlobalExecute(message, interaction) {
   }
   
   return {
-    interaction: "🟢",
-    message: "🟢"
+    interaction: "✅ **Done!**",
+    message: "✅ **Done!**"
   }
 }
 
 function InteractionExecute(interaction, global) {
-  interaction.react(global);
+  interaction.replyNoMention({ content: global, ephemeral: true });
 }
 
 function MessageExecute(message, global) {
-  message.react(global);
+  message.replyNoMention({ content: global });
 };
