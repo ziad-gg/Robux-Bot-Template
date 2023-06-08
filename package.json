@@ -1,18 +1,18 @@
 {
   "name": "Robux-Bot",
   "version": "1.0.0",
-  "description": "This Project is Way to bind a discord bot with your roblox account and It has a Econemy System",
+  "description": "The Discord Robux Bot !",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "authors": [
-    "Ziad",
-    "Slayver"
+    "Ziath (860865950945378325)",
+    "Slayver (789896576402587667)"
   ],
   "dependencies": {
     "zoblox.js": "^2.0.0-beta",
-    "handler.djs": "^2.5.0",
+    "handler.djs": "^2.5.3",
     "uptimer-web": "^3.3.0",
     "discord.js": "^14.11.0",
     "express": "^4.18.2",
@@ -26,7 +26,7 @@
   },
   "license": "MIT",
   "keywords": [
-    "Robux",
-    "api"
+    "Roblox",
+    "Robux-Bot"
   ]
 }

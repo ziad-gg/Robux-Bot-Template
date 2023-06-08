@@ -22,13 +22,14 @@ async function GlobalExecute(message, interaction) {
   if (!Group) return controller.replyNoMention({ content: "يبدو ان اي دي الجروب غير صحيح" });
 
   const owner = await Group.members.me;
-  
   if (!owner || !owner.isOwner()) controller.replyNoMention({ content: "يجب ان يكون المستخدم صاحب الجروب" });
+  
+  
   
   return {
     message: 0,
     interaction: 0,
-  };
+  }
   
 };
 

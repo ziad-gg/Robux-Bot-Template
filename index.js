@@ -1,6 +1,6 @@
 const { Client, GatewayIntentBits } = require('discord.js');
 const { Application } = require('handler.djs');
-const { Zoblox } = require('zoblox.js');
+const { Zoblox, Events } = require('zoblox.js');
 const mongoose = require('mongoose');
 const path = require('node:path');
 
@@ -29,7 +29,7 @@ client.Application.setData({
   users: require('./src/models/Users.js'),
 });
 
-zoblox.on('userReady', () => console.log(`Logged is as: ${zoblox.me.username} !`));
+zoblox.on(Events.UserReady, () => console.log(`Logged is as: ${zoblox.me.username} !`));
 mongoose.connection.on('connected', () => console.log('Connected to database !'));
 
 mongoose.connect(process.env.Mongo_Url);
