@@ -32,25 +32,26 @@ async function GlobalExecute(message, interaction) {
  
   const WantedToCompete = parseInt(amount * price);
   
-  let embed = new EmbedBuilder()
-    .setColor("GOLD")
-    .setTitle("رساله شراء")
+  let embed = new EmbedBuilder().setColor("Gold").setTitle("رساله شراء")
     .setDescription(`   قم بتحويل  الي  <@${ownerId}> مبلغ ${WantedToCompete} \n\ 
        \`\`\` c ${ownerId} ${WantedToCompete} \`\`\`
        \n\
-       **لانهاء عمليه الشراء اكتب end${message.client.Application.prefix}**
+       **لانهاء عمليه الشراء اكتب end${controller.client.Application.prefix}**
        **يمكنك استخدام امر </credits:971443830870126632> اذا لم يعمل اختصار \`c\` **
-    `)
-    .setFooter(`لديك 5 دقائق للتحويل`)
-    .setTimestamp()
+    `).setFooter({ text: `لديك 5 دقائق للتحويل` }).setTimestamp()
   
    const filter = m => m.author.id === '282859044593598464' && m.content.includes(price) && m.content.includes(`<@!${ownerId}>`) ;
    const collector = controller.channel.createMessageCollector(filter, { time: 300000 });
   
    controller.replyNoMention({ embeds: [embed] }); 
   
+  Tickets.set(key, {
+    channelId: controller.channel.id,
+    messageId: 
+  })
+  
    collector.on("collect", async() => {
-       
+       console.log("collected")
    });
   
    collector.once("end", async() => {

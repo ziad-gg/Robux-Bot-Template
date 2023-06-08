@@ -22,20 +22,19 @@ async function GlobalExecute(message, interaction) {
   if (!user) return controller.replyNoMention({ content: "> 🤔 **لا يمكنني العثور علي هذا العضو**" });
   if (user.bot) return controller.replyNoMention({ content: "> 🤔 **البوتات لا تملك حساب**" });
   
-  const data = await Users.get(user.id);
-  const embed = new EmbedBuilder().setColor('DarkButNotBlack').setTitle((controller.author.id === user.id) ? `رصيدك الحالي هو ${data.balance}` : `رصيد ${user.tag} الحالي هو ${data.balance}`);
-  const msg = user.id === message.author.id ? `**رصيد حسابك هو \`${userData.balance}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.balance}\`** 🪙`;
+  const userData = await Users.get(user.id);
+  const msg = user.id === controller.author.id ? `**رصيد حسابك هو \`${userData.balance}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.balance}\`** 🪙`;
 
   return {
-    message: embed,
-    interaction: embed
+    message: msg,
+    interaction: msg
   };
 };
 
 function InteractionExecute(interaction, global) {
-  interaction.replyNoMention({ embeds: [global] });
+  interaction.replyNoMention({ content: global });
 };
 
 function MessageExecute(message, global) {   
-  message.replyNoMention({ embeds: [global] });
+  message.replyNoMention({ content: global });
 };
