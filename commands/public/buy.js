@@ -14,7 +14,7 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
-  if (!controller.channel.name.startsWith("ticket-")) return controller.replyNoMention({ content: '❌ **يمكن استخدام هذا الامر داحل التكت فقط**' })
+  if (!controller.channel.name.startsWith("ticket")) return controller.replyNoMention({ content: '❌ **يمكن استخدام هذا الامر داحل التكت فقط**' })
   
   const key = `${controller.author.id}-${controller.guild.id}`;
   const Tickets = controller.getData('tickets');
@@ -36,14 +36,14 @@ async function GlobalExecute(message, interaction) {
   
   let embed = new EmbedBuilder().setColor("Gold").setTitle("رساله شراء")
     .setDescription(`قم بتحويل  الي  <@${ownerId}> مبلغ ${WantedToCompete} \n\ 
-       \`\`\` c ${ownerId} ${WantedToCompete} \`\`\`
+       \`\`\` c ${ownerId} ${(WantedToCompete * 20 / 19).toFixed(0)} \`\`\`
        \n\
        **لانهاء عمليه الشراء اكتب end${controller.client.Application.prefix}**
        **يمكنك استخدام امر </credits:971443830870126632> اذا لم يعمل اختصار \`c\` **
     `).setFooter({ text: `لديك 5 دقائق للتحويل` }).setTimestamp()
   
    const filter = m => m.author.id === '282859044593598464' && m.content.includes(price) && m.content.includes(`<@!${ownerId}>`) ;
-   const collector = controller.channel.createMessageCollector(filter, { time });
+   const collector = controller.channel.createMessageCollector({filter,  time });
   
   
    const BuyMessageGui = await controller.replyNoMention({ embeds: [embed] }); 
@@ -62,7 +62,7 @@ async function GlobalExecute(message, interaction) {
        User.balance += +amount;
        await User.save();
        BuyMessageGui.delete();
-       controller.replyNoMention(`**تمت عمليه الشراء سوف يتم قفل التكت 😊❤**`);
+       controller.replyNoMention({ content: `**تمت عمليه الشراء سوف يتم قفل التكت 😊❤**` });
        await wait(5000);
        controller.channel.delete();
        Tickets.delete(key);
@@ -70,7 +70,7 @@ async function GlobalExecute(message, interaction) {
   
   
    collector.on('buyEnd', (e) => {
-        if (!e) controller.replyNoMention(`**لقد انتهي وقت التحويل 😒**`);
+        if (!e) controller.replyNoMention({ content: `**لقد انتهي وقت التحويل 😒**` });
         Tickets.delete(key);
         BuyMessageGui.delete();
         clearTimeout(timeout);

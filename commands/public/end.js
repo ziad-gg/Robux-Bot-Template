@@ -20,7 +20,6 @@ async function GlobalExecute(message, interaction) {
   
   Process.collector.emit('buyEnd', true);
   
-  
    return {
     message: "**✅ تم انهاء عمليه الشراء بنجاح!**",
     interaction: "**✅ تم انهاء عمليه الشراء بنجاح!**",
