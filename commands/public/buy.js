@@ -29,13 +29,13 @@ async function GlobalExecute(message, interaction) {
   const Guild = await Guilds.get(controller.guild.id);
   const User = await Users.get(controller.author.id);
 
-  const ownerId = controller.guild.fetchOwner().then(owner => owner.user.id);
+  const ownerId = await controller.guild.fetchOwner().then(owner => owner.user.id);
   const price = Guild.price
  
   const WantedToCompete = parseInt(amount * price);
   
   let embed = new EmbedBuilder().setColor("Gold").setTitle("رساله شراء")
-    .setDescription(`   قم بتحويل  الي  <@${ownerId}> مبلغ ${WantedToCompete} \n\ 
+    .setDescription(`قم بتحويل  الي  <@${ownerId}> مبلغ ${WantedToCompete} \n\ 
        \`\`\` c ${ownerId} ${WantedToCompete} \`\`\`
        \n\
        **لانهاء عمليه الشراء اكتب end${controller.client.Application.prefix}**
@@ -54,36 +54,35 @@ async function GlobalExecute(message, interaction) {
      collector
    });
   
-   let timout
+   let timeout = null
   
    collector.on("collect", async() => {
-       collector.stop()
+       collector.stop();
+       clearTimeout(timeout);
        User.balance += +amount;
        await User.save();
        BuyMessageGui.delete();
        controller.replyNoMention(`**تمت عمليه الشراء سوف يتم قفل التكت 😊❤**`);
        await wait(5000);
        controller.channel.delete();
-       Tickets.delete(key)
+       Tickets.delete(key);
    });
   
   
-   collector.on('buyEnd', () => {
-        controller.replyNoMention(`**لقد انتهي وقت التحويل 😒**`);
-        Tickets.delete(key)
-        BuyMessageGui.delete()
+   collector.on('buyEnd', (e) => {
+        if (!e) controller.replyNoMention(`**لقد انتهي وقت التحويل 😒**`);
+        Tickets.delete(key);
+        BuyMessageGui.delete();
+        clearTimeout(timeout);
    })
   
     timeout = setTimeout(() => {
-       if (!Tickets.has(key)) return
+      if (!Tickets.has(key)) return
       collector.emit('buyEnd')
     }, time)
   
   
-  return {
-    message: collector, 
-    interaction: collector
-  };
+  return ;
 }
 
 function InteractionExecute(interaction, global) {

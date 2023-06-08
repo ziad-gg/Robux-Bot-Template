@@ -12,7 +12,7 @@ const GuildsSchema = new mongoose.Schema({
     default: prefix
   },
   groupId: { type: Number },
-  price: { type: Number, default: 1000 }
+  price: { type: Number, default: 1000 }, 
 });
 
 
