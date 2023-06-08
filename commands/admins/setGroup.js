@@ -15,7 +15,7 @@ async function GlobalExecute(message, interaction) {
   const roblox = controller.getData('roblox');
   const Guilds = controller.getData('guilds');
   
-  const GroupId = controller[0];
+  const GroupId = controller[0] || controller['id'];
   if (!GroupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
   
   const Group = await roblox.groups.get(GroupId);

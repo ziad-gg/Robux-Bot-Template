@@ -15,7 +15,7 @@ async function GlobalExecute(message, interaction) {
   const config = controller.getData('config');
   const Guilds = controller.getData('guilds');
   const Guild = await Guilds.get(controller.guild.id);
-  const prefix = controller[0]
+  const prefix = controller[0] || controller['prefix'];
     
   if (!prefix) {
     Guild.prefix = config.prefix;
