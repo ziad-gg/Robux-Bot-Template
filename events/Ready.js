@@ -11,15 +11,16 @@ async function Execute(client) {
   
   const cookies = App.getData('cookies');
   const Guilds = App.getData('guilds');
-  const Cookies = Guilds.find({ cookie: { $exists: true } });
+  const FoundGuilds = await Guilds.find({ cookie: { $exists: true } });
   
-  Cookies.forEach(async cookie => {
-    const zoblox = new Zoblox();
-    
-  const LoggedData = await roblox.login(cookie).then((me) => me).catch(e => null);
-    
-  })
-  
+  FoundGuilds.forEach(async Guild => {
+    const roblox = new Zoblox();
+    const LoggedData = await roblox.login(Guild.cookie).then((me) => me).catch(e => null);
+    if (LoggedData) {
+      console.log(`Logged is as: (${roblox.me.username})`)
+      cookies.set(Guild.id, roblox)
+    }
+  });
   
   console.log(`${client.user.tag} Is Online !`);
 }

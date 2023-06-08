@@ -12,8 +12,15 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
-  const roblox = controller.getData('roblox');
+  
+  
+  const cookies = controller.getData('cookies');
   const Guilds = controller.getData('guilds');
+  
+  const roblox = cookies.get(controller.guild.id);
+  if (!roblox) return controller.replyNoMention({ content: '❌ **يحب ان تقوم بتسجيل الكوكي اولا**' });
+  
+  if (!roblox.isLoged()) return controller.replyNoMention({
   
   const GroupId = controller[0] || controller['id'];
   if (!GroupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
