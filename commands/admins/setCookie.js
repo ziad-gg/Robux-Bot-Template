@@ -19,17 +19,16 @@ async function GlobalExecute(message, interaction) {
   const Guild = await Guilds.get(controller.guild.id);
   const roblox = new Zoblox();
   
-  const cookie = controller[0] || controller['cookie'];
+  const cookie = controller[0];
   
   if (!cookie) return controller.replyNoMention({ content: "الرجاء ادخالي كوكي للتسجيل" });
   
-  const logingedData = await roblox.login(cookie).then((me) => me).catch(e => null);
-  if (!logingedData) return controller.replyNoMention({ content: "الرجاء ادخال كوكي صحيح للتسجيل" });
+  const LoggedData = await roblox.login(cookie).then((me) => me).catch(e => null);
+  if (!LoggedData) return controller.replyNoMention({ content: "الرجاء ادخال كوكي صحيح للتسجيل" });
   
   await cookies.set(controller.guild.id, roblox);
   Guild.cookie = cookie;
   await Guild.save();
-  
   
   return {
     message: "**✅ تم تحديد الكوكيز بنجاح!**",
