@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const { Application } = require('handler.djs');
 const { Zoblox, Events } = require('zoblox.js');
 const mongoose = require('mongoose');
@@ -18,12 +18,13 @@ client.Application.setCooldown({
   long: true, 
   Mdelete: 2500,
   EphemeralReply: true,
-  once: true 
+  once: false 
 });
 
 client.Application.build();
 client.Application.setData({
   roblox: zoblox, 
+  tickets: new Collection(),
   guilds: require('./src/models/Guilds.js'),
   users: require('./src/models/Users.js'),
   config: require('./src/config.js')

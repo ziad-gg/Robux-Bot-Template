@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName("buy")
   .setDescription("Buy Some Roblox to UR Balance.")
   .setCategory("public")
-  .setCooldown('10s')
+  .setCooldown('15s')
   .InteractionOn(new SlashCommandBuilder().addNumberOption(op => op.setName('amount').setDescription('Type Amount You Want To Buy Here').setRequired(true)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
@@ -13,7 +13,21 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
+  if (!controller.channel.name.startsWith("ticket")) return controller.replyNoMention({ content: '❌ **يمكن استخدام هذا الامر داحل التكت فقط**' })
+  
+  const key = `${controller.author.id}-${controller.guild.id}`;
+  const Tickets = controller.getData('tickets');
+  const Guilds = controller.getData('guilds');
+  const Users = controller.getData('users');
+  
+  if (Tickets.has(key)) return controller.replyNoMention({ content: '❌ **لديك عمليه شراء بالفعل**' });
+  
+  const Guild = await Guilds.get(controller.guild.id);
+  const User = await Users.get(controller.author.id);
 
+  const price = Guild.price
+  
+     
   return {
     message: null, 
     interaction: null
