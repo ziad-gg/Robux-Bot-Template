@@ -13,9 +13,22 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) { 
 
-  // const roblox = message.getData('roblox');
-  const cookies = message.getData('cookies');
-  const roblox = new Zoblox()
+  const controller = message ?? interaction;
+  const Guilds = controller.getData('guilds'); 
+  const cookies = controller.getData('cookies');
+  const Guild = await Guilds.get(controller.guild.id);
+  const roblox = new Zoblox();
+  
+  const cookie = controller[0] || controller['cookie'];
+  
+  if (!cookie) return controller.replyNoMention({ content: "الرجاء ادخالي كوكي للتسجيل" });
+  
+  const logingedData = await roblox.login(cookie).then((me) => me).catch(e => null);
+  if (!logingedData) return controller.replyNoMention({ content: "الرجاء ادخال كوكي صحيح للتسجيل" });
+  
+  await cookies.set(controller.guild.id, roblox);
+  Guild.cookie = cookie;
+  await Guild.save();
   
   
   return {
@@ -25,8 +38,10 @@ async function GlobalExecute(message, interaction) {
 };
 
 function InteractionExecute(interaction, global) {
+  interaction.reply({content: global});
 };
 
-function MessageExecute(message, global) {   
+function MessageExecute(message, global) {
+  message.replyNoMention({content: global});
 };
 
