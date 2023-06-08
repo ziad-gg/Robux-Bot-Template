@@ -17,8 +17,9 @@ async function GlobalExecute(message, interaction) {
   const Users = controller.getData('users');
   
   const args = controller[0];
-  const user = controller.getUser(args?.toId()) || controller.author;
+  const user = await controller.getUser(args.toId()) || controller.author;
 
+  console.log(user);
   if (!user) return controller.replyNoMention({ content: "> 🤔 **لا يمكنني العثور علي هذا العضو**" });
   if (user.bot) return controller.replyNoMention({ content: "> 🤔 **البوتات لا تملك حساب**" });
   
