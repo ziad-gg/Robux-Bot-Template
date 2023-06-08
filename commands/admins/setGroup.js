@@ -20,7 +20,7 @@ async function GlobalExecute(message, interaction) {
   const roblox = cookies.get(controller.guild.id);
   if (!roblox) return controller.replyNoMention({ content: '❌ **يحب ان تقوم بتسجيل الكوكي اولا**' });
   
-  if (!roblox.isLoged()) return controller.replyNoMention({
+  if (!await roblox.isLoged()) return controller.replyNoMention({ content: '❌ ** يجب ان تقوم بتسجيل كوكي صالح للاستخدام**' });
   
   const GroupId = controller[0] || controller['id'];
   if (!GroupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
@@ -39,7 +39,7 @@ async function GlobalExecute(message, interaction) {
   return {
     message: "**✅ تم تحديد الجروب بنجاح!**",
     interaction: "**✅ تم تحديد الجروب بنجاح!**",
-  }
+  };
 };
 
 function InteractionExecute(interaction, global) {
