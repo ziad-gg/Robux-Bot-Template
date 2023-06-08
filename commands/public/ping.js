@@ -13,6 +13,7 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
+  console.log(controller.createdTimestamp);
   const msg = await controller.replyNoMention({ content: '**🏓 Pong...**' });
   const embed = new EmbedBuilder()
     .setColor(0x0068ff)
