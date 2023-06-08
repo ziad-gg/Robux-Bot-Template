@@ -2,24 +2,24 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName("balance")
-  .setDescription("Shows user balance.")
-  .setCategory("public")
-  .setCooldown('10s')
-  .InteractionOn(new SlashCommandBuilder().addUserOption(option => option.setName('user').setDescription('User To Get Information of His Currency')))
-  .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
+.setName("balance")
+.setDescription("Shows user balance.")
+.setCategory("public")
+.setCooldown('10s')
+.InteractionOn(new SlashCommandBuilder().addUserOption(option => option.setName('user').setDescription('User To Get Information of His Currency')))
+.setGlobal(GlobalExecute)
+.setInteractionExecution(InteractionExecute)
+.setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
   
-  const controller = message ?? interaction;
+  const controller =  message ?? interaction;
   const Users = controller.getData('users');
   
   const args = controller[0];
-  const user = await controller.getUser(args.toId()) || controller.author;
+  let user = controller.author;
 
-  console.log(user);
+  if (args) user = await controller.getUser(args.toId());
   if (!user) return controller.replyNoMention({ content: "> 🤔 **لا يمكنني العثور علي هذا العضو**" });
   if (user.bot) return controller.replyNoMention({ content: "> 🤔 **البوتات لا تملك حساب**" });
   
@@ -34,10 +34,10 @@ async function GlobalExecute(message, interaction) {
 };
 
 function InteractionExecute(interaction, global) {
-  interaction.replyNoMention({ embeds: [global] });
+  interaction.replyNoMention({embeds: [global]});
 };
 
 function MessageExecute(message, global) {   
-  message.replyNoMention({ embeds: [global] });
+  message.replyNoMention({embeds: [global]});
 };
 
