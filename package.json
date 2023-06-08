@@ -21,10 +21,6 @@
   "engines": {
     "node": "16.x"
   },
-  "repository": {
-    "url": ""
-  },
-  "license": "MIT",
   "keywords": [
     "Roblox",
     "Robux-Bot"

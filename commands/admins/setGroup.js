@@ -16,28 +16,30 @@ async function GlobalExecute(message, interaction) {
   const Guilds = controller.getData('guilds');
   
   const GroupId = controller[0];
-  if (!GroupId) return controller.replyNoMention({ content: "يجب عليك ادخال اي دي الجروب" });
+  if (!GroupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
   
   const Group = await roblox.groups.get(GroupId);
-  if (!Group) return controller.replyNoMention({ content: "يبدو ان اي دي الجروب غير صحيح" });
+  if (!Group) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف جروب صحيح!**' });
 
   const owner = await Group.members.me;
-  if (!owner || !owner.isOwner()) controller.replyNoMention({ content: "يجب ان يكون المستخدم صاحب الجروب" });
+  if (!owner || !owner.isOwner()) return controller.replyNoMention({ content: '❌ **يجب أن تكون انت مالك الجروب!**' });
   
+  const Guild = await Guilds.get(controller.guild.id);
   
+  Guild.groupId = Group.id;
+  await Guild.save();
   
   return {
-    message: 0,
-    interaction: 0,
+    message: "**✅ تم تحديد الجروب بنجاح!**",
+    interaction: "**✅ تم تحديد الجروب بنجاح!**",
   }
-  
 };
 
 function InteractionExecute(interaction, global) {
-  interaction.replyNoMention({embeds: [global]});
+  interaction.replyNoMention({ content: global });
 };
 
 function MessageExecute(message, global) {   
-  message.replyNoMention({embeds: [global]});
+  message.replyNoMention({ content: global });
 };
 
