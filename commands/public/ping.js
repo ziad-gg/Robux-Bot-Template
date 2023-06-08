@@ -16,20 +16,19 @@ async function GlobalExecute(message, interaction) {
   const msg = await controller.replyNoMention({ content: '**🏓 Pong...**' });
   const embed = new EmbedBuilder()
     .setColor(0x0068ff)
-    .setDescription(`**⏰ Discord API: ${message.client.ws.ping}ms\n📊 Time Taken: ${message.createdTimestamp - msg.createdTimestamp}ms**`)
+    .setDescription(`**⏰ Discord API: ${controller.client.ws.ping}ms\n📊 Time Taken: ${msg.createdTimestamp - controller.createdTimestamp}ms**`)
     .setTimestamp()
   
   return {
-    message: {msg, embed}, 
+    message: { msg, embed }, 
     interaction: embed
   };
-};
+}
 
 function InteractionExecute(interaction, global) {
-  interaction.editReply({ embeds: [global] });
+  interaction.editReply({ content: '', embeds: [global] });
 };
 
 function MessageExecute(message, global) {
-  console.log(message);
-  global.msg.edit({ embeds: [global.embed] });
+  global.msg.edit({ content: '', embeds: [global.embed] });
 };
