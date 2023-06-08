@@ -25,6 +25,7 @@ async function GlobalExecute(message, interaction) {
   const Guild = await Guilds.get(controller.guild.id);
   const User = await Users.get(controller.author.id);
 
+  const ownerId = controller.guild.fetchOwner().then(console.log);
   const price = Guild.price
   
      
