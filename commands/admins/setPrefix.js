@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName("setprefix")
   .setDescription("Change Current Prefix To Another One")
   .setCategory("admins")
-  .InteractionOn(new SlashCommandBuilder().addStringOption(op => op.setName('prefix').setDescription('The New Prefix To Set')))
+  .InteractionOn(new SlashCommandBuilder().addStringOption(option => option.setName('prefix').setDescription('The New Prefix To Set')))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute)
@@ -18,11 +18,9 @@ async function GlobalExecute(message, interaction) {
   const prefix = controller[0];
   
   if (!prefix) {
-    if (Guild.prefix === config.prefix) return controller.replyNoMention({ content: '❌ **هذه البادئة محددة من قبل!**' });
     Guild.prefix = config.prefix;
     await Guild.save()
   } else {
-    if (Guild.prefix === prefix || Guild.prefix === config.prefix) return controller.replyNoMention({ content: '❌ **هذه البادئة محددة من قبل!**' });
     Guild.prefix = prefix;
     await Guild.save()
   }

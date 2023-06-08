@@ -1,18 +1,17 @@
-const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder } = require('discord.js');
+const { CommandBuilder } = require("handler.djs");
 
-module.exports = new CommandBuilder() 
+module.exports = new CommandBuilder()
   .setName("ping")
-  .setDescription("Test Bot By Ping it And Wait For Response")
-  .setCategory("public")
-  .InteractionOn(new SlashCommandBuilder())
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
+  .setDescription("Ping Me")
+  .setCooldown("5s")
+  .setCategory("general")
+  .setExecution(Execute);
 
-function InteractionExecute(interaction) {
-  interaction.reply({ content: "PONG 🏓" });
+async function Execute(message) {
+  message
+    .reply({ content: "Pong!" })
+    .then((msg) =>
+      msg.edit(`Pong! (${msg.createdTimestamp - message.createdTimestamp}ms)`)
+    )
+    .catch(() => {});
 }
-
-function MessageExecute(message) {
-  message.reply({ content: "PONG 🏓" });
-};
