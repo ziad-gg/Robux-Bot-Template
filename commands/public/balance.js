@@ -12,8 +12,7 @@ module.exports = new CommandBuilder()
   .setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
-  
-  const controller =  message ?? interaction;
+  const controller = message ?? interaction;
   const Users = controller.getData('users');
   
   const args = controller[0];
@@ -30,14 +29,13 @@ async function GlobalExecute(message, interaction) {
     message: embed,
     interaction: embed
   };
-  
 };
 
 function InteractionExecute(interaction, global) {
-  interaction.replyNoMention({embeds: [global]});
+  interaction.replyNoMention({ embeds: [global] });
 };
 
 function MessageExecute(message, global) {   
-  message.replyNoMention({embeds: [global]});
+  message.replyNoMention({ embeds: [global] });
 };
 

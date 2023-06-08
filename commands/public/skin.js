@@ -12,7 +12,6 @@ module.exports = new CommandBuilder()
   .setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
-  
   const roblox = message ? message.getData('roblox') : interaction.getData('roblox');
   const username = message ? message[0] : interaction['username'];
   
@@ -35,7 +34,6 @@ async function GlobalExecute(message, interaction) {
     message: embed,    
     interaction: embed
   };
-  
 }
 
 function InteractionExecute(interaction, global) {

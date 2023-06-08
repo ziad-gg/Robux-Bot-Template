@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
+const { prefix } = require('../config.js');
 
 const GuildsSchema = new mongoose.Schema({
   id: {
     type: String,
     required: true,
     unique: true
+  },
+  prefix: {
+    type: String,
+    default: prefix
   },
   groupId: { type: Number }
 });

@@ -3,8 +3,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('setgroup')
-  .setDescription("Set Main Roblox Group.")
-  .setCategory("admins")
+  .setDescription('Set Main Roblox Group.')
+  .setCategory('admins')
   .InteractionOn(new SlashCommandBuilder().addNumberOption(option => option.setName('id').setDescription('Group Id To Select').setRequired(true)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)

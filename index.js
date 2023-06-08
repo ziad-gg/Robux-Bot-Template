@@ -21,7 +21,6 @@ client.Application.setCooldown({
   once: true 
 });
 
-client.Application.setPrefix("!");
 client.Application.build();
 client.Application.setData({
   roblox: zoblox, 
