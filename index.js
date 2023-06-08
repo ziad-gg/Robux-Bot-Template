@@ -18,7 +18,7 @@ client.Application.setCooldown({
   long: true, 
   Mdelete: 2500,
   EphemeralReply: true,
-  once: false 
+  once: true
 });
 
 client.Application.build();

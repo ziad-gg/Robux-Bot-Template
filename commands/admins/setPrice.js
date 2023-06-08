@@ -12,20 +12,18 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
-  
   const Guilds = controller.getData('guilds');  
   const Guild = await Guilds.get(controller.guild.id);
-
   const price = controller[0];
   
-  if (isNaN(price) || price <= 0) return controller.replyNoMention({ content: "❌ **قم بتحديد سعر صحيح**" })
+  if (!price.isNumber()) return controller.replyNoMention({ content: "❌ **قم بتحديد رقم صحيح!**" });
   
   Guild.price = price;
   await Guild.save();
   
   return {
-    message: "✅ **تم تحديد السعر بنجاح**", 
-    interaction: "✅ **تم تحديد السعر بنجاح**"
+    message: "✅ **تم تحديد السعر بنجاح!**", 
+    interaction: "✅ **تم تحديد السعر بنجاح!**"
   };
 }
 

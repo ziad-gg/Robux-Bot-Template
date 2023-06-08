@@ -22,12 +22,18 @@ async function GlobalExecute(message, interaction) {
   
   if (Tickets.has(key)) return controller.replyNoMention({ content: '❌ **لديك عمليه شراء بالفعل**' });
   
+  const amount = controller[0]
+  
   const Guild = await Guilds.get(controller.guild.id);
   const User = await Users.get(controller.author.id);
 
-  const ownerId = controller.guild.fetchOwner().then(console.log);
+  const ownerId = controller.guild.fetchOwner().then(owner => owner.user.id);
   const price = Guild.price
+ 
+  const wantedToCompete = parseInt(amount * price);
   
+  
+
      
   return {
     message: null, 
