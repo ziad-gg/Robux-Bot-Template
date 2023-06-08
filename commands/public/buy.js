@@ -13,7 +13,7 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
-  if (!controller.channel.name.startsWith("ticket")) return controller.replyNoMention({ content: '❌ **يمكن استخدام هذا الامر داحل التكت فقط**' })
+  if (!controller.channel.name.startsWith("ticket-")) return controller.replyNoMention({ content: '❌ **يمكن استخدام هذا الامر داحل التكت فقط**' })
   
   const key = `${controller.author.id}-${controller.guild.id}`;
   const Tickets = controller.getData('tickets');
@@ -30,18 +30,41 @@ async function GlobalExecute(message, interaction) {
   const ownerId = controller.guild.fetchOwner().then(owner => owner.user.id);
   const price = Guild.price
  
-  const wantedToCompete = parseInt(amount * price);
+  const WantedToCompete = parseInt(amount * price);
   
+  let embed = new EmbedBuilder()
+    .setColor("GOLD")
+    .setTitle("رساله شراء")
+    .setDescription(`   قم بتحويل  الي  <@${ownerId}> مبلغ ${WantedToCompete} \n\ 
+       \`\`\` c ${ownerId} ${WantedToCompete} \`\`\`
+       \n\
+       **لانهاء عمليه الشراء اكتب end${message.client.Application.prefix}**
+       **يمكنك استخدام امر </credits:971443830870126632> اذا لم يعمل اختصار \`c\` **
+    `)
+    .setFooter(`لديك 5 دقائق للتحويل`)
+    .setTimestamp()
   
-
-     
+   const filter = m => m.author.id === '282859044593598464' && m.content.includes(price) && m.content.includes(`<@!${ownerId}>`) ;
+   const collector = controller.channel.createMessageCollector(filter, { time: 300000 });
+  
+   controller.replyNoMention({ embeds: [embed] }); 
+  
+   collector.on("collect", async() => {
+       
+   });
+  
+   collector.once("end", async() => {
+    
+   });
+  
   return {
-    message: null, 
-    interaction: null
+    message: collector, 
+    interaction: collector
   };
 }
 
 function InteractionExecute(interaction, global) {
+  
 };
 
 function MessageExecute(message, global) {

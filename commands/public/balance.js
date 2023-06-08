@@ -24,7 +24,8 @@ async function GlobalExecute(message, interaction) {
   
   const data = await Users.get(user.id);
   const embed = new EmbedBuilder().setColor('DarkButNotBlack').setTitle((controller.author.id === user.id) ? `رصيدك الحالي هو ${data.balance}` : `رصيد ${user.tag} الحالي هو ${data.balance}`);
-   
+  const msg = user.id === message.author.id ? `**رصيد حسابك هو \`${userData.balance}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.balance}\`** 🪙`;
+
   return {
     message: embed,
     interaction: embed
