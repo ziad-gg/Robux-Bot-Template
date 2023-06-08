@@ -38,4 +38,3 @@ function InteractionExecute(interaction, global) {
 function MessageExecute(message, global) {   
   message.replyNoMention({ embeds: [global] });
 };
-
