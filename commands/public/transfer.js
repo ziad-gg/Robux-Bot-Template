@@ -15,15 +15,21 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   
+  const roblox = controller.getData('roblox');
   const Guilds = controller.getData('guilds');
   const Users = controller.getData('users');
   
   const username = controller[0];
   const amount = controller[1];
-
   
+  if (!username) return controller.replyNoMention({ content: "" })
+  if (!amount.isNumber()) return controller.replyNoMention({ content: "" })
   
-  const User = await User.get(controller.author.id);
+  const User = await Users.get(controller.author.id);
+  if (User.balance < amount) return controller.replyNoMention({ content: "" });
+  
+  let UserRbx = await roblox.users.find({ userNames: [username] });
+  Usr
   
 
 }
