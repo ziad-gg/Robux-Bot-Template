@@ -87,7 +87,6 @@ async function GlobalExecute(message, interaction) {
     controller.channel.send({ files: [attachment] });
     
 
-
   }).catch((e) => {
      if (e.message.includes("401")) return controller.replyNoMention({ content: "" });
   });

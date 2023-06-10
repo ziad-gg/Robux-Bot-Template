@@ -6,6 +6,8 @@ const UsersSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
+  coins: { type: Number, default: 0 },
+  guildId: { type: String, required: false },  
   blacklist: { 
     blacklisted: { type: Boolean, default: false }, 
     forEver: { type: Boolean, default: false }, 
