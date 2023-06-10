@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
 .setName("end")
-.setDescription("End Buy.")
+.setDescription("Cancel your current purchase.")
 .setCategory("public")
 .setCooldown('10s')
 .InteractionOn(new SlashCommandBuilder())

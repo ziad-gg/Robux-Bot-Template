@@ -4,7 +4,7 @@ const wait = require('node:timers/promises').setTimeout;
 
 module.exports = new CommandBuilder() 
   .setName("buy")
-  .setDescription("Buy Some Roblox to UR Balance.")
+  .setDescription("Buy a balance.")
   .setCategory("public")
   .setCooldown('15s')
   .InteractionOn(new SlashCommandBuilder().addNumberOption(op => op.setName('amount').setDescription('Type Amount You Want To Buy Here').setRequired(true)))

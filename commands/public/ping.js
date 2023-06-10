@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName("ping")
-  .setDescription("Shows bot ping.")
+  .setDescription("Test the bots response time.")
   .setCategory("public")
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder())
