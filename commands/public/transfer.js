@@ -1,6 +1,6 @@
 const { CommandBuilder } = require("handler.djs");
 const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder, hyperlink } = require("discord.js");
-const {createCanvas, loadImage} = require('@napi-rs/canvas');
+const {createCanvas, loadImage} = require('canvas');
 
 module.exports = new CommandBuilder()
   .setName("transfer")
@@ -10,11 +10,10 @@ module.exports = new CommandBuilder()
   .InteractionOn(new SlashCommandBuilder().addStringOption((option) => option
      .setName("username")
      .setDescription("player username")
-     .setRequired(true))
-     .addNumberOption((option) => option
-     .setName("amount")
-     .setDescription("Type Amount You Want To transfer Here")
-     .setRequired(true)))
+     .setRequired(true)).addNumberOption((option) => option
+        .setName("amount")
+        .setDescription("Type Amount You Want To transfer Here")
+        .setRequired(true)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute);
@@ -36,21 +35,25 @@ async function GlobalExecute(message, interaction) {
   if (userData.balance < amount) return controller.replyNoMention({ content: "" });
 
   let user = await roblox.users.find({ userNames: username });
-  console.log(user);
   if (!user) return controller.replyNoMention({ content: "" })
-  user = await roblox.users.get(user .id);
+  user = await roblox.users.get(user.id);
 
   const Guild = await Guilds.get(controller.guild.id);
   const Group = await roblox.groups.get(Guild.groupId);
 
   const member = await Group.members.get(user.id);
 
-  if (!member) return controller.replyNoMention({ content: `❌ **يجب ان يكون المستخدم داخل ** ${hyperlink('الجروب', 'https://www.roblox.com/groups/${Group.id}]')}` });
+  if (!member) return controller.replyNoMention({ content: `❌ **يجب ان تكون داخل الجروب لاستلام الروبوكس**`});
 
   const robux = await Group.getFunds().then((e) => e.robux);
   if (robux < amount) return controller.replyNoMention({ content: "" });
 
   member.payout({ amount }).then(async () => {
+    
+    const url = user.avatarURL({ type: 'Headshot' });
+    
+    user.balance -= +amount;
+    user.save()
     
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
@@ -69,8 +72,7 @@ async function GlobalExecute(message, interaction) {
     ctx.fillStyle = 'Gray';
     ctx.fillText('Member', 65, 47);
     ctx.closePath();
-    
-    // const userImage = await loadImage(url.toString());
+    const userImage = await loadImage(url.toString());
     ctx.beginPath();
     ctx.arc(29, 34, 21, 0, Math.PI * 2 , true);
     ctx.strokeStyle = '#fff';
@@ -78,10 +80,12 @@ async function GlobalExecute(message, interaction) {
     ctx.stroke();
     ctx.closePath();
     ctx.clip();
-    // ctx.drawImage(userImage, 11.5,16.5,35,35);
+    ctx.drawImage(userImage, 11.5,16.5,35,35);
     
-    const attachment = new AttachmentBuilder(await canvas.encode('png'), { name: 'payout.png' });
-    controller.channel.send({ files: [attachment] })
+    const attachment = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
+    controller.channel.send({ files: [attachment] });
+    
+
 
   }).catch((e) => {
      if (e.message.includes("401")) return controller.replyNoMention({ content: "" });
