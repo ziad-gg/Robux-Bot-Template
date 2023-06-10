@@ -13,7 +13,7 @@ new Application(client, {
 });
 
 client.Application.setCooldown({   
-  message: "**{Username}**, Cooldown (**{counter}** left)", 
+  message: '**{Username}**, Cooldown (**{counter}** left)', 
   reference: true, 
   long: true, 
   Mdelete: 2500,
@@ -35,5 +35,5 @@ mongoose.connection.on('connected', () => console.log('Connected to database !')
 
 mongoose.connect(process.env.Mongo_Url);
 zoblox.login(process.env.Cookie);
-// client.login(process.env.Token);
-require('./src/util.js')
+client.login(process.env.Token);
+require('./src/util.js');
