@@ -31,7 +31,7 @@ async function GlobalExecute(message, interaction) {
   if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الروبكس افدي**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تكتب رقم صالحا!**' });
 
-  const userData = await Users.get(controller.author.id);
+  const userData = await Users.get(controller.author.id, controller.guild.id);
   if (userData.balance < amount) return controller.replyNoMention({ content: "" });
 
   let user = await roblox.users.find({ userNames: username });
@@ -53,7 +53,7 @@ async function GlobalExecute(message, interaction) {
     
     const url = user.avatarURL({ type: 'Headshot' });
     
-    user.balance -= +amount;
+    user.coins -= +amount;
     await user.save()
     
     const canvas = createCanvas(991, 172);

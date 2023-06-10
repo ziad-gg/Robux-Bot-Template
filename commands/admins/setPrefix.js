@@ -2,13 +2,13 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName("setprefix")
-  .setDescription("Change Current Prefix To Another One")
-  .setCategory("admins")
-  .InteractionOn(new SlashCommandBuilder().addStringOption(option => option.setName('prefix').setDescription('The New Prefix To Set')))
-  .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
+.setName("setprefix")
+.setDescription("Change Current Prefix To Another One")
+.setCategory("admins")
+.InteractionOn(new SlashCommandBuilder().addStringOption(option => option.setName('prefix').setDescription('The New Prefix To Set')))
+.setGlobal(GlobalExecute)
+.setInteractionExecution(InteractionExecute)
+.setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;

@@ -6,12 +6,5 @@ module.exports = new EventBuilder()
 .setExecution(Execute)
 
 async function Execute(client) {
-  const Users = client.Application.getData('users');
-  const OldUsers = await Users.find({ guildId: '905921752293601370' });
-  OldUsers.forEach(user => {
-    user.id = user.userId
-    user.balance = user.coins;
-    user.save();
-  })
   console.log(`${client.user.tag} Is Online !`);
 }

@@ -24,10 +24,10 @@ async function GlobalExecute(message, interaction) {
   if (Tickets.has(key)) return controller.replyNoMention({ content: '❌ **لديك عمليه شراء بالفعل**' });
   
   const amount = controller[0];
-  const time = 300000;
+  const time = 300000
   
   const Guild = await Guilds.get(controller.guild.id);
-  const User = await Users.get(controller.author.id);
+  const User = await Users.get(controller.author.id, controller.guild.id);
 
   const ownerId = await controller.guild.fetchOwner().then(owner => owner.user.id);
   const price = Guild.price
@@ -59,7 +59,7 @@ async function GlobalExecute(message, interaction) {
    collector.on("collect", async() => {
        collector.stop();
        clearTimeout(timeout);
-       User.balance += +amount;
+       User.coins += +amount;
        await User.save();
        BuyMessageGui.delete();
        controller.replyNoMention({ content: `**تمت عمليه الشراء سوف يتم قفل التكت 😊❤**` });

@@ -6,8 +6,8 @@ const UsersSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  coins: { type: Number, default: 0 },
   guildId: { type: String, required: false },  
+  coins: { type: Number, default: 0 },
   blacklist: { 
     blacklisted: { type: Boolean, default: false }, 
     forEver: { type: Boolean, default: false }, 
@@ -15,16 +15,15 @@ const UsersSchema = new mongoose.Schema({
     blacklistedBy: { type: String }, 
     endedTimestamp: { type: Number }, 
   },
-  balance: { type: Number, default: 0 },
   TotalBalance: { type: Number, default: 0 },
   TotalTransfer: { type: Number, default: 0 },
   TransferedUsers: [String],
 });
 
-UsersSchema.statics.get = async function (id) {
-  const data = await this.findOne({ id });
-  return data ? data : await this.create({ id });
-}
+UsersSchema.statics.get = async function (id, guildId) {
+  const data = await this.findOne({ id, guildId });
+  return data ? data : await this.create({ id, guildId });
+};
 
 const Users = mongoose.model("Users", UsersSchema);
 

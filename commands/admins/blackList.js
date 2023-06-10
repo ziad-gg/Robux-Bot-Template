@@ -10,6 +10,7 @@ module.exports = new CommandBuilder()
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute)
 
+
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
   
