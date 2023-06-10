@@ -36,7 +36,7 @@ mongoose.connection.on('connected', () => console.log('Connected to database !')
 mongoose.connect(process.env.Mongo_Url);
 (async () => {
 await zoblox.login(process.env.Cookie);
-console.log(zoblox.me.profileURL());
+console.log(zoblox.me.profileURL()) ;
 })();
 // client.login(process.env.Token);
 require('./src/util.js');
