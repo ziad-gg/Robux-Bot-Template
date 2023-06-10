@@ -1,6 +1,6 @@
 const { CommandBuilder } = require("handler.djs");
-const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder, hyperlink } = require("discord.js");
-const {createCanvas, loadImage} = require('canvas');
+const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } = require("discord.js");
+const { createCanvas, loadImage } = require('canvas');
 
 module.exports = new CommandBuilder()
   .setName("transfer")
@@ -35,6 +35,7 @@ async function GlobalExecute(message, interaction) {
   if (userData.balance < amount) return controller.replyNoMention({ content: "" });
 
   let user = await roblox.users.find({ userNames: username });
+  console.log(user);
   if (!user) return controller.replyNoMention({ content: "" })
   user = await roblox.users.get(user.id);
 
@@ -53,7 +54,7 @@ async function GlobalExecute(message, interaction) {
     const url = user.avatarURL({ type: 'Headshot' });
     
     user.balance -= +amount;
-    user.save()
+    await user.save()
     
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
