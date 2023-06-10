@@ -3,13 +3,13 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName("end")
-.setDescription("Cancel your current purchase.")
-.setCategory("public")
-.setCooldown('10s')
-.InteractionOn(new SlashCommandBuilder())
-.setGlobal(GlobalExecute)
-.setInteractionExecution(InteractionExecute)
-.setMessageExecution(MessageExecute)
+  .setDescription("Cancel your current purchase.")
+  .setCategory("public")
+  .setCooldown('10s')
+  .InteractionOn(new SlashCommandBuilder())
+  .setGlobal(GlobalExecute)
+  .setInteractionExecution(InteractionExecute)
+  .setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
@@ -24,7 +24,6 @@ async function GlobalExecute(message, interaction) {
     message: "**✅ تم انهاء عمليه الشراء بنجاح!**",
     interaction: "**✅ تم انهاء عمليه الشراء بنجاح!**",
   }
-
 }
 
 function InteractionExecute(interaction, global) {
