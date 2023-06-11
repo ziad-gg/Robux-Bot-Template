@@ -25,10 +25,13 @@ async function GlobalExecute(message, interaction) {
   if (cooldowns.has(key)) return controller.replyNoMention({ content: '❌ **لديك عملية شراء بالفعل!**' });
 
   const amount = +controller[0];
-  if (!amount) return controller.replyNoMention({ content: '' } =
+  if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تريده!**' });
+  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بكتابة رقم صالحآ!**' });
   
   const time = 3e5;
   const guildData = await guildsData.get(controller.guild.id);
+  if (guildData.buy.max < amount) return message.replyNoMention({ content: `الحد الاقصي للشراء هو ${guildData.buy.max}` });
+  if (guildData.buy.min > amount) return message.replyNoMention({ content: `الحد الاقل للشراء هو ${guildData.buy.min}` });
   
   const userData = await usersData.get(controller.author.id, controller.guild.id);
   const recipientId = await controller.guild.fetchOwner().then((owner) => owner.user.id);

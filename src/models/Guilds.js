@@ -20,17 +20,16 @@ const GuildsSchema = new mongoose.Schema({
     min: { type: Number, default: 1 },
   },
   transfer: {
-    max: { type: Number,  default: 1 },
-    min: { type: Number,  default: 1 },
+    max: { type: Number, default: 1 },
+    min: { type: Number, default: 1 },
   }
 });
-
 
 GuildsSchema.statics.get = async function (id) {
   const data = await this.findOne({ id });
   return data ? data : await this.create({ id });
 }
 
-const Guilds = mongoose.model("Guilds", GuildsSchema);
+const Guilds = mongoose.model('Guilds', GuildsSchema);
 
 module.exports = Guilds;

@@ -15,9 +15,10 @@ const UsersSchema = new mongoose.Schema({
     blacklistedBy: { type: String }, 
     endedTimestamp: { type: Number }, 
   },
-  TotalBalance: { type: Number, default: 0 },
-  TotalTransfer: { type: Number, default: 0 },
-  TransferedUsers: [String],
+  buyedTotal: { type: Number, default: 0 },
+  buyedCount: { type: Number, default: 0 },
+  transactionsTotal: { type: Number, default: 0 },
+  transactionsCount: { type: Number, default: 0 },
 });
 
 UsersSchema.statics.get = async function (id, guildId) {
@@ -25,6 +26,6 @@ UsersSchema.statics.get = async function (id, guildId) {
   return data ? data : await this.create({ id, guildId });
 };
 
-const Users = mongoose.model("Users", UsersSchema);
+const Users = mongoose.model('Users', UsersSchema);
 
 module.exports = Users;
