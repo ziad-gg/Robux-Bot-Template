@@ -8,6 +8,7 @@ module.exports = new CommandBuilder()
 .InteractionOn(new SlashCommandBuilder().addStringOption(option => option.setName('prefix').setDescription('The New Prefix To Set')))
 .setGlobal(GlobalExecute)
 .setInteractionExecution(InteractionExecute)
+.OwnersOnly()
 .setMessageExecution(MessageExecute)
 
 

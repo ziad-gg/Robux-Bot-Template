@@ -7,6 +7,7 @@ module.exports = new CommandBuilder()
 .setCategory('admins')
 .InteractionOn(new SlashCommandBuilder().addUserOption(op => op.setName('user').setDescription('User Acount to give Robux').setRequired(true)).addNumberOption(option => option.setName('amount').setDescription('Amount to Transfer To').setRequired(true)))
 .setGlobal(GlobalExecute)
+.OwnersOnly()
 .setInteractionExecution(InteractionExecute)
 
 

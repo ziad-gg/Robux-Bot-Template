@@ -5,11 +5,12 @@ const mongoose = require('mongoose');
 const path = require('node:path');
 
 const client = new Client({ intents: 3276799 });
-const zoblox = new Zoblox()
+const zoblox = new Zoblox();
 
 new Application(client, {
   commandsPath: path.join(__dirname, 'commands'),
-  EventsPath: path.join(__dirname, 'events')
+  EventsPath: path.join(__dirname, 'events'),
+  owners: ['789896576402587667']
 });
 
 client.Application.setCooldown({   
@@ -36,4 +37,4 @@ mongoose.connection.on('connected', () => console.log('Connected to database !')
 mongoose.connect(process.env.Mongo_Url);
 zoblox.login(process.env.Cookie);
 client.login(process.env.Token);
-require('./src/util.js');
+require('./src/Util.js');

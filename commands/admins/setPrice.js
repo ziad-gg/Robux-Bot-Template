@@ -8,6 +8,7 @@ module.exports = new CommandBuilder()
   .InteractionOn(new SlashCommandBuilder().addNumberOption(op => op.setName('price').setDescription('Type Amount Here To Set').setRequired(true)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
+.OwnersOnly()
   .setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {

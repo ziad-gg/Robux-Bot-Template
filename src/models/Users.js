@@ -7,7 +7,7 @@ const UsersSchema = new mongoose.Schema({
     unique: true
   },
   guildId: { type: String, required: false },  
-  balance: { type: Number, default: 0 },
+  coins: { type: Number, default: 0 },
   blacklist: { 
     blacklisted: { type: Boolean, default: false }, 
     forEver: { type: Boolean, default: false }, 

@@ -9,6 +9,7 @@ module.exports = new CommandBuilder()
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute)
+  .OwnersOnly()
 
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;

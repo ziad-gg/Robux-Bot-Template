@@ -7,6 +7,7 @@ module.exports = new CommandBuilder()
 .setCategory('admins')
 .InteractionOn(new SlashCommandBuilder())
 .setGlobal(GlobalExecute)
+.OwnersOnly()
 .setSubcommands([
    { command: 'donechannel' },
    { command: 'clientrole' },

@@ -8,6 +8,7 @@ module.exports = new CommandBuilder()
   .InteractionOn(new SlashCommandBuilder().addNumberOption(option => option.setName('id').setDescription('Group Id To Select').setRequired(true)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
+ .OwnersOnly()
   .setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) { 

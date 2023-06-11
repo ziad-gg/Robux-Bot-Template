@@ -42,8 +42,8 @@ async function GlobalExecute(message, interaction) {
   const Guild = await Guilds.get(controller.guild.id);
   const Group = await roblox.groups.get(Guild.groupId);
   
-  if (Guild.transfer.max < amount) return message.replyNoMention({ content: `الحد الاقصي للتحويل هو ${guildData.transfer.max}` });
-  if (Guild.transfer.min > amount) return message.replyNoMention({ content: `الحد الاقل للشراء هو ${guildData.transfer.min}` });
+  if (Guild.transfer.max < amount) return message.replyNoMention({ content: `الحد الاقصي للتحويل هو ${Guild.transfer.max}` });
+  if (Guild.transfer.min > amount) return message.replyNoMention({ content: `الحد الاقل للتحويل هو ${Guild.transfer.min}` });
   
   const member = await Group.members.get(user.id);
 
