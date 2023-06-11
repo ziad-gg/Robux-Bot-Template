@@ -2,9 +2,9 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName("balance")
-  .setDescription("Shows user balance.")
-  .setCategory("public")
+  .setName('balance')
+  .setDescription('Shows user balance.')
+  .setCategory('public')
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().addUserOption(option => option.setName('user').setDescription('User To Get Information of His Currency')))
   .setGlobal(GlobalExecute)

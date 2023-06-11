@@ -7,4 +7,4 @@
 
 [Robux Factory](https://discord.gg/qDt4zUrzph)
 
-[Robux Mania]()
+[Robux Mania](https://discord.gg/JUrAHdDxAT)

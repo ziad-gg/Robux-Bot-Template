@@ -56,7 +56,7 @@ async function GlobalExecute(message, interaction) {
     message.reply(`**✅ تم بنجاح شراء \`${amount}\` رصيد!\nرصيدك الحالي: \`${userData.balance}RB\`.**`);
 
     setTimeout(() => {
-      message.channel.delete()
+      message.channel.delete();
       cooldowns.delete(key);
     });
   }
