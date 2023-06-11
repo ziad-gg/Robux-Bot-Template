@@ -2,9 +2,9 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName("ping")
-  .setDescription("Test the bots response time.")
-  .setCategory("public")
+  .setName('ping')
+  .setDescription('Test the bots response time.')
+  .setCategory('public')
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder())
   .setGlobal(GlobalExecute)

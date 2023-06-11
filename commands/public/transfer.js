@@ -46,7 +46,7 @@ async function GlobalExecute(message, interaction) {
   
   const member = await Group.members.get(user.id);
 
-  if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب: ${Group.linkURL()}**`});
+  if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${Group.linkURL()}`});
 
   const robux = await Group.getFunds().then((e) => e.robux);
   if (robux < amount) return controller.replyNoMention({ content: "" });
@@ -95,7 +95,6 @@ async function GlobalExecute(message, interaction) {
     }
 
   }).catch((e) => {
-     console.log(e.message);
      if (e.message === '400 Payout is restricted.') return controller.replyNoMention({ content: "❌ **هذا اللاعب جديد في الجروب!**" });
      if (/\d+/.test(e.message)) return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
   });
