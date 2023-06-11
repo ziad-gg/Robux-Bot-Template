@@ -22,8 +22,8 @@ const UsersSchema = new mongoose.Schema({
 });
 
 UsersSchema.statics.get = async function (id, guildId) {
-  const data = await this.findOne({ id, guildId });
-  return data ? data : await this.create({ id, guildId });
+  const userData = await this.findOne({ id, guildId });
+  return userData ? userData : await this.create({ id, guildId });
 };
 
 const Users = mongoose.model('Users', UsersSchema);

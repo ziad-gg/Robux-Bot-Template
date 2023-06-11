@@ -13,15 +13,14 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
   const Users = controller.getData('users');
-  
   const UserId = controller[0];
-  const Amount = controller[1];
   
+  const Amount = controller[1];
   const User = await controller.getUser(UserId).then(u => u?.user?.id? u.user : u);
+  
   const UserData = await Users.get(User.id, controller.guild.id);
   
   UserData.balance += +Amount;
-  
   await UserData.save();
   
   controller.replyNoMention({ content: `**تم تحويل ${Amount} ل <@${UserId}>**` })  

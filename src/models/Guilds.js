@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { prefix } = require('../config.js');
+const { PREFIX } = require('../Constants.js');
 
 const GuildsSchema = new mongoose.Schema({
   id: {
@@ -9,7 +9,7 @@ const GuildsSchema = new mongoose.Schema({
   },
   prefix: {
     type: String,
-    default: prefix
+    default: PREFIX
   },
   groupId: { type: Number },
   price: { type: Number, default: 1000 }, 
@@ -26,8 +26,8 @@ const GuildsSchema = new mongoose.Schema({
 });
 
 GuildsSchema.statics.get = async function (id) {
-  const data = await this.findOne({ id });
-  return data ? data : await this.create({ id });
+  const guildData = await this.findOne({ id });
+  return guildData ? guildData : await this.create({ id });
 }
 
 const Guilds = mongoose.model('Guilds', GuildsSchema);

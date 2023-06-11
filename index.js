@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Collection } = require('discord.js');
+const { Client } = require('discord.js');
 const { Application } = require('handler.djs');
 const { Zoblox, Events } = require('zoblox.js');
 const mongoose = require('mongoose');
@@ -28,7 +28,6 @@ client.Application.setData({
   buy_cooldowns: new Map(),
   guilds: require('./src/models/Guilds.js'),
   users: require('./src/models/Users.js'),
-  config: require('./src/config.js')
 });
 
 zoblox.on(Events.UserReady, () => console.log(`Logged is as: ${zoblox.me.username} !`));
