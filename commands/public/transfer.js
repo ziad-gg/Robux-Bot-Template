@@ -35,7 +35,7 @@ async function GlobalExecute(message, interaction) {
   if (userData.balance < amount) return controller.replyNoMention({ content: "❌ **ليس لديك رصيد كافي!**" });
 
   let user = await roblox.users.find({ userNames: username });
-  if (!user) return controller.replyNoMention({ content: "" })
+  if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' })
   user = await roblox.users.get(user.id);
 
   const Guild = await Guilds.get(controller.guild.id);
@@ -95,8 +95,7 @@ async function GlobalExecute(message, interaction) {
     }
 
   }).catch((e) => {
-     if (e.message === '400 Payout is restricted.') return controller.replyNoMention({ content: "❌ **هذا اللاعب جديد في الجروب!**" });
-     if (/\d+/.test(e.message)) return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
+     if (e.message === '400 Payout is restricted.') return controller.replyNoMention({ content: '❌ **هذا اللاعب جديد في الجروب!**' });
   });
 }
 

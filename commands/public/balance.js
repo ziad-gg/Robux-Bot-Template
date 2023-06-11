@@ -13,16 +13,16 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
-  const Users = controller.getData('users');
+  const usersData = controller.getData('users');
   
   const args = controller[0];
   let user = controller.author;
 
   if (args) user = await controller.getUser(args.toId());
-  if (!user) return controller.replyNoMention({ content: "> 🤔 **لا يمكنني العثور علي هذا العضو**" });
-  if (user.bot) return controller.replyNoMention({ content: "> 🤔 **البوتات لا تملك حساب**" });
+  if (!user) return controller.replyNoMention({ content: "❌ **لا يمكنني العثور على هذا العضو!**" });
+  if (user.bot) return controller.replyNoMention({ content: "❌ **البوتات لا تملك حساب!**" });
   
-  const userData = await Users.get(user.id, controller.guild.id);
+  const userData = await usersData.get(user.id, controller.guild.id);
   const msg = user.id === controller.author.id ? `**رصيد حسابك هو \`${userData.coins}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.coins}\`** 🪙`;
 
   return {
