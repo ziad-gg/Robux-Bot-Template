@@ -2,20 +2,20 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-.setName('set')
-.setDescription('This Command is To manage a multi tasks.')
-.setCategory('admins')
-.InteractionOn(new SlashCommandBuilder())
-.setGlobal(GlobalExecute)
-.OwnersOnly()
-.setSubcommands([
-   { command: 'donechannel' },
-   { command: 'clientrole' },
-   { command: 'max', group: 'buy' },
-   { command: 'min', group: 'buy' },
-   { command: 'max', group: 'transfer' },
-   { command: 'min', group: 'transfer' },
-])
+  .setName('set')
+  .setDescription('Management the database.')
+  .setCategory('admins')
+  .InteractionOn(new SlashCommandBuilder())
+  .setGlobal(GlobalExecute)
+  .OwnersOnly()
+  .setSubcommands([
+     { command: 'donechannel' },     
+     { command: 'clientrole' },
+     { command: 'max', group: 'buy' },
+     { command: 'min', group: 'buy' },
+     { command: 'max', group: 'transfer' },
+     { command: 'min', group: 'transfer' },
+  ])
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;

@@ -24,8 +24,6 @@ async function GlobalExecute(message, interaction) {
   await UserData.save();
   
   controller.replyNoMention({ content: `**تم تحويل ${Amount} ل <@${UserId}>**` })  
-
-  return; 
 };
 
 function InteractionExecute() {}

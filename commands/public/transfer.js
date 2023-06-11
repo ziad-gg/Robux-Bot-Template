@@ -95,7 +95,11 @@ async function GlobalExecute(message, interaction) {
     }
 
   }).catch((e) => {
-     if (e.message === '400 Payout is restricted.') return controller.replyNoMention({ content: '❌ **هذا اللاعب جديد في الجروب!**' });
+     if (e.message === '400 Payout is restricted.') { 
+       controller.replyNoMention({ content: '❌ **هذا اللاعب جديد في الجروب!**' });
+     } else {
+       console.error(e);
+     } 
   });
 }
 

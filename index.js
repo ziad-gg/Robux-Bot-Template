@@ -1,6 +1,7 @@
 const { Client } = require('discord.js');
-const { Application } = require('handler.djs');
 const { Zoblox, Events } = require('zoblox.js');
+const { Application } = require('handler.djs');
+const { OWNERS } = require('./src/Constants.js');
 const mongoose = require('mongoose');
 const path = require('node:path');
 
@@ -10,7 +11,7 @@ const zoblox = new Zoblox();
 new Application(client, {
   commandsPath: path.join(__dirname, 'commands'),
   EventsPath: path.join(__dirname, 'events'),
-  owners: ['789896576402587667']
+  owners: OWNERS
 });
 
 client.Application.setCooldown({   
