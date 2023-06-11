@@ -87,7 +87,13 @@ async function GlobalExecute(message, interaction) {
     ctx.drawImage(userImage, 11.5,16.5,35,35);
     
     const attachment = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
-    controller.channel.send({ files: [attachment] });
+    const channel = await controller.channels.cache.get(Guild.proof);
+    
+    if (channel) {
+      channel.send({ files: [attachment] });
+    } else {
+      controller.channel.send({ files: [attachment] });
+    }
     
 
   }).catch((e) => {
