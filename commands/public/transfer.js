@@ -53,7 +53,6 @@ async function GlobalExecute(message, interaction) {
 
   await member.payout({ amount }).then(async () => {
     controller.replyNoMention({ content: `✅ **تم بنجاح تحويل الروبوكس إلى ${username}**` });
-    const url = user.avatarURL({ type: 'Headshot' });
     
     userData.coins -= +amount;
     await userData.save();
@@ -73,9 +72,9 @@ async function GlobalExecute(message, interaction) {
     ctx.fillText(username.toString(), 61, 35);
     ctx.font = '10px impact';
     ctx.fillStyle = 'Gray';
-    ctx.fillText('Member', 65, 47);
+    ctx.fillText(member.role.name, 65, 47);
     ctx.closePath();
-    const userImage = await loadImage(url.toString());
+    const userImage = await loadImage(user.avatarURL({ type: 'Headshot' }));
     ctx.beginPath();
     ctx.arc(29, 34, 21, 0, Math.PI * 2 , true);
     ctx.strokeStyle = '#fff';
@@ -99,6 +98,7 @@ async function GlobalExecute(message, interaction) {
        controller.replyNoMention({ content: '❌ **هذا اللاعب جديد في الجروب!**' });
      } else {
        console.error(e);
+       controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
      } 
   });
 }
