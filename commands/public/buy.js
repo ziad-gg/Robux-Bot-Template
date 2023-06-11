@@ -25,6 +25,8 @@ async function GlobalExecute(message, interaction) {
   if (cooldowns.has(key)) return controller.replyNoMention({ content: '❌ **لديك عملية شراء بالفعل!**' });
 
   const amount = +controller[0];
+  if (!amount) return controller.replyNoMention({ content: '' } =
+  
   const time = 3e5;
   const guildData = await guildsData.get(controller.guild.id);
   
@@ -44,26 +46,27 @@ async function GlobalExecute(message, interaction) {
   pay.on('collect', async () => {
     if (cooldowns.has(key)) {
     if (cooldowns.get(key).transactionId !== transactionId) return;
-      
+
     userData.balance += amount;
     await usersData.save();
-      
+
     message.reply(`**✅ تم بنجاح شراء \`${amount}\` رصيد!\nرصيدك الحالي: \`${userData.balance}RB\`.**`);
 
     setTimeout(() => {
       message.channel.delete()
       cooldowns.delete(key);
-     });
-    } 
-  });
-
-  pay.on('end', (timeout) => {
-    if (cooldowns.has(key)) {
-    if (cooldowns.get(key).transactionId !== transactionId) return;
-    controller.replyNoMention({ content: '🕓 **لقد انتهى وقت التحويل المسموح لك بالتحويل!**' });
-    cooldowns.delete(key);
-    }
-  });
+    });
+  }
+});
+  
+ pay.on('end', async () => {
+   if (cooldowns.has(key)) {
+   if (cooldowns.get(key).transactionId !== transactionId) return;
+  
+   await cooldowns.delete(key); 
+   controller.replyNoMention({ content: '🕓 **لقد انتهى وقت التحويل المسموح لك بالتحويل!**' });
+   }
+ });
 }
 
 function InteractionExecute(interaction, global) {}

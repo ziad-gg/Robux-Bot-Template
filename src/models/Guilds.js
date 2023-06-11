@@ -16,12 +16,12 @@ const GuildsSchema = new mongoose.Schema({
   proof: { type: String },
   clientR: { type: String },
   buy: {
-    max: { type: Number },
-    min: { type: Number },
+    max: { type: Number, default: 1 },
+    min: { type: Number, default: 1 },
   },
   transfer: {
-    max: { type: Number },
-    min: { type: Number },
+    max: { type: Number,  default: 1 },
+    min: { type: Number,  default: 1 },
   }
 });
 

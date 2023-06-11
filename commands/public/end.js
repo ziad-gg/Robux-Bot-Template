@@ -2,9 +2,9 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName("end")
-  .setDescription("Cancel your current purchase.")
-  .setCategory("public")
+  .setName('end')
+  .setDescription('Cancel your current purchase.')
+  .setCategory('public')
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder())
   .setGlobal(GlobalExecute)
@@ -13,16 +13,16 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
-  const Tickets = controller.getData('tickets');
+  const cooldowns = controller.getData('buy_cooldowns');
   const key = `${controller.author.id}-${controller.guild.id}`;
-  if (!Tickets.has(key)) return controller.replyNoMention({ content: '❌ **ليس لديك عمليه شراء***' });
-  const Process = Tickets.get(key);
   
-  Process.collector.emit('buyEnd', true);
+  if (!cooldowns.has(key)) return controller.replyNoMention({ content: '❌ **ليس لديك عملية شراء!**' });
   
-   return {
-    message: "**✅ تم انهاء عمليه الشراء بنجاح!**",
-    interaction: "**✅ تم انهاء عمليه الشراء بنجاح!**",
+  await cooldowns.delete(key);
+  
+  return {
+    message: "✅ **تم بنجاح إنهاء عملية الشراء!**",
+    interaction: "✅ **تم بنجاح إنهاء عملية الشراء**",
   }
 }
 
