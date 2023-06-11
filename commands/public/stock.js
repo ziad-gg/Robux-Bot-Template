@@ -2,9 +2,9 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName("stock")
-  .setDescription("Check the stock of robux.")
-  .setCategory("public")
+  .setName('stock')
+  .setDescription('Check the stock of robux.')
+  .setCategory('public')
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)

@@ -4,13 +4,14 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('set')
   .setDescription('Management the database.')
-  .setCategory('admins')
   .InteractionOn(new SlashCommandBuilder())
   .setGlobal(GlobalExecute)
   .OwnersOnly()
   .setSubcommands([
-     { command: 'donechannel' },     
+     { command: 'prefix' },     
+     { command: 'group' },
      { command: 'clientrole' },
+     { command: 'donechannel' },
      { command: 'max', group: 'buy' },
      { command: 'min', group: 'buy' },
      { command: 'max', group: 'transfer' },

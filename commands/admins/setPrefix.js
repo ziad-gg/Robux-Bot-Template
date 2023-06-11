@@ -3,15 +3,13 @@ const { SlashCommandBuilder } = require('discord.js');
 const { PREFIX } = require('../../src/Constants.js');
 
 module.exports = new CommandBuilder() 
-.setName('setprefix')
+.setName('prefix')
 .setDescription('Change Current Prefix To Another One')
-.setCategory('admins')
 .InteractionOn(new SlashCommandBuilder().addStringOption(option => option.setName('prefix').setDescription('The New Prefix To Set')))
-.setGlobal(GlobalExecute)
+// .setGlobal(GlobalExecute)
 .setInteractionExecution(InteractionExecute)
-.OwnersOnly()
 .setMessageExecution(MessageExecute)
-
+.isSubCommand()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
