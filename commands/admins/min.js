@@ -2,8 +2,8 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-.setName('proofchannel')
-.setDescription('set proof channel.')
+.setName('min')
+.setDescription('Select the min Amount to buy.')
 .InteractionOn(new SlashCommandBuilder().addChannelOption(op => op.setName('proofchannel').setDescription('Channel Option to select').setRequired(true)))
 .setInteractionExecution(InteractionExecute)
 .isSubCommand()

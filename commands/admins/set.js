@@ -8,8 +8,12 @@ module.exports = new CommandBuilder()
 .InteractionOn(new SlashCommandBuilder())
 .setGlobal(GlobalExecute)
 .setSubcommands([
-   { command: 'proofchannel' },
+   { command: 'donechannel' },
    { command: 'clientrole' },
+   { command: 'max', group: 'buy' },
+   // { command: 'min', group: 'buy' },
+   // { command: 'max', group: 'transfer' },
+   // { command: 'min', group: 'transfer' },
 ])
 
 async function GlobalExecute(message, interaction) {
