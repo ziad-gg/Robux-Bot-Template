@@ -20,6 +20,8 @@ async function GlobalExecute(message, interaction) {
     
     const group = await roblox.groups.get(guildData.groupId);  
     const transactions = await group.getTransactions({ limit: 10 });
+    const a = await fetchAllGroupTransactions(group);
+    console.log(a.length);
     const embed = new EmbedBuilder()
       .setColor('#0be881')
       .setTitle(group.name)
@@ -44,3 +46,19 @@ function InteractionExecute(interaction, global) {
 function MessageExecute(message, global) {   
   message.replyNoMention({ embeds: [global] });
 };
+
+
+async function fetchAllGroupTransactions(Group) {
+  let transactions = [];
+  let nextPageCursor = null;
+
+  do {
+    const result = await Group.getTransactions({ cursor: nextPageCursor });
+    const { data, nextPageCursor: nextCursor } = result;
+
+    transactions = transactions.concat(data);
+    nextPageCursor = nextCursor;
+  } while (!nextPageCursor);
+
+  return transactions;
+}
