@@ -19,14 +19,12 @@ async function GlobalExecute(message, interaction) {
     const guildData = await guildsData.get(controller.guild.id);
     
     const group = await roblox.groups.get(guildData.groupId);  
-    const transactions = await group.getTransactions({ limit: 10 });
-    const a = await fetchAllGroupTransactions(group);
-    console.log(a.length);
+    const transactions = await fetchAllGroupTransactions(group);
     const embed = new EmbedBuilder()
       .setColor('#0be881')
       .setTitle(group.name)
       .setThumbnail(controller.guild.iconURL({ dynamic: true })) 
-      .setDescription(transactions.data.filter(e => e.isPending).sort((a, b) => Math.floor((new Date(a.created).getTime() + 432e6) / 1000) - Math.floor((new Date(b.created).getTime() + 432e6) / 1000)).map(e => `**- Amount : ${Math.ceil(e.currency.amount)}\n- Arrival time : <t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:F> \n<t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:R>**`).join('\n\n') || ' ')
+      .setDescription(transactions.filter(e => e.isPending).sort((a, b) => Math.floor((new Date(a.created).getTime() + 432e6) / 1000) - Math.floor((new Date(b.created).getTime() + 432e6) / 1000)).map(e => `**- Amount : ${Math.ceil(e.currency.amount)}\n- Arrival time : <t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:F> \n<t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:R>**`).join('\n\n') || ' ')
       .setFooter({ text: controller.author.username, iconURL: controller.author.displayAvatarURL({ dynamic: true }) })
       .setTimestamp()
     
@@ -53,12 +51,12 @@ async function fetchAllGroupTransactions(Group) {
   let nextPageCursor = null;
 
   do {
-    const result = await Group.getTransactions({ cursor: nextPageCursor });
+    const result = await Group.getTransactions({ limit: 100, cursor: nextPageCursor });
     const { data, nextPageCursor: nextCursor } = result;
 
     transactions = transactions.concat(data);
     nextPageCursor = nextCursor;
-  } while (!nextPageCursor);
+  } while (nextPageCursor !== null);
 
   return transactions;
 }

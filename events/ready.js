@@ -9,7 +9,5 @@ module.exports = new EventBuilder()
 
 async function Execute(client) {
   app.listen(3000);
-  console.log(client.Application.getCommand('set'))
-
   console.log(`${client.user.tag} Is Online !`);
 }
