@@ -17,7 +17,7 @@
     "handler.djs": "^2.6.1",
     "mongoose": "^7.2.3",
     "uptimer-web": "^3.3.0",
-    "zoblox.js": "^2.0.0"
+    "zoblox.js": "^2.1.0"
   },
   "engines": {
     "node": "16.x"

@@ -51,12 +51,12 @@ async function GlobalExecute(message, interaction) {
   const robux = await Group.getFunds().then((e) => e.robux);
   if (robux < amount) return controller.replyNoMention({ content: "" });
 
-  member.payout({ amount }).then(async () => {
-    
+  await member.payout({ amount }).then(async () => {
+    controller.replyNoMention({ content: `✅ **تم بنجاح تحويل الروبوكس إلى ${username}!**` });
     const url = user.avatarURL({ type: 'Headshot' });
     
-    user.coins -= +amount;
-    await user.save()
+    userData.coins -= +amount;
+    await userData.save()
     
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
@@ -86,14 +86,13 @@ async function GlobalExecute(message, interaction) {
     ctx.drawImage(userImage, 11.5,16.5,35,35);
     
     const attachment = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
-    const channel = await controller.channels.cache.get(Guild.proof);
+    const channel = await controller.client.channels.cache.get(Guild.proof);
     
     if (channel) {
-      channel.send({ files: [attachment] });
+      channel.send({ content: `**تم الشراء بواسطة: ${controller.author}**`, files: [attachment] });
     } else {
       controller.channel.send({ files: [attachment] });
     }
-    
 
   }).catch((e) => {
      console.log(e)
