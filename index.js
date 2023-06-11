@@ -24,7 +24,7 @@ client.Application.setCooldown({
 client.Application.build();
 client.Application.setData({
   roblox: zoblox, 
-  tickets: new Collection(),
+  buy_cooldowns: new Map(),
   guilds: require('./src/models/Guilds.js'),
   users: require('./src/models/Users.js'),
   config: require('./src/config.js')
@@ -35,5 +35,5 @@ mongoose.connection.on('connected', () => console.log('Connected to database !')
 
 mongoose.connect(process.env.Mongo_Url);
 zoblox.login(process.env.Cookie);
-client.login(process.env.Token);
+// client.login(process.env.Token);
 require('./src/util.js');
