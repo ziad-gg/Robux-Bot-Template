@@ -8,9 +8,18 @@ module.exports = new CommandBuilder()
 .InteractionOn(new SlashCommandBuilder())
 .setGlobal(GlobalExecute)
 .setSubcommands([
-   { command: '' }
+   { command: 'proofchannel' },
+   { command: 'clientrole' },
 ])
 
-function GlobalExecute() {
+async function GlobalExecute(message, interaction) {
+  const controller = message ?? interaction;
+  const Guilds = controller.getData('guilds');
+  const guild = await Guilds.get(controller.guild.id);
   
+  return {
+    interaction: {
+      guild
+    }
+  }
 }

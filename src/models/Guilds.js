@@ -13,6 +13,8 @@ const GuildsSchema = new mongoose.Schema({
   },
   groupId: { type: Number },
   price: { type: Number, default: 1000 }, 
+  proof: { type: String },
+  clientR: { type: String },
 });
 
 
