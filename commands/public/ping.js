@@ -12,11 +12,13 @@ module.exports = new CommandBuilder()
   .setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
+  let now = Date.now();
   const controller = message ?? interaction;
   const msg = await controller.replyNoMention({ content: '**🏓 Pong...**' });
+  now = Date.now() - now;
   const embed = new EmbedBuilder()
     .setColor(0x0068ff)
-    .setDescription(`**⏰ Discord API: ${controller.client.ws.ping}ms\n📊 Time Taken: ${msg.createdTimestamp - message ? controller.createdTimestamp : Date.now() - interaction.createdTimestamp}ms**`)
+    .setDescription(`**⏰ Discord API: ${controller.client.ws.ping}ms\n📊 Time Taken: ${now}ms**`)
     .setTimestamp()
   
   return {
