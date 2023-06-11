@@ -35,7 +35,6 @@ async function GlobalExecute(message, interaction) {
   if (userData.balance < amount) return controller.replyNoMention({ content: "" });
 
   let user = await roblox.users.find({ userNames: username });
-  console.log(user);
   if (!user) return controller.replyNoMention({ content: "" })
   user = await roblox.users.get(user.id);
 
@@ -97,6 +96,7 @@ async function GlobalExecute(message, interaction) {
     
 
   }).catch((e) => {
+     console.log(e)
      if (e.message.includes("401")) return controller.replyNoMention({ content: "" });
   });
   
