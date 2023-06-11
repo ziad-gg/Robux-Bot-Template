@@ -11,7 +11,7 @@
     "Slayver (789896576402587667)"
   ],
   "dependencies": {
-    "handler.djs": "^2.5.6",
+    "handler.djs": "^2.5.8",
     "zoblox.js": "^2.1.0-beta.150",
     "uptimer-web": "^3.3.0",
     "discord.js": "^14.11.0",
