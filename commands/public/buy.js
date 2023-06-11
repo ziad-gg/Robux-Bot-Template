@@ -1,5 +1,5 @@
-const { CommandBuilder } = require("handler.djs");
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { CommandBuilder } = require('handler.djs');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder()
   .setName("buy")
@@ -26,36 +26,39 @@ async function GlobalExecute(message, interaction) {
 
   const amount = controller[0];
   const time = 3e5;
-  const Guild = await guifd.get(controller.guild.id);
+  const guildData = await guildsData.get(controller.guild.id);
   
-  const userData = await Users.get(controller.author.id, controller.guild.id);
-  const ownerId = await controller.guild.fetchOwner().then((owner) => owner.user.id);
-  const price = Guild.price;
+  const userData = await usersData.get(controller.author.id, controller.guild.id);
+  const recipientId = await controller.guild.fetchOwner().then((owner) => owner.user.id);
+  const price = guildData.price;
   
-  const WantedToCompete = parseInt(amount * price);
   const embed = new EmbedBuilder()
     .setTimestamp();
   
   await controller.replyNoMention({ embeds: [embed] });
-  const filter = '';
+  const filter = m => m.author.id == '282859044593598464' && m.content.includes(`${price}`) & m.content.includes(`${recipientId}`) && m.content.includes(`${controller.author.username}`);
   const pay = controller.channel.createMessageCollector({ filter, time, max: 1 });
   const transactionId = 'xxxx-xxxx-xxxx-xxxx'.replace(/x/g, () => Math.floor(Math.random() * 16).toString(16));
   
-  Cooldowns.set(key, {
+  cooldowns.set(key, {
     transactionId
   });
 
-  pay.on("collect", async () => {
+  pay.on('collect', async () => {
+    if (cooldowns.has(key)) {
+    if (cooldowns.get(key).transactionId !== transactionId) return;
+      
     userData.balance += +amount;
-    await User.save();
+    await usersData.save();
+      
+    message.channel.send('✅ **تم بنجاح شحن رصيد لحسابك سيتم غلق التكت بعد 5 ثواني!**');
+    setTimeout(() => message.channel.delete(), 5000);
+    }
   });
 
-  collector.on("buyEnd", (e) => {
-    if (!e)
-      controller.replyNoMention({ content: `**لقد انتهي وقت التحويل 😒**` });
-    Tickets.delete(key);
-    BuyMessageGui.delete();
-    clearTimeout(timeout);
+  pay.on('end', (timeout) => {
+    controller.replyNoMention({ content: '🕓 **لقد انتهى وقت التحويل المسموح لك بالتحويل!**' });
+    cooldowns.delete(key);
   });
 }
 
