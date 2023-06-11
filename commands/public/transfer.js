@@ -46,17 +46,17 @@ async function GlobalExecute(message, interaction) {
   
   const member = await Group.members.get(user.id);
 
-  if (!member) return controller.replyNoMention({ content: `❌ **يجب ان تكون داخل الجروب لاستلام الروبوكس**`});
+  if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب: ${Group.linkURL()}**`});
 
   const robux = await Group.getFunds().then((e) => e.robux);
   if (robux < amount) return controller.replyNoMention({ content: "" });
 
   await member.payout({ amount }).then(async () => {
-    controller.replyNoMention({ content: `✅ **تم بنجاح تحويل الروبوكس إلى ${username}!**` });
+    controller.replyNoMention({ content: `✅ **تم بنجاح تحويل الروبوكس إلى ${username}**` });
     const url = user.avatarURL({ type: 'Headshot' });
     
     userData.coins -= +amount;
-    await userData.save()
+    await userData.save();
     
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
@@ -91,15 +91,14 @@ async function GlobalExecute(message, interaction) {
     if (channel) {
       channel.send({ content: `**تم الشراء بواسطة: ${controller.author}**`, files: [attachment] });
     } else {
-      controller.channel.send({ files: [attachment] });
+      controller.replyNoMention({ files: [attachment] });
     }
 
   }).catch((e) => {
-     console.log(e)
-     if (e.message.includes("401")) return controller.replyNoMention({ content: "" });
+     console.log(e.message);
+     if (e.message === '400 Payout is restricted.') return controller.replyNoMention({ content: "❌ **هذا اللاعب جديد في الجروب!**" });
+     if (/\d+/.test(e.message)) return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
   });
-  
-  return;
 }
 
 function InteractionExecute(interaction, global) {}
