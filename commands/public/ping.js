@@ -16,7 +16,7 @@ async function GlobalExecute(message, interaction) {
   const msg = await controller.replyNoMention({ content: '**🏓 Pong...**' });
   const embed = new EmbedBuilder()
     .setColor(0x0068ff)
-    .setDescription(`**⏰ Discord API: ${controller.client.ws.ping}ms\n📊 Time Taken: ${msg.createdTimestamp - controller.createdTimestamp}ms**`)
+    .setDescription(`**⏰ Discord API: ${controller.client.ws.ping}ms\n📊 Time Taken: ${msg.createdTimestamp - message ? controller.createdTimestamp : Date.now() - interaction.createdTimestamp}ms**`)
     .setTimestamp()
   
   return {
