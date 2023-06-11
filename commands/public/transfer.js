@@ -1,18 +1,18 @@
-const { CommandBuilder } = require("handler.djs");
-const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } = require("discord.js");
+const { CommandBuilder } = require('handler.djs');
+const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } = require('discord.js');
 const { createCanvas, loadImage } = require('canvas');
 
 module.exports = new CommandBuilder()
-  .setName("transfer")
-  .setDescription("Change Your Current Balance to Robux.")
-  .setCategory("public")
-  .setCooldown("15s")
+  .setName('transfer')
+  .setDescription('Transfer balance to robux.')
+  .setCategory('public')
+  .setCooldown('20s')
   .InteractionOn(new SlashCommandBuilder().addStringOption((option) => option
-     .setName("username")
-     .setDescription("player username")
+     .setName('username')
+     .setDescription('The username you want to transfer to')
      .setRequired(true)).addNumberOption((option) => option
-        .setName("amount")
-        .setDescription("Type Amount You Want To transfer Here")
+        .setName('amount')
+        .setDescription('The amount you want')
         .setRequired(true)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
@@ -21,18 +21,18 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
 
-  const roblox = controller.getData("roblox");
-  const Guilds = controller.getData("guilds");
-  const Users = controller.getData("users");
+  const roblox = controller.getData('roblox');
+  const Guilds = controller.getData('guilds');
+  const Users = controller.getData('users');
   const username = controller[0];
   const amount = controller[1];
 
-  if (!username) return controller.replyNoMention({ content: "❌ **يجب أن تقوم بتحديد اسمك في روبلوكس!**" });
+  if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسمك في روبلوكس!**' });
   if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الروبكس افدي**' });
-  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تكتب رقم صالحا!**' });
+  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تكتب رقم صالحآ**' });
 
   const userData = await Users.get(controller.author.id, controller.guild.id);
-  if (userData.balance < amount) return controller.replyNoMention({ content: "" });
+  if (userData.balance < amount) return controller.replyNoMention({ content: "❌ **ليس لديك رصيد كافي!**" });
 
   let user = await roblox.users.find({ userNames: username });
   if (!user) return controller.replyNoMention({ content: "" })
@@ -49,7 +49,7 @@ async function GlobalExecute(message, interaction) {
   if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${Group.linkURL()}`});
 
   const robux = await Group.getFunds().then((e) => e.robux);
-  if (robux < amount) return controller.replyNoMention({ content: "" });
+  if (robux < amount) return controller.replyNoMention({ content: '❌ **عذرا ولاكن هذا العدد غير متوفر في الجروب في الوقت الحالي!**' });
 
   await member.payout({ amount }).then(async () => {
     controller.replyNoMention({ content: `✅ **تم بنجاح تحويل الروبوكس إلى ${username}**` });
@@ -85,13 +85,13 @@ async function GlobalExecute(message, interaction) {
     ctx.clip();
     ctx.drawImage(userImage, 11.5,16.5,35,35);
     
-    const attachment = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
+    const attach = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
     const channel = await controller.client.channels.cache.get(Guild.proof);
     
     if (channel) {
-      channel.send({ content: `**تم الشراء بواسطة: ${controller.author}**`, files: [attachment] });
+      channel.send({ content: `**تم الشراء بواسطة: ${controller.author}**`, files: [attach] });
     } else {
-      controller.replyNoMention({ files: [attachment] });
+      controller.replyNoMention({ files: [attach] });
     }
 
   }).catch((e) => {

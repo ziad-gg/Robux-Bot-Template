@@ -25,7 +25,7 @@ async function GlobalExecute(message, interaction) {
   const embed = new EmbedBuilder()
   .setAuthor({ name: user.name, iconURL: user.avatarURL() })
   .setTitle(user.name)
-  .setURL('https://www.roblox.com/users/' + user.id)
+  .setURL(user.profileURL())
   .setImage(user.avatarURL())
   .setFooter({ text: m.author.username, iconURL: m.author.avatarURL() })
   .setTimestamp();
