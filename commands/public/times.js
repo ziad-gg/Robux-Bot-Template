@@ -19,21 +19,20 @@ async function GlobalExecute(message, interaction) {
     const guildData = await guildsData.get(controller.guild.id);
     
     const group = await roblox.groups.get(guildData.groupId);  
-    const transactions = await group.getTransactions();
+    const transactions = await group.getTransactions({ limit: 10 });
     const embed = new EmbedBuilder()
-      .setColor()
+      .setColor('#0be881')
       .setTitle(group.name)
-      .setThumbnail(message.guild.iconURL({ dynamic: true })) 
-      .setDescription(transactions.filter(e => e.isPending).sort((a, b) => Math.floor((new Date(a.created).getTime() + 432e6) / 1000) - Math.floor((new Date(b.created).getTime() + 432e6) / 1000)).map(e => `**- Amount : ${Math.ceil(e.currency.amount)}\n- Arrival time : <t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:F> \n<t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:R>**`).join('\n\n') || ' ')
-      .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+      .setThumbnail(controller.guild.iconURL({ dynamic: true })) 
+      .setDescription(transactions.data.filter(e => e.isPending).sort((a, b) => Math.floor((new Date(a.created).getTime() + 432e6) / 1000) - Math.floor((new Date(b.created).getTime() + 432e6) / 1000)).map(e => `**- Amount : ${Math.ceil(e.currency.amount)}\n- Arrival time : <t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:F> \n<t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:R>**`).join('\n\n') || ' ')
+      .setFooter({ text: controller.author.username, iconURL: controller.author.displayAvatarURL({ dynamic: true }) })
       .setTimestamp()
     
     return {
       message: embed,
       interaction: embed
     };
-  } catch (e) {
-    console.log(e);
+  } catch {
     return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
   };
 }

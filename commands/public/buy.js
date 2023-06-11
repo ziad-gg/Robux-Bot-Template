@@ -4,7 +4,6 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder()
   .setName('buy')
   .setDescription('Buy a balance.')
-  .setCategory('public')
   .setCooldown('20s')
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
      .setName('amount')
