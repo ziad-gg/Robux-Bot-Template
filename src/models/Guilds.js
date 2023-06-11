@@ -15,6 +15,14 @@ const GuildsSchema = new mongoose.Schema({
   price: { type: Number, default: 1000 }, 
   proof: { type: String },
   clientR: { type: String },
+  buy: {
+    max: { type: Number },
+    min: { type: Number },
+  },
+  transfer: {
+    max: { type: Number },
+    min: { type: Number },
+  }
 });
 
 

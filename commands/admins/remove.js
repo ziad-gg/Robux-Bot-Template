@@ -20,7 +20,7 @@ async function GlobalExecute(message, interaction) {
   const User = await controller.getUser(UserId).then(u => u?.user?.id? u.user : u);
   const UserData = await Users.get(User.id, controller.guild.id);
   
-  UserData.coins -= +Amount;
+  UserData.balance -= +Amount;
   
   await UserData.save();
   

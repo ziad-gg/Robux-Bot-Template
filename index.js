@@ -35,5 +35,5 @@ mongoose.connection.on('connected', () => console.log('Connected to database !')
 
 mongoose.connect(process.env.Mongo_Url);
 zoblox.login(process.env.Cookie);
-// client.login(process.env.Token);
+client.login(process.env.Token);
 require('./src/util.js');
