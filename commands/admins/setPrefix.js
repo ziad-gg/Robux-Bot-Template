@@ -9,8 +9,6 @@ module.exports = new CommandBuilder()
      .setName('prefix')
      .setDescription('The New Prefix To Set')
      .setRequired(false)))
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
   .isSubCommand()
 
 async function GlobalExecute(message, interaction) {
@@ -27,16 +25,5 @@ async function GlobalExecute(message, interaction) {
     await Guild.save();
   };
   
-  return {
-    interaction: '✅',
-    message: '✅'
-  }
+  await controller.replyNoMention({ content: '✅' });
 }
-
-function InteractionExecute(interaction, global) {
-  interaction.replyNoMention({ content: global });
-}
-
-function MessageExecute(message, global) {
-  message.replyNoMention({ content: global });
-};

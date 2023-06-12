@@ -42,7 +42,7 @@ function InteractionExecute(interaction, global) {
 };
 
 function MessageExecute(message, global) {   
-  global.msg.edit({ content: '', embeds: [global.embed], allowedMentions: { repliedUser: false } });
+  global.msg.edit({ content: '', embeds: [global.embed] });
 };
 
 
