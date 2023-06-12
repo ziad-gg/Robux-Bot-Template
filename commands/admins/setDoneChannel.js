@@ -4,7 +4,11 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('donechannel')
   .setDescription('set proof channel.')
-  .InteractionOn(new SlashCommandBuilder().addChannelOption(op => op.setName('proofchannel').setDescription('Channel Option to select').setRequired(true)))
+  .InteractionOn(new SlashCommandBuilder().addChannelOption((option) => option
+     .addChannelTypes(0)                                                       
+     .setName('channel')
+     .setDescription('Channel Option to select')
+     .setRequired(true)))
   .setInteractionExecution(InteractionExecute)
   .isSubCommand()
 
@@ -16,5 +20,5 @@ async function InteractionExecute(interaction, global) {
   guild.proof = Channel.id;
   await guild.save();
   
-  interaction.replyNoMention({ content: `تم تحديد <#${guild.proof}> روم الاثباتات` })
+  interaction.replyNoMention({ content: `تم تحديد <#${guild.proof}> روم الاثباتات` });
 };

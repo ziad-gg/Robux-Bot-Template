@@ -25,7 +25,7 @@ async function GlobalExecute(message, interaction) {
   
   const Users = controller.getData('users');
   const username = controller[0];
-  const amount = controller[1];
+  const amount = +controller[1];
 
   if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسمك في روبلوكس!**' });
   if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
@@ -53,7 +53,9 @@ async function GlobalExecute(message, interaction) {
   await member.payout({ amount }).then(async () => {
     controller.replyNoMention({ content: `✅ **تم بنجاح تحويل الروبوكس إلى ${username}**` });
     
-    userData.coins -= +amount;
+    userData.balance -= amount;
+    userData.transactionsTotal += amount;
+    userData.transactionsCount += 1;
     await userData.save();
     
     const canvas = createCanvas(991, 172);

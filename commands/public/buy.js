@@ -50,6 +50,8 @@ async function GlobalExecute(message, interaction) {
     if (cooldowns.get(key).transactionId !== transactionId) return;
 
     userData.balance += amount;
+    userData.buyedTotal += amount;
+    userData.buyedCount += 1;
     await usersData.save();
 
     message.reply(`**✅ تم بنجاح شراء \`${amount}\` رصيد!\nرصيدك الحالي: \`${userData.balance}RB\`.**`);
