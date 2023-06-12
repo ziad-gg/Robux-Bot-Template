@@ -18,8 +18,8 @@ async function GlobalExecute(message, interaction) {
   let user = controller.author;
 
   if (args) user = await controller.getUser(args.toId());
-  if (!user) return controller.replyNoMention({ content: "❌ **لا يمكنني العثور على هذا العضو!**" });
-  if (user.bot) return controller.replyNoMention({ content: "❌ **البوتات لا تملك حساب!**" });
+  if (!user) return controller.replyNoMention({ content: '❌ **لا يمكنني العثور على هذا العضو!**' });
+  if (user.bot) return controller.replyNoMention({ content: '❌ **البوتات لا تملك حساب!**' });
   
   const userData = await usersData.get(user.id, controller.guild.id);
   const msg = user.id === controller.author.id ? `**رصيد حسابك هو \`${userData.coins}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.coins}\`** 🪙`;

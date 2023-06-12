@@ -25,7 +25,7 @@ async function GlobalExecute(message, interaction) {
 
   const amount = +controller[0];
   if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تريده!**' });
-  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بكتابة رقم صالحآ!**' });
+  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بكتابة رقم صحيح!**' });
   
   const time = 3e5;
   const guildData = await guildsData.get(controller.guild.id);

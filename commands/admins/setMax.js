@@ -14,10 +14,12 @@ async function InteractionExecute(interaction, global) {
   
   if (interaction.GroupName === 'transfer') {
     guild.transfer.max = Amount;  
+    
     await guild.save();
     interaction.replyNoMention({ content: `> **Done ${interaction.GroupName} ${interaction.GroupChildName } is now ${Amount}**` })
-  } else {
+  } else if (interaction.GroupName === 'buy') {
     guild.buy.max = Amount;  
+    
     await guild.save();
     interaction.replyNoMention({ content: `> **Done ${interaction.GroupName} ${interaction.GroupChildName } is now ${Amount}**` })
   };

@@ -20,16 +20,16 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
-
   const roblox = controller.getData('roblox');
   const Guilds = controller.getData('guilds');
+  
   const Users = controller.getData('users');
   const username = controller[0];
   const amount = controller[1];
 
   if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسمك في روبلوكس!**' });
-  if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الروبكس افدي**' });
-  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تكتب رقم صالحآ**' });
+  if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
+  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بكتابة رقم صحيح!**' });
 
   const userData = await Users.get(controller.author.id, controller.guild.id);
   if (userData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
@@ -45,7 +45,6 @@ async function GlobalExecute(message, interaction) {
   if (Guild.transfer.min > amount) return message.replyNoMention({ content: `❌ **الحد الأدنى للتحويل هو ${Guild.transfer.min}**` });
   
   const member = await Group.members.get(user.id);
-
   if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${Group.linkURL()}`});
 
   const robux = await Group.getFunds().then((e) => e.robux);
@@ -94,12 +93,12 @@ async function GlobalExecute(message, interaction) {
     }
 
   }).catch((e) => {
-     if (e.message === '400 Payout is restricted.') { 
-       controller.replyNoMention({ content: '❌ **هذا اللاعب جديد في الجروب!**' });
-     } else {
-       console.error(e);
-       controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
-     } 
+    if (e.message === '400 Payout is restricted.') { 
+      controller.replyNoMention({ content: '❌ **هذا اللاعب جديد في الجروب!**' });
+    } else {
+      console.error(e);
+      controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
+    } 
   });
 }
 
