@@ -7,12 +7,11 @@ module.exports = new CommandBuilder()
 .setCooldown('10s')
 .setCategory('help')
 .InteractionOn(new SlashCommandBuilder().addStringOption((op) => op
- .setName('cmd')
- .setDescription('Command name to get'))
-)
-// .setGlobal(GlobalExecute)
+   .setName('command')
+   .setDescription('Shows details about how to use a command')))
+ .setGlobal(GlobalExecute)
 .setInteractionExecution(InteractionExecute)
-.setMessageExecution(MessageExecute);
+.setMessageExecution(MessageExecute)
 
 // function GlobalExecute() {}
 
@@ -31,7 +30,7 @@ async function MessageExecute(message) {
     const commands = [];
     const fields = [];
 
-    client.Application.commands.filter(e => e.category != 'help' || e.category != 'util' || !e.Application.isSub).forEach(cmd => {
+    client.Application.commands.filter(e => e.category != 'help' || e.category != 'util' && !e.Application.isSub).forEach(cmd => {
       commands.push({ name: `\`${cmd.name}\``, category: cmd.category });
     });
 
@@ -44,6 +43,9 @@ async function MessageExecute(message) {
 
     if (general.length) fields.push({ name: '**General Commands**', value: general.join(', ') });
     if (admins.length && message.author.isOwner) fields.push({ name: '**Admins**', value: admins.join(', ') });
+            
+    embed.data.fields = fields;
+
   };
   message.replyNoMention({ embeds: [embed] });
 }
