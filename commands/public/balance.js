@@ -18,10 +18,7 @@ async function GlobalExecute(message, interaction) {
   const usersData = controller.getData('users');
   const args = controller[0];
   
-  let a = args ? await controller.getUser
-  let user = controller.author;
-
-  if (args) user = await controller.getUser(args.toId());
+  const user = args ? await controller.getUser(args.toId()) : controller.author;
   if (!user) return controller.replyNoMention({ content: '❌ **لا يمكنني العثور على هذا العضو!**' });
   if (user.bot) return controller.replyNoMention({ content: '❌ **البوتات لا تملك حساب!**' });
   
