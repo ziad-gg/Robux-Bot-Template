@@ -9,21 +9,19 @@ module.exports = new CommandBuilder()
      .setName('prefix')
      .setDescription('The New Prefix To Set')
      .setRequired(false)))
+  .setInteractionExecution(InteractionExecute)
   .isSubCommand()
 
-async function GlobalExecute(message, interaction) {
-  const controller = message ?? interaction;
-  const Guilds = controller.getData('guilds');
-  const Guild = await Guilds.get(controller.guild.id);
-  const prefix = controller[0];
+async function InteractionExecute(interaction, global) {
+  const guild = global.guild;
+  const prefix = interaction[0];
     
   if (!prefix) {
-    Guild.prefix = prefix;
-    await Guild.save();
+    guild.prefix = prefix;
+    await guild.save();
   } else {
-    Guild.prefix = DEFAULT_PREFIX;
-    await Guild.save();
+    guild.prefix = DEFAULT_PREFIX;
+    await guild.save();
   };
-  
-  await controller.replyNoMention({ content: '✅' });
+   interaction.replyNoMention({ content: '✅' });
 }
