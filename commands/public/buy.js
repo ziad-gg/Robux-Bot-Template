@@ -14,6 +14,7 @@ module.exports = new CommandBuilder()
   .setMessageExecution(MessageExecute);
 
 async function GlobalExecute(message, interaction) {
+  let buyed = false;
   const controller = message ?? interaction;
   if (!controller.channel.name.startsWith('ticket-')) return;
 
@@ -53,23 +54,25 @@ async function GlobalExecute(message, interaction) {
     userData.balance += amount;
     userData.buyedTotal += amount;
     userData.buyedCount += 1;
+    buyed = true;
     await userData.save();
 
-    message.reply(`**✅ تم بنجاح شراء \`${amount}\` رصيد!\nرصيدك الحالي: \`${userData.balance}RB\`.**`);
+    controller.channel.send({ content: `**✅ تم بنجاح شراء \`${amount}\` رصيد!\nرصيدك الحالي: \`${userData.balance}RB\`.**` });
 
     setTimeout(() => {
-      message.channel.delete();
+      controller.channel.delete();
       cooldowns.delete(key);
-    });
+    }, 5000);
   }
 });
   
  pay.on('end', async () => {
+   if (buyed) return;
    if (cooldowns.has(key)) {
    if (cooldowns.get(key).transactionId !== transactionId) return;
   
    await cooldowns.delete(key); 
-   controller.replyNoMention({ content: '🕓 **لقد انتهى وقت التحويل المسموح لك بالتحويل!**' });
+   controller.channel.send({ content: '🕓 **لقد انتهى وقت التحويل المسموح لك بالتحويل!**' });
    }
  });
 }
