@@ -12,19 +12,20 @@ module.exports = new CommandBuilder()
   .setInteractionExecution(InteractionExecute)
   .isSubCommand()
 
-async function InteractionExecute(interaction) { 
+async function InteractionExecute(interaction, global) { 
   const roblox = interaction.getData('roblox');
   const guildData = global.guild;
-  const GroupId = interaction[0];
-  if (!GroupId) return interaction.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
+  const groupId = interaction[0];
+  if (!groupId) return interaction.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
   
-  const Group = await roblox.groups.get(GroupId);
-  if (!Group) return interaction.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف جروب صحيح!**' });
-
-  const owner = await Group.members.me;
+  const group = await roblox.groups.get(groupId);
+  if (!group) return interaction.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف جروب صحيح!**' });
+  if (guildData.groupId === group.id) return interaction.replyNoMention({ content: '❌ **يبدو أن هذا الجروب محدد من قبل!**' });
+  
+  const owner = await group.members.me;
   if (!owner || !owner.isOwner()) return interaction.replyNoMention({ content: '❌ **يجب أن تكون انت مالك الجروب!**' });
-    
-  guildData.groupId = Group.id;
+  
+  guildData.groupId = group.id;
   await guildData.save();
   
   interaction.replyNoMention({ content: '**✅ تم تحديد الجروب بنجاح!**' });
