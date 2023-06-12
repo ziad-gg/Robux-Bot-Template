@@ -4,7 +4,6 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('blacklist')
   .setDescription('To blacklist user.')
-  .setCategory('admins')
   .InteractionOn(new SlashCommandBuilder().addUserOption(option => option.setName('user').setDescription('User To blacklist').setRequired(true)).addStringOption(option => option.setName('duration').setDescription('Blacklist expiration time').setRequired(false)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)

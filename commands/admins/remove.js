@@ -2,13 +2,13 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-.setName('remove')
-.setDescription('Give user an amount of robux.')
-.setCategory('admins')
-.InteractionOn(new SlashCommandBuilder().addUserOption(op => op.setName('user').setDescription('User Acount to give Robux').setRequired(true)).addNumberOption(option => option.setName('amount').setDescription('Amount to Transfer To').setRequired(true)))
-.setGlobal(GlobalExecute)
-.OwnersOnly()
-.setInteractionExecution(InteractionExecute)
+  .setName('remove')
+  .setDescription('Give user an amount of robux.')
+  .setCategory('admins')
+  .InteractionOn(new SlashCommandBuilder().addUserOption(op => op.setName('user').setDescription('User Acount to give Robux').setRequired(true)).addNumberOption(option => option.setName('amount').setDescription('Amount to Transfer To').setRequired(true)))
+  .setGlobal(GlobalExecute)
+  .OwnersOnly()
+  .setInteractionExecution(InteractionExecute)
 
 
 async function GlobalExecute(message, interaction) { 

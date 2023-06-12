@@ -16,12 +16,12 @@ async function InteractionExecute(interaction, global) {
   const amount = interaction[0];
   
   if (interaction.GroupName === 'transfer') {
-     guild.transfer.min = amount;  
-     await guild.save();
-     interaction.replyNoMention({ content: `> **Done ${interaction.GroupName} ${interaction.GroupChildName } is now ${amount}**` })
+    guild.transfer.min = amount;  
+    await guild.save();
+    interaction.replyNoMention({ content: `> **Done ${interaction.GroupName} ${interaction.GroupChildName } is now ${amount}**` })
   } else if (interaction.GroupName === 'buy') {
-     guild.buy.min = amount;  
-     await guild.save();
-     interaction.replyNoMention({ content: `> **Done ${interaction.GroupName} ${interaction.GroupChildName } is now ${amount}**` })
+    guild.buy.min = amount;  
+    await guild.save();
+    interaction.replyNoMention({ content: `> **Done ${interaction.GroupName} ${interaction.GroupChildName } is now ${amount}**` })
   };
 };

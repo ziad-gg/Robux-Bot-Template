@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { PREFIX } = require('../Constants.js');
+const { DEFAULT_PREFIX } = require('../Constants.js');
 
 const GuildsSchema = new mongoose.Schema({
   id: {
@@ -9,7 +9,7 @@ const GuildsSchema = new mongoose.Schema({
   },
   prefix: {
     type: String,
-    default: PREFIX
+    default: DEFAULT_PREFIX
   },
   groupId: { type: Number },
   price: { type: Number, default: 1000 }, 

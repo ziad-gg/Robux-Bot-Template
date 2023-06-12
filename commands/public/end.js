@@ -20,8 +20,8 @@ async function GlobalExecute(message, interaction) {
   await cooldowns.delete(key);
   
   return {
-    message: "✅ **تم بنجاح إنهاء عملية الشراء!**",
-    interaction: "✅ **تم بنجاح إنهاء عملية الشراء**",
+    message: '✅ **تم بنجاح إنهاء عملية الشراء!**',
+    interaction: '✅ **تم بنجاح إنهاء عملية الشراء**',
   }
 }
 

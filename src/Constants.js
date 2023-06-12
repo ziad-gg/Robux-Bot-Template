@@ -1,3 +1,5 @@
-module.exports.PREFIX = '-';
+module.exports.DEFAULT_PREFIX = '-';
 
-module.exports.OWNERS = ['789896576402587667'];
+module.exports.OWNERS = [
+  '789896576402587667'
+];

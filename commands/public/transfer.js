@@ -32,7 +32,7 @@ async function GlobalExecute(message, interaction) {
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تكتب رقم صالحآ**' });
 
   const userData = await Users.get(controller.author.id, controller.guild.id);
-  if (userData.balance < amount) return controller.replyNoMention({ content: "❌ **ليس لديك رصيد كافي!**" });
+  if (userData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
 
   let user = await roblox.users.find({ userNames: username });
   if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' })
@@ -41,8 +41,8 @@ async function GlobalExecute(message, interaction) {
   const Guild = await Guilds.get(controller.guild.id);
   const Group = await roblox.groups.get(Guild.groupId);
   
-  if (Guild.transfer.max < amount) return message.replyNoMention({ content: `الحد الاقصي للتحويل هو ${Guild.transfer.max}` });
-  if (Guild.transfer.min > amount) return message.replyNoMention({ content: `الحد الاقل للتحويل هو ${Guild.transfer.min}` });
+  if (Guild.transfer.max < amount) return message.replyNoMention({ content: `❌ **الحد الأقصى التحويل هو ${Guild.transfer.max}**` });
+  if (Guild.transfer.min > amount) return message.replyNoMention({ content: `❌ **الحد الأدنى للتحويل هو ${Guild.transfer.min}**` });
   
   const member = await Group.members.get(user.id);
 

@@ -15,7 +15,7 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
-  if (!controller.channel.name.startsWith("ticket-")) return controller.replyNoMention({ content: "❌ **يمكن استخدام هذا الامر داحل التكت فقط!**" });
+  if (!controller.channel.name.startsWith('ticket-')) return;
 
   const key = `${controller.author.id}-${controller.guild.id}`;
   const cooldowns = controller.getData('buy_cooldowns');
@@ -29,8 +29,8 @@ async function GlobalExecute(message, interaction) {
   
   const time = 3e5;
   const guildData = await guildsData.get(controller.guild.id);
-  if (guildData.buy.max < amount) return message.replyNoMention({ content: `الحد الاقصي للشراء هو ${guildData.buy.max}` });
-  if (guildData.buy.min > amount) return message.replyNoMention({ content: `الحد الاقل للشراء هو ${guildData.buy.min}` });
+  if (guildData.buy.max < amount) return message.replyNoMention({ content: `❌ **الحد الاقصي للشراء هو ${guildData.buy.max}**` });
+  if (guildData.buy.min > amount) return message.replyNoMention({ content: `❌ **الحد الأدنى للشراء هو ${guildData.buy.min}**` });
   
   const userData = await usersData.get(controller.author.id, controller.guild.id);
   const recipientId = await controller.guild.fetchOwner().then((owner) => owner.user.id);

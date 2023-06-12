@@ -15,8 +15,8 @@ async function GlobalExecute(message, interaction) {
   try {
     const Guilds = controller.getData('guilds');
     const roblox = controller.getData('roblox');
-  
     const Guild = await Guilds.get(controller.guild.id);
+    
     const Group = await roblox.groups.get(Guild.groupId);  
     const robux = await Group.getFunds().then(e => e.robux);
     const pending = await Group.getRevenueSummary().then(e => e.pendingRobux);
