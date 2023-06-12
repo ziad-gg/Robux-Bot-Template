@@ -34,10 +34,10 @@ async function GlobalExecute(message, interaction) {
   } catch {
     return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
   };
-}
+};
 
-function InteractionExecute(interaction, global) {
-  interaction.replyNoMention({ embeds: [global] });
+async function InteractionExecute(interaction, global) {
+  await interaction.replyNoMention({ embeds: [global] });
 };
 
 function MessageExecute(message, global) {   
@@ -50,7 +50,7 @@ async function fetchAllGroupTransactions(Group) {
   let nextPageCursor = null;
 
   do {
-    const result = await Group.getTransactions({ limit: 100, cursor: nextPageCursor });
+    const result = await Group.getTransactions({ limit: 10, cursor: nextPageCursor });
     const { data, nextPageCursor: nextCursor } = result;
 
     transactions = transactions.concat(data);
