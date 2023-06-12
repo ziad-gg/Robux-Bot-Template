@@ -5,7 +5,10 @@ module.exports = new CommandBuilder()
   .setName('balance')
   .setDescription('Shows user balance.')
   .setCooldown('10s')
-  .InteractionOn(new SlashCommandBuilder().addUserOption(option => option.setName('user').setDescription('User To Get Information of His Currency')))
+  .InteractionOn(new SlashCommandBuilder().addUserOption((option) => option
+     .setName('user')
+     .setDescription('User to show the his balance')
+     .setRequired(false)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute)
@@ -13,8 +16,9 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   const usersData = controller.getData('users');
-  
   const args = controller[0];
+  
+  let a = args ? await controller.getUser
   let user = controller.author;
 
   if (args) user = await controller.getUser(args.toId());
@@ -22,7 +26,7 @@ async function GlobalExecute(message, interaction) {
   if (user.bot) return controller.replyNoMention({ content: '❌ **البوتات لا تملك حساب!**' });
   
   const userData = await usersData.get(user.id, controller.guild.id);
-  const msg = user.id === controller.author.id ? `**رصيد حسابك هو \`${userData.coins}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.coins}\`** 🪙`;
+  const msg = user.id === controller.author.id ? `**رصيد حسابك هو \`${userData.balance}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.balance}\`** 🪙`;
 
   return {
     message: msg,
