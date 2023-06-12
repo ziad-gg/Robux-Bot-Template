@@ -10,7 +10,7 @@ module.exports = new CommandBuilder()
   .setSubcommands([
      { command: 'prefix' },     
      { command: 'group' },
-     { command: 'clientrole' },
+     { command: 'clientsrole' },
      { command: 'donechannel' },
      { command: 'max', group: 'buy' },
      { command: 'min', group: 'buy' },

@@ -30,8 +30,8 @@ async function GlobalExecute(message, interaction) {
   await Guild.save();
   
   return {
-    message: "**✅ تم تحديد الجروب بنجاح!**",
-    interaction: "**✅ تم تحديد الجروب بنجاح!**",
+    message: '**✅ تم تحديد الجروب بنجاح!**',
+    interaction: '**✅ تم تحديد الجروب بنجاح!**',
   }
 };
 

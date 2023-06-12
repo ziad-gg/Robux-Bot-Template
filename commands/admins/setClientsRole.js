@@ -2,9 +2,12 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('clientrole')
+  .setName('clientsrole')
   .setDescription('Set client Role.')
-  .InteractionOn(new SlashCommandBuilder().addRoleOption(op => op.setName('role').setDescription('Role Option to select').setRequired(true)))
+  .InteractionOn(new SlashCommandBuilder().addRoleOption(option => option
+     .setName('role')
+     .setDescription('Role Option to select')
+     .setRequired(true)))
   .setInteractionExecution(InteractionExecute)
   .isSubCommand()
 

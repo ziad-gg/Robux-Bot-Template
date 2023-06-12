@@ -4,7 +4,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('max')
   .setDescription('Select the max Amount to buy.')
-  .InteractionOn(new SlashCommandBuilder().addNumberOption(op => op.setName('amount').setDescription('Amount Option to select').setRequired(true)))
+  .InteractionOn(new SlashCommandBuilder().addNumberOption(option => option.setName('amount').setDescription('Amount Option to select').setRequired(true)))
   .setInteractionExecution(InteractionExecute)
   .isSubCommand()
 

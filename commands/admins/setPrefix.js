@@ -5,7 +5,10 @@ const { DEFAULT_PREFIX } = require('../../src/Constants.js');
 module.exports = new CommandBuilder() 
   .setName('prefix')
   .setDescription('Change Current Prefix To Another One')
-  .InteractionOn(new SlashCommandBuilder().addStringOption(option => option.setName('prefix').setDescription('The New Prefix To Set')))
+  .InteractionOn(new SlashCommandBuilder().addStringOption((option) => option 
+     .setName('prefix')
+     .setDescription('The New Prefix To Set')
+     .setRequired(false)))
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute)
   .isSubCommand()
