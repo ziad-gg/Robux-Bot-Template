@@ -13,6 +13,7 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   try {
+    const msg = await controller.replyNoMention({ content: 'Wait...' });
     const guildsData = controller.getData('guilds');
     const roblox = controller.getData('roblox');
     const guildData = await guildsData.get(controller.guild.id);
@@ -28,7 +29,7 @@ async function GlobalExecute(message, interaction) {
       .setTimestamp()
     
     return {
-      message: embed,
+      message: { msg, embed },
       interaction: embed
     };
   } catch {
@@ -36,12 +37,12 @@ async function GlobalExecute(message, interaction) {
   };
 };
 
-async function InteractionExecute(interaction, global) {
-  await interaction.replyNoMention({ embeds: [global] });
+function InteractionExecute(interaction, global) {
+  interaction.editReply({ content: '', embeds: [global] });
 };
 
 function MessageExecute(message, global) {   
-  message.replyNoMention({ embeds: [global] });
+  global.msg.edit({ content: '', embeds: [global.embed], allowedMentions: { repliedUser: false } });
 };
 
 
