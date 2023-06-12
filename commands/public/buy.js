@@ -35,8 +35,9 @@ async function GlobalExecute(message, interaction) {
   const userData = await usersData.get(controller.author.id, controller.guild.id);
   const recipientId = await controller.guild.fetchOwner().then((owner) => owner.user.id);
   const price = guildData.price;
+  const tax = Math.ceil(price * 20 / 19);
   
-  await controller.replyNoMention({ content : `\`\`\`c ${recipientId} ${price}\`\`\`` });
+  await controller.replyNoMention({ content : `\`\`\`c ${recipientId} ${tax}\`\`\`` });
   const filter = m => m.author.id == '282859044593598464' && m.content.includes(`${price}`) & m.content.includes(`${recipientId}`) && m.content.includes(`${controller.author.username}`);
   const pay = controller.channel.createMessageCollector({ filter, time, max: 1 });
   const transactionId = 'xxxx-xxxx-xxxx-xxxx'.replace(/x/g, () => Math.floor(Math.random() * 16).toString(16));
@@ -52,7 +53,7 @@ async function GlobalExecute(message, interaction) {
     userData.balance += amount;
     userData.buyedTotal += amount;
     userData.buyedCount += 1;
-    await usersData.save();
+    await userData.save();
 
     message.reply(`**✅ تم بنجاح شراء \`${amount}\` رصيد!\nرصيدك الحالي: \`${userData.balance}RB\`.**`);
 
