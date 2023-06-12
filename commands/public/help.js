@@ -3,25 +3,22 @@ const { CommandBuilder } = require("handler.djs");
 
 module.exports = new CommandBuilder()
 .setName('help')
-.setDescription('Get all Commands or Command Details')
+.setDescription('Feeling lost?')
 .setCooldown('10s')
 .setCategory('help')
 .InteractionOn(new SlashCommandBuilder().addStringOption((op) => op
    .setName('command')
    .setDescription('Shows details about how to use a command')))
- .setGlobal(GlobalExecute)
+.setGlobal(GlobalExecute)
 .setInteractionExecution(InteractionExecute)
 .setMessageExecution(MessageExecute)
 
-// function GlobalExecute() {}
+async function GlobalExecute(message, interaction) {
+  const controller = message ?? interaction;
+  const client = controller.client;
+  const command = controller[0]?.toLowerCase();
 
-function InteractionExecute() {}
-
-async function MessageExecute(message) {
-  const client = message.client;
-  const command = message[0]?.toLowerCase();
-
-  let embed = new EmbedBuilder()
+  const embed = new EmbedBuilder()
     .setColor('#0be881');
 
   if (command) {
@@ -37,15 +34,26 @@ async function MessageExecute(message) {
     const general = commands.filter(cmd => cmd.category == 'public').map(cmd => cmd.name);
     const admins = commands.filter(cmd => cmd.category == 'admins').map(cmd => cmd.name);
 
-    embed.setTitle(`قائمة أوامر ${message.guild.name}`);
+    embed.setTitle(`قائمة أوامر ${controller.guild.name}`);
     embed.setDescription(`**للحصول على معلومات أكثر حول أمر معين ، اكتب : ${client.Application.prefix}help <command name>**`)
-    embed.setThumbnail(message.guild.iconURL())
+    embed.setThumbnail(controller.guild.iconURL())
 
     if (general.length) fields.push({ name: '**General Commands**', value: general.join(', ') });
-    if (admins.length && message.author.isOwner) fields.push({ name: '**Admins**', value: admins.join(', ') });
+    if (admins.length && controller.author.isOwner) fields.push({ name: '**Admins**', value: admins.join(', ') });
             
     embed.data.fields = fields;
-
   };
-  message.replyNoMention({ embeds: [embed] });
+  
+  return {
+    message: embed,
+    interaction: embed
+  };
 }
+
+function InteractionExecute(interaction, global) {
+  interaction.replyNoMention({ embeds: [global] });
+};
+
+function MessageExecute(message, global) {   
+  message.replyNoMention({ embeds: [global] });
+};
