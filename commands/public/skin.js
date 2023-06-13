@@ -8,6 +8,7 @@ module.exports = new CommandBuilder()
   .InteractionOn(new SlashCommandBuilder().addStringOption(option => option
      .setName('username')
      .setDescription('The username to get skin for')
+     .setDMPermission(false)                                                       
      .setRequired(true)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)

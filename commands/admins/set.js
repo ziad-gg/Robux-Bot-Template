@@ -4,7 +4,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('set')
   .setDescription('Management the database.')
-  .InteractionOn(new SlashCommandBuilder())
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
   .OwnersOnly()
   .setSubcommands([
