@@ -1,14 +1,11 @@
-const { Client, Partials } = require('discord.js');
+const { Client } = require('discord.js');
 const { Zoblox, Events } = require('zoblox.js');
 const { Application } = require('handler.djs');
-const { OWNERS } = require('./src/Constants.js');
+const { OWNERS, CLIENT_OPTIONS } = require('./src/Constants.js');
 const mongoose = require('mongoose');
 const path = require('node:path');
 
-const client = new Client({
-  intents: 3276799,
-  partials: [Partials.Channel, Partials.User, Partials.Message, Partials.Reaction, Partials.GuildMember]
-});
+const client = new Client(CLIENT_OPTIONS);
 const zoblox = new Zoblox();
 
 new Application(client, {
