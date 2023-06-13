@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName('avatar')
   .setDescription('Get your roblox avatar.')
   .setCooldown('10s')
-  .InteractionOn(new SlashCommandBuilder().addStringOption(option => option
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption(option => option
      .setName('username')
      .setDescription('The username to get avatar for')
      .setRequired(true)))

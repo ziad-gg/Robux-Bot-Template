@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName('balance')
   .setDescription('Shows user balance.')
   .setCooldown('10s')
-  .InteractionOn(new SlashCommandBuilder().addUserOption((option) => option
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(true).addUserOption((option) => option
      .setName('user')
      .setDescription('User to show the his balance')
      .setRequired(false)))

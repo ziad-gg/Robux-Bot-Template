@@ -9,7 +9,6 @@ module.exports = new CommandBuilder()
   .OwnersOnly()
   .setSubcommands([
      { command: 'prefix' },     
-     // { command: 'delete' },
      { command: 'group' },
      { command: 'clientsrole' },
      { command: 'donechannel' },

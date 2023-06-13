@@ -5,10 +5,9 @@ module.exports = new CommandBuilder()
   .setName('skin')
   .setDescription('Get your roblox skin.')
   .setCooldown('10s')
-  .InteractionOn(new SlashCommandBuilder().addStringOption(option => option
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption(option => option
      .setName('username')
-     .setDescription('The username to get skin for')
-     .setDMPermission(false)                                                       
+     .setDescription('The username to get skin for')                                                            
      .setRequired(true)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)

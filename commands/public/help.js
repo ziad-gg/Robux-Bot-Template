@@ -8,7 +8,7 @@ module.exports = new CommandBuilder()
   .setCategory('help')
   .InteractionOn(new SlashCommandBuilder().addStringOption((option) => option
      .setName('command')
-     .setDescription('Shows details about how to use a command')
+     .setDescription('Shows details about how to use a command')                                                           
      .setRequired(false)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)

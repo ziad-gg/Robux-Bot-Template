@@ -5,9 +5,9 @@ module.exports = new CommandBuilder()
   .setName('buy')
   .setDescription('Buy a balance.')
   .setCooldown('20s')
-  .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option
      .setName('amount')
-     .setDescription('The amount you want')
+     .setDescription('The amount you want')                                                          
      .setRequired(true)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
