@@ -32,6 +32,12 @@ async function Global(message, interaction, global) {
  
   controller.replyNoMention({ content: '✅' });
 
+  
+   return {
+    interaction: true,
+    message: true
+  }
+  
 }
 
 async function InteractionExecute(interaction, global) {

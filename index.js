@@ -15,7 +15,8 @@ new Application(client, {
   commandsPath: path.join(__dirname, 'commands'),
   validationPath: path.join(__dirname, 'validation'),
   EventsPath: path.join(__dirname, 'events'),
-  owners: OWNERS
+  owners: OWNERS,
+  prefix: '-'
 })
 
 client.Application.setCooldown({   

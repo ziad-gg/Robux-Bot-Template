@@ -8,14 +8,15 @@ module.exports = new CommandBuilder()
   .setGlobal(GlobalExecute)
   .OwnersOnly()
   .setSubcommands([
-     { command: 'prefix' },     
-     { command: 'group' },
-     { command: 'clientsrole' },
-     { command: 'donechannel' },
-     { command: 'max', group: 'buy' },
-     { command: 'min', group: 'buy' },
-     { command: 'max', group: 'transfer' },
-     { command: 'min', group: 'transfer' },
+     // { command: 'prefix' },     
+     { command: 'delete' },
+     // { command: 'group' },
+     // { command: 'clientsrole' },
+     // { command: 'donechannel' },
+     // { command: 'max', group: 'buy' },
+     // { command: 'min', group: 'buy' },
+     // { command: 'max', group: 'transfer' },
+     // { command: 'min', group: 'transfer' },
   ])
 
 async function GlobalExecute(message, interaction) {
