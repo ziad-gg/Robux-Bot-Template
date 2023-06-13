@@ -15,9 +15,9 @@ const UsersSchema = new mongoose.Schema({
   transactionsCount: { type: Number, default: 0 },
 });
 
-UsersSchema.statics.get = async function (id, guildId) {
-  const userData = await this.findOne({ id, guildId });
-  return userData ? userData : await this.create({ id, guildId });
+UsersSchema.statics.get = async function (id) {
+  const userData = await this.findOne({ id });
+  return userData ? userData : await this.create({ id });
 };
 
 const Users = mongoose.model('Users', UsersSchema);
