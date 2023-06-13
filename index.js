@@ -16,7 +16,7 @@ new Application(client, {
   validationPath: path.join(__dirname, 'validation'),
   EventsPath: path.join(__dirname, 'events'),
   owners: OWNERS
-});
+})
 
 client.Application.setCooldown({   
   message: '**{Username}**, Cooldown (**{counter}** left)', 

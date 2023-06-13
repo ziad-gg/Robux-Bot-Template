@@ -9,6 +9,7 @@ module.exports = new CommandBuilder()
    .setName('prefix')
    .setDescription('The New Prefix To Set')
    .setRequired(false)))
+.setGlobal(Global)
 .setInteractionExecution(InteractionExecute)
 .setMessageExecution(InteractionExecute)
 .isSubCommand()
@@ -34,6 +35,6 @@ async function Global(message, interaction, global) {
 }
 
 async function InteractionExecute(interaction, global) {
-  // console.log("Hello World")
+  console.log("Hello World From Interaction")
   
 }

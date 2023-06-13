@@ -25,7 +25,7 @@ async function InteractionExecute(interaction, global) {
   const owner = await group.members.me;
   if (!owner || !owner.isOwner()) return interaction.replyNoMention({ content: '❌ **يجب أن تكون انت مالك الجروب!**' });
   
-  guildData.groupId = group.id;
+  guildData.groupId = group.id
   await guildData.save();
   
   interaction.replyNoMention({ content: '**✅ تم تحديد الجروب بنجاح!**' });

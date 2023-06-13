@@ -18,10 +18,10 @@ async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   const username = controller[0];
   
-  if (!username) return message.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسم المستخدم!**' });
+  if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسم المستخدم!**' });
   let user = await roblox.users.find({ userNames: username });
   
-  if (!user) return message.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' });
+  if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' });
   user = await roblox.users.get(user.id);
 
   const embed = new EmbedBuilder()
