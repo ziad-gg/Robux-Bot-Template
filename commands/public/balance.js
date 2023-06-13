@@ -15,6 +15,7 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
+  
   const usersData = controller.getData('users');
   const args = controller[0];
   
@@ -25,6 +26,7 @@ async function GlobalExecute(message, interaction) {
   const userData = await usersData.get(user.id);
   const msg = user.id === controller.author.id ? `**رصيد حسابك هو \`${userData.balance}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.balance}\`** 🪙`;
 
+  
   return {
     message: msg,
     interaction: msg
