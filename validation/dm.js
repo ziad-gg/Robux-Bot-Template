@@ -9,5 +9,7 @@ function Exection (controller, next, end) {
    if (controller.channel.type === ChannelType.DM && controller.Command.category == 'admins') {
      controller.reply({ content: "🔴 **Admin Command Is Not Allowed In Direct Channels !**" });
      return end();
+   } else {
+     next()
    }
 }
