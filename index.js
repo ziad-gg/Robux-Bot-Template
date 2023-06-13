@@ -7,12 +7,13 @@ const path = require('node:path');
 
 const client = new Client({
   intents: 3276799,
-  partials: [ Partials.Channel, Partials.User, Partials.Message, Partials.Reaction, Partials.GuildMember ]
+  partials: [Partials.Channel, Partials.User, Partials.Message, Partials.Reaction, Partials.GuildMember]
 });
 const zoblox = new Zoblox();
 
 new Application(client, {
   commandsPath: path.join(__dirname, 'commands'),
+  validationPath: path.join(__dirname, 'validation'),
   EventsPath: path.join(__dirname, 'events'),
   owners: OWNERS
 });
