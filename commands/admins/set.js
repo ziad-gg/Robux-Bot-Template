@@ -20,12 +20,12 @@ module.exports = new CommandBuilder()
   ])
 
 async function GlobalExecute(message, interaction) {
-//   const controller = message ?? interaction;
-//   const Guilds = controller.getData('guilds');
-//   const guild = await Guilds.get(controller.guild.id);
+  const controller = message ?? interaction;
+  const Guilds = controller.getData('guilds');
+  const guild = await Guilds.get(controller.guild.id);
   
    return {
-    interaction: "Hello World From Parent To Interaction",
-    message: "Hello World From Parent To Message"
+    interaction: { guild },
+    message: { guild },
   }
 }

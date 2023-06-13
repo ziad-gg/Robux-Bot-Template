@@ -2,15 +2,15 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('group')
-  .setDescription('Set Main Roblox Group.')
-  .setCategory('admins')
-  .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
-     .setName('id')
-     .setDescription('Group Id To Select')
-     .setRequired(true)))
-  .setInteractionExecution(InteractionExecute)
-  .isSubCommand()
+.setName('group')
+.setDescription('Set Main Roblox Group.')
+.setCategory('admins')
+.InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
+   .setName('id')
+   .setDescription('Group Id To Select')
+   .setRequired(true)))
+.setInteractionExecution(InteractionExecute)
+.isSubCommand()
 
 async function InteractionExecute(interaction, global) { 
   const roblox = interaction.getData('roblox');

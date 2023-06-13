@@ -2,13 +2,13 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('setprice')
-  .setDescription('Set Robux Price.')
-  .InteractionOn(new SlashCommandBuilder().addNumberOption(op => op.setName('price').setDescription('Type Amount Here To Set').setRequired(true)))
-  .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .OwnersOnly()
-  .setMessageExecution(MessageExecute)
+.setName('setprice')
+.setDescription('Set Robux Price.')
+.InteractionOn(new SlashCommandBuilder().addNumberOption(op => op.setName('price').setDescription('Type Amount Here To Set').setRequired(true)))
+.setGlobal(GlobalExecute)
+.setInteractionExecution(InteractionExecute)
+.OwnersOnly()
+.setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
