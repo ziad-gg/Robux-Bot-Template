@@ -8,7 +8,7 @@ module.exports = new CommandBuilder()
 .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
    .setName('id')
    .setDescription('Group Id To Select')
-   .setRequired(true)))
+   .setRequired(false)))
 .setGlobal(GlobalExecute)
 .setInteractionExecution(InteractionExecute)
 .setMessageExecution(MessageExecute)
