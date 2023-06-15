@@ -19,11 +19,8 @@ module.exports = new CommandBuilder()
   ])
 
 async function GlobalExecute(message, interaction) {
-  const controller = message ?? interaction;
-  controller.reply({ content: "Hello World" });
-  
-  // controller.replyNoMention('Hello World!');
-  
+  const controller = message ?? interaction;  
+  await controller.channel.send({ content: "Hello World " })
   const Guilds = controller.getData('guilds');
   const guild = await Guilds.get(controller.guild.id);
   
