@@ -1,6 +1,6 @@
 const { EventBuilder } = require('handler.djs');
 const { Events } = require('discord.js');
-const uptime = new (require('uptimer-web').UptimeBuilder)({ TYPE: 'Array', URLS: [require('../src/Constants.js').PROJECT_LINK], TIMEOUT: 24e4 });
+const uptime = new (require('uptimer-web').UptimeBuilder)({ TYPE: 'Array', URLS: [require('../src/Constants.js').PROJECT_LINK], TIMEOUT: 12e4 });
 const express = require('express');
 const app = express();
 
