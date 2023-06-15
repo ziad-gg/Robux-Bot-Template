@@ -32,17 +32,16 @@ async function GlobalExecute(message, interaction) {
   .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
   .setTimestamp();
   
-  return {
-    message: embed,    
-    interaction: embed
-  };
+  return embed
 }
 
-function InteractionExecute(interaction, global) {
-  interaction.replyNoMention({ embeds: [global] });
+async function InteractionExecute(interaction, Global) {
+  const embed = await Global;
+  interaction.replyNoMention({ embeds: [embed] });
 };
 
-function MessageExecute(message, global) {   
+function MessageExecute(message, global) { 
+  const embed = await Global;
   message.replyNoMention({ embeds: [global] });
 };
 

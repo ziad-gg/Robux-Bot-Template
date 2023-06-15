@@ -2,26 +2,22 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-.setName('group')
-.setDescription('Set Main Roblox Group.')
-.setCategory('admins')
-.InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
-   .setName('id')
-   .setDescription('Group Id To Select')
-   .setRequired(false)))
-.setGlobal(GlobalExecute)
-.setInteractionExecution(InteractionExecute)
-.setMessageExecution(MessageExecute)
-.isSubCommand()
+  .setName('group')
+  .setDescription('Set Main Roblox Group.')
+  .setCategory('admins')
+  .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
+     .setName('groupid')
+     .setDescription('Group Id To Select')
+     .setRequired(false)))
+  .setGlobal(GlobalExecute)
+  .setInteractionExecution(InteractionExecute)
+  .setMessageExecution(MessageExecute)
+  .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
-  
   const controller = message ?? interaction;
   const roblox = controller.getData('roblox');
-  
-  
   const guildData = await global;
-  return controller.reply({ content: "", ephemeral: true });
   
   const groupId = controller[0];
   if (!groupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
@@ -38,7 +34,7 @@ async function GlobalExecute(message, interaction, global) {
   
   return {
     interaction: (i) => {
-      i.editReply({ content: '**✅ تم تحديد الجروب بنجاح!**' }) 
+      i.replyNoMention({ content: '**✅ تم تحديد الجروب بنجاح!**' });
     },
     message: (m) => {  
       m.replyNoMention({ content: '**✅ تم تحديد الجروب بنجاح!**' }) 
@@ -47,7 +43,6 @@ async function GlobalExecute(message, interaction, global) {
 }
 
 async function InteractionExecute(interaction, global) { 
- // global(interaction);
 };
 
 async function MessageExecute(message, Global) {
