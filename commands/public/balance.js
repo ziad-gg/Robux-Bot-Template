@@ -15,7 +15,6 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
-  
   const usersData = controller.getData('users');
   const args = controller[0];
   
@@ -25,18 +24,16 @@ async function GlobalExecute(message, interaction) {
   
   const userData = await usersData.get(user.id);
   const msg = user.id === controller.author.id ? `**رصيد حسابك هو \`${userData.balance}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.balance}\`** 🪙`;
-
   
-  return {
-    message: msg,
-    interaction: msg
-  };
+  return msg;
 };
 
-function InteractionExecute(interaction, global) {
-  interaction.replyNoMention({ content: global });
+async function InteractionExecute(interaction, Global) {
+  const content = await Global;
+  interaction.replyNoMention({ content });
 };
 
-function MessageExecute(message, global) {   
-  message.replyNoMention({ content: global })
+async function MessageExecute(message, Global) {   
+  const content = await Global;
+  message.replyNoMention({ content });
 };

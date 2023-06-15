@@ -32,7 +32,7 @@ async function GlobalExecute(message, interaction) {
   .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
   .setTimestamp();
   
-  return embed
+  return embed;
 }
 
 async function InteractionExecute(interaction, Global) {
@@ -40,7 +40,7 @@ async function InteractionExecute(interaction, Global) {
   interaction.replyNoMention({ embeds: [embed] });
 };
 
-function MessageExecute(message, global) { 
+async function MessageExecute(message, Global) { 
   const embed = await Global;
   message.replyNoMention({ embeds: [global] });
 };

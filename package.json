@@ -12,7 +12,7 @@
   ],
   "dependencies": {
     "discord.js": "^14.11.0",
-    "handler.djs": "^2.6.18", 
+    "handler.djs": "^2.6.19", 
     "zoblox.js": "^2.3.0",
     "uptimer-web": "^3.3.0",
     "mongoose": "^7.2.4",

@@ -2,16 +2,14 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder()
-  .setName('buy')
-  .setDescription('Buy a balance.')
-  .setCooldown('20s')
-  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option
-     .setName('amount')
-     .setDescription('The amount you want')                                                          
-     .setRequired(true)))
-  .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute);
+.setName('buy')
+.setDescription('Buy a balance.')
+.setCooldown('20s')
+.InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option
+   .setName('amount')
+   .setDescription('The amount you want')                                                          
+   .setRequired(true)))
+.setGlobal(GlobalExecute)
 
 async function GlobalExecute(message, interaction) {
   let buyed = false;
@@ -75,8 +73,4 @@ async function GlobalExecute(message, interaction) {
    controller.channel.send({ content: '🕓 **لقد انتهى وقت التحويل المسموح لك بالتحويل!**' });
    }
  });
-}
-
-function InteractionExecute(interaction, global) {}
-
-function MessageExecute(message, global) {}
+};
