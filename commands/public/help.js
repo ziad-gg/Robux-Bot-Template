@@ -11,8 +11,6 @@ module.exports = new CommandBuilder()
      .setDescription('Shows details about how to use a command')                                                           
      .setRequired(false)))
   .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
@@ -26,7 +24,7 @@ async function GlobalExecute(message, interaction) {
     const commands = [];
 
     client.Application.commands.filter(e => e.category !== 'help' || e.category !== 'util' && !e.Application.isSub).forEach(cmd => {
-      commands.push({ name: `\`${cmd.name}\``, category: cmd.category });
+      if (!cmd.isSubCommand) commands.push({ name: `\`${cmd.name}\``, category: cmd.category });
     });
 
     const general = commands.filter(cmd => cmd.category === 'public').map(cmd => cmd.name);
@@ -40,16 +38,5 @@ async function GlobalExecute(message, interaction) {
     if (admins.length && controller.author.isOwner) embed.addFields([{ name: '**Admins**', value: admins.join(', ') }]);
   };
   
-  return {
-    message: embed,
-    interaction: embed
-  };
-}
-
-function InteractionExecute(interaction, global) {
-  interaction.replyNoMention({ embeds: [global] });
-};
-
-function MessageExecute(message, global) {   
-  message.replyNoMention({ embeds: [global] });
+  controller.replyNoMention({ embeds: [embed] });
 };

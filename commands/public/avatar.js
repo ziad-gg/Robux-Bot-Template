@@ -10,8 +10,7 @@ module.exports = new CommandBuilder()
      .setDescription('The username to get avatar for')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
+
 
 async function GlobalExecute(message, interaction) {
   const roblox = message ? message.getData('roblox') : interaction.getData('roblox');
@@ -32,16 +31,6 @@ async function GlobalExecute(message, interaction) {
   .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
   .setTimestamp();
   
-  return embed;
-}
-
-async function InteractionExecute(interaction, Global) {
-  const embed = await Global;
-  interaction.replyNoMention({ embeds: [embed] });
+  controller.replyNoMention({ embeds: [embed] });
+  // return embed;
 };
-
-async function MessageExecute(message, Global) { 
-  const embed = await Global;
-  message.replyNoMention({ embeds: [global] });
-};
-

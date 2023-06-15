@@ -10,8 +10,6 @@ module.exports = new CommandBuilder()
      .setDescription('The username to get skin for')                                                            
      .setRequired(true)))
   .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
   const roblox = message ? message.getData('roblox') : interaction.getData('roblox');
@@ -32,17 +30,5 @@ async function GlobalExecute(message, interaction) {
   .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
   .setTimestamp();
   
-  return {
-    message: embed,    
-    interaction: embed
-  };
+  controller.replyNoMention({ embeds: [embed] });
 }
-
-function InteractionExecute(interaction, global) {
-  interaction.replyNoMention({ embeds: [global] });
-};
-
-function MessageExecute(message, global) {   
-  message.replyNoMention({ embeds: [global] });
-};
-
