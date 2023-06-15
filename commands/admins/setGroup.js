@@ -21,7 +21,7 @@ async function GlobalExecute(message, interaction, global) {
   
   
   const guildData = await global;
-  return controller.editReply({ content: "" });
+  return controller.reply({ content: "", ephemeral: true });
   
   const groupId = controller[0];
   if (!groupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
