@@ -26,8 +26,10 @@ async function GlobalExecute(message, interaction) {
   };
 }
 
-function InteractionExecute(interaction, global) {
-  interaction.editReply({ content: '', embeds: [global] });
+async function InteractionExecute(interaction, global) {
+  const embed = await global
+  
+  interaction.editReply({ content: '', embeds: [global.interaction] });
 };
 
 function MessageExecute(message, global) {
