@@ -10,8 +10,6 @@ module.exports = new CommandBuilder()
      .setDescription('User to show the his balance')
      .setRequired(false)))
   .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
@@ -25,15 +23,5 @@ async function GlobalExecute(message, interaction) {
   const userData = await usersData.get(user.id);
   const msg = user.id === controller.author.id ? `**رصيد حسابك هو \`${userData.balance}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.balance}\`** 🪙`;
   
-  return msg;
-};
-
-async function InteractionExecute(interaction, Global) {
-  const content = await Global;
-  interaction.replyNoMention({ content });
-};
-
-async function MessageExecute(message, Global) {   
-  const content = await Global;
-  message.replyNoMention({ content });
+  controller.replyNoMention({ content: msg });
 };

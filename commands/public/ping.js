@@ -7,8 +7,8 @@ module.exports = new CommandBuilder()
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
+  //.setInteractionExecution(InteractionExecute)
+  //.setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
   let now = Date.now();
@@ -20,10 +20,9 @@ async function GlobalExecute(message, interaction) {
     .setDescription(`**⏰ Discord API: ${controller.client.ws.ping}ms\n📊 Time Taken: ${now}ms**`)
     .setTimestamp()
   
-  return {
-    message: { msg, embed }, 
-    interaction: embed
-  };
+  controller.editReply = (obj) => interaction ? msg.editReply(obj) : msg.edit(obj);
+  controller.editReply({ content: '', embeds: [embed] });
+    
 }
 
 async function InteractionExecute(interaction, Global) {

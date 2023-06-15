@@ -11,7 +11,6 @@ module.exports = new CommandBuilder()
      .setRequired(true)))
   .setGlobal(GlobalExecute)
 
-
 async function GlobalExecute(message, interaction) {
   const roblox = message ? message.getData('roblox') : interaction.getData('roblox');
   const controller = message ?? interaction;
@@ -32,5 +31,4 @@ async function GlobalExecute(message, interaction) {
   .setTimestamp();
   
   controller.replyNoMention({ embeds: [embed] });
-  // return embed;
 };
