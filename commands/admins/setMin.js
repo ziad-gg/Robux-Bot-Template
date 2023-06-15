@@ -2,14 +2,14 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('min')
-  .setDescription('Select the min Amount to buy.')
-  .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
-     .setName('amount')
-     .setDescription('Amount Option to select')
-     .setRequired(true)))
-  .setInteractionExecution(InteractionExecute)
-  .isSubCommand()
+.setName('min')
+.setDescription('Select the min Amount to buy.')
+.InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
+   .setName('amount')
+   .setDescription('Amount Option to select')
+   .setRequired(true)))
+.setInteractionExecution(InteractionExecute)
+.isSubCommand()
 
 async function InteractionExecute(interaction, global) {
   const guild = global.guild;

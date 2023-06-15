@@ -3,15 +3,15 @@ const { CommandBuilder } = require('handler.djs');
 const { DEFAULT_PREFIX } = require('../../src/Constants.js');
 
 module.exports = new CommandBuilder()
-  .setName('prefix')
-  .setDescription('set new Command prefix')
-  .InteractionOn(new SlashCommandBuilder().addStringOption((option) => option
-     .setName('prefix')
-     .setDescription('new prefix option')))
-  .setGlobal(Global)
-  .setMessageExecution(Message)
-  .setInteractionExecution(Interaction)
-  .isSubCommand();
+.setName('prefix')
+.setDescription('set new Command prefix')
+.InteractionOn(new SlashCommandBuilder().addStringOption((option) => option
+   .setName('prefix')
+   .setDescription('new prefix option')))
+.setGlobal(Global)
+.setMessageExecution(Message)
+.setInteractionExecution(Interaction)
+.isSubCommand();
 
 async function Global(message, interaction, global) {
   const Guild = global.guild;
