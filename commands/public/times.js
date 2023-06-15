@@ -7,8 +7,6 @@ module.exports = new CommandBuilder()
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
@@ -28,23 +26,14 @@ async function GlobalExecute(message, interaction) {
       .setFooter({ text: controller.author.username, iconURL: controller.author.displayAvatarURL({ dynamic: true }) })
       .setTimestamp()
     
-    return {
-      message: { msg, embed },
-      interaction: embed
-    };
-  } catch {
+   controller.editReply = (obj) => interaction ? msg.editReply(obj) : msg.edit(obj);
+   controller.editReply({ content: '', embeds: [embed] });
+    
+  } catch (e) {
+    console.log(e)
     return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
   };
 };
-
-function InteractionExecute(interaction, global) {
-  interaction.editReply({ content: '', embeds: [global] });
-};
-
-function MessageExecute(message, global) {   
-  global.msg.edit({ content: '', embeds: [global.embed] });
-};
-
 
 async function fetchAllGroupTransactions(Group) {
   let transactions = [];

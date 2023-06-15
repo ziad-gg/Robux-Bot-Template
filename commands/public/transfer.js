@@ -15,8 +15,6 @@ module.exports = new CommandBuilder()
         .setDescription('The amount you want')
         .setRequired(true)))
   .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute);
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
@@ -102,8 +100,4 @@ async function GlobalExecute(message, interaction) {
       controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
     } 
   });
-}
-
-function InteractionExecute(interaction, global) {}
-
-function MessageExecute(message, global) {}
+};

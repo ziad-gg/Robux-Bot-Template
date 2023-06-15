@@ -8,7 +8,6 @@ module.exports = new CommandBuilder()
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option.setName('user').setDescription('User Acount to give Robux').setRequired(true)).addNumberOption(option => option.setName('amount').setDescription('Amount to Transfer To').setRequired(true)))
   .setGlobal(GlobalExecute)
   .OwnersOnly()
-  .setInteractionExecution(InteractionExecute)
 
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
@@ -22,7 +21,6 @@ async function GlobalExecute(message, interaction) {
   usersData.balance += amount;
   await usersData.save();
   
-  controller.replyNoMention({ content: `**تم تحويل ${Amount} ل <@${UserId}>**` })  
+  controller.replyNoMention({ content: `**تم تحويل ${amount} ل <@${UserId}>**` })  
 };
 
-function InteractionExecute() {}
