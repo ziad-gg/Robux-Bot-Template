@@ -27,7 +27,6 @@ async function GlobalExecute(message, interaction) {
       .setTimestamp()
     
    controller.editReply = (obj) => interaction ? interaction.editReply(obj) : msg.edit(obj);
-   console.log(controller.editReply())
    controller.editReply({ content: '', embeds: [embed] });
     
   } catch (e) {
