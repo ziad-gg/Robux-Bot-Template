@@ -8,19 +8,18 @@ module.exports = new CommandBuilder()
 .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
    .setName('id')
    .setDescription('Group Id To Select')
-   .setRequired(false)))
+   .setRequired(true)))
 .setGlobal(GlobalExecute)
 .setInteractionExecution(InteractionExecute)
 .setMessageExecution(MessageExecute)
 .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
-  await global
   
   const controller = message ?? interaction;
   const roblox = controller.getData('roblox');
   
-  const guildData = global;
+  const guildData = await global;
   
   const groupId = controller[0];
   if (!groupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
@@ -49,6 +48,8 @@ async function InteractionExecute(interaction, global) {
  // global(interaction);
 };
 
-function MessageExecute(message, global) {
- global(message);
+async function MessageExecute(message, Global) {
+ const global = await Global;
+ const data = await global.message;
+ data(message);
 }
