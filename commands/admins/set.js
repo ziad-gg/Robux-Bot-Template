@@ -20,6 +20,7 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction
+  await controller.deferReply()
   // await controller.reply({ content: "Hello" });
   const Guilds = controller.getData('guilds');
   const guild = await Guilds.get(controller.guild.id);

@@ -15,9 +15,10 @@ module.exports = new CommandBuilder()
 .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
+  await global
   const controller = message ?? interaction;
   const roblox = controller.getData('roblox');
-  const guildData = global.guild;
+  const guildData = global.interaction ;
   
   const groupId = controller[0];
   if (!groupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
