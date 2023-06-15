@@ -16,12 +16,10 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
-  controller.deferReply()
   const roblox = controller.getData('roblox');
   const guildData = global.guild;
   
   const groupId = controller[0];
-  
   if (!groupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
   
   const group = await roblox.groups.get(groupId);
@@ -31,7 +29,7 @@ async function GlobalExecute(message, interaction, global) {
   const owner = await group.members.me;
   if (!owner || !owner.isOwner()) return controller.replyNoMention({ content: '❌ **يجب أن تكون انت مالك الجروب!**' });
   
-  guildData.groupId = group.id
+  guildData.groupId = group.id;
   await guildData.save();
   
   return {

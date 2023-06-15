@@ -12,8 +12,9 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
+  controller.reply({ content: "Hello" })
   const Guilds = controller.getData('guilds');  
-  const Guild = await Guilds.get(controller.guild.id);
+  const Guild = await Guilds.get(controller.guild.id)
   const price = controller[0];
   
   if (!price.isNumber()) return controller.replyNoMention({ content: '❌ **قم بتحديد رقم صحيح!**' });
