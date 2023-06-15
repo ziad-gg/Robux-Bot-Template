@@ -18,6 +18,6 @@ async function GlobalExecute(message, interaction) {
     .setDescription(`**⏰ Discord API: ${controller.client.ws.ping}ms\n📊 Time Taken: ${now}ms**`)
     .setTimestamp()
   
-  controller.editReply = (obj) => interaction ? interaction.editReply(obj) : msg.edit(obj);
-  controller.editReply({ content: '', embeds: [embed] });
+  controller.editMsg = (obj) => interaction ? interaction.editReply(obj) : msg.edit(obj);
+  controller.editMsg({ content: '', embeds: [embed] });
 }

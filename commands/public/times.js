@@ -26,11 +26,10 @@ async function GlobalExecute(message, interaction) {
       .setFooter({ text: controller.author.username, iconURL: controller.author.displayAvatarURL({ dynamic: true }) })
       .setTimestamp()
     
-   controller.editReply = (obj) => interaction ? interaction.editReply(obj) : msg.edit(obj);
-   controller.editReply({ content: '', embeds: [embed] });
+   controller.editMsg = (obj) => interaction ? interaction.editReply(obj) : msg.edit(obj);
+   controller.editMsg({ content: '', embeds: [embed] });
     
-  } catch (e) {
-    console.log(e);
+  } catch {
     return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
   };
 };
