@@ -8,10 +8,10 @@ module.exports = new CommandBuilder()
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
      .setName('group')
      .setDescription('The group id do you want')
-     .setRequired(false)))
+     .setRequired(true)))
   .setGlobal(GlobalExecute)
-  //.setInteractionExecution(InteractionExecute)
-  //.setMessageExecution(MessageExecute)
+  .setInteractionExecution(InteractionExecute)
+  .setMessageExecution(MessageExecute)
   .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
@@ -32,21 +32,9 @@ async function GlobalExecute(message, interaction, global) {
   guildData.groupId = group.id;
   await guildData.save();
   
-  return {
-    interaction: (i) => {
-      i.replyNoMention({ content: '**✅ تم تحديد الجروب بنجاح!**' });
-    },
-    message: (m) => {  
-      m.replyNoMention({ content: '**✅ تم تحديد الجروب بنجاح!**' }) 
-    },
-  };
+  controller.replyNoMention({ content: '**✅ تم تحديد الجروب بنجاح!**' });
 }
 
-/*async function InteractionExecute(interaction, global) { 
-};*/
+async function InteractionExecute(interaction, global) {};
 
-/*async function MessageExecute(message, Global) {
- const global = await Global;
- const data = await global.message;
- data(message);
-}*/
+async function MessageExecute(message, Global) {};

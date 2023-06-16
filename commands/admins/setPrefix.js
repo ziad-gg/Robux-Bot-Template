@@ -3,41 +3,34 @@ const { CommandBuilder } = require('handler.djs');
 const { DEFAULT_PREFIX } = require('../../src/Constants.js');
 
 module.exports = new CommandBuilder()
-.setName('prefix')
-.setDescription('set new Command prefix')
-.InteractionOn(new SlashCommandBuilder().addStringOption((option) => option
-   .setName('prefix')
-   .setDescription('new prefix option')))
-.setGlobal(Global)
-.setMessageExecution(Message)
-.setInteractionExecution(Interaction)
-.isSubCommand();
+  .setName('prefix')
+  .setDescription('set new Command prefix')
+  .InteractionOn(new SlashCommandBuilder().addStringOption((option) => option
+     .setName('prefix')
+     .setDescription('new prefix option')))
+  .setGlobal(Global)
+  .setInteractionExecution(InteractionExecute)
+  .setMessageExecution(MessageExecute)
+  .isSubCommand();
 
 async function Global(message, interaction, global) {
-  const Guild = global.guild;
+  const guildData = await global;
   const controller = message ?? interaction;
   const prefix = controller[0];
   
   if (!prefix) {
-    if (Guild.prefix === DEFAULT_PREFIX) return controller.replyNoMention({ content: '❌' });
-    Guild.prefix = DEFAULT_PREFIX;
+    if (guildData.prefix === DEFAULT_PREFIX) return controller.replyNoMention({ content: '❌ ****' });
+    guildData.prefix = DEFAULT_PREFIX;
   } else {
-    if (Guild.prefix === prefix) return controller.replyNoMention({ content: '❌' });
-    Guild.prefix = prefix;
+    if (guildData.prefix === prefix) return controller.replyNoMention({ content: '❌ ****' });
+    guildData.prefix = prefix;
   };
   
-  await Guild.save();
+  await guildData.save();
 
-  return {
-    interaction: '✅',
-    message: '✅'
-  }
+  controller.replyNoMention({ content: '✅ **تم تحديد البادئة بنجاح!**' });
 }
 
-function Message (message, global) {
-  message.replyNoMention({ content: global });
-}
+async function InteractionExecute(interaction, global) {};
 
-function Interaction (interaction, global) {
-  interaction.replyNoMention({ content: global });
-}
+async function MessageExecute(message, Global) {};
