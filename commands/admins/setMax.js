@@ -3,24 +3,29 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('max')
-  .setDescription('Select the max Amount to buy.')
-  .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option.setName('amount').setDescription('Amount Option to select').setRequired(true)))
-  .setInteractionExecution(InteractionExecute)
+  .setDescription('Select the max Amount to set.')
+  .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
+     .setName('amount')
+     .setDescription('Amount Option to select')
+     .setRequired(true)))
+  .setGlobal(GlobalExecute)
   .isSubCommand()
 
-async function InteractionExecute(interaction, global) {
-  const guild = global.guild;
-  const amount = interaction[0];
+async function GlobalExecute(message, interaction, global) {
+  const controller = message ?? interaction;
+  const guild = await global;
+  const amount = controller[0];
   
-  if (interaction.GroupName === 'transfer') {
-    guild.transfer.max = amount;  
-    
+  if (!amount) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد الحد الاعلي!**');
+  if (!amount.isNumber()) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد رقم صحيح!**');
+  
+  if (controller.GroupName === 'transfer') {
+    guild.transfer.max = amount;
     await guild.save();
-    interaction.replyNoMention({ content: `> **Done ${interaction.GroupName} ${interaction.GroupChildName } is now ${amount}**` })
-  } else if (interaction.GroupName === 'buy') {
-    guild.buy.max = amount;  
-    
+    controller.replyNoMention({ content: `> **Done ${controller.GroupName} ${controller.GroupChildName } is now ${amount}**` })
+  } else if (controller.GroupName === 'buy') {
+    guild.buy.max = amount; 
     await guild.save();
-    interaction.replyNoMention({ content: `> **Done ${interaction.GroupName} ${interaction.GroupChildName } is now ${amount}**` })
+    controller.replyNoMention({ content: `> **Done ${controller.GroupName} ${controller.GroupChildName } is now ${amount}**` })
   };
 };

@@ -8,14 +8,14 @@ module.exports = new CommandBuilder()
      .setName('role')
      .setDescription('Role Option to select')
      .setRequired(true)))
-  .setInteractionExecution(InteractionExecute)
+  .setGlobal(GlobalExecute)
   .isSubCommand()
 
-async function InteractionExecute(interaction, global) {
+async function GlobalExecute(interaction, global) {
   const guild = global.guild;
   const RoleId = interaction[0];
 
-  guild.clientR = RoleId;
+  guild.clientsRole = RoleId;
   await guild.save();
   
   interaction.replyNoMention({ content: `تم تحديد <@&${guild.proof}> رول العميل` });

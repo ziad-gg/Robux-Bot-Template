@@ -3,14 +3,12 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('min')
-  .setDescription('Select the min Amount to buy.')
+  .setDescription('Select the min Amount to set.')
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
      .setName('amount')
      .setDescription('Amount Option to select')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
   .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
@@ -31,6 +29,3 @@ async function GlobalExecute(message, interaction, global) {
     controller.replyNoMention({ content: `> **Done ${controller.GroupName} ${controller.GroupChildName } is now ${amount}**` })
   };
 };
-
-function InteractionExecute() {}
-function MessageExecute() {}
