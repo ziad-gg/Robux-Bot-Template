@@ -3,29 +3,30 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('max')
-  .setDescription('Select the max Amount to set.')
+  .setDescription('Sets the max.')
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
-     .setName('amount')
-     .setDescription('Amount Option to select')
+     .setName('max')
+     .setDescription('The max do you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
   .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
-  const guild = await global;
+  const guildData = await global;
   const amount = controller[0];
   
-  if (!amount) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد الحد الاعلي!**');
+  if (!amount) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد الحد الأقصى!**');
   if (!amount.isNumber()) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد رقم صحيح!**');
   
   if (controller.GroupName === 'transfer') {
-    guild.transfer.max = amount;
-    await guild.save();
-    controller.replyNoMention({ content: `> **Done ${controller.GroupName} ${controller.GroupChildName } is now ${amount}**` })
+    guildData.transfer.max = amount;
+    await guildData.save();
+    controller.replyNoMention({ content: '✅ **تم تحديد الحد الأقصى بنجاح!**' });
+    
   } else if (controller.GroupName === 'buy') {
-    guild.buy.max = amount; 
-    await guild.save();
-    controller.replyNoMention({ content: `> **Done ${controller.GroupName} ${controller.GroupChildName } is now ${amount}**` })
+    guildData.buy.max = amount; 
+    await guildData.save();
+    controller.replyNoMention({ content: '✅ **تم تحديد الحد لأقصى بنجاح!**' });
   };
 };

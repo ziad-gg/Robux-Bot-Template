@@ -4,15 +4,16 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('clientsrole')
   .setDescription('Sets clients Role.')
-  .InteractionOn(new SlashCommandBuilder().addRoleOption(option => option
+  .InteractionOn(new SlashCommandBuilder().addRoleOption((option) => option
      .setName('role')
-     .setDescription('Role Option to select')
+     .setDescription('The role do you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
   .isSubCommand()
 
-async function GlobalExecute(interaction, global) {
-  const guild = global.guild;
+async function GlobalExecute(message, interaction, global) {
+  const controller = message ?? interaction;
+  const guild = await global;
   const RoleId = interaction[0];
 
   guild.clientsRole = RoleId;

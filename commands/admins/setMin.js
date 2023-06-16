@@ -3,29 +3,30 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('min')
-  .setDescription('Select the min Amount to set.')
+  .setDescription('Sets the min.')
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
-     .setName('amount')
-     .setDescription('Amount Option to select')
+     .setName('min')
+     .setDescription('The min do you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
   .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
-  const guild = await global;
+  const guildData = await global;
   const amount = controller[0];
   
   if (!amount) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد الحد الأدنى!**');
   if (!amount.isNumber()) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد رقم صحيح!**');
   
   if (controller.GroupName === 'transfer') {
-    guild.transfer.min = amount;
-    await guild.save();
-    controller.replyNoMention({ content: `> **Done ${controller.GroupName} ${controller.GroupChildName } is now ${amount}**` })
+    guildData.transfer.min = amount;
+    await guildData.save();
+    controller.replyNoMention({ content: '✅ **تم تحديد الحد الأدنى بنجاح!**' });
+    
   } else if (controller.GroupName === 'buy') {
-    guild.buy.min = amount; 
-    await guild.save();
-    controller.replyNoMention({ content: `> **Done ${controller.GroupName} ${controller.GroupChildName } is now ${amount}**` })
+    guildData.buy.min = amount; 
+    await guildData.save();
+    controller.replyNoMention({ content: '✅ **تم تحديد الحد الأدنى بنجاح!**' });
   };
 };

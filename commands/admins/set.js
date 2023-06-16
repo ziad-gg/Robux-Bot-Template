@@ -20,8 +20,8 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;  
-  const Guilds = controller.getData('guilds');
-  const guild = await Guilds.get(controller.guild.id);
+  const guildsData = controller.getData('guilds');
+  const guildData = await guildsData.get(controller.guild.id);
   
-  return guild;
+  return guildData;
 }
