@@ -4,14 +4,13 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('credit')
   .setDescription('how much robux you can buy.')
+  .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option
      .setName('amount')
      .setDescription('The amount you would like to calculate')                                                   
      .setRequired(true))) 
   .setGlobal(GlobalExecute)
-  .setAliases([
-    { cut: 'c', prefix: true }
-  ])
+  .setAliases([{ cut: 'c', prefix: true }])
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
@@ -34,7 +33,7 @@ async function GlobalExecute(message, interaction) {
     embeds: [
       new EmbedBuilder()
       .setColor('#0be881')
-      .setThumbnail(message.guild.iconURL())
+      .setThumbnail(controller.guild.iconURL())
       .setTitle(`**ضريبة الكريديت**`)
       .addFields([{ name: 'يمكنك شراء :', value: `${buy} روبكس` }])
       .addFields([{ name: 'السعر :', value: `${price}` }])

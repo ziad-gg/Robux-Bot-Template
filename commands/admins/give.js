@@ -4,7 +4,6 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('give')
   .setDescription('Transfer someone specific balance.')
-  .setCategory('admins')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option
      .setName('user')
      .setDescription('The user to transfer to')

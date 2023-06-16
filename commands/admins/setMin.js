@@ -14,7 +14,7 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
   const guildData = await global;
-  const amount = controller[0];
+  const amount = parseInt(controller[0]);
   
   if (!amount) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد الحد الأدنى!**');
   if (!amount.isNumber()) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد رقم صحيح!**');

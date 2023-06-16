@@ -7,7 +7,7 @@ module.exports = new CommandBuilder()
   .setCooldown('20s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option
      .setName('amount')
-     .setDescription('The amount you want')                                                          
+     .setDescription('The amount you want to buy')                                                          
      .setRequired(true)))
   .setGlobal(GlobalExecute)
 

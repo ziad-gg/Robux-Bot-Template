@@ -2,8 +2,9 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('end')
+  .setName('endbuy')
   .setDescription('Cancel your current purchase.')
+  .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
   // .setInteractionExecution(InteractionExecute)

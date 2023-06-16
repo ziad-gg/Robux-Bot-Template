@@ -4,7 +4,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('times')
   .setDescription('Shows the pending robux times.')
-  .setCooldown('10s')
+  .setCooldown('60s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
 

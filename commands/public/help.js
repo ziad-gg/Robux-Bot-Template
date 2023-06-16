@@ -19,21 +19,17 @@ async function GlobalExecute(message, interaction) {
   const embed = new EmbedBuilder().setColor('#0be881');
 
   if (command) {
-      const fields = [];
-      const cmd = client.Application.getCommand(command)
-      if (!cmd || cmd.category == "help" || cmd.category == "dev" || cmd.category == "util") return controller.replyNoMention(`❌ **لا يمكنني العثور علي هذا الامر**`);
+    const fields = [];
+    const cmd = client.Application.getCommand(command)
+    if (!cmd || cmd.category == "help" || cmd.category == "dev" || cmd.category == "util") return controller.replyNoMention(`❌ **لا يمكنني العثور علي هذا الامر**`);
 
-
-    console.log(cmd)
       embed.setTitle(`**Command: ${cmd.name}**`); 
       
       if (cmd.description) embed.addField(cmd.description);
       if (command.usage) embed.addField({name: `**Usages:**`, value: command.usage.map(e => `${client.Application.prefix}${e}`).join(`\n`)});
       if (command.examples) fields.push({name: `**Examples:**`, value: command.examples.map(e => `${client.Application.prefix}${e.replace(/\{userMention}/g, `<@${message.author.id}>`).replace(/\{userId}/g, `${message.author.id}`)}`).join(`\n`)});
-      //embed.addField(`**Cooldown:**`, `${(command.cooldown) ? command.cooldown : 3} second(s)`);;
         
-      // embed.data.fields = fields
-  } else {
+/  } else {
     const commands = [];
 
     client.Application.commands.filter(e => e.category !== 'help').forEach(cmd => {
