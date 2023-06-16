@@ -1,5 +1,5 @@
 const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder, EmbedBuilder, AttachmentBuilder } = require('discord.js');
+const { SlashCommandBuilder, AttachmentBuilder } = require('discord.js');
 const { createCanvas, loadImage } = require('canvas');
 
 module.exports = new CommandBuilder()
@@ -26,7 +26,7 @@ async function GlobalExecute(message, interaction) {
   
   const Users = controller.getData('users');
   const username = controller[0];
-  const amount = +controller[1];
+  const amount = parseInt(controller[1]);
 
   if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسمك في روبلوكس!**' });
   if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });

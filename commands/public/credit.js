@@ -9,31 +9,37 @@ module.exports = new CommandBuilder()
      .setDescription('The amount you would like to calculate')                                                   
      .setRequired(true))) 
   .setGlobal(GlobalExecute)
+  .setAliases([
+    { cut: 'c', prefix: true }
+  ])
 
 async function GlobalExecute(message, interaction) {
-  const val = parseInt(args[0]);
-
-    if (!val) return message.reply("**❌ قم بوضع رقم!**");
-    if (isNaN(val) || parseInt(val) !== val || val < 1) return message.reply("❌ **قم بوضع رقم صالح!**");
+  const controller = message ?? interaction;
+  const amount = parseInt(controller[0]);
+  
+  if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم!**' });
+  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
     
-    const systemPrice = client.price;
+  const guildsData = controller.getData('guilds');
+  const guildData = await guildsData.get(controller.guild.id);
+  const guildPrice = guildData.price;
 
-    if (val * 0.95 < systemPrice * 1) return message.reply(`❌ **يجب أن يكون عدد الكريديت \`${Math.ceil((systemPrice * 1) / 0.95)}\` على الأقل!**`);
+  if (amount * 0.95 < guildPrice * 1) return controller.replyNoMention({ content: `❌ **يجب أن يكون عدد الكريديت \`${Math.ceil((guildPrice * 1) / 0.95)}\` على الأقل!**` });
 
-    const amount = Math.floor((val * 0.95) / systemPrice);
-    const price = amount * systemPrice;
-    const withtax = Math.ceil(price / 0.95);
+  const buy = Math.floor((amount * 0.95) / guildPrice);
+  const price = buy * guildPrice;
+  const withtax = Math.ceil(price / 0.95);
 
-    return message.reply({
-      embeds: [
-        new EmbedBuilder()
-        .setColor(client.color)
-        .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
-        .setTitle(`**ضريبة الكريديت**`)
-        .addFields([{ name: 'يمكنك شراء :', value: `${amount} روبكس` }])
-        .addFields([{ name: 'السعر :', value: `${price}` }])
-        .addFields([{ name:'السعر مع الضريبة :', value: `${withtax}` }])
-        .setTimestamp()
-      ]
-    }).catch(() => {});
+  return controller.replyNoMention({
+    embeds: [
+      new EmbedBuilder()
+      .setColor('#0be881')
+      .setThumbnail(message.guild.iconURL())
+      .setTitle(`**ضريبة الكريديت**`)
+      .addFields([{ name: 'يمكنك شراء :', value: `${buy} روبكس` }])
+      .addFields([{ name: 'السعر :', value: `${price}` }])
+      .addFields([{ name:'السعر مع الضريبة :', value: `${withtax}` }])
+      .setTimestamp()
+    ]
+  })
 }

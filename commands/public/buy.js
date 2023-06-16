@@ -22,7 +22,7 @@ async function GlobalExecute(message, interaction) {
   const usersData = controller.getData('users');
   if (cooldowns.has(key)) return controller.replyNoMention({ content: '❌ **لديك عملية شراء بالفعل!**' });
 
-  const amount = +controller[0];
+  const amount = parseInt(controller[0]);
   if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تريده!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
   
