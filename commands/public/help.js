@@ -19,7 +19,19 @@ async function GlobalExecute(message, interaction) {
   const embed = new EmbedBuilder().setColor('#0be881');
 
   if (command) {
-    
+      const fields = [];
+      const cmd = client.Application.getCommand(command)
+      if (!cmd || cmd.category == "help" || cmd.category == "dev" || cmd.category == "util") return controller.replyNoMention(`❌ **لا يمكنني العثور علي هذا الامر**`);
+
+
+      // embed.setTitle(replys.chTitle(command.name)); 
+      
+      // if (cmdInfo.description) embed.setDescription(cmdInfo.description);
+      // if (command.usage) fields.push({name: replys.chSections[1], value: command.usage.map(e => `${client.Application.prefix}${e}`).join(`\n`)});
+      // if (command.examples) fields.push({name: replys.chSections[2], value: command.examples.map(e => `${client.Application.prefix}${e.replace(/\{userMention}/g, `<@${message.author.id}>`).replace(/\{userId}/g, `${message.author.id}`)}`).join(`\n`)});
+      //embed.addField(`**Cooldown:**`, `${(command.cooldown) ? command.cooldown : 3} second(s)`);;
+        
+      embed.data.fields = fields;
   } else {
     const commands = [];
 

@@ -14,7 +14,7 @@ async function Execute(message) {
   const prefix = guildData.prefix;
   app.setPrefix(prefix);
   
-  if (message.content === '<@' + message.client.user.id + '>') return message.reply({ content: `My prefix is : ${app.prefix}` });
+  if (message.content === '<@' + message.client.user.id + '>') return message.replyNoMention(`My prefix is : ${app.prefix}`);
   
   if (!message.content.includes(app.prefix)) return;
   const args = message.content.slice(app.prefix.length).split(/ +/g);
@@ -31,6 +31,6 @@ async function Execute(message) {
     let subs = SubCommands?.find(sub => sub.commandGroup?.toLowerCase() === GroupName && (GroupChildName ? sub.commandName === GroupChildName : true));
     if (!subs) subs = SubCommands.find(op => op.commandName.toLowerCase() === GroupName && !op.commandGroup);
 
-    if (!subs) return message.reply(`❌ **هذا الامر غير موجود!**`)
+    if (!subs) return message.replyNoMention(`❌ **هذا الامر غير موجود!**`)
   };
 }

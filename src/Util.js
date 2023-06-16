@@ -10,14 +10,16 @@ function isNumber() {
 } 
 
 function replyNoMention(options) {
-  if typeof 
-  this.reply()
-}
-
-
+  options = typeof options === 'string' ? { content: options } : options;
+  options.allowedMentions = {
+    repliedUser: false
+  };
+  return this.reply(options);
+} 
+  
 String.prototype.toId = toId;
 String.prototype.isNumber = isNumber;
 
 Number.prototype.isNumber = isNumber;
 
-Messag.prototype..replyNoMention = replyNoMention 
+Message.prototype.replyNoMention = replyNoMention 
