@@ -18,18 +18,13 @@ async function GlobalExecute(message, interaction) {
   const command = controller[0]?.toLowerCase();
   const embed = new EmbedBuilder().setColor('#0be881');
 
-  if (command) {
-    const fields = [];
+  if (command && command !== 'help') {
     const cmd = client.Application.getCommand(command)
-    if (!cmd || cmd.category == "help" || cmd.category == "dev" || cmd.category == "util") return controller.replyNoMention(`❌ **لا يمكنني العثور علي هذا الامر**`);
-
+    if (!cmd || !message.author.isOwner && cmd.category === 'admins') return controller.replyNoMention({ content: `❌ **لا يمكن العثور على هذا الأمر!**` });
+    
       embed.setTitle(`**Command: ${cmd.name}**`); 
-      
-      if (cmd.description) embed.addField(cmd.description);
-      if (command.usage) embed.addField({name: `**Usages:**`, value: command.usage.map(e => `${client.Application.prefix}${e}`).join(`\n`)});
-      if (command.examples) fields.push({name: `**Examples:**`, value: command.examples.map(e => `${client.Application.prefix}${e.replace(/\{userMention}/g, `<@${message.author.id}>`).replace(/\{userId}/g, `${message.author.id}`)}`).join(`\n`)});
-        
-/  } else {
+      embed.setDescription(cmd.description);
+  } else {
     const commands = [];
 
     client.Application.commands.filter(e => e.category !== 'help').forEach(cmd => {
