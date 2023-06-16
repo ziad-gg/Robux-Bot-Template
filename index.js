@@ -1,7 +1,7 @@
 const { Client } = require('discord.js');
 const { Zoblox, Events } = require('zoblox.js');
 const { Application } = require('handler.djs');
-const { OWNERS, CLIENT_OPTIONS } = require('./src/Constants.js');
+const { DEFAULT_PREFIX, OWNERS, CLIENT_OPTIONS } = require('./src/Constants.js');
 const mongoose = require('mongoose');
 const path = require('node:path');
 
@@ -13,7 +13,7 @@ new Application(client, {
   validationPath: path.join(__dirname, 'validation'),
   EventsPath: path.join(__dirname, 'events'),
   owners: OWNERS,
-  prefix: '-'
+  prefix: DEFAULT_PREFIX
 })
 
 client.Application.setCooldown({   

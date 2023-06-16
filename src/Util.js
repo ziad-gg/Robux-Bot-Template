@@ -1,13 +1,12 @@
-String.prototype.toId = function () {
-  return this.replace(/[<@#&!>]/g, '');
-}
+function toId() {
+  return this.replaceAll('[<@#&!>]', '');
+} 
 
-String.prototype.isNumber = function () {
+function isNumber() {
   if (isNaN(this) || parseInt(this) != this || parseInt(this) <= 0) return false;
   return true;
-};
+} 
 
-Number.prototype.isNumber = function () {
-  if (isNaN(this) || parseInt(this) != this || parseInt(this) <= 0) return false;
-  return true;
-};
+String.prototype.toId = toId();
+String.prototype.isNumber = isNumber();
+Number.prototype.isNumber = isNumber();

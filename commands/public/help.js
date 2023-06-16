@@ -23,7 +23,7 @@ async function GlobalExecute(message, interaction) {
   } else {
     const commands = [];
 
-    client.Application.commands.filter(e => e.category !== 'help' || e.category !== 'util' && !e.Application.isSub).forEach(cmd => {
+    client.Application.commands.filter(e => e.category !== 'help').forEach(cmd => {
       if (!cmd.isSubCommand) commands.push({ name: `\`${cmd.name}\``, category: cmd.category });
     });
 
