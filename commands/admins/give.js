@@ -7,10 +7,10 @@ module.exports = new CommandBuilder()
   .setCategory('admins')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option
      .setName('user')
-     .setDescription('User Acount to give Robux')
+     .setDescription('The user to transfer to')
      .setRequired(true)).addNumberOption((option) => option
         .setName('amount')
-        .setDescription('Amount to Transfer To')
+        .setDescription('The amount to transfer to')
         .setRequired(true)))
   .setGlobal(GlobalExecute)
   .OwnersOnly()
@@ -32,4 +32,3 @@ async function GlobalExecute(message, interaction) {
   
   controller.replyNoMention({ content: `✅ **تم بنجاح تحويل ${amount} الي ${user}\nرصيده الحالي هو: ${userData.balance}**` });
 };
-

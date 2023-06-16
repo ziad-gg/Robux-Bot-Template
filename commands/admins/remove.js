@@ -3,28 +3,33 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('remove')
-  .setDescription('Give user an amount of robux.')
+  .setDescription('Remove someone specific balance.')
   .setCategory('admins')
-  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption(op => op.setName('user').setDescription('User Acount to give Robux').setRequired(true)).addNumberOption(option => option.setName('amount').setDescription('Amount to Transfer To').setRequired(true)))
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option
+     .setName('user')
+     .setDescription('The user from whom the balance is to be removed')
+     .setRequired(true)).addNumberOption((option) => option
+        .setName('amount')
+        .setDescription('The amount to remove')
+        .setRequired(true)))
   .setGlobal(GlobalExecute)
   .OwnersOnly()
-  .setInteractionExecution(InteractionExecute)
 
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
-  const Users = controller.getData('users');
-  const UserId = controller[0];
+  const usersData = controller.getData('users');
+  const userId = controller[0]?.toId();
+  if (!userId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد المستخدم!**' });
   
-  const Amount = controller[1];
-  const User = await controller.getUser(UserId).then(u => u?.user?.id? u.user : u);
-  const UserData = await Users.get(User.id, controller.guild.id);
+  const amount = +controller[1];
+  if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد!**' });
   
-  UserData.balance -= +Amount;
-  await UserData.save();
+  const user = await controller.getUser(userId).then(u => u?.user?.id? u.user : u);
+  const userData = await usersData.get(user.id, controller.guild.id);
+  if (userData.balance < amount) return controller.replyNoMention({ content: '❌ **رصيد هذا الشخص اقل من المبلغ المراد خصمه!**' });
+    
+  userData.balance -= amount;
+  await userData.save();
   
-  controller.replyNoMention({ content: `**تم ازاله ${Amount} من <@${UserId}>**` })  
-
-  return; 
+  controller.replyNoMention({ content: `✅ **تم بنجاح خصم ${amount} من ${user}\nرصيده الحالي هو: ${userData.balance}**` });
 };
-
-function InteractionExecute() {}

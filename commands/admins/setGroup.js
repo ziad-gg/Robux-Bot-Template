@@ -10,8 +10,8 @@ module.exports = new CommandBuilder()
      .setDescription('The group id do you want')
      .setRequired(false)))
   .setGlobal(GlobalExecute)
-  .setInteractionExecution(InteractionExecute)
-  .setMessageExecution(MessageExecute)
+  //.setInteractionExecution(InteractionExecute)
+  //.setMessageExecution(MessageExecute)
   .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
@@ -42,11 +42,11 @@ async function GlobalExecute(message, interaction, global) {
   };
 }
 
-async function InteractionExecute(interaction, global) { 
-};
+/*async function InteractionExecute(interaction, global) { 
+};*/
 
-async function MessageExecute(message, Global) {
+/*async function MessageExecute(message, Global) {
  const global = await Global;
  const data = await global.message;
  data(message);
-}
+}*/
