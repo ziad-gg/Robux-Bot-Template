@@ -7,22 +7,30 @@ module.exports = new CommandBuilder()
   .InteractionOn(new SlashCommandBuilder().addChannelOption((option) => option
      .addChannelTypes(0)                                                       
      .setName('channel')
-     .setDescription('Channel Option to select')
+     .setDescription('The channel you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setInteractionExecution(InteractionExecute)
+  .setMessageExecution(MessageExecute)
   .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
-  const guild = await global;
-  const ChannelId = interaction[0];
-  const Channel = interaction.guild.channels.cache.get(ChannelId);
+  const guildData = await global;
+  const channelId = controller[0]?.toId();
+  if (!channelId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد القناة!**' });
   
-  if (!Channel) return controller.replyNoMention('❌ ****');
-  if (Channel.type !== 0) return controller.replyNoMention('❌ ****');
+  const channel = controller.guild.channels.cache.get(channelId);
   
-  guild.proofsChannel = Channel.id;
-  await guild.save();
+  if (!channel) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة صالحة!**' });
+  if (channel.type !== 0) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة كتابية!**' });
+  if (guildData.proofsChannel === channel.id) return controller.replyNoMention({ content: '❌ **هذه القناة محددة من قبل!**' });	
   
-  controller.replyNoMention({ content: `✅ ****` });
+  guildData.proofsChannel = channel.id;
+  await guildData.save();
+  
+  controller.replyNoMention({ content: '✅ **تم بنجاح تحديد قناة الدلائل!**' });
 };
+
+async function InteractionExecute(interaction, global) {};
+async function MessageExecute(message, Global) {};

@@ -34,5 +34,4 @@ async function GlobalExecute(message, interaction, global) {
 }
 
 async function InteractionExecute(interaction, global) {};
-
 async function MessageExecute(message, Global) {};
