@@ -12,7 +12,7 @@ module.exports = new CommandBuilder()
      .setDescription('The username you want to transfer to')
      .setRequired(true)).addNumberOption((option) => option
         .setName('amount')
-        .setDescription('The amount you want')
+        .setDescription('The amount you want to transfer')
         .setRequired(true)))
   .setGlobal(GlobalExecute)
   .setAliases([{ cut: 'tran', prefix: true }])

@@ -6,7 +6,7 @@ module.exports = new CommandBuilder()
   .setDescription('Feeling lost?')
   .setCooldown('10s')
   .setCategory('help')
-  .InteractionOn(new SlashCommandBuilder().addStringOption((option) => option
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
      .setName('command')
      .setDescription('Shows details about how to use a command')                                                           
      .setRequired(false)))

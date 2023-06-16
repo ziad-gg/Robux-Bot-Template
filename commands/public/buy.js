@@ -29,7 +29,7 @@ async function GlobalExecute(message, interaction) {
   const time = 3e5;
   const guildData = await guildsData.get(controller.guild.id);
   if (guildData.buy.min > amount) return message.replyNoMention({ content: `❌ **الحد الأدنى للشراء هو ${guildData.buy.min}**` });
-  if (guildData.buy.max < amount) return message.replyNoMention({ content: `❌ **الحد الاقصي للشراء هو ${guildData.buy.max}**` });
+  if (guildData.buy.max < amount) return message.replyNoMention({ content: `❌ **الحد الأقصى للشراء هو ${guildData.buy.max}**` });
   
   const userData = await usersData.get(controller.author.id, controller.guild.id);
   const recipientId = await controller.guild.fetchOwner().then((owner) => owner.user.id);
