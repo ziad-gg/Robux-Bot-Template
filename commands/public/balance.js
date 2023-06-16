@@ -11,7 +11,7 @@ module.exports = new CommandBuilder()
      .setRequired(false)))
   .setGlobal(GlobalExecute)
   .setAliases([
-    { cut: 'b' }
+    { cut: 'bal', prefix: true }
   ])
 
 async function GlobalExecute(message, interaction) {

@@ -31,5 +31,5 @@ async function GlobalExecute(message, interaction) {
   userData.balance += amount;
   await userData.save();
   
-  controller.replyNoMention({ content: `✅ **تم بنجاح تحويل ${amount} الي ${user}\nرصيده الحالي هو: ${userData.balance}**` });
+  controller.replyNoMention({ content: `✅ **تم بنجاح تحويل ${amount} الي ${user}\nرصيده الحالي هو ${userData.balance}**` });
 };
