@@ -13,7 +13,7 @@ module.exports.CLIENT_OPTIONS = {
     status: 'Online',
     activities: [{
       type: ActivityType.Playing,
-      name: `${exports.DEFAULT_PREFIX}help | Robux Factory`
+      name: `/help | Robux Factory`
     }]
   },
 }; //Client Options

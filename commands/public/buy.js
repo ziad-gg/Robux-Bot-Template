@@ -2,14 +2,14 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder()
-.setName('buy')
-.setDescription('Buy a balance.')
-.setCooldown('20s')
-.InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option
-   .setName('amount')
-   .setDescription('The amount you want')                                                          
-   .setRequired(true)))
-.setGlobal(GlobalExecute)
+  .setName('buy')
+  .setDescription('Buy a balance.')
+  .setCooldown('20s')
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option
+     .setName('amount')
+     .setDescription('The amount you want')                                                          
+     .setRequired(true)))
+  .setGlobal(GlobalExecute)
 
 async function GlobalExecute(message, interaction) {
   let buyed = false;
@@ -24,7 +24,7 @@ async function GlobalExecute(message, interaction) {
 
   const amount = +controller[0];
   if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تريده!**' });
-  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بكتابة رقم صحيح!**' });
+  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
   
   const time = 3e5;
   const guildData = await guildsData.get(controller.guild.id);

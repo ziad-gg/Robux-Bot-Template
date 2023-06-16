@@ -23,6 +23,7 @@ async function GlobalExecute(message, interaction) {
   
   const amount = +controller[1];
   if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد!**' });
+  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
   
   const user = await controller.getUser(userId).then(u => u?.user?.id? u.user : u);
   const userData = await usersData.get(user.id, controller.guild.id);

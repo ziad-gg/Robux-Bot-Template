@@ -4,25 +4,26 @@ const { DEFAULT_PREFIX } = require('../../src/Constants.js');
 
 module.exports = new CommandBuilder()
   .setName('prefix')
-  .setDescription('set new Command prefix')
+  .setDescription('Change the prefix.')
   .InteractionOn(new SlashCommandBuilder().addStringOption((option) => option
      .setName('prefix')
-     .setDescription('new prefix option')))
-  .setGlobal(Global)
+     .setDescription('The new prefix do you want')
+     .setRequired(false)))
+  .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute)
   .isSubCommand();
 
-async function Global(message, interaction, global) {
+async function GlobalExecute(message, interaction, global) {
   const guildData = await global;
   const controller = message ?? interaction;
   const prefix = controller[0];
   
   if (!prefix) {
-    if (guildData.prefix === DEFAULT_PREFIX) return controller.replyNoMention({ content: '❌ ****' });
+    if (guildData.prefix === DEFAULT_PREFIX) return controller.replyNoMention({ content: '❌ **يبدو أن البادئة الافتراضية محددة من قبل!**' });
     guildData.prefix = DEFAULT_PREFIX;
   } else {
-    if (guildData.prefix === prefix) return controller.replyNoMention({ content: '❌ ****' });
+    if (guildData.prefix === prefix) return controller.replyNoMention({ content: '❌ **يبدو أن هذه البادئة محددة من قبل!**' });
     guildData.prefix = prefix;
   };
   

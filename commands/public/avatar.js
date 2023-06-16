@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName('avatar')
   .setDescription('Get your roblox avatar.')
   .setCooldown('10s')
-  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption(option => option
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
      .setName('username')
      .setDescription('The username to get avatar for')
      .setRequired(true)))
@@ -23,12 +23,12 @@ async function GlobalExecute(message, interaction) {
   user = await roblox.users.get(user.id);
 
   const embed = new EmbedBuilder()
-  .setAuthor({ name: user.name, iconURL: user.avatarURL({ type: 'Headshot' }) })
-  .setTitle(user.name)
-  .setURL(user.profileURL())
-  .setImage(user.avatarURL({ type: 'Headshot' }))
-  .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
-  .setTimestamp();
+    .setAuthor({ name: user.name, iconURL: user.avatarURL({ type: 'Headshot' }) })
+    .setTitle(user.name)
+    .setURL(user.profileURL())
+    .setImage(user.avatarURL({ type: 'Headshot' }))
+    .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
+    .setTimestamp();
   
   controller.replyNoMention({ embeds: [embed] });
 };

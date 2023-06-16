@@ -27,7 +27,7 @@ async function GlobalExecute(message, interaction) {
 
   if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسمك في روبلوكس!**' });
   if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
-  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بكتابة رقم صحيح!**' });
+  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
 
   const userData = await Users.get(controller.author.id, controller.guild.id);
   if (userData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
