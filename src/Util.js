@@ -1,5 +1,5 @@
 function toId() {
-  return this.replaceAll('[<@#&!>]', '');
+  return this.replaceAll(/[<@#&!>]/g, '');
 } 
 
 function isNumber() {
@@ -7,6 +7,7 @@ function isNumber() {
   return true;
 } 
 
-String.prototype.toId = toId();
-String.prototype.isNumber = isNumber();
-Number.prototype.isNumber = isNumber();
+String.prototype.toId = toId;
+String.prototype.isNumber = isNumber;
+
+Number.prototype.isNumber = isNumber;
