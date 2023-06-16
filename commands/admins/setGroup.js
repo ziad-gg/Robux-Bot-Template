@@ -19,7 +19,7 @@ async function GlobalExecute(message, interaction, global) {
   const roblox = controller.getData('roblox');
   const guildData = await global;
   
-  const groupId = toId(controller[0])[0];
+  const groupId = controller[0];
   if (!groupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
   
   const group = await roblox.groups.get(groupId);
@@ -38,7 +38,3 @@ async function GlobalExecute(message, interaction, global) {
 async function InteractionExecute(interaction, global) {};
 
 async function MessageExecute(message, Global) {};
-
-function toId(url) {
-  url.match(/\d+/) || '';
-}

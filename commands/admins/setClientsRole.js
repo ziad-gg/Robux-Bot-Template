@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('clientsrole')
-  .setDescription('Set client Role.')
+  .setDescription('Sets clients Role.')
   .InteractionOn(new SlashCommandBuilder().addRoleOption(option => option
      .setName('role')
      .setDescription('Role Option to select')
@@ -18,5 +18,5 @@ async function InteractionExecute(interaction, global) {
   guild.clientR = RoleId;
   await guild.save();
   
-  interaction.replyNoMention({ content: `تم تحديد <@&${guild.proof}> رول العميل` })
+  interaction.replyNoMention({ content: `تم تحديد <@&${guild.proof}> رول العميل` });
 };
