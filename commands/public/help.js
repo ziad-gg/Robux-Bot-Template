@@ -20,7 +20,7 @@ async function GlobalExecute(message, interaction) {
 
   if (command && command !== 'help') {
     const cmd = client.Application.getCommand(command)
-    if (!cmd || !message.author.isOwner && cmd.category === 'admins') return controller.replyNoMention({ content: `❌ **لا يمكن العثور على هذا الأمر!**` });
+    if (!cmd || !controller.author.isOwner && cmd.category === 'admins') return controller.replyNoMention({ content: `❌ **لا يمكن العثور على هذا الأمر!**` });
     
       embed.setTitle(`**Command: ${cmd.name}**`); 
       embed.setDescription(cmd.description);
