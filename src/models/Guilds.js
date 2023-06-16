@@ -13,14 +13,14 @@ const GuildsSchema = new mongoose.Schema({
   },
   groupId: { type: Number },
   price: { type: Number, default: 1000 }, 
-  proof: { type: String },
+  proofsChannel: { type: String },
   clientsRole: { type: String },
   buy: {
-    max: { type: Number, default: 1 },
+    max: { type: Number, default: 0 },
     min: { type: Number, default: 1 },
   },
   transfer: {
-    max: { type: Number, default: 1 },
+    max: { type: Number, default: 0 },
     min: { type: Number, default: 1 },
   }
 });

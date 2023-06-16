@@ -22,6 +22,7 @@ async function GlobalExecute(message, interaction, global) {
   if (!prefix) {
     if (guildData.prefix === DEFAULT_PREFIX) return controller.replyNoMention({ content: '❌ **يبدو أن البادئة الافتراضية محددة من قبل!**' });
     guildData.prefix = DEFAULT_PREFIX;
+    
   } else {
     if (guildData.prefix === prefix) return controller.replyNoMention({ content: '❌ **يبدو أن هذه البادئة محددة من قبل!**' });
     guildData.prefix = prefix;

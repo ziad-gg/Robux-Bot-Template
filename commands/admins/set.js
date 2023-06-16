@@ -11,7 +11,7 @@ module.exports = new CommandBuilder()
      { command: 'prefix' },     
      { command: 'group' },
      { command: 'clientsrole' },
-     { command: 'donechannel' },
+     { command: 'proofschannel' },
      { command: 'max', group: 'buy' },
      { command: 'min', group: 'buy' },
      { command: 'max', group: 'transfer' },

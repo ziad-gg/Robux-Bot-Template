@@ -20,9 +20,9 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   const roblox = controller.getData('roblox');
-  const Guilds = controller.getData('guilds');
+  const guildsData = controller.getData('guilds');
   
-  const Users = controller.getData('users');
+  const usersData = controller.getData('users');
   const username = controller[0];
   const amount = parseInt(controller[1]);
 
@@ -30,26 +30,26 @@ async function GlobalExecute(message, interaction) {
   if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
 
-  const userData = await Users.get(controller.author.id, controller.guild.id);
+  const userData = await usersData.get(controller.author.id, controller.guild.id);
   if (userData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
 
   let user = await roblox.users.find({ userNames: username });
   if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' })
   user = await roblox.users.get(user.id);
 
-  const Guild = await Guilds.get(controller.guild.id);
-  const Group = await roblox.groups.get(Guild.groupId);
+  const guildData = await guildsData.get(controller.guild.id);
+  const group = await roblox.groups.get(guildData.groupId);
   
-  if (Guild.transfer.max < amount) return message.replyNoMention({ content: `❌ **الحد الأقصى التحويل هو ${Guild.transfer.max}**` });
-  if (Guild.transfer.min > amount) return message.replyNoMention({ content: `❌ **الحد الأدنى للتحويل هو ${Guild.transfer.min}**` });
+  if (guildData.transfer.min > amount) return message.replyNoMention({ content: `❌ **الحد الأدنى للتحويل هو ${guildData.transfer.min}**` });
+  if (guildData.transfer.max < amount) return message.replyNoMention({ content: `❌ **الحد الأقصى التحويل هو ${guildData.transfer.max}**` });
   
-  const member = await Group.members.get(user.id);
-  if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${Group.linkURL()}`});
+  const member = await group.members.get(user.id);
+  if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${group.linkURL()}`});
 
-  const robux = await Group.getFunds().then((e) => e.robux);
+  const robux = await group.getFunds().then((e) => e.robux);
   if (robux < amount) return controller.replyNoMention({ content: '❌ **عذرا ولاكن هذا العدد غير متوفر في الجروب في الوقت الحالي!**' });
 
-  // await member.payout({ amount }).then(async () => {
+  await member.payout({ amount }).then(async () => {
     controller.replyNoMention({ content: `✅ **تم بنجاح تحويل الروبوكس إلى ${username}**` });
     
     userData.balance -= amount;
@@ -85,7 +85,7 @@ async function GlobalExecute(message, interaction) {
     ctx.drawImage(userImage, 11.5,16.5,35,35);
     
     const attach = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
-    const channel = await controller.client.channels.cache.get(Guild.proof);
+    const channel = await controller.client.channels.cache.get(guildData.proofsChannel);
     
     if (channel) {
       channel.send({ content: `**تم الشراء بواسطة: ${controller.author}**`, files: [attach] });
@@ -93,12 +93,12 @@ async function GlobalExecute(message, interaction) {
       controller.replyNoMention({ files: [attach] });
     }
 
-   // }).catch((e) => {
-     // if (e.message === '400 Payout is restricted.') { 
-       // controller.replyNoMention({ content: '❌ **هذا اللاعب جديد في الجروب!**' });
-     // } else {
-  //     console.error(e);
-  //     controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
-  //   } 
-  // });
+    }).catch((e) => {
+      if (e.message === '400 Payout is restricted.') { 
+        controller.replyNoMention({ content: '❌ **هذا اللاعب جديد في الجروب!**' });
+      } else {
+        console.error(e);
+        controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
+      } 
+   });
 };
