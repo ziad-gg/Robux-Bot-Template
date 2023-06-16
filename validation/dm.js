@@ -7,7 +7,8 @@ module.exports = new Validation()
 
 function Exection(controller, next, end) {
   const allowed = ['balance', 'transfer'];
-
+  
+  if (!controller.author.isOwner && controller.Command.category === 'admins') return;
   if (controller.channel?.type === ChannelType.DM && !allowed.includes(controller.Command.name)) {
     controller.replyNoMention({ content: '❌ **يمكنك استخدام هذا الأمر في السيرفر فقط!**' });
     return end();
