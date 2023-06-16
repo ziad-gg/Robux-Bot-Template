@@ -10,6 +10,9 @@ module.exports = new CommandBuilder()
      .setDescription('User to show the his balance')
      .setRequired(false)))
   .setGlobal(GlobalExecute)
+  .setAliases([
+    { cut: 'b' }
+  ])
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
