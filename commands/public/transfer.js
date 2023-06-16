@@ -15,6 +15,9 @@ module.exports = new CommandBuilder()
         .setDescription('The amount you want')
         .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setAliases([
+     { cut: 'tran', prefix: true }
+   ])
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;

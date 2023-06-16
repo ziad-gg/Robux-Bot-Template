@@ -22,4 +22,4 @@ String.prototype.isNumber = isNumber;
 
 Number.prototype.isNumber = isNumber;
 
-Message.prototype.replyNoMention = replyNoMention 
+Message.prototype.replyNoMention = replyNoMention;

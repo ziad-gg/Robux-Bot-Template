@@ -1,10 +1,9 @@
 const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('end')
   .setDescription('Cancel your current purchase.')
-  .setCategory('public')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
   // .setInteractionExecution(InteractionExecute)
