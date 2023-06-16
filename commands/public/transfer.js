@@ -83,7 +83,7 @@ async function GlobalExecute(message, interaction) {
     ctx.clip();
     ctx.drawImage(userImage, 11.5,16.5,35,35);
     
-    const attach = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'payout.png' });
+    const attach = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
     const channel = await controller.client.channels.cache.get(Guild.proof);
     
     if (channel) {

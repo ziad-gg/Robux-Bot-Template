@@ -16,8 +16,8 @@
     "zoblox.js": "^2.3.0",
     "uptimer-web": "^3.3.0",
     "mongoose": "^7.2.4",
-    "@napi-rs/canvas": "^0.1.41",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "canvas": "^2.11.1"
   },
   "engines": {
     "node": "16.x"

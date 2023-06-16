@@ -9,16 +9,20 @@ module.exports = new CommandBuilder()
      .setName('channel')
      .setDescription('Channel Option to select')
      .setRequired(true)))
-  .setInteractionExecution(InteractionExecute)
+  .setGlobal(GlobalExecute)
   .isSubCommand()
 
-async function InteractionExecute(interaction, global) {
-  const guild = global.guild;
+async function GlobalExecute(message, interaction, global) {
+  const controller = message ?? interaction;
+  const guild = await global;
   const ChannelId = interaction[0];
   const Channel = interaction.guild.channels.cache.get(ChannelId);
-
+  
+  if (!Channel) return controller.replyNoMention('❌ ****');
+  if (Channel.type !== 'GUILD_TEXT') return controller.replyNoMention('❌ ****');
+  
   guild.proof = Channel.id;
   await guild.save();
   
-  interaction.replyNoMention({ content: `تم تحديد <#${guild.proof}> روم الاثباتات` });
+  controller.replyNoMention({ content: `✅ ****` });
 };
