@@ -11,14 +11,14 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   try {
-    const Guilds = controller.getData('guilds');
+    const guildsData = controller.getData('guilds');
     const roblox = controller.getData('roblox');
-    const Guild = await Guilds.get(controller.guild.id);
+    const guildData = await guildsData.get(controller.guild.id);
     
-    const Group = await roblox.groups.get(Guild.groupId);  
-    const robux = await Group.getFunds().then((e) => e.robux);
-    const pending = await Group.getRevenueSummary().then((e) => e.pendingRobux);
-    const embed = new EmbedBuilder().setColor('#0be881').setTitle(Group.name).setDescription(`**- Total Robux : (\`${robux}\`)\n- Pending Robux : (\`${pending}\`)**`);  
+    const group = await roblox.groups.get(guildData.groupId);  
+    const robux = await group.getFunds().then((e) => e.robux);
+    const pending = await group.getRevenueSummary().then((e) => e.pendingRobux);
+    const embed = new EmbedBuilder().setColor('#0be881').setTitle(group.name).setDescription(`**- Total Robux : (\`${robux}\`)\n- Pending Robux : (\`${pending}\`)**`);  
   
     controller.replyNoMention({ embeds: [embed] });
 

@@ -8,7 +8,8 @@ module.exports = new CommandBuilder()
   .setGlobal(GlobalExecute)
   .OwnersOnly()
   .setSubcommands([
-     { command: 'prefix' },     
+     { command: 'prefix' },   
+     { command: 'price' },   
      { command: 'group' },
      { command: 'clientsrole' },
      { command: 'proofschannel' },

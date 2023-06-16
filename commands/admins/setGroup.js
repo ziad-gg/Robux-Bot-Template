@@ -21,6 +21,7 @@ async function GlobalExecute(message, interaction, global) {
   
   const groupId = controller[0];
   if (!groupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
+  if (!groupId.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن يكون معرف المجموعة رقمآ!**' }) 
   
   const group = await roblox.groups.get(groupId);
   if (!group) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف جروب صحيح!**' });
@@ -36,5 +37,4 @@ async function GlobalExecute(message, interaction, global) {
 }
 
 async function InteractionExecute(interaction, global) {};
-
 async function MessageExecute(message, Global) {};

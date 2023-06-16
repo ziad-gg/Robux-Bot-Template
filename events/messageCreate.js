@@ -31,6 +31,6 @@ async function Execute(message) {
     let subs = SubCommands?.find(sub => sub.commandGroup?.toLowerCase() === GroupName && (GroupChildName ? sub.commandName === GroupChildName : true));
     if (!subs) subs = SubCommands.find(op => op.commandName.toLowerCase() === GroupName && !op.commandGroup);
 
-    if (!subs) return message.replyNoMention(`❌ **هذا الامر غير موجود!**`)
+    if (!subs) return message.replyNoMention(`❌ **هذا الامر غير موجود!**`);
   };
 }

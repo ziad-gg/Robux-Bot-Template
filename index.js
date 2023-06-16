@@ -36,7 +36,7 @@ client.Application.setData({
 zoblox.on(Events.UserReady, () => console.log(`Logged is as: ${zoblox.me.username} !`));
 mongoose.connection.on('connected', () => console.log('Connected to database !'));
 
-mongoose.connect(process.env.Mongo_Url);
-zoblox.login(process.env.Cookie)
-client.login(process.env.Token);
+mongoose.connect(process.env.MONGO_URL);
+zoblox.login(process.env.COOKIE)
+client.login(process.env.TOKEN);
 require('./src/Util.js');
