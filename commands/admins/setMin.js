@@ -9,6 +9,8 @@ module.exports = new CommandBuilder()
      .setDescription('Amount Option to select')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setInteractionExecution(InteractionExecute)
+  .setMessageExecution(MessageExecute)
   .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
@@ -29,3 +31,6 @@ async function GlobalExecute(message, interaction, global) {
     controller.replyNoMention({ content: `> **Done ${controller.GroupName} ${controller.GroupChildName } is now ${amount}**` })
   };
 };
+
+function InteractionExecute() {}
+function MessageExecute() {}
