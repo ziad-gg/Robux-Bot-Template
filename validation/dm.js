@@ -8,7 +8,7 @@ module.exports = new Validation()
 function Exection(controller, next, end) {
   const allowed = ['balance', 'transfer'];
 
-  if ((!controller.author.isOwner && controller.Command.category === 'admins') || controller.channel?.type === ChannelType.DM && controller.Command.category === 'admins' && !allowed.includes(controller.Command.name)) {
+  if (controller.channel?.type === ChannelType.DM && !allowed.includes(controller.Command.name)) {
     controller.replyNoMention({ content: '❌ **يمكنك استخدام هذا الأمر في السيرفر فقط!**' });
     return end();
   } else {
