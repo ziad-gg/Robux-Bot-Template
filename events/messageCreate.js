@@ -23,15 +23,14 @@ async function Execute(message) {
   if (cmd === 'set') {
     const command = app.getCommand('set');
     if (!command.owners.includes(message.author.id)) return;
-    const SubCommand = command.SubCommands;
     
+    const SubCommands = command.SubCommands;
     const GroupName = args[0]?.toLowerCase();
     const GroupChildName = args[1]?.toLowerCase();
       
-    let subs = SubCommand?.find(sub => sub.commandGroup?.toLowerCase() === GroupName && (GroupChildName ? sub.commandName === GroupChildName : true));
-    if (!subs) subs = SubCommand.find(op => op.commandName.toLowerCase() === GroupName && !op.commandGroup);
+    let subs = SubCommands?.find(sub => sub.commandGroup?.toLowerCase() === GroupName && (GroupChildName ? sub.commandName === GroupChildName : true));
+    if (!subs) subs = SubCommands.find(op => op.commandName.toLowerCase() === GroupName && !op.commandGroup);
 
-    if (!subs) return message.reply(`❌ **هذا الامر غير موجود**`)
-    
+    if (!subs) return message.reply(`❌ **هذا الامر غير موجود!**`)
   };
 }
