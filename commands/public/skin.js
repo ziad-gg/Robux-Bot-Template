@@ -4,7 +4,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('skin')
   .setDescription('Get your roblox skin.')
-  .setCooldown('10s')
+  //.setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
      .setName('username')
      .setDescription('The username to get skin for')                                                            
@@ -12,23 +12,29 @@ module.exports = new CommandBuilder()
   .setGlobal(GlobalExecute)
 
 async function GlobalExecute(message, interaction) {
-  const roblox = message ? message.getData('roblox') : interaction.getData('roblox');
+  while (true) {
   const controller = message ?? interaction;
-  const username = controller[0];
+  try {
+    const roblox = message ? message.getData('roblox') : interaction.getData('roblox');
+    const username = controller[0];
   
-  if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسم المستخدم!**' });
-  let user = await roblox.users.find({ userNames: username });
+    if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسم المستخدم!**' });
+    let user = await roblox.users.find({ userNames: username });
   
-  if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' });
-  user = await roblox.users.get(user.id);
+    if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' });
+    user = await roblox.users.get(user.id);
 
-  const embed = new EmbedBuilder()
-    .setAuthor({ name: user.name, iconURL: user.avatarURL() })
-    .setTitle(user.name)
-    .setURL(user.profileURL())
-    .setImage(user.avatarURL())
-    .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
-    .setTimestamp();
+    const embed = new EmbedBuilder()
+      .setAuthor({ name: user.name, iconURL: user.avatarURL() })
+      .setTitle(user.name)
+      .setURL(user.profileURL())
+      .setImage(user.avatarURL())
+      .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
+      .setTimestamp();
   
-  controller.replyNoMention({ embeds: [embed] });
+    controller.replyNoMention({ embeds: [embed] });
+  } catch {
+    return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
+  };
+  }
 }
