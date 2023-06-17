@@ -4,7 +4,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('skin')
   .setDescription('Get your roblox skin.')
-  //.setCooldown('10s')
+  .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
      .setName('username')
      .setDescription('The username to get skin for')                                                            
@@ -12,7 +12,6 @@ module.exports = new CommandBuilder()
   .setGlobal(GlobalExecute)
 
 async function GlobalExecute(message, interaction) {
-  while (true) {
   const controller = message ?? interaction;
   try {
     const roblox = message ? message.getData('roblox') : interaction.getData('roblox');
@@ -36,5 +35,4 @@ async function GlobalExecute(message, interaction) {
   } catch {
     return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
   };
-  }
 }
