@@ -11,7 +11,8 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   try {
-    const msg = await controller.replyNoMention({ content: 'Wait...' });
+    interaction.defarReply
+    //const msg = await controller.replyNoMention({ content: 'Wait...' });
     const guildsData = controller.getData('guilds');
     const roblox = controller.getData('roblox');
     const guildData = await guildsData.get(controller.guild.id);
