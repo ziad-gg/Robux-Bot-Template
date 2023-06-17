@@ -25,5 +25,5 @@ module.exports.OWNERS = [
 
 module.exports.port = 5000; // dashboard port
 
-module.exports.callbackURL = 'http://localhost:5000/login/api'; // auth call back url
+module.exports.callbackURL = 'https://bot-robux.glitch.me/login/api'; // auth call back url
 
