@@ -22,7 +22,7 @@ async function GlobalExecute(message, interaction) {
     const cmd = client.Application.getCommand(command)
     if (!cmd || !controller.author.isOwner && cmd.category === 'admins') return controller.replyNoMention({ content: `❌ **لا يمكن العثور على هذا الأمر!**` });
     
-      embed.setTitle(`**Command: ${cmd.name}**`); 
+      embed.setTitle(`Command: ${cmd.name}`); 
       embed.setDescription(cmd.description);
   } else {
     const commands = [];
@@ -38,8 +38,8 @@ async function GlobalExecute(message, interaction) {
     embed.setDescription(`**للحصول على معلومات أكثر حول أمر معين ، اكتب : ${client.Application.prefix}help <command name>**`)
     embed.setThumbnail(controller.guild.iconURL())
 
-    if (general.length) embed.addFields([{ name: '**General Commands**', value: general.join(', ') }]);
-    if (admins.length && controller.author.isOwner) embed.addFields([{ name: '**Admins**', value: admins.join(', ') }]);
+    if (general.length) embed.addFields([{ name: 'General Commands', value: general.join(', ') }]);
+    if (admins.length && controller.author.isOwner) embed.addFields([{ name: 'Admins Commands', value: admins.join(', ') }]);
   };
   
   controller.replyNoMention({ embeds: [embed] });
