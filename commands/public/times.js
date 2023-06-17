@@ -11,8 +11,7 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   try {
-    interaction.defarReply
-    //const msg = await controller.replyNoMention({ content: 'Wait...' });
+    if (interaction) interaction.deferReply({ ephemeral: false });
     const guildsData = controller.getData('guilds');
     const roblox = controller.getData('roblox');
     const guildData = await guildsData.get(controller.guild.id);
@@ -27,7 +26,7 @@ async function GlobalExecute(message, interaction) {
       .setFooter({ text: controller.author.username, iconURL: controller.author.displayAvatarURL({ dynamic: true }) })
       .setTimestamp()
     
-   controller.editMsg = (obj) => interaction ? interaction.editReply(obj) : msg.edit(obj);
+   controller.editMsg = (obj) => interaction ? interaction.editReply(obj) : message.replyNoMention(obj);
    controller.editMsg({ content: '', embeds: [embed] });
     
   } catch {
