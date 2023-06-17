@@ -4,16 +4,17 @@ const session = require('express-session');
 const passport = require('passport');
 const fileUpload = require('express-fileupload');
 const path = require('path');
-const uptime = new (require('uptimer-web').UptimeBuilder)({ TYPE: 'Array', URLS: [require('../src/Constants.js').PROJECT_LINK], TIMEOUT: 24e4 });
 
 
 
-const { port } = require('../src/Constants.js')
+const { port, PROJECT_LINK } = require('../src/Constants.js')
 const client = require('../index');
 
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+
+const uptime = new (require('uptimer-web').UptimeBuilder)({ TYPE: 'Array', URLS: [PROJECT_LINK], TIMEOUT: 24e4 });
 
 uptime.startAll();
 

@@ -8,17 +8,19 @@ const router = express.Router();
 
 router.get('/', forwardAuthenticated, (req, res) => {
     res.render('login/login', {
+        tag: client.user.tag,
         user: client.user.username,
         avatar: client.user.avatarURL()
     })
 })
 
 router.get('/api', forwardAuthenticated, (req, res, next) => {
-    passport.authenticate('discord', {
-        successRedirect: '/home',
-        failureRedirect: '/login',
-        failureFlash: true
-    })(req, res, next);
+  res.send("Errrror")
+    // passport.authenticate('discord', {
+    //     successRedirect: '/home',
+    //     failureRedirect: '/login',
+    //     failureFlash: true
+    // })(req, res, next);
 })
 
 module.exports = router;
