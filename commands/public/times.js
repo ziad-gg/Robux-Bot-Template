@@ -39,7 +39,7 @@ async function fetchAllGroupTransactions(Group) {
   let nextPageCursor = null;
 
   do {
-    const result = await Group.getTransactions({ limit: 10, cursor: nextPageCursor });
+    const result = await Group.fetchTransactions({ limit: 10, cursor: nextPageCursor });
     const { data, nextPageCursor: nextCursor } = result;
 
     transactions = transactions.concat(data);

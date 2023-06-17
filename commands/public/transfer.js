@@ -46,7 +46,7 @@ async function GlobalExecute(message, interaction) {
   const member = await group.members.get(user.id);
   if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${group.linkURL()}`});
 
-  const robux = await group.getFunds().then((e) => e.robux);
+  const robux = await group.fetchCurrency().then((e) => e.robux);
   if (robux < amount) return controller.replyNoMention({ content: '❌ **عذرا ولاكن هذا العدد غير متوفر في الجروب في الوقت الحالي!**' });
 
   await member.payout({ amount }).then(async () => {

@@ -8,8 +8,6 @@ const path = require('node:path');
 const client = new Client(CLIENT_OPTIONS);
 const zoblox = new Zoblox();
 
-require('dotenv').config();
-
 new Application(client, {
   commandsPath: path.join(__dirname, 'commands'),
   validationPath: path.join(__dirname, 'validation'),
