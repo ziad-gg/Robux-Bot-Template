@@ -22,3 +22,8 @@ module.exports.OWNERS = [
   '789896576402587667',
   '860865950945378325'
 ]; //Owners
+
+module.exports.port = 5000; // dashboard port
+
+module.exports.callbackURL = 'http://localhost:5000/login/api'; // auth call back url
+

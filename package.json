@@ -11,13 +11,23 @@
     "Slayver (789896576402587667)"
   ],
   "dependencies": {
+    "canvas": "^2.11.1",
+    "connect-flash": "^0.1.1",
+    "dateformat": "^4.5.1",
     "discord.js": "^14.11.0",
-    "handler.djs": "^2.6.25",
-    "zoblox.js": "^2.3.0",
-    "uptimer-web": "^3.3.0",
-    "mongoose": "^7.2.4",
+    "dotenv": "^16.3.0",
+    "easy-number-formatter": "^1.0.3",
+    "ejs": "^3.1.6",
     "express": "^4.18.2",
-    "canvas": "^2.11.1"
+    "express-fileupload": "^1.2.1",
+    "express-session": "^1.17.2",
+    "handler.djs": "^2.6.25",
+    "mongoose": "^7.2.4",
+    "passport": "^0.4.1",
+    "passport-discord": "^0.1.4",
+    "socket.io": "^4.2.0",
+    "uptimer-web": "^3.3.0",
+    "zoblox.js": "^2.3.0"
   },
   "engines": {
     "node": "16.x"

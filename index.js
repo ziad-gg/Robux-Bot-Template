@@ -8,6 +8,8 @@ const path = require('node:path');
 const client = new Client(CLIENT_OPTIONS);
 const zoblox = new Zoblox();
 
+require('dotenv').config();
+
 new Application(client, {
   commandsPath: path.join(__dirname, 'commands'),
   validationPath: path.join(__dirname, 'validation'),
@@ -37,6 +39,8 @@ zoblox.on(Events.UserReady, () => console.log(`Logged is as: ${zoblox.me.usernam
 mongoose.connection.on('connected', () => console.log('Connected to database !'));
 
 mongoose.connect(process.env.MONGO_URL);
-zoblox.login(process.env.COOKIE)
+// zoblox.login(process.env.COOKIE)
 client.login(process.env.TOKEN);
 require('./src/Util.js');
+
+module.exports = client;
