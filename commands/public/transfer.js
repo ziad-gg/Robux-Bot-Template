@@ -60,29 +60,21 @@ async function GlobalExecute(message, interaction) {
     
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
-    const background = await loadImage('https://cdn.glitch.global/8e162bb4-d4c3-4bbc-8811-ac29c822a781/pay%20image%201.png?v=1657613444619');
+    const background = await loadImage('https://cdn.glitch.global/60d2234a-7ca2-4fc7-a312-190e5d8c2e88/Picsart_23-02-24_20-56-24-896.jpg?v=1677265030940');
+    
     ctx.beginPath();
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
     ctx.font = '15px impact';
     ctx.fillStyle = 'black';
-    ctx.fillText(amount.toLocaleString().toString(), 802.5, 42.4);
-    ctx.font = "650 16px impact";
-    ctx.fillText(amount.toLocaleString().toString(), 864.5, 82.5);
-    ctx.fillText((robux - amount).toString(), 830.5, 105.7);
-    ctx.font = "570 15.2px impact";
-    ctx.fillText(username.toString(), 61, 35);
-    ctx.font = '10px impact';
-    ctx.fillStyle = 'Gray';
-    ctx.fillText(member.role.name, 65, 47);
+    ctx.fillText(amount.toLocaleString(), 802.5, 42.4);
+    ctx.font = '650 16px impact';
+    ctx.fillText(amount.toLocaleString(), 864.5, 82.5);
+    ctx.fillText((robux - amount).toLocaleString(), 830.5, 105.7);
+    ctx.font = '570 15.2px impact';
+    ctx.fillText(username, 61, 35);
     ctx.closePath();
+    
     const userImage = await loadImage(user.avatarURL({ type: 'Headshot' }));
-    ctx.beginPath();
-    ctx.arc(29, 34, 21, 0, Math.PI * 2 , true);
-    ctx.strokeStyle = '#fff';
-    ctx.lineWidth = 7;
-    ctx.stroke();
-    ctx.closePath();
-    ctx.clip();
     ctx.drawImage(userImage, 11.5,16.5,35,35);
     
     const attach = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });

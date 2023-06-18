@@ -17,16 +17,18 @@ async function GlobalExecute(message, interaction, global) {
   const amount = parseInt(controller[0]);
   
   if (!amount) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد الحد الأقصى!**');
-  if (!amount.isNumber()) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد رقم صحيح!**');
+  if (isNaN(amount) || parseInt(amount) != amount || parseInt(amount) < 0) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد رقم صحيح!**');
   
   if (controller.GroupName === 'transfer') {
     guildData.transfer.max = amount;
     await guildData.save();
+    
     controller.replyNoMention({ content: '✅ **تم تحديد الحد الأقصى بنجاح!**' });
     
   } else if (controller.GroupName === 'buy') {
     guildData.buy.max = amount; 
     await guildData.save();
+    
     controller.replyNoMention({ content: '✅ **تم تحديد الحد لأقصى بنجاح!**' });
   };
 };

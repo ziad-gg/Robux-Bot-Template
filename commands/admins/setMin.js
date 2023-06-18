@@ -22,11 +22,13 @@ async function GlobalExecute(message, interaction, global) {
   if (controller.GroupName === 'transfer') {
     guildData.transfer.min = amount;
     await guildData.save();
+    
     controller.replyNoMention({ content: '✅ **تم تحديد الحد الأدنى بنجاح!**' });
     
   } else if (controller.GroupName === 'buy') {
     guildData.buy.min = amount; 
     await guildData.save();
+    
     controller.replyNoMention({ content: '✅ **تم تحديد الحد الأدنى بنجاح!**' });
   };
 };
