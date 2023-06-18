@@ -39,6 +39,6 @@ async function GlobalExecute(message, interaction) {
       .addFields([{ name: 'السعر :', value: `${price}` }])
       .addFields([{ name:'السعر مع الضريبة :', value: `${withtax}` }])
       .setTimestamp()
-    ]
+     ]
   })
 }

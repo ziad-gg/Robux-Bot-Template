@@ -1,0 +1,214 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@0ac23ca/css/all.css" rel="stylesheet"
+    type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <title><%= title></title>
+</head>
+<body>
+  <header class="navbar navbar-expand-lg navbar-light border-bottom">
+    <div class="container-fluid">
+      <a class="navbar-brand fs-6 side-line text-light" href="#">Mega Mind</a>
+      <div class="position-absolute top-50 start-50 translate-middle border rounded-pill border-secondary p-2"
+        style="min-height: 2rem !important" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Commands</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Transfer</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled text-muted" href="#" tabindex="-1" aria-disabled="true">Support</a>
+          </li>
+        </ul>
+      </div>
+      <div class="d-flex align-items-center">
+        <img src="<%= avatar>" alt="User Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+        <span class="text-light"><%= =username></span>
+      </div>
+    </div>
+  </header>
+  <main class="d-flex pt-5 main-section flex-column bd-highlight container-fluid pt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="box box-group-name">
+            <h5><i class="fas fa-users box-icon"></i>Group Name</h5>
+            <p class="box-value"><%= group.name></p>
+          </div>
+
+          <div class="box box-group-fund">
+            <h5><i class="fas fa-dollar-sign box-icon"></i>Group Fund</h5>
+            <p class="box-value"><%= group.funds></p>
+          </div>
+
+          <div class="box box-group-link">
+            <h5><i class="fas fa-link box-icon"></i>Group Link</h5>
+            <p class="box-value"><%= group.link></p>
+          </div>
+
+          <div class="box box-group-coming-funds">
+            <h5><i class="fas fa-arrow-up box-icon"></i>Group Coming Funds</h5>
+            <p class="box-value">$<%= group.pending></p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="box box-user-balance">
+            <h5><i class="fas fa-wallet box-icon"></i>User Balance</h5>
+            <p class="box-value" id="balance">$10</p>
+          </div>
+
+          <div class="box box-user-robux">
+            <h5><i class="fas fa-coins box-icon"></i>User Total Buyed Robux</h5>
+            <p class="box-value">1,000</p>
+          </div>
+
+          <div class="box box-user-transfer">
+            <h5><i class="fas fa-exchange-alt box-icon"></i>User Last Transfer Account</h5>
+            <p class="box-value">Roblox</p>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="box box-guild-id">
+            <h5><i class="fas fa-id-card box-icon"></i>Guild ID</h5>
+            <p class="box-value">12345678910</p>
+          </div>
+
+          <div class="box box-guild-owner">
+            <h5><i class="fas fa-user box-icon"></i>Guild Owner</h5>
+            <p class="box-value">Slayver</p>
+          </div>
+
+          <div class="box box-guild-robux-price">
+            <h5><i class="fas fa-dollar-sign box-icon"></i>Guild Robux Price</h5>
+            <p class="box-value">$1,000</p>
+          </div>
+
+          <div class="box box-transfer-coins">
+            <h5><i class="fas fa-exchange-alt box-icon"></i>Transfer Coins to Robux</h5>
+            <button type="button" class="btn btn-primary btn-transfer" data-bs-toggle="modal"
+              data-bs-target="#transferModal">Transfer</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer mt-auto py-3 border-top">
+    <div class="container text-center">
+      <span class="text-muted">Discord Bot Dashboard &copy; 2023</span>
+    </div>
+  </footer>
+  <!-- Transfer Modal -->
+  <div class="modal fade" id="transferModal" tabindex="-1" aria-labelledby="transferModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title" id="transferModalLabel">Transfer Coins</h5>
+          <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="usernameInput" class="form-label">
+                <i class="fas fa-user"></i> Username
+              </label>
+              <input type="text" class="form-control" id="usernameInput" placeholder="Enter username">
+            </div>
+            <div class="mb-3">
+              <label for="amountInput" class="form-label">
+                <i class="fas fa-coins"></i> Amount
+              </label>
+              <input type="number" class="form-control" id="amountInput" placeholder="Enter amount"
+                oninput="calculateBalance()">
+            </div>
+            <div class="mb-3">
+              <label for="balanceOutput" class="form-label">Calculated Balance</label>
+              <output id="balanceOutput" class="form-control"></output>
+              <div class="alert alert-danger d-none mt-2" role="alert" id="transferError"></div> <!-- Added transferError element -->
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="transferButton">Transfer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script>
+    const transferButton = document.getElementById('transferButton');
+    const usernameInput = document.getElementById('usernameInput');
+    const amountInput = document.getElementById('amountInput');
+    const transferError = document.getElementById('transferError');
+
+    transferButton.addEventListener('click', () => {
+      const username = usernameInput.value;
+      const amount = amountInput.value;
+
+      // Perform validation here
+      if (username === '' || amount === '') {
+        transferError.innerText = 'Username and amount cannot be empty.';
+        transferError.classList.remove('d-none');
+      } else if (amount > userBalance) {
+        transferError.innerText = 'Insufficient funds.';
+        transferError.classList.remove('d-none');
+      } else {
+        // Perform the transfer logic here
+        transferCoinsToRobux(username, amount);
+        $('#transferModal').modal('hide');
+      }
+    });
+    function calculateBalance() {
+      const amountInput = document.getElementById('amountInput');
+      const balanceOutput = document.getElementById('balanceOutput');
+      const transferButton = document.getElementById('transferButton');
+      const transferError = document.getElementById('transferError');
+
+      const currentBalance = document.getElementById('balance');
+      const balance =  parseFloat(currentBalance.innerText.slice(1))
+      const transferAmount = parseFloat(amountInput.value) || 0;
+      const calculatedBalance = parseFloat(currentBalance.innerText.slice(1)) - transferAmount;
+
+
+      balanceOutput.value = calculatedBalance;
+
+      if (transferAmount <= 0) {
+        transferButton.disabled = true;
+        transferError.innerText = 'Transfer amount must be greater than zero.';
+        transferError.classList.remove('d-none');
+      } else if (transferAmount > balance) {
+        transferButton.disabled = true;
+        transferError.innerText = 'Insufficient funds.';
+        transferError.classList.remove('d-none');
+      } else {
+        transferButton.disabled = false;
+        transferError.classList.add('d-none');
+      }
+    }
+  </script>
+</body>
+</html>

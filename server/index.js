@@ -4,18 +4,15 @@ const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
 
-
-const { port, PROJECT_LINK } = require('../src/Constants.js')
+const { PORT, PROJECT_LINK } = require('../src/Constants.js')
 const client = require('../index');
 
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-
 const uptime = new (require('uptimer-web').UptimeBuilder)({ TYPE: 'Array', URLS: [PROJECT_LINK], TIMEOUT: 24e4 });
 
 uptime.startAll();
-
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'themes')));
@@ -54,7 +51,7 @@ app.use(function (req, res) {
     res.status(404).render('error_pages/404');
 });
 
-http.listen(port)
+http.listen(PORT)
 
 io.sockets.on('connection', function (sockets) {
     setInterval(function () {

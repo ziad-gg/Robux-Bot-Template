@@ -34,6 +34,6 @@ async function GlobalExecute(message, interaction) {
       .addFields([{ name: `**المبلغ بدون ضريبة :**`, value: '' + price }])
       .addFields([{ name: `**المبلغ بعد الضريبة :**`, value: '' + Math.ceil(price / 0.95) }])
       .setTimestamp()
-    ]
+     ]
   })
 }

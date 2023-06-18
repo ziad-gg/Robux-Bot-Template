@@ -25,6 +25,7 @@ async function GlobalExecute(message, interaction) {
 
     const embed = new EmbedBuilder()
       .setTitle('Roblox Player Information')
+      .setColor('#0be881')
       .setImage(user.avatarURL())
       .addFields([{ name: 'Username', value: `**[${user.name}](${user})**` }])
       .addFields([{ name: 'Display Name', value: `${user.displayName}` }])
@@ -36,7 +37,7 @@ async function GlobalExecute(message, interaction) {
       .addFields([{ name: 'Friends Number', value: `${user.profile.friendsCount}` }]) 
       .addFields([{ name: 'Followers', value: `${user.profile.followersCount}` }]) 
       .addFields([{ name: 'Following', value: `${user.profile.followingsCount}` }]) 
-      .setFooter({ text: message.author.username, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+      .setFooter({ text: controller.author.username, iconURL: controller.author.displayAvatarURL({ dynamic: true }) })
       .setTimestamp()
     
     controller.replyNoMention({ embeds: [embed] });
