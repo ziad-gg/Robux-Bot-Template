@@ -15,8 +15,8 @@ async function Execute(message) {
   app.setPrefix(prefix);
   
   if (message.content === '<@' + message.client.user.id + '>') return message.replyNoMention(`My prefix is : ${app.prefix}`);
-  
   if (!message.content.includes(app.prefix)) return;
+  
   const args = message.content.slice(app.prefix.length).split(/ +/g);
   const cmd = args.shift().toLowerCase();
   

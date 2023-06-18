@@ -1,7 +1,7 @@
 const { Message } = require('discord.js/src/structures/Message.js');
 
 function toId() {
-  return this.replaceAll(/[<@#&!>]/g, '');
+  return this.replace(/[<@#&!>]/g, '');
 } 
 
 function isNumber() {
