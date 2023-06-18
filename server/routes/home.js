@@ -15,9 +15,11 @@ router.get('/', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-  req.logout();
+  req.logout(() => {});
   req.flash('success', 'Logged out');
   res.redirect('/login');
 });
+
+
 
 module.exports = router;

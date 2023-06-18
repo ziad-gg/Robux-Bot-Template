@@ -4,7 +4,7 @@ const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
 
-const { PORT, PROJECT_LINK } = require('../src/Constants.js')
+const { PORT, PROJECT_LINK, DEFAULT_GUILD } = require('../src/Constants.js')
 const client = require('../index');
 
 const app = express();
@@ -52,5 +52,6 @@ app.use('/dashboard', require('./routes/dashboard.js'));
 app.use(function (req, res) {
     res.redirect('/')
 });
+
 
 http.listen(PORT)

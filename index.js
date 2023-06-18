@@ -33,6 +33,7 @@ client.Application.setData({
   users: require('./src/models/Users.js'),
 });
 
+process.on('unhandledRejection', (err) => console.error(err));
 zoblox.on(Events.UserReady, () => console.log(`Logged is as: ${zoblox.me.username} !`));
 mongoose.connection.on('connected', () => console.log('Connected to database !'));
 
