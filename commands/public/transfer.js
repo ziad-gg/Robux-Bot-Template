@@ -44,7 +44,7 @@ async function GlobalExecute(message, interaction) {
   if (guildData.transfer.max < amount) return message.replyNoMention({ content: `❌ **الحد الأقصى التحويل هو ${guildData.transfer.max}**` });
   
   const member = await group.members.get(user.id);
-  if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${group.linkURL()}`});
+  if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${group}`});
 
   const robux = await group.fetchCurrency().then((e) => e.robux);
   if (robux < amount) return controller.replyNoMention({ content: '❌ **عذرا ولاكن هذا العدد غير متوفر في الجروب في الوقت الحالي!**' });
