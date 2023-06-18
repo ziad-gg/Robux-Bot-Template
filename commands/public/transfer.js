@@ -41,7 +41,7 @@ async function GlobalExecute(message, interaction) {
   const group = await roblox.groups.get(guildData.groupId);
   
   if (guildData.transfer.min > amount) return message.replyNoMention({ content: `❌ **الحد الأدنى للتحويل هو ${guildData.transfer.min}**` });
-  if (guildData.transfer.max < amount) return message.replyNoMention({ content: `❌ **الحد الأقصى التحويل هو ${guildData.transfer.max}**` });
+  if (guildData.transfer.max > 0 && guildData.transfer.max < amount) return message.replyNoMention({ content: `❌ **الحد الأقصى التحويل هو ${guildData.transfer.max}**` });
   
   const member = await group.members.get(user.id);
   if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${group}`});

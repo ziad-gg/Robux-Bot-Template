@@ -64,14 +64,21 @@ router.post('/transfer', async (req, res) => {
   
   if (GuildData.transfer.max < amount) return res.json({ error: true, message: `❌ الحد الأقصى التحويل هو ${GuildData.transfer.max}` });
   if (GuildData.transfer.min > amount) return res.json({ error: true, message: `❌ الحد الأدنى للتحويل هو ${GuildData.transfer.min}` });
-   // خلاص هنعمل auth code الي هو توكن البوت
-  // ازاي ?
-  //الرابط من api يب يب انا عامل كذا في ttan
+  
   const funds = await group.fetchCurrency().then((e) => e.robux);
+  if (amount > funds)  return res.json({ error: true, message: `❌ عذرا ولاكن هذا العدد غير متوفر في الجروب في الوقت الحالي!` });
   
-  if (amount > funds)  return res.json({ error: true, message: `❌ الحد الأدنى للتحويل هو ${GuildData.transfer.min}` });
+  let user = await roblox.users.find({ userNames: username });
+  if (!user) return res.json({ error: true, message: '❌ يبدو أن هذا اللاعب غير متواجد في روبلوكس!' })
   
+  const member = await group.members.get(user.id);
+  if (!member) return res.json({ error: true, message: `❌ هذا اللاعب غير متواجد في الجروب\nرابط الجروب:\n https://www.roblox.com/groups/${group.id}`});
+
   const UserData = await controller.getData('users').get(req.user.id);
+  
+  if (!UserData || UserData.balance < amount) return res.json({ error: true, message: '❌ رصيدك الحالي غير كافي للتحويل' });
+
+  return res.json({ user: UserData, done: true });
   
   
   
