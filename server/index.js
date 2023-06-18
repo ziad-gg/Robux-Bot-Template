@@ -4,15 +4,11 @@ const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
 
-const { PORT, PROJECT_LINK, DEFAULT_GUILD } = require('../src/Constants.js')
+const { PORT, PROJECT_LINK, DEFAULT_GUILD } = require('../src/Constants.js');
 const client = require('../index');
 
 const app = express();
 const http = require('http').Server(app);
-// const io = require('socket.io')(http);
-//const uptime = new (require('uptimer-web').UptimeBuilder)({ TYPE: 'Array', URLS: [PROJECT_LINK], TIMEOUT: 24e4 });
-
-//uptime.startAll();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
@@ -37,21 +33,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-// Global
 app.use(function (req, res, next) {
-    res.locals.success = req.flash('success');
-    res.locals.error = req.flash('error');
-    next();
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
 });
 
 app.use('/', require('./routes/home.js'));
 app.use('/login', require('./routes/login.js'));
 app.use('/dashboard', require('./routes/dashboard.js'));
 
-// Error Pages
 app.use(function (req, res) {
-    res.redirect('/')
+  res.redirect('/');
 });
 
-
-http.listen(PORT)
+http.listen(PORT);

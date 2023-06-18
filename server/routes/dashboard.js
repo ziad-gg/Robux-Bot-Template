@@ -7,19 +7,16 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../auth/auth');
 const router = express.Router();
 
 router.get('/', ensureAuthenticated, async (req, res) => {
-  
   const guild = await client.guilds.cache.get(DEFAULT_GUILD);
   if (!guild) return res.redirect('/');
   
   const GuildData = await client.Application.getData('guilds').get(guild.id);
   const UserData = await client.Application.getData('users').get(req.user.id);;
-  
   const roblox = client.Application.getData('roblox');
   
   const group = await roblox.groups.get(GuildData.groupId);  
   const funds = await group.fetchCurrency().then((e) => e.robux);
   const pending = await group.fetchRevenueSummary().then((e) => e.pendingRobux);
-
   
   res.render('dashboard', {
     title: client.user.username + " | " + "dashboard",
@@ -84,8 +81,5 @@ router.get('/t', async (req, res) => {
 //   return res.json({ user: UserData, done: true });
   
 })
-
-
-
 
 module.exports = router;
