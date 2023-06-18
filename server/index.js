@@ -10,9 +10,9 @@ const client = require('../index');
 const app = express();
 const http = require('http').Server(app);
 // const io = require('socket.io')(http);
-const uptime = new (require('uptimer-web').UptimeBuilder)({ TYPE: 'Array', URLS: [PROJECT_LINK], TIMEOUT: 24e4 });
+//const uptime = new (require('uptimer-web').UptimeBuilder)({ TYPE: 'Array', URLS: [PROJECT_LINK], TIMEOUT: 24e4 });
 
-uptime.startAll();
+//uptime.startAll();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
@@ -41,8 +41,6 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', require('./routes/home.js'));
-app.use('/', require('./routes/guilds.js'));
-
 app.use('/login', require('./routes/login.js'));
 
 // Error Pages
@@ -51,18 +49,3 @@ app.use(function (req, res) {
 });
 
 http.listen(PORT)
-
-// io.sockets.on('connection', function (sockets) {
-//     setInterval(function () {
-//         // Uptime Count
-//         let days = Math.floor(client.uptime / 86400000);
-//         let hours = Math.floor(client.uptime / 3600000) % 24;
-//         let minutes = Math.floor(client.uptime / 60000) % 60;
-//         let seconds = Math.floor(client.uptime / 1000) % 60;
-
-//         var BOTuptime = `${days}d ${hours}h ${minutes}m ${seconds}s`
-
-//         // Emit count to browser 
-//         sockets.emit('uptime', { uptime: BOTuptime });
-//     }, 1000);
-// });
