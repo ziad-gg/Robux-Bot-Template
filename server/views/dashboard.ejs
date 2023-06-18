@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="../main.css">
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
@@ -67,34 +67,34 @@
         <div class="col-md-4">
           <div class="box box-user-balance">
             <h5><i class="fas fa-wallet box-icon"></i>User Balance</h5>
-            <p class="box-value" id="balance">$10</p>
+            <p class="box-value" id="balance">$<%= user.balance></p>
           </div>
 
           <div class="box box-user-robux">
             <h5><i class="fas fa-coins box-icon"></i>User Total Buyed Robux</h5>
-            <p class="box-value">1,000</p>
+            <p class="box-value"><%= user.total></p>
           </div>
 
           <div class="box box-user-transfer">
             <h5><i class="fas fa-exchange-alt box-icon"></i>User Last Transfer Account</h5>
-            <p class="box-value">Roblox</p>
+            <p class="box-value"><%= user.lastAccount></p>
           </div>
         </div>
 
         <div class="col-md-4">
           <div class="box box-guild-id">
             <h5><i class="fas fa-id-card box-icon"></i>Guild ID</h5>
-            <p class="box-value">12345678910</p>
+            <p class="box-value"><%= guild.id></p>
           </div>
 
           <div class="box box-guild-owner">
             <h5><i class="fas fa-user box-icon"></i>Guild Owner</h5>
-            <p class="box-value">Slayver</p>
+            <p class="box-value"><%= guild.owner></p>
           </div>
 
           <div class="box box-guild-robux-price">
             <h5><i class="fas fa-dollar-sign box-icon"></i>Guild Robux Price</h5>
-            <p class="box-value">$1,000</p>
+            <p class="box-value">$<%= guild.price></p>
           </div>
 
           <div class="box box-transfer-coins">
