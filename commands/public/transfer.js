@@ -30,7 +30,7 @@ async function GlobalExecute(message, interaction) {
   if (!controller[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
 
-  const userData = await usersData.get(controller.author.id, controller.guild.id);
+  const userData = await usersData.get(controller.author.id);
   if (userData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
 
   let user = await roblox.users.find({ userNames: username });

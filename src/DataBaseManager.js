@@ -11,6 +11,6 @@ module.exports = class DataBaseManager {
       return data;
     } else {
       return data;
-    } 
+    }
   }
-} 
+}

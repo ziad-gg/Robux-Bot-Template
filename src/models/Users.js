@@ -1,14 +1,12 @@
+const DataBaseManager = require('../DataBaseManager.js');
 const mongoose = require('mongoose');
 
-const UsersSchema = new mongoose.Schema({
+module.exports = new DataBaseManager(mongoose.model('Users', new mongoose.Schema({
   id: {
     type: String,
     required: true,
     unique: true
   },
-  guildId: { 
-    type: String
-  },  
   balance: { 
     type: Number, 
     default: 0 
@@ -36,13 +34,4 @@ const UsersSchema = new mongoose.Schema({
   lastTransactionsAccount: { 
     type: String 
   }
-});
-
-UsersSchema.statics.get = async function (id) {
-  const userData = await this.findOne({ id });
-  return userData ? userData : await this.create({ id });
-};
-
-const Users = mongoose.model('Users', UsersSchema);
-
-module.exports = Users;
+})));
