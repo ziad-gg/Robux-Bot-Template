@@ -7,7 +7,7 @@ module.exports = new CommandBuilder()
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
      .setName('username')
-     .setDescription('The username to get information for')                                                            
+     .setDescription('Username to get its information')                                                            
      .setRequired(true)))
   .setGlobal(GlobalExecute)
 

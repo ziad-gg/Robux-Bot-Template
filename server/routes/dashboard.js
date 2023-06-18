@@ -31,7 +31,7 @@ router.get('/', ensureAuthenticated, async (req, res) => {
       funds: robux
     },
     guild: guild,
-    owner: await guild.fetchOwner().then((owner) => owner.user.tag),
+    owner: await guild.fetchOwner().then((owner) => owner.user.username),
     data: GuildData,
     user: UserData
   });
