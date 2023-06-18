@@ -9,8 +9,11 @@ const router = express.Router();
 router.get('/', ensureAuthenticated, async (req, res) => {
   
   const guild = await client.guilds.cache.get(DEFAULT_GUILD);
-  const GuildData = await client.Applica
   if (!guild) return res.redirect('/');
+  
+  const GuildData = await client.Application.getData('guilds').get(guild.id);
+  const UserData = await client.Application.getData('guilds').get(req.user.id);;
+  
   
   res.render('dashboard', {
     title: client.user.username + " | " + "dashboard",
@@ -19,8 +22,8 @@ router.get('/', ensureAuthenticated, async (req, res) => {
     group: 'roblox grooup',
     guild: guild,
     owner: await guild.fetchOwner().then((owner) => owner.user.tag),
-    data:    
-
+    data: GuildData,
+    user: UserData
   });
 
 })

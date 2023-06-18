@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/api', forwardAuthenticated, (req, res, next) => {
     passport.authenticate('discord', {
-        successRedirect: '/home',
+        successRedirect: '/dashboard',
         failureRedirect: '/login',
         failureFlash: true
     })(req, res, next);

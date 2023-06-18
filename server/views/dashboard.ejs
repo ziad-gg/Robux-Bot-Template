@@ -10,7 +10,7 @@
     type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <title><%= title></title>
+  <title><%= title %></title>
 </head>
 <body>
   <header class="navbar navbar-expand-lg navbar-light border-bottom">
@@ -35,7 +35,7 @@
       </div>
       <div class="d-flex align-items-center">
         <img src="<%= https://cdn.discordapp.com/avatars/<%= profile.id %>/<%= profile.avatar %>" alt="User Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px;">
-        <span class="text-light"><%= profile.username></span>
+        <span class="text-light"><%= profile.username %></span>
       </div>
     </div>
   </header>
@@ -45,22 +45,22 @@
         <div class="col-md-4">
           <div class="box box-group-name">
             <h5><i class="fas fa-users box-icon"></i>Group Name</h5>
-            <p class="box-value"><%= group.name></p>
+            <p class="box-value"><%= group.name %></p>
           </div>
 
           <div class="box box-group-fund">
             <h5><i class="fas fa-dollar-sign box-icon"></i>Group Fund</h5>
-            <p class="box-value"><%= group.funds></p>
+            <p class="box-value"><%= group.funds %></p>
           </div>
 
           <div class="box box-group-link">
             <h5><i class="fas fa-link box-icon"></i>Group Link</h5>
-            <p class="box-value"><%= group.link></p>
+            <p class="box-value"><%= group.link %></p>
           </div>
 
           <div class="box box-group-coming-funds">
             <h5><i class="fas fa-arrow-up box-icon"></i>Group Coming Funds</h5>
-            <p class="box-value">$<%= group.pending></p>
+            <p class="box-value">$<%= group.pending %></p>
           </div>
         </div>
 
@@ -72,29 +72,29 @@
 
           <div class="box box-user-robux">
             <h5><i class="fas fa-coins box-icon"></i>User Total Buyed Robux</h5>
-            <p class="box-value"><%= user.total></p>
+            <p class="box-value"><%= user.total %></p>
           </div>
 
           <div class="box box-user-transfer">
             <h5><i class="fas fa-exchange-alt box-icon"></i>User Last Transfer Account</h5>
-            <p class="box-value"><%= user.lastAccount></p>
+            <p class="box-value"><%= user.lastAccount %></p>
           </div>
         </div>
 
         <div class="col-md-4">
           <div class="box box-guild-id">
             <h5><i class="fas fa-id-card box-icon"></i>Guild ID</h5>
-            <p class="box-value"><%= guild.id></p>
+            <p class="box-value"><%= guild.id %></p>
           </div>
 
           <div class="box box-guild-owner">
             <h5><i class="fas fa-user box-icon"></i>Guild Owner</h5>
-            <p class="box-value"><%= owner></p>
+            <p class="box-value"><%= owner %></p>
           </div>
 
           <div class="box box-guild-robux-price">
             <h5><i class="fas fa-dollar-sign box-icon"></i>Guild Robux Price</h5>
-            <p class="box-value">$<%= guild.price></p>
+            <p class="box-value">$<%= data.price></p>
           </div>
 
           <div class="box box-transfer-coins">
