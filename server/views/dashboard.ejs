@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../main.css">
+  <link rel="stylesheet" href="../themes/main.css">
   <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css">
@@ -13,100 +13,34 @@
   <title><%= title %></title>
 </head>
 <body>
-  <header class="navbar navbar-expand-lg navbar-light border-bottom">
-    <div class="container-fluid">
-      <a class="navbar-brand fs-6 side-line text-light" href="#">Mega Mind</a>
-      <div class="position-absolute top-50 start-50 translate-middle border rounded-pill border-secondary p-2"
-        style="min-height: 2rem !important" id="navbarSupportedContent">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="#">Commands</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="#">Transfer</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled text-muted" href="#" tabindex="-1" aria-disabled="true">Support</a>
-          </li>
-        </ul>
-      </div>
-      <div class="d-flex align-items-center">
-        <img src="<%= https://cdn.discordapp.com/avatars/<%= profile.id %>/<%= profile.avatar %>" alt="User Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px;">
-        <span class="text-light"><%= profile.username %></span>
-      </div>
-    </div>
-  </header>
-  <main class="d-flex pt-5 main-section flex-column bd-highlight container-fluid pt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="box box-group-name">
-            <h5><i class="fas fa-users box-icon"></i>Group Name</h5>
-            <p class="box-value"><%= group.name %></p>
-          </div>
-
-          <div class="box box-group-fund">
-            <h5><i class="fas fa-dollar-sign box-icon"></i>Group Fund</h5>
-            <p class="box-value"><%= group.funds %></p>
-          </div>
-
-          <div class="box box-group-link">
-            <h5><i class="fas fa-link box-icon"></i>Group Link</h5>
-            <p class="box-value"><%= group.link %></p>
-          </div>
-
-          <div class="box box-group-coming-funds">
-            <h5><i class="fas fa-arrow-up box-icon"></i>Group Coming Funds</h5>
-            <p class="box-value">$<%= group.pending %></p>
-          </div>
+    <header class="navbar navbar-expand-lg navbar-light border-bottom">
+        <div class="container-fluid">
+          
+         <a class="navbar-brand fs-6 side-line text-light " href="#"><%= client.user.tag%></a>
+         <div class="position-absolute top-50 start-50 translate-middle border rounded-pill border-secondary p-2" style="min-height: 2rem !important" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/commands">Commands</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/dashboard">Tranfer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled text-muted" href="#" tabindex="-1" aria-disabled="true">Support</a>
+            </li>
+          </ul>
         </div>
-
-        <div class="col-md-4">
-          <div class="box box-user-balance">
-            <h5><i class="fas fa-wallet box-icon"></i>User Balance</h5>
-            <p class="box-value" id="balance">$<%= user.balance></p>
-          </div>
-
-          <div class="box box-user-robux">
-            <h5><i class="fas fa-coins box-icon"></i>User Total Buyed Robux</h5>
-            <p class="box-value"><%= user.total %></p>
-          </div>
-
-          <div class="box box-user-transfer">
-            <h5><i class="fas fa-exchange-alt box-icon"></i>User Last Transfer Account</h5>
-            <p class="box-value"><%= user.lastAccount %></p>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="box box-guild-id">
-            <h5><i class="fas fa-id-card box-icon"></i>Guild ID</h5>
-            <p class="box-value"><%= guild.id %></p>
-          </div>
-
-          <div class="box box-guild-owner">
-            <h5><i class="fas fa-user box-icon"></i>Guild Owner</h5>
-            <p class="box-value"><%= owner %></p>
-          </div>
-
-          <div class="box box-guild-robux-price">
-            <h5><i class="fas fa-dollar-sign box-icon"></i>Guild Robux Price</h5>
-            <p class="box-value">$<%= data.price></p>
-          </div>
-
-          <div class="box box-transfer-coins">
-            <h5><i class="fas fa-exchange-alt box-icon"></i>Transfer Coins to Robux</h5>
-            <button type="button" class="btn btn-primary btn-transfer" data-bs-toggle="modal"
-              data-bs-target="#transferModal">Transfer</button>
-          </div>
-
-        </div>
+     <div class="d-flex align-items-center">
+        <img src="https://cdn.discordapp.com/avatars/<%= profile.id %>/<%= profile.avatar %>" alt="User Avatar" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+        <span class="text-light"><%= profile.username%></span>
       </div>
-    </div>
-  </main>
+          </div>
+    </header>
+    
+    
   <footer class="footer mt-auto py-3 border-top">
     <div class="container text-center">
       <span class="text-muted">Discord Bot Dashboard &copy; 2023</span>
