@@ -21,13 +21,16 @@ app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
 require('./auth/passport')(passport);
 
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 
 app.use(session({
+  secret: 'foo',
+  resave: false, 
+  saveUninitialized: false, 
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_URL,
-    mongoOptions: {} 
-  })
+    collectionName: 'Users'
+  }),
 }));
 
 app.use(passport.initialize());

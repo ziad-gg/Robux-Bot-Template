@@ -17,7 +17,7 @@ router.get('/', ensureAuthenticated, async (req, res) => {
   const roblox = client.Application.getData('roblox');
   
   const group = await roblox.groups.get(GuildData.groupId);  
-  const robux = await group.fetchCurrency().then((e) => e.robux);
+  const funds = await group.fetchCurrency().then((e) => e.robux);
   const pending = await group.fetchRevenueSummary().then((e) => e.pendingRobux);
 
   
@@ -28,7 +28,7 @@ router.get('/', ensureAuthenticated, async (req, res) => {
     group: {
       ...group,
       pending,
-      funds: robux
+      funds
     },
     guild: guild,
     owner: await guild.fetchOwner().then((owner) => owner.user.username),
@@ -43,5 +43,15 @@ router.get('/logout', (req, res) => {
   req.flash('success', 'Logged out');
   res.redirect('/login');
 });
+
+
+router.post('/transfer', async (req, res) => {
+  const UserId = req.query.id
+  const username = req.query.username;
+  const amount = req.query.amount;
+  
+  
+})
+
 
 module.exports = router;
