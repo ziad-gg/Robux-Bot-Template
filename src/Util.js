@@ -1,5 +1,5 @@
 const usersData = require('./models/Users.js');
-const guiData = require('./models/Users.js');
+const guildsData = require('./models/Guilds.js');
 const { Message } = require('discord.js/src/structures/Message.js');
 
 function toId() {
@@ -35,5 +35,9 @@ String.prototype.isInteger = isInteger;
 
 Number.prototype.isNumber = isNumber;
 Number.prototype.isInteger = isInteger;
+
+usersData.statics.get = get;
+
+guildsData.statics.get = get;
 
 Message.prototype.replyNoMention = replyNoMention;

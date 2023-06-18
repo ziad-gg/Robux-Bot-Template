@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-module.exports = mongoose.model('Users', new mongoose.Schema({
+consgnew mongoose.Schema({
   id: {
     type: String,
     required: true,
