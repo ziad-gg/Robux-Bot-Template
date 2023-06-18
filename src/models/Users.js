@@ -11,6 +11,7 @@ const UsersSchema = new mongoose.Schema({
   blacklist: { type: Boolean, default: false },
   buyedTotal: { type: Number, default: 0 },
   buyedCount: { type: Number, default: 0 },
+  lastAccount: { type: String },
   transactionsTotal: { type: Number, default: 0 },
   transactionsCount: { type: Number, default: 0 },
 });
