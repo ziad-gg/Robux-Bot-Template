@@ -24,10 +24,10 @@ async function GlobalExecute(message, interaction) {
   
   const usersData = controller.getData('users');
   const username = controller[0];
-  const amount = parseInt(controller[1]);
+  const amount = +controller[1];
 
   if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسمك في روبلوكس!**' });
-  if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
+  if (!controller[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
 
   const userData = await usersData.get(controller.author.id, controller.guild.id);
