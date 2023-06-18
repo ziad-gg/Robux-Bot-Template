@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const UsersSchema = new mongoose.Schema({
   id: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   balance: { 
     type: Number, 

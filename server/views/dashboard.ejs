@@ -50,13 +50,13 @@
           </div>
 
           <div class="box box-group-fund">
-            <h5><i class="fas fa-dollar-sign box-icon"></i>Group Fund</h5>
+            <h5><i class="fas fa-dollar-sign box-icon"></i>Group Funds</h5>
             <p class="box-value"><%= group.funds %></p>
           </div>
 
           <div class="box box-group-link">
             <h5><i class="fas fa-link box-icon"></i>Group Link</h5>
-            <p class="box-value"><a href="roblox.com/groups/<%= group.id%>" class="text-decoration-none"><%= group.name%></a></p>
+            <p class="box-value"><a href="<%= group.link %>"><%= group.name %></a></p>
           </div>
 
           <div class="box box-group-coming-funds">
@@ -78,7 +78,7 @@
 
           <div class="box box-user-transfer">
             <h5><i class="fas fa-exchange-alt box-icon"></i>User Last Transfer Account</h5>
-            <p class="box-value"><%= user.lastAccount ?? "Roblox" %></p>
+            <p class="box-value"><%= user.lastAccount ?? "None" %></p>
           </div>
         </div>
 

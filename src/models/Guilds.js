@@ -4,8 +4,7 @@ const { DEFAULT_PREFIX } = require('../Constants.js');
 const GuildsSchema = new mongoose.Schema({
   id: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   prefix: {
     type: String,

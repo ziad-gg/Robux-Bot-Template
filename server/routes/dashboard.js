@@ -27,6 +27,7 @@ router.get('/', ensureAuthenticated, async (req, res) => {
     profile: req.user,
     group: {
       ...group,
+      link: group.linkURL(), 
       pending,
       funds
     },
