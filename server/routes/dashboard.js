@@ -46,9 +46,33 @@ router.get('/logout', (req, res) => {
 
 
 router.post('/transfer', async (req, res) => {
-  const UserId = req.query.id
+  
+  const controller = client.Application;
+  const roblox = controller.getData('roblox');
+  
+  const GuildData = await controller.getData('guilds').get(DEFAULT_GUILD);
+  const group = await roblox.groups.get(GuildData.groupId);  
+  
+  if (GuildData.tranfer.status || !GuildData.groupId || !group) return res.json({ error: true, message: '❌ التحويل مقفل في الوقت الحالي!' });
+  
+  
+  const UserId = req.query.id;
   const username = req.query.username;
   const amount = req.query.amount;
+  
+  if (!UserId || !username || amount) return res.json({ error: true, message: '❌ Invalid Arguments' });
+  
+  if (GuildData.transfer.max < amount) return res.json({ error: true, message: `❌ الحد الأقصى التحويل هو ${GuildData.transfer.max}` });
+  if (GuildData.transfer.min > amount) return res.json({ error: true, message: `❌ الحد الأدنى للتحويل هو ${GuildData.transfer.min}` });
+   // خلاص هنعمل auth code الي هو توكن البوت
+  // ازاي ?
+  //الرابط من api يب يب انا عامل كذا في ttan
+  const funds = await group.fetchCurrency().then((e) => e.robux);
+  
+  if (amount > funds)  return res.json({ error: true, message: `❌ الحد الأدنى للتحويل هو ${GuildData.transfer.min}` });
+  
+  const UserData = await controller.getData('users').get(req.user.id);
+  
   
   
 })
