@@ -4,6 +4,8 @@ module.exports.DEFAULT_PREFIX = '-'; //Prefix
 
 module.exports.DEFAULT_GUILD = '936974185421475864'; //Server Id
 
+module.exports.PORT = 3000; //The Web Port
+
 module.exports.PROJECT_LINK = 'https://bot-robux.glitch.me/'; // Your Project Link
 
 module.exports.CLIENT_OPTIONS = {
@@ -13,7 +15,7 @@ module.exports.CLIENT_OPTIONS = {
     status: 'Online',
     activities: [{
       type: ActivityType.Playing,
-      name: `/help | Robux Factory`
+      name: '/help | Robux Factory'
     }]
   },
 }; //Client Options
@@ -22,8 +24,3 @@ module.exports.OWNERS = [
   '789896576402587667',
   '860865950945378325'
 ]; //Owners
-
-module.exports.port = 5000; // dashboard port
-
-module.exports.callbackURL = 'https://bot-robux.glitch.me/login/api'; // auth call back url
-

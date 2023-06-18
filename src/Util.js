@@ -9,6 +9,11 @@ function isNumber() {
   return true;
 } 
 
+function isInteger() {
+  if (isNaN(this) || parseInt(this) != this || parseInt(this) < 0) return false;
+  return true;
+} 
+
 function replyNoMention(options) {
   options = typeof options === 'string' ? { content: options } : options;
   options.allowedMentions = {
@@ -19,7 +24,9 @@ function replyNoMention(options) {
   
 String.prototype.toId = toId;
 String.prototype.isNumber = isNumber;
+String.prototype.isInteger = isInteger;
 
 Number.prototype.isNumber = isNumber;
+Number.prototype.isInteger = isInteger;
 
 Message.prototype.replyNoMention = replyNoMention;
