@@ -1,3 +1,5 @@
+const usersData = require('./models/Users.js');
+const guiData = require('./models/Users.js');
 const { Message } = require('discord.js/src/structures/Message.js');
 
 function toId() {
@@ -12,6 +14,11 @@ function isNumber() {
 function isInteger() {
   if (isNaN(this) || parseInt(this) != this || parseInt(this) < 0) return false;
   return true;
+} 
+
+async function get(id) {
+  const data = await this.findOne({ id });
+  return data ? data : new this({ id });
 } 
 
 function replyNoMention(options) {
