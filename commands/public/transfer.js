@@ -49,7 +49,8 @@ async function GlobalExecute(message, interaction) {
   const robux = await group.fetchCurrency().then((e) => e.robux);
   if (robux < amount) return controller.replyNoMention({ content: '❌ **عذرا ولاكن هذا العدد غير متوفر في الجروب في الوقت الحالي!**' });
 
-  await member.payout({ amount }).then(async () => {
+  try {
+  await member.payout({ amount });
     controller.replyNoMention({ content: `✅ **تم بنجاح تحويل الروبوكس إلى ${username}**` });
     
     userData.balance -= amount;
@@ -92,13 +93,13 @@ async function GlobalExecute(message, interaction) {
     } else {
       controller.replyNoMention({ files: [attach] });
     }
-
-    }).catch((e) => {
+    
+    } catch (e) {
       if (e.message === '400 Payout is restricted.') { 
-        controller.replyNoMention({ content: '❌ **هذا اللاعب جديد في الجروب!**' });
+        controller.replyNoMention({ content: '❌ **هذا اللاعب لم يكمل 14 يوم داخل الجروب!**' });
       } else {
         console.error(e);
         controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
       } 
-   });
-};
+    }
+ };
