@@ -1,15 +1,15 @@
 const passport = require('passport');
 const DiscordStrategy = require('passport-discord').Strategy;
 const client = require('../../index.js');
-const { callbackURL, OWNERS } = require('../../src/Constants.js')
+const { PROJECT_LINK } = require('../../src/Constants.js')
 
 module.exports = function(passport) {
-    const scopes = ['identify', 'email', 'guilds', 'guilds.join'];
+    const scopes = ['identify'];
  
     passport.use(new DiscordStrategy({
         clientID: client.user.id,
         clientSecret: process.env.CLIENT_SECRET,
-        callbackURL: callbackURL,
+        callbackURL: PROJECT_LINK+'/login/api',
         scope: scopes
     },
     function(accessToken, refreshToken, profile, cb) {
