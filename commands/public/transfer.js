@@ -56,6 +56,7 @@ async function GlobalExecute(message, interaction) {
     userData.balance -= amount;
     userData.transactionsTotal += amount;
     userData.transactionsCount += 1;
+    userData.lastTransactionsAccount = username;
     await userData.save();
     
     const canvas = createCanvas(991, 172);

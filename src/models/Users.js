@@ -6,14 +6,36 @@ const UsersSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  guildId: { type: String, required: false },  
-  balance: { type: Number, default: 0 },
-  blacklist: { type: Boolean, default: false },
-  buyedTotal: { type: Number, default: 0 },
-  buyedCount: { type: Number, default: 0 },
-  lastAccount: { type: String },
-  transactionsTotal: { type: Number, default: 0 },
-  transactionsCount: { type: Number, default: 0 },
+  guildId: { 
+    type: String
+  },  
+  balance: { 
+    type: Number, 
+    default: 0 
+  },
+  blacklist: { 
+    type: Boolean, 
+    default: false 
+  },
+  buyedTotal: { 
+    type: Number, 
+    default: 0 
+  },
+  buyedCount: { 
+    type: Number, 
+    default: 0 
+  },
+  transactionsTotal: { 
+    type: Number, 
+    default: 0 
+  },
+  transactionsCount: { 
+    type: Number, 
+    default: 0 
+  },
+  lastTransactionsAccount: { 
+    type: String 
+  }
 });
 
 UsersSchema.statics.get = async function (id) {
