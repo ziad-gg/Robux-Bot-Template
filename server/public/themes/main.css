@@ -47,7 +47,7 @@ footer {
 
 .main-section {
   height: calc(100% - 45px);
-  min-height: 600px;
+  min-height: 100dvh !important;
   background-color: var(--sections-bg-color);
   /* width: 100%; */
 }
@@ -211,6 +211,7 @@ footer {
 
 @media only screen and (max-width: 767px) {
   .main-section {
+    min-height: 290dvh !important;
     align-items: center;
   }
 

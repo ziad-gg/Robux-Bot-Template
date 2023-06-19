@@ -72,6 +72,6 @@ router.get('/t', async (req, res) => {
   donechannel.send({ content: `**تم الشراء بواسطة: <@${UserId}>**`, files: [attach] });
   
   
-})
+});
 
 module.exports = router;

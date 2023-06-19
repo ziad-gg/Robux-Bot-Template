@@ -38,7 +38,7 @@ async function GlobalExecute(message, interaction) {
   if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' })
   user = await roblox.users.get(user.id);
 
-  const guildData = await guildsData.get(controller.guild.id || DEFAULT_GUILD);
+  const guildData = await guildsData.get(controller.guild?.id || DEFAULT_GUILD);
   const group = await roblox.groups.get(guildData.groupId);
   
   if (guildData.transfer.min > amount) return message.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأدنى للتحويل هو ${guildData.transfer.min}**` });
