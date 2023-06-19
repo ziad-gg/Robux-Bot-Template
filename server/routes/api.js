@@ -35,7 +35,7 @@ router.get('/t', async (req, res) => {
 
   user = await roblox.users.get(user.id);
   const member = await group.members.get(user.id);
-  if (!member) return res.json({ error: true, message: `❌ هذا اللاعب غير متواجد في الجروب\nرابط الجروب:\n https://www.roblox.com/groups/${group.id}`});
+  if (!member) return res.json({ error: true, message: `❌ هذا اللاعب غير متواجد في الجروب\nرابط الجروب:\n <a href="https://www.roblox.com/groups/${group.id}">Group Link</a>`});
 
   const UserData = await controller.getData('users').get(UserId);
   if (!UserData || UserData.balance < amount) return res.json({ error: true, message: '❌ رصيدك الحالي غير كافي للتحويل' });

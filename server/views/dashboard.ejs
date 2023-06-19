@@ -41,6 +41,21 @@
   
     
     <main class="d-flex pt-5 main-section flex-column bd-highlight container-fluid pt-5">
+      
+      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Bootstrap</strong>
+      <small>11 mins ago</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div>
+  </div>
+</div>
+
+      
     <div class="container">
       <div class="row">
         <div class="col-md-4">
@@ -103,6 +118,9 @@
             <button type="button" class="btn btn-primary btn-transfer" data-bs-toggle="modal"
               data-bs-target="#transferModal">Transfer</button>
           </div>
+          
+          <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
 
         </div>
       </div>
@@ -166,6 +184,17 @@
   integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
   crossorigin="anonymous"></script>
   <script>
+    
+    const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+if (toastTrigger) {
+  toastTrigger.addEventListener('click', () => {
+    const toast = new bootstrap.Toast(toastLiveExample)
+
+    toast.show()
+  })
+}
+    
     const transferButton = document.getElementById('transferButton');
     const usernameInput = document.getElementById('usernameInput');
     const amountInput = document.getElementById('amountInput');
@@ -186,12 +215,34 @@
         transferError.classList.remove('d-none');
       } else {
         transferCoinsToRobux(username, amount);
-        $("#transferModal .close").click()
+        // $("#transferModal .close").click()
       }
     });
     
     function transferCoinsToRobux(username, amount, id) {
-      // console.log(username, amount, <%= profile.id%>)
+      const apiUrl = 'https://bot-robux.glitch.me/api/t';
+      const params = new URLSearchParams({
+        username: username,
+        id: <%= profile.id%>,
+        amount: +amount
+      });
+
+      const urlWithParams = `${apiUrl}?${params}`;
+      const authToken = 'YOUR_AUTH_TOKEN';
+
+      fetch(urlWithParams, { headers: { Authorization: `Bearer ${authToken}` } })
+      .then(response => response.json())
+      .then(data => {
+        
+        if (data.error) {
+          transferError.innerText = data.message;
+          transferError.classList.remove('d-none');
+        };
+        
+        
+        
+      });
+     
     };
     
     function calculateBalance() {
