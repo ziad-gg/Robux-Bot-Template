@@ -7,7 +7,7 @@ module.exports = new CommandBuilder()
   .setCategory('admins')
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
      .setName('group')
-     .setDescription('The group id do you want')
+     .setDescription('The group ID you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
@@ -21,7 +21,7 @@ async function GlobalExecute(message, interaction, global) {
   
   const groupId = controller[0];
   if (!groupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
-  if (!groupId.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن يكون معرف المجموعة رقمآ!**' }) 
+  if (!groupId.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن يكون معرف المجموعة رقمآ!**' });
   
   const group = await roblox.groups.get(groupId);
   if (!group) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف جروب صحيح!**' });

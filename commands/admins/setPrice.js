@@ -19,7 +19,7 @@ async function GlobalExecute(message, interaction, global) {
   const guildData = await global;  
   const price = +controller[0];
   
-  if (!price) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد السعر!**' });
+  if (!controller[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد السعر!**' });
   if (!price.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد سعر صحيح!**' });
   if (price === guildData.price) return controller.replyNoMention({ content: '❌ **هذا السعر محدد من قبل!**' });
   

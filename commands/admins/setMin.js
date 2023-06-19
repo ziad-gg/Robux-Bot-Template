@@ -3,10 +3,10 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('min')
-  .setDescription('Sets the min.')
+  .setDescription('Sets the minimum.')
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
      .setName('min')
-     .setDescription('The min do you want')
+     .setDescription('The minimum you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
   .isSubCommand()
@@ -20,12 +20,14 @@ async function GlobalExecute(message, interaction, global) {
   if (!amount.isNumber()) return controller.replyNoMention('❌ **يجب أن تقوم بتحديد رقم صحيح!**');
   
   if (controller.GroupName === 'transfer') {
+    if (guildData.transfer.min === amount) return controller.replyNoMention({ content: '❌ **هذا الحد محدد من قبل!**' });
     guildData.transfer.min = amount;
     await guildData.save();
     
     controller.replyNoMention({ content: '✅ **تم تحديد الحد الأدنى بنجاح!**' });
     
   } else if (controller.GroupName === 'buy') {
+    if (guildData.buy.min === amount) return controller.replyNoMention({ content: '❌ **هذا الحد محدد من قبل!**' });
     guildData.buy.min = amount; 
     await guildData.save();
     

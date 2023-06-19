@@ -6,7 +6,7 @@ module.exports = new CommandBuilder()
   .setDescription('Sets clients Role.')
   .InteractionOn(new SlashCommandBuilder().addRoleOption((option) => option
      .setName('role')
-     .setDescription('The role do you want')
+     .setDescription('The clientsrole you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
   .isSubCommand()
