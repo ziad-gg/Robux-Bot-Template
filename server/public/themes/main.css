@@ -214,7 +214,7 @@ footer {
   .main-section {
     text-align: center !important;
     display: flex !important;
-    min-height: 130dvh !important;
+    min-height: 250dvh !important;
     align-items: center !important;
   }
 
