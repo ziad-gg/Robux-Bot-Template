@@ -38,23 +38,20 @@
   </div>
   </div>
   </header>
-  
-    
-    <main class="d-flex pt-5 main-section flex-column bd-highlight container-fluid pt-5">
+  <main class="d-flex pt-5 main-section flex-column bd-highlight container-fluid pt-5">
       
-      <div class="toast-container position-fixed bottom-0 end-0 p-3">
-  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="toast-header">
-      <strong class="me-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+     <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+       <strong class="me-auto">successfully</strong>
+       <small>11 mins ago</small>
+       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body" id="ToastMessage">
       Hello, world! This is a toast message.
+      </div>
+     </div>
     </div>
-  </div>
-</div>
-
       
     <div class="container">
       <div class="row">
@@ -119,9 +116,6 @@
               data-bs-target="#transferModal">Transfer</button>
           </div>
           
-          <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-
-
         </div>
       </div>
     </div>
@@ -185,16 +179,6 @@
   crossorigin="anonymous"></script>
   <script>
     
-    const toastTrigger = document.getElementById('liveToastBtn')
-const toastLiveExample = document.getElementById('liveToast')
-if (toastTrigger) {
-  toastTrigger.addEventListener('click', () => {
-    const toast = new bootstrap.Toast(toastLiveExample)
-
-    toast.show()
-  })
-}
-    
     const transferButton = document.getElementById('transferButton');
     const usernameInput = document.getElementById('usernameInput');
     const amountInput = document.getElementById('amountInput');
@@ -207,6 +191,9 @@ if (toastTrigger) {
       const currentBalance = document.getElementById('balance');
       const balance =  parseFloat(currentBalance.innerText.slice(1))
 
+      transferError.classList.add('d-none');
+      
+      
       if (username === '' || amount === '') {
         transferError.innerText = 'Username and amount cannot be empty.';
         transferError.classList.remove('d-none');
@@ -237,7 +224,14 @@ if (toastTrigger) {
         if (data.error) {
           transferError.innerText = data.message;
           transferError.classList.remove('d-none');
-        };
+        } else if (data.done) {
+          const toastLiveExample = document.getElementById('liveToast');
+          const toast = new bootstrap.Toast(toastLiveExample);
+          const ToastMessage = document.getElementById('ToastMessage');
+          ToastMessage.innerText = ''
+          $("#transferModal .close").click()
+          toast.show()
+        }
         
         
         

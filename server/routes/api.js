@@ -18,7 +18,7 @@ router.get('/t', async (req, res) => {
 
   if (GuildData.transfer.status || !GuildData.groupId || !group) return res.json({ error: true, message: '❌ التحويل مقفل في الوقت الحالي!' });
 
-  const UserId = req.query.id;
+  const UserId = req.user.id;
   const username = req.query.username;
   const amount = req.query.amount;
 
@@ -37,8 +37,10 @@ router.get('/t', async (req, res) => {
   const member = await group.members.get(user.id);
   if (!member) return res.json({ error: true, message: `❌ هذا اللاعب غير متواجد في الجروب\nرابط الجروب:\n <a href="https://www.roblox.com/groups/${group.id}">Group Link</a>`});
 
-  const UserData = await controller.getData('users').get(UserId);
-  if (!UserData || UserData.balance < amount) return res.json({ error: true, message: '❌ رصيدك الحالي غير كافي للتحويل' });
+  console.log(UserId)
+  
+  const UserData = await controller.getData('users').get(req.user.id);
+  if (UserData.balance < amount) return res.json({ error: true, message: '❌ رصيدك الحالي غير كافي للتحويل' });
 
   const donechannel = await client.guilds.cache.get(DEFAULT_GUILD)?.channels?.cache.get(GuildData?.proofsChannel);
   UserData.balance -= +amount;
@@ -69,7 +71,7 @@ router.get('/t', async (req, res) => {
 
   const attach = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
 
-  donechannel.send({ content: `**تم الشراء بواسطة: <@${UserId}>**`, files: [attach] });
+  donechannel.send({ content: `**تم الشراء بواسطة: <@${req.user.id}>**`, files: [attach] });
   
   
 });
