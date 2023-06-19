@@ -12,7 +12,6 @@ router.post('/transfer', async (req, res) => {
   const controller = client.Application;
   const botToken = req.headers.authorization;
   
-  if (!botToken || botToken !== process.env.TOKEN) return res.json({ error: true, message: 'Unauthorized' });
   const roblox = controller.getData('roblox');
   const guildData = await controller.getData('guilds').get(DEFAULT_GUILD);
   const group = await roblox.groups.get(guildData.groupId);  
