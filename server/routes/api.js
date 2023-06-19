@@ -10,17 +10,20 @@ const router = express.Router();
 
 router.post('/transfer', async (req, res) => {
   const controller = client.Application;
+  const botToken = req.headers.authorization;
+  
+  if (!botToken || botToken !== process.env.TOKEN) return res.json({ error: true, message: 'Unauthorized' });
   const roblox = controller.getData('roblox');
   const guildData = await controller.getData('guilds').get(DEFAULT_GUILD);
   const group = await roblox.groups.get(guildData.groupId);  
 
   if (guildData.transfer.status || !guildData.groupId || !group) return res.json({ error: true, message: '❌ التحويل مقفل في الوقت الحالي!' });
 
-  const UserId = req.user.id;
+  const userId = req.user.id;
   const username = req.query.username;
   const amount = req.query.amount;
 
-  if (!UserId || !username || !amount || !amount.isNumber()) return res.json({ error: true, message: '❌ Invalid Arguments' });
+  if (!userId || !username || !amount || !amount.isNumber()) return res.json({ error: true, message: '❌ Invalid Arguments' });
 
   if (guildData.transfer.min > amount) return res.json({ error: true, message: `❌ الحد الأدنى للتحويل هو ${guildData.transfer.min}` });
   if (guildData.transfer.max > 0 && guildData.transfer.max < amount) return res.json({ error: true, message: `❌ الحد الأقصى التحويل هو ${guildData.transfer.max}` });
@@ -36,7 +39,7 @@ router.post('/transfer', async (req, res) => {
   if (!member) return res.json({ error: true, message: `❌ هذا اللاعب غير متواجد في الجروب`});
   
   const proofChannel = await client.guilds.cache.get(DEFAULT_GUILD)?.channels?.cache.get(guildData.proofsChannel);
-  const userData = await controller.getData('users').get(req.user.id);
+  const userData = await controller.getData('users').get(userId);
   if (userData.balance < amount) return res.json({ error: true, message: '❌ رصيدك الحالي غير كافي للتحويل' });
 
   userData.balance -= amount;
@@ -73,7 +76,7 @@ router.post('/transfer', async (req, res) => {
   ctx.fillText(username, 61, 35);
   ctx.closePath();
 
-  const userImage = await loadImage(user.avatarURL({ type: 'Headshot' }))
+  const userImage = await loadImage(user.avatarURL({ type: 'Headshot' }));
   ctx.drawImage(userImage, 11.5,16.5,35,35);
 
   const attach = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
