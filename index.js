@@ -43,4 +43,4 @@ client.login(process.env.TOKEN);
 
 require('./src/Util.js');
 
-module.exports = client
+module.exports = client;
