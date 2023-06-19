@@ -29,7 +29,8 @@ async function GlobalExecute(message, interaction) {
    controller.editMsg = (obj) => interaction ? interaction.editReply(obj) : message.replyNoMention(obj);
    controller.editMsg({ content: '', embeds: [embed] });
     
-  } catch {
+  } catch (e) {
+    console.log(e);
     return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
   };
 };
