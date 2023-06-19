@@ -48,10 +48,16 @@ router.post('/t', async (req, res) => {
   
   try {
     await member.payout({ amount });
-    
-  } catch e()
+    res.json({ user: UserData, done: true, donechannel });  
+  } catch (e) {
+    if (e.message === '400 Payout is restricted.') { 
+       res.json({error: true, message: '❌ هذا اللاعب لم يكمل 14 يوم داخل الجروب!' });
+    } else {
+      console.error(e);
+      res.json({error: true, content: '❌ حدث خطأ ما' });
+    } 
+  }
   
-  res.json({ user: UserData, done: true, donechannel });
 
   const canvas = createCanvas(991, 172);
   const ctx = canvas.getContext('2d')

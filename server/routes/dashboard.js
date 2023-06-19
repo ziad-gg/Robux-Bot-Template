@@ -7,6 +7,7 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../auth/auth');
 const router = express.Router();
 
 router.get('/', ensureAuthenticated, async (req, res) => {
+  
   const guild = await client.guilds.cache.get(DEFAULT_GUILD);
   if (!guild) return res.redirect('/');
   
