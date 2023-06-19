@@ -46,6 +46,10 @@ router.post('/t', async (req, res) => {
   UserData.lastTransactionsAccount = username;
   UserData.save();
   
+  try {
+    await member.payout({ amount });
+    
+  } catch e()
   
   res.json({ user: UserData, done: true, donechannel });
 

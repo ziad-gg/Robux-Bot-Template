@@ -49,6 +49,7 @@ footer {
   height: calc(100% - 45px);
   min-height: 100dvh !important;
   background-color: var(--sections-bg-color);
+  
   /* width: 100%; */
 }
 
@@ -211,8 +212,10 @@ footer {
 
 @media only screen and (max-width: 767px) {
   .main-section {
+    text-align: center !important;
+    display: flex !important;
     min-height: 290dvh !important;
-    align-items: center;
+    align-items: center !important;
   }
 
   .navbar-nav,

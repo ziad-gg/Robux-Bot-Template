@@ -19,7 +19,7 @@ module.exports = new CommandBuilder()
   .setAliases([{ cut: 'tran', prefix: true }])
 
 async function GlobalExecute(message, interaction) {
-  let controller;
+  let controller = {};
   if (interaction) interaction.deferReply({ ephemeral: false });
   const controller_ = message ?? interaction;
   const roblox = controller_.getData('roblox');
@@ -32,7 +32,7 @@ async function GlobalExecute(message, interaction) {
   controller.replyNoMention = (obj) => interaction ? interaction.editReply(obj) : message.replyNoMention(obj);
   
   if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسمك في روبلوكس!**' });
-  if (!controller[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
+  if (!controller_[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
 
   const userData = await usersData.get(controller_.author.id);
@@ -83,10 +83,10 @@ async function GlobalExecute(message, interaction) {
     ctx.drawImage(userImage, 11.5,16.5,35,35);
     
     const attach = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
-    const channel = await controller.client.channels.cache.get(guildData.proofsChannel);
+    const channel = await controller_.client.channels.cache.get(guildData.proofsChannel);
     
     if (channel) {
-      channel.send({ content: `**تم الشراء بواسطة: ${controller.author}**`, files: [attach] });
+      channel.send({ content: `**تم الشراء بواسطة: ${controller_.author}**`, files: [attach] });
     } else {
       controller.replyNoMention({ files: [attach] });
     }

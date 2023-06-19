@@ -217,6 +217,9 @@
       const urlWithParams = `${apiUrl}?${params}`;
       const authToken = 'YOUR_AUTH_TOKEN';
 
+      const transferButton = document.getElementById('transferButton');
+      transferButton.disabled = true;
+
       fetch(urlWithParams, { headers: { Authorization: `Bearer ${authToken}` }, method: 'post' })
       .then(response => response.json())
       .then(data => {
