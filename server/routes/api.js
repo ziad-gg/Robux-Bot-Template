@@ -44,7 +44,7 @@ router.get('/t', async (req, res) => {
 
   const donechannel = await client.guilds.cache.get(DEFAULT_GUILD)?.channels?.cache.get(GuildData?.proofsChannel);
   UserData.balance -= +amount;
-  
+  UserData.lastTransactionsAccount = user.username;
   UserData.save();
   
   
