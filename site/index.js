@@ -30,7 +30,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.use('/', require('./routes/home.js'));
 app.use('/api', require('./routes/api.js'));
 app.use('/login', require('./routes/login.js'));

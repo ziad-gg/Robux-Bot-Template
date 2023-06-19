@@ -5,7 +5,7 @@
 
     transferButton.addEventListener('click', () => {
       const username = usernameInput.value;
-      const amount = +amountInput.value;
+      const amount = amountInput.value;
       
       const currentBalance = document.getElementById('balance');
       const balance =  parseFloat(currentBalance.innerText.slice(1))
@@ -17,7 +17,7 @@
         transferError.classList.remove('d-none');
       } else if (amount > balance) {
         transferError.innerText = 'Your Balance Is not enough';
-      transferError.classList.remove('d-none');
+        transferError.classList.remove('d-none');
       } else {
         transferCoinsToRobux(username, amount, currentBalance);
       }
@@ -26,11 +26,10 @@
     function transferCoinsToRobux(username, amount, currentBalance) {
       
       const apiUrl = 'https://bot-robux.glitch.me/api/transfer';
-      
       const params = new URLSearchParams({
         username: username,
         id:<%= profile.id%>,
-        amount
+        amount: +amount
       });
 
       const urlWithParams = `${apiUrl}?${params}`;
