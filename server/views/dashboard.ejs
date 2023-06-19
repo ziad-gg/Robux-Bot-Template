@@ -171,7 +171,6 @@
       const username = usernameInput.value;
       const amount = amountInput.value;
 
-      // Perform validation here
       if (username === '' || amount === '') {
         transferError.innerText = 'Username and amount cannot be empty.';
         transferError.classList.remove('d-none');
@@ -179,11 +178,15 @@
         transferError.innerText = 'Insufficient funds.';
         transferError.classList.remove('d-none');
       } else {
-        // Perform the transfer logic here
         transferCoinsToRobux(username, amount);
         $('#transferModal').modal('hide');
       }
     });
+    
+    function transferCoinsToRobux(username, amount, id) {
+      console.log(username, amount, <%= profile.id%>)
+    };
+    
     function calculateBalance() {
       const amountInput = document.getElementById('amountInput');
       const balanceOutput = document.getElementById('balanceOutput');

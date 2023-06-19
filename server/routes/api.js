@@ -33,16 +33,20 @@ router.get('/t', async (req, res) => {
   let user = await roblox.users.find({ userNames: username });
   if (!user) return res.json({ error: true, message: '❌ يبدو أن هذا اللاعب غير متواجد في روبلوكس!' })
 
+  user = await roblox.users.get(user.id);
   const member = await group.members.get(user.id);
   if (!member) return res.json({ error: true, message: `❌ هذا اللاعب غير متواجد في الجروب\nرابط الجروب:\n https://www.roblox.com/groups/${group.id}`});
 
-  const UserData = await controller.getData('users').get(req.user.id);
+  const UserData = await controller.getData('users').get(UserId);
   if (!UserData || UserData.balance < amount) return res.json({ error: true, message: '❌ رصيدك الحالي غير كافي للتحويل' });
 
   const donechannel = await client.guilds.cache.get(DEFAULT_GUILD)?.channels?.cache.get(GuildData?.proofsChannel);
-  UserData.balance - +amount;
+  UserData.balance -= +amount;
   
-  return res.json({ user: UserData, done: true, donechannel });
+  UserData.save();
+  
+  
+  res.json({ user: UserData, done: true, donechannel });
 
   const canvas = createCanvas(991, 172);
   const ctx = canvas.getContext('2d')
@@ -60,7 +64,7 @@ router.get('/t', async (req, res) => {
   ctx.fillText(username, 61, 35);
   ctx.closePath();
 
-  const userImage = await loadImage(user.avatarURL({ type: 'Headshot' }));
+  const userImage = await loadImage(user.avatarURL({ type: 'Headshot' }))
   ctx.drawImage(userImage, 11.5,16.5,35,35);
 
   const attach = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
