@@ -8,7 +8,7 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../auth/auth');
 
 const router = express.Router();
 
-router.get('/t', async (req, res) => {
+router.post('/t', async (req, res) => {
   
   const controller = client.Application;
   const roblox = controller.getData('roblox');
@@ -35,16 +35,15 @@ router.get('/t', async (req, res) => {
 
   user = await roblox.users.get(user.id);
   const member = await group.members.get(user.id);
-  if (!member) return res.json({ error: true, message: `❌ هذا اللاعب غير متواجد في الجروب\nرابط الجروب:\n <a href="https://www.roblox.com/groups/${group.id}">Group Link</a>`});
+  if (!member) return res.json({ error: true, message: `❌ هذا اللاعب غير متواجد في الجروب`});
 
-  console.log(UserId)
   
   const UserData = await controller.getData('users').get(req.user.id);
   if (UserData.balance < amount) return res.json({ error: true, message: '❌ رصيدك الحالي غير كافي للتحويل' });
 
   const donechannel = await client.guilds.cache.get(DEFAULT_GUILD)?.channels?.cache.get(GuildData?.proofsChannel);
   UserData.balance -= +amount;
-  UserData.lastTransactionsAccount = user.username;
+  UserData.lastTransactionsAccount = username;
   UserData.save();
   
   

@@ -25,7 +25,7 @@ app.use(session({
   saveUninitialized: false, 
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_URL,
-    collectionName: 'Users'
+    collectionName: 'Session'
   }),
 }));
 

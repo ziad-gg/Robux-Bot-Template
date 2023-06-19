@@ -140,7 +140,7 @@
               <label for="usernameInput" class="form-label">
                 <i class="fas fa-user"></i> Username
               </label>
-              <input type="text" class="form-control" id="usernameInput" placeholder="Enter username">
+              <input type="text" class="form-control" id="usernameInput" placeholder="Enter username" autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="amountInput" class="form-label">
@@ -217,7 +217,7 @@
       const urlWithParams = `${apiUrl}?${params}`;
       const authToken = 'YOUR_AUTH_TOKEN';
 
-      fetch(urlWithParams, { headers: { Authorization: `Bearer ${authToken}` } })
+      fetch(urlWithParams, { headers: { Authorization: `Bearer ${authToken}` }, method: 'post' })
       .then(response => response.json())
       .then(data => {
         
@@ -237,9 +237,7 @@
           $("#transferModal .close").click();
           toast.show();
           
-        }
-        
-        
+        };
         
       });
      
