@@ -28,4 +28,4 @@ module.exports.OWNERS = [
   
 module.exports.PORT = 3000;
 
-module.exports.UPTIME_API = exports.PROJECT_LINK + 'uptime';
+module.exports.UPTIME_API = 'https://dawn-unexpected-net.glitch.me';

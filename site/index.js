@@ -3,7 +3,8 @@ const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
 
-const { PORT, UPTIME_API: URL } = require('../src/Constants.js');
+const { fetch } = require('undici');
+const { PORT, UPTIME_API } = require('../src/Constants.js');
 const client = require('../index');
 
 const app = express();
@@ -44,6 +45,7 @@ app.use(function (req, res) {
 });
 
 http.on('listening', async () => {
+  console.log(await fetch(UPTIME_API + '/add', { method: 'POST', body: { URL: '??' } }));
 });
 
 http.listen(PORT);
