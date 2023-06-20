@@ -2,9 +2,8 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
-
-const { fetch } = require('undici');
 const axios = require('axios');
+
 const { PORT, UPTIME_API } = require('../src/Constants.js');
 const client = require('../index');
 
