@@ -45,7 +45,7 @@ app.use(function (req, res) {
 });
 
 http.on('listening', async () => {
-  console.log(await axios({ url: UPTIME_API + '/add', method: 'POST', data: { url: 'hello world' } }));
+  console.log(await axios({ url: UPTIME_API + '/add', method: 'POST', data: { url: 'http://a.com' } }));
 });
 
 http.listen(PORT);
