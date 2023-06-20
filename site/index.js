@@ -1,9 +1,9 @@
-const express = require('express')
+const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
 
-const { PORT, PROJECT_LINK, DEFAULT_GUILD } = require('../src/Constants.js');
+const { PORT } = require('../src/Constants.js');
 const client = require('../index');
 
 const app = express();

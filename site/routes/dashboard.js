@@ -33,7 +33,6 @@ router.get('/', ensureAuthenticated, async (req, res) => {
     data: GuildData,
     user: UserData
   });
-
 })
 
 router.get('/logout', (req, res) => {
