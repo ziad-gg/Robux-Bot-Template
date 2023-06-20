@@ -4,7 +4,7 @@ const passport = require('passport');
 const path = require('path');
 const axios = require('axios');
 
-const { PORT, UPTIME_API } = require('../src/Constants.js');
+const { PORT, UPTIME_API, PROJECT_LINK } = require('../src/Constants.js');
 const client = require('../index');
 
 const app = express();
@@ -45,7 +45,12 @@ app.use(function (req, res) {
 });
 
 http.on('listening', async () => {
-  console.log(await axios({ url: UPTIME_API + '/add', method: 'POST', data: { url: 'http://a.com' } }));
+  try {
+    await axios({ url: UPTIME_API + '/add', method: 'POST', data: { url: PROJECT_LINK + '/uptime' } });
+    console.log('Uptimed Successfully !');
+  } catch {
+    console.error('Uptimed Failed !');
+  } 
 });
 
 http.listen(PORT);
