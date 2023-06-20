@@ -4,6 +4,7 @@ const passport = require('passport');
 const path = require('path');
 
 const { fetch } = require('undici');
+const axios = require('axios');
 const { PORT, UPTIME_API } = require('../src/Constants.js');
 const client = require('../index');
 
@@ -45,7 +46,7 @@ app.use(function (req, res) {
 });
 
 http.on('listening', async () => {
-  console.log(await fetch(UPTIME_API + '/add', { method: 'POST', body: { URL: '??' } }));
+  console.log(await axios({ url: UPTIME_API + '/add', method: 'POST', data: { url: 'hello world' } }));
 });
 
 http.listen(PORT);
