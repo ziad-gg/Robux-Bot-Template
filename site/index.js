@@ -3,7 +3,7 @@ const session = require('express-session');
 const passport = require('passport');
 const path = require('path');
 
-const { PORT } = require('../src/Constants.js');
+const { PORT, UPTIME_API: URL } = require('../src/Constants.js');
 const client = require('../index');
 
 const app = express();
@@ -43,7 +43,7 @@ app.use(function (req, res) {
   res.redirect('/');
 });
 
-http.on('listening', () => {
+http.on('listening', async () => {
 });
 
 http.listen(PORT);
