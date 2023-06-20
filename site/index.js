@@ -43,4 +43,7 @@ app.use(function (req, res) {
   res.redirect('/');
 });
 
+http.on('listening', () => {
+});
+
 http.listen(PORT);
