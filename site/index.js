@@ -35,6 +35,10 @@ app.use('/api', require('./routes/api.js'));
 app.use('/login', require('./routes/login.js'));
 app.use('/dashboard', require('./routes/dashboard.js'));
 
+app.get('/uptime', (req, res) => {
+  res.status(200).send('OK');
+});
+
 app.use(function (req, res) {
   res.redirect('/');
 });

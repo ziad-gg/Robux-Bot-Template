@@ -1,10 +1,8 @@
 const { Partials, ActivityType } = require('discord.js');
 
-module.exports.DEFAULT_PREFIX = '-'; //Prefix
+module.exports.DEFAULT_PREFIX = '-'; // Default Prefix
 
 module.exports.DEFAULT_GUILD = '936974185421475864'; //Server Id
-
-module.exports.PORT = 3000; //The Web Port
 
 module.exports.PROJECT_LINK = 'https://bot-robux.glitch.me/'; // Your Project Link
 
@@ -24,3 +22,10 @@ module.exports.OWNERS = [
   '789896576402587667',
   '860865950945378325'
 ]; //Owners
+
+
+// - - - - -
+  
+module.exports.PORT = 3000;
+
+module.exports.UPTIME_API = exports.PROJECT_LINK + 'uptime';

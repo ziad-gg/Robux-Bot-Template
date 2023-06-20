@@ -8,10 +8,6 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../auth/auth');
 
 const router = express.Router();
 
-router.get('/uptime', (req, res) => {
-  res.status(200).send('OK');
-});
-
 router.post('/transfer', async (req, res) => {
   const controller = client.Application;
   const botToken = req.headers.authorization;
