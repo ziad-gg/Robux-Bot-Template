@@ -4,6 +4,8 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('give')
   .setDescription('Transfer someone specific balance.')
+  .setUsage(['{cmdname} (user) (amount)'])
+  .setExample(['{cmdname} {userMention} {snumber}', '{cmdname} {userId} {snumber}'])
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option
      .setName('user')
      .setDescription('The user to transfer to')

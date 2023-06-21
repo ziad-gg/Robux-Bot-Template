@@ -4,6 +4,8 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('remove')
   .setDescription('Remove someone specific balance.')
+  .setUsage(['{cmdname} (user) (amount)'])
+  .setExample(['{cmdname} {userMention} {snumber}', '{cmdname} {userId} {snumber}'])
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option
      .setName('user')
      .setDescription('The user from whom the balance is to be removed')

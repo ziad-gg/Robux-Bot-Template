@@ -7,7 +7,7 @@ module.exports = new CommandBuilder()
   .setName('transfer')
   .setDescription('Transfer balance to robux.')
   .setUsage(['{cmdname} (username) (amount)'])
-  .setExample(['{cmdname} {rusername} {lnumber}'])
+  .setExample(['{cmdname} {rusername} {snumber}'])
   .setCategory('public')
   .setCooldown('20s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(true).addStringOption((option) => option

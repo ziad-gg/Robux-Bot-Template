@@ -4,6 +4,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('set')
   .setDescription('Management the database.')
+  .setUsage(['{cmdname} (CommandName) (GroupName: Optional)'])
+  .setExample(['{cmdname} prefix', '{cmdname} price', '{cmdname} group', '{cmdname} clientsrole {roleMention}', '{cmdname} proofschannel', '{cmdname} buy max', '{cmdname} buy min', '{cmdname} transfer max', '{cmdname} transfer min' ])
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
   .OwnersOnly()
