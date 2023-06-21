@@ -4,6 +4,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('clientsrole')
   .setDescription('Sets clients role.')
+  .setUsage(['{mainName} {cmdname} (role)'])
+  .setExample(['{mainName} {cmdname} {roleMention}', '{mainName} {cmdname} {roleId}'])
   .InteractionOn(new SlashCommandBuilder().addRoleOption((option) => option
      .setName('role')
      .setDescription('The clientsrole you want')
