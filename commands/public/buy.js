@@ -31,7 +31,7 @@ async function GlobalExecute(message, interaction) {
   const time = 3e5;
   const guildData = await guildsData.get(controller.guild.id);
   
-  if (!guildData.transfer.buy) return controller.replyNoMention({ content: '❌ **نظام الشراء مقفل في الوقت الحالي!**' });
+  if (!controller.author.isOwner && !guildData.transfer.buy) return controller.replyNoMention({ content: '❌ **نظام الشراء مقفل في الوقت الحالي!**' });
   if (guildData.buy.min > amount) return message.replyNoMention({ content: `❌ **الحد الأدنى للشراء هو ${guildData.buy.min}**` });
   if (guildData.buy.max > 0 && guildData.buy.max < amount) return message.replyNoMention({ content: `❌ **الحد الأقصى للشراء هو ${guildData.buy.max}**` });
   

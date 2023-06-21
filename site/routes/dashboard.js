@@ -28,6 +28,8 @@ router.get('/', ensureAuthenticated, async (req, res) => {
       pending,
       funds
     },
+    recipientId: guild.recipient,
+    
     guild: guild,
     owner: await guild.fetchOwner().then((owner) => owner.user.username),
     data: GuildData,
