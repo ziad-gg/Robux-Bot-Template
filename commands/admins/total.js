@@ -7,10 +7,12 @@ module.exports = new CommandBuilder()
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
   .OwnersOnly()
+  .setAliases([{ cut: 'all', prefix: true }])
+
 
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
-  const usersData = await controller.getData('users').find();
+  const usersData = await controller.getData('users').find({ balance: { $ne: 0 } });
   
   controller.replyNoMention({ content: `🪙 **عدد رصيد الكل هو \`${usersData.reduce((a, b) => a + b.balance, 0)}\`**` });
 };

@@ -7,7 +7,7 @@ module.exports = new CommandBuilder()
   .setCooldown('10s')
   .setCategory('help')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
-     .setName('command')
+     .setName('cmd')
      .setDescription('Shows details about how to use a command')                                                           
      .setRequired(false)))
   .setGlobal(GlobalExecute)
@@ -22,8 +22,14 @@ async function GlobalExecute(message, interaction) {
     const cmd = client.Application.getCommand(command)
     if (!cmd || !controller.author.isOwner && cmd.category === 'admins') return controller.replyNoMention({ content: `❌ **لا يمكن العثور على هذا الأمر!**` });
     
-      embed.setTitle(`Command: ${cmd.name}`); 
-      embed.setDescription(cmd.description);
+    if (cmdInfo.description) embed.setDescription(cmdInfo.description);
+    if (command.usage) fields.push({name:"**Usages**", value: command.usage.map(e => `${client.Application.prefix}${e}`).join(`\n`)});
+    if (command.examples) fields.push({name: replys.chSections[2], value: command.examples.map(e => `${client.Application.prefix}${e.replace(/\{userMention}/g, `<@${message.author.id}>`).replace(/\{userId}/g, `${message.author.id}`)}`).join(`\n`)});
+    
+    embed.setTitle(`Command: ${cmd.name}`); 
+    embed.setDescription(cmd.description);
+    
+    
   } else {
     const commands = [];
 
