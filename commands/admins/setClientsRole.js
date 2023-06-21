@@ -9,6 +9,8 @@ module.exports = new CommandBuilder()
      .setDescription('The clientsrole you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setInteractionExecution(InteractionExecute)
+  .setMessageExecution(MessageExecute)
   .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
@@ -17,7 +19,7 @@ async function GlobalExecute(message, interaction, global) {
   
   if (!controller[0]) return controller.replyNoMention({ content: '❌ **قم بتحديد الرتبة!**' });
   
-  const role = controller.guild.roles.cache.get(interaction ? interaction[0].id : controller[0].toId());
+  const role = controller.guild.roles.cache.get(controller[0].toId());
 
   if (!role || role.tags?.botId) return controller.replyNoMention({ content: '❌ **قم بتحديد رتبة صالحة!**' });
   if (role.position > controller.guild.members.me.roles.highest.position) return controller.replyNoMention({ content: '❌ **يجب أن يكون لدي صلاحيات كافية لإضافة هذه الرتبة!**' });
@@ -28,3 +30,6 @@ async function GlobalExecute(message, interaction, global) {
   
   controller.replyNoMention({ content: '✅ **تم بنجاح تحديد رتبة العملاء!**' });
 };
+
+async function InteractionExecute(interaction, global) {};
+async function MessageExecute(message, Global) {};
