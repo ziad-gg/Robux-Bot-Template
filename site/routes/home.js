@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   res.render('home', {
-    title: client.user.username + " | " + "dashboard",
+    title: client.user.username + ' | ' + 'dashboard',
     client,
     user: req.user
   });
