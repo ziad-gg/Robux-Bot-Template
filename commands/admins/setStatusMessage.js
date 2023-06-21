@@ -1,5 +1,5 @@
 const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, hyperlink  } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('smessage')
@@ -10,7 +10,7 @@ module.exports = new CommandBuilder()
      .addChannelTypes(0)                                                       
      .setName('schannel')
      .setDescription('The channel you want')
-     .setRequired(true)))
+     .setRequired(false)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute)
@@ -20,12 +20,22 @@ async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
   const Guilds = controller.getData('guilds')
   const guildData = await global;
-  const channelId = controller[0]?.toId();
-  if (!channelId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد القناة!**' });
   
+  
+  const channelId = controller[0]?.toId();
+  
+  if (!channelId) {
+    const data = guildData.schannels
+    const embed = new EmbedBuilder()
+    .setColor('Green')
+    .setDescription(data.map((e, index) => hyperlink(`message-${index + 1}`, `https://discord.com/channels/${controller.guild.id}/${e.ChannelId}/${e.MessageId}`)).join('\n'))
+ 
+    return controller.replyNoMention({ embeds: [embed] }, true);
+  }
+  // if (!channelId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد القناة!**' });
   const channel = controller.guild.channels.cache.get(channelId);
   
-  if (!channel) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة صالحة!**' });
+  // if (!channel) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة صالحة!**' });
   if (channel.type !== 0) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة كتابية!**' });
   
   if (guildData.schannels.find(e => e.ChannelId === channel.id)) {
