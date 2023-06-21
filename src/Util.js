@@ -33,7 +33,7 @@ function UpdateStatusMessages (guildData, client) {
   
   data.forEach(async ({ ChannelId, MessageId }) => {
     const channel = client.channels.cache.get(ChannelId);
-    const message = await channel.messages.cache.get(MessageId);
+    const message = await channel.messages.fetch(MessageId).then(m => m).catch(e => null);
     
     const Bemoji = (guildData.buy.status) ? '🟢' : '🔴';
     const Temoji = (guildData.transfer.status) ? '🟢' : '🔴';
