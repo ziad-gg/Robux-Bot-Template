@@ -9,7 +9,6 @@ module.exports = new CommandBuilder()
   .OwnersOnly()
   .setAliases([{ cut: 'all', prefix: true }])
 
-
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
   const usersData = await controller.getData('users').find({ balance: { $ne: 0 } });
