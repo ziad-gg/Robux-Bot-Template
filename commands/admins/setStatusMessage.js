@@ -35,10 +35,11 @@ async function GlobalExecute(message, interaction, global) {
     return controller.replyNoMention({ content: '✅ **تم حذف هذه القناه بنجاح**' })
   } else {
     const msg = await channel.send({ content: '**Robux Withdrawal System : Closed**\n\**Robux Buy System : Closed**' });
-    await guildData.updateOne({ id: controller.guild.id }, { $push: { schannels: { MessageId: msg.id, ChannelId: channel.id } } } );
+    const result = await guildData.findOneAndUpdate({ id: controller.guild.id }, { $push: { schannels: { MessageId: msg.id, ChannelId: channel.id } } } );
+    console.log(result)
     return controller.replyNoMention({ content: '✅ **تم اضافه هذه القناه بنجاح**' })
     
-  } 
+  }; 
   
 };
 
