@@ -7,7 +7,7 @@ module.exports = new CommandBuilder()
   .setCooldown('10s')
   .setCategory('help')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
-     .setName('cmd')
+     .setName('command')
      .setDescription('Shows details about how to use a command')                                                           
      .setRequired(false)))
   .setGlobal(GlobalExecute)
@@ -20,14 +20,12 @@ async function GlobalExecute(message, interaction) {
   const embed = new EmbedBuilder().setColor('#0be881');
 
   if (command && command !== 'help') {
-    
     let cmd = client.Application.getCommand(command) || client.Application.getCommandByCut(command);
     if (!cmd || (!controller.author.isOwner && cmd.category === 'admins') || cmd.isSubCommand) return controller.replyNoMention({ content: '❌ **هذا الأمر غير موجود!**' });
     
     embed.setTitle(`Command: ${cmd.name}`); 
     
     const SubCommands = cmd.SubCommands;
-    
     const GroupName = controller[1]?.toLowerCase();
     const GroupChildName = controller[2]?.toLowerCase();
       
@@ -48,10 +46,10 @@ async function GlobalExecute(message, interaction) {
     const Aliases = cmd.Application.Cuts;
     
     if (cmd.description) embed.setDescription(cmd.description);
-    if (Aliases && Aliases.size > 0) embed.addFields({ name: 'Aliases:', value: Aliases.map(e => e.withPrefix ? `${client.Application.prefix}${e.cutName}`: e.cutName).join(' ') })
-    if (!main && SubCommands.length > 0) embed.addFields({ name: 'Subs:', value: SubCommands.map(e => `${client.Application.prefix}${cmd.name} ${e.commandGroup ? e.commandGroup : e.commandName } ${e.commandGroup ? e.commandName : ''}`).join('\n') });
-    if (cmd.usage) embed.addFields({ name: 'Usages:' , value: cmd.usage.map(e => `${client.Application.prefix}${e.replace(/\{cmdname}/, cmd.name).replace(/\{mainName}/, main?.name).replace(/\{groupname}/, GroupName)}`).join('\n') });
-    if (cmd.examples) embed.addFields({ name: 'Exmaples:', value: cmd.examples.map(e => `${client.Application.prefix}${e.replace(/\{cmdname}/, cmd.name).replace(/\{mainName}/, main?.name).replace(/\{groupname}/, GroupName).replace(/\{roleMention}/, `<@&${controller.guild.roles.cache.randomKey()}>`).replace(/\{roleId}/, `${controller.guild.roles.cache.randomKey()}`).replace(/\{channelId}/, `${controller.guild.channels.cache.randomKey()}`).replace(/\{channelMention}/, `<#${controller.guild.channels.cache.randomKey()}>`).replace(/\{snumber}|{lnumber}/, (math) => math.randomNum()).replace(/\{rusername}/, roblox.me.username).replace(/\{userMention}/g, `<@${controller.author.id}>`).replace(/\{userId}/g, `${controller.author.id}`)}`).join('\n') });
+    if (Aliases && Aliases.size > 0) embed.addFields([{ name: 'Aliases:', value: Aliases.map(e => e.withPrefix ? `${client.Application.prefix}${e.cutName}`: e.cutName).join(' ') }])
+    if (cmd.usage) embed.addFields([{ name: 'Usages:' , value: cmd.usage.map(e => `${client.Application.prefix}${e.replace(/\{cmdname}/, cmd.name).replace(/\{mainName}/, main?.name).replace(/\{groupname}/, GroupName)}`).join('\n') }]);
+    if (!main && SubCommands.length > 0) embed.addFields([{ name: 'Subs:', value: SubCommands.map(e => `${client.Application.prefix}${cmd.name} ${e.commandGroup ? e.commandGroup : e.commandName } ${e.commandGroup ? e.commandName : ''}`).join('\n') }]);
+    if (cmd.examples) embed.addFields([{ name: 'Exmaples:', value: cmd.examples.map(e => `${client.Application.prefix}${e.replace(/\{cmdname}/, cmd.name).replace(/\{mainName}/, main?.name).replace(/\{groupname}/, GroupName).replace(/\{roleMention}/, `<@&${controller.guild.roles.cache.randomKey()}>`).replace(/\{roleId}/, `${controller.guild.roles.cache.randomKey()}`).replace(/\{channelId}/, `${controller.guild.channels.cache.randomKey()}`).replace(/\{channelMention}/, `<#${controller.guild.channels.cache.randomKey()}>`).replace(/\{snumber}|{lnumber}/, (math) => math.randomNum()).replace(/\{rusername}/, roblox.me.username).replace(/\{userMention}/g, `<@${controller.author.id}>`).replace(/\{userId}/g, `${controller.author.id}`)}`).join('\n') }]);
     
   } else {
     const commands = [];
