@@ -4,6 +4,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('price')
   .setDescription('Sets the robux price.')
+  .setUsage(['{mainName} {cmdname} (price)'])
+  .setExample(['{mainName} {cmdname} {lnumber}'])
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
      .setName('price')
      .setDescription('The price of the robux you want')

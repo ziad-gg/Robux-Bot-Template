@@ -4,6 +4,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('min')
   .setDescription('Sets the minimum.')
+  .setUsage(['{mainName} {groupname} {cmdname} (amount)'])
+  .setExample(['{mainName} {groupname}  {cmdname} {snumber}'])
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
      .setName('min')
      .setDescription('The minimum you want')
