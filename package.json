@@ -12,7 +12,7 @@
   ],
   "dependencies": {
     "discord.js": "^14.11.0",
-    "handler.djs": "^2.6.26",
+    "handler.djs": "^2.6.27",
     "zoblox.js": "^2.6.0",
     "mongoose": "^7.3.0",
     "express": "^4.18.2",
