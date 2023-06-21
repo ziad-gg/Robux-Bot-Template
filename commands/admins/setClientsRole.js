@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('clientsrole')
-  .setDescription('Sets clients Role.')
+  .setDescription('Sets clients role.')
   .InteractionOn(new SlashCommandBuilder().addRoleOption((option) => option
      .setName('role')
      .setDescription('The clientsrole you want')
@@ -19,9 +19,8 @@ async function GlobalExecute(message, interaction, global) {
   
   const role = controller.guild.roles.cache.get(interaction ? interaction[0].id : controller[0].toId());
 
-  console.log(role);
-  
-  if (!role || role.tags.botId) return controller.replyNoMention({ content: '❌ **قم بتحديد رتبة صالحة!**' });
+  if (!role || role.tags?.botId) return controller.replyNoMention({ content: '❌ **قم بتحديد رتبة صالحة!**' });
+  if (role.position > controller.guild.members.me.roles.highest.position) return controller.replyNoMention({ content: '❌ **يجب أن يكون لدي صلاحيات كافية لإضافة هذه الرتبة!**' });
   if (guildData.clientsRole === role.id) return controller.replyNoMention({ content: '❌ **هذه الرتبة محددة من قبل!**' });
   
   guildData.clientsRole = role.id;
