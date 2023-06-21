@@ -14,6 +14,10 @@ function isInteger() {
   return true;
 } 
 
+function RandomNumber(match) {
+  if ()
+}
+
 function replyNoMention(options) {
   options = typeof options === 'string' ? { content: options } : options;
   options.allowedMentions = {

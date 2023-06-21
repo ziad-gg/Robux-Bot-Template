@@ -24,16 +24,15 @@ async function GlobalExecute(message, interaction) {
     const cmd = client.Application.getCommand(command) || client.Application.getCommandByCut(command);
     if (!cmd || (!controller.author.isOwner && cmd.category === 'admins') || command.isSubCommand) return controller.replyNoMention({ content: `❌ **لا يمكن العثور على هذا الأمر!**` });
     
+    embed.setTitle(`Command: ${cmd.name}`); 
+    
     const Aliases = cmd.Application.Cuts;
     const SubCommands = cmd.SubCommands;
     
     if (cmd.description) embed.setDescription(cmd.description);
-    if (Aliases && Aliases.size > 0) embed.addFields({name:"**Aliases**", value: Aliases.map(e => e.withPrefix?  `${client.Application.prefix}${e.cutName}`: e.cutName ).join(' ') })
-    if (cmd.usage) embed.addFields({name:"**Usages**", value: cmd.usage.map(e => `${client.Application.prefix}${e.replace(/\{cmdname}/, cmd.name)}`).join(`\n`)});
-    if (cmd.examples) embed.addFields({name: "**Exmaples**", value: cmd.examples.map(e => `${client.Application.prefix}${e.replace(/\{cmdname}/, cmd.name).replace(/\{rusername}/, roblox.me.username).replace(/\{userMention}/g, `<@${controller.author.id}>`).replace(/\{userId}/g, `${controller.author.id}`)}`).join(`\n`)});
-    
-    embed.setTitle(`Command: ${cmd.name}`); 
-    embed.setDescription(cmd.description);
+    if (Aliases && Aliases.size > 0) embed.addFields({ name: 'Aliases:', value: Aliases.map(e => e.withPrefix ? `${client.Application.prefix}${e.cutName}`: e.cutName).join(' ') })
+    if (cmd.usage) embed.addFields({ name: 'Usages:' , value: cmd.usage.map(e => `${client.Application.prefix}${e.replace(/\{cmdname}/, cmd.name)}`).join(`\n`) });
+    if (cmd.examples) embed.addFields({ name: 'Exmaples:', value: cmd.examples.map(e => `${client.Application.prefix}${e.replace(/\{cmdname}/, cmd.name).replace(/\{snumber}/, parseInt(Math.random() * (10 + 1) + 1)).replace(/\{rusername}/, roblox.me.username).replace(/\{userMention}/g, `<@${controller.author.id}>`).replace(/\{userId}/g, `${controller.author.id}`)}`).join(`\n`) });
     
     
   } else {

@@ -6,7 +6,7 @@ module.exports = new CommandBuilder()
   .setDescription('Shows top users.')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
-  .setAliases([{ cut: 'lb', prefix: true }])
+  .setAliases([ { cut: 'lb', prefix: true }, { cut: 'top', prefix: true } ]);
 
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
