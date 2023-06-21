@@ -21,13 +21,32 @@ async function GlobalExecute(message, interaction) {
 
   if (command && command !== 'help') {
     
-    const cmd = client.Application.getCommand(command) || client.Application.getCommandByCut(command);
+    let cmd = client.Application.getCommand(command) || client.Application.getCommandByCut(command);
     if (!cmd || (!controller.author.isOwner && cmd.category === 'admins') || command.isSubCommand) return controller.replyNoMention({ content: `❌ **لا يمكن العثور على هذا الأمر!**` });
     
     embed.setTitle(`Command: ${cmd.name}`); 
     
-    const Aliases = cmd.Application.Cuts;
     const SubCommands = cmd.SubCommands;
+    
+    const GroupName = controller[1]?.toLowerCase();
+    const GroupChildName = controller[2]?.toLowerCase();
+      
+    let subs;
+    
+    if (GroupName || GroupChildName) {
+      subs = SubCommands?.find(sub => sub.commandGroup?.toLowerCase() === GroupName && (GroupChildName ? sub.commandName === GroupChildName : true));
+      if (!subs) subs = SubCommands.find(op => op.commandName.toLowerCase() === GroupName && !op.commandGroup);
+      if (!subs) return controller.reply
+    }
+
+
+    console.log(subs)
+    
+//     if (!subs) return message.replyNoMention('❌ **هذا الامر غير موجود!**');
+    
+    const Aliases = cmd.Application.Cuts
+    
+    
     
     if (cmd.description) embed.setDescription(cmd.description);
     if (Aliases && Aliases.size > 0) embed.addFields({ name: 'Aliases:', value: Aliases.map(e => e.withPrefix ? `${client.Application.prefix}${e.cutName}`: e.cutName).join(' ') })
