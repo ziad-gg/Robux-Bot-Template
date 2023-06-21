@@ -18,6 +18,7 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
+  const Guilds = controller.getData('guilds')
   const guildData = await global;
   const channelId = controller[0]?.toId();
   if (!channelId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد القناة!**' });
@@ -31,11 +32,13 @@ async function GlobalExecute(message, interaction, global) {
     const { MessageId } = guildData.schannels.find(e => e.ChannelId === channel.id);
     const msg = await channel.messages.cache.get(MessageId);
     if (msg) msg.delete();
-    await guildData.updateOne({ id: controller.guild.id }, { $pull: { schannels: { ChannelId: channel.id } } } );
+    await Guilds.updateOne({ id: controller.guild.id }, { $pull: { schannels: { ChannelId: channel.id } } } );
     return controller.replyNoMention({ content: '✅ **تم حذف هذه القناه بنجاح**' })
   } else {
     const msg = await channel.send({ content: '**Robux Withdrawal System : Closed**\n\**Robux Buy System : Closed**' });
-    const result = await guildData.findOneAndUpdate({ id: controller.guild.id }, { $push: { schannels: { MessageId: msg.id, ChannelId: channel.id } } } );
+    
+    const result = await Guilds.updateOne({ id: controller.guild.id }, { $push: { schannels: { MessageId: msg.id, ChannelId: channel.id } } } );
+    
     console.log(result)
     return controller.replyNoMention({ content: '✅ **تم اضافه هذه القناه بنجاح**' })
     
