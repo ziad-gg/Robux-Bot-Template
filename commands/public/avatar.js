@@ -28,7 +28,7 @@ async function GlobalExecute(message, interaction) {
     const embed = new EmbedBuilder()
       .setAuthor({ name: user.name, iconURL: user.avatarURL({ type: 'Headshot' }) })
       .setTitle(user.name)
-      .setURL(user.profileURL())
+      .setURL(user.profileURL)
       .setImage(user.avatarURL({ type: 'Headshot' }))
       .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
       .setTimestamp();
