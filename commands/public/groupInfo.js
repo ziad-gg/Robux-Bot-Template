@@ -17,7 +17,7 @@ async function GlobalExecute(message, interaction) {
       .setColor('#0be881')
       .setAuthor({ name: group.name, iconURL: group.logoURL() })
       .setTitle(group.name)
-      .setURL(group.linkURL())
+      .setURL(group.linkURL)
       .setThumbnail(group.logoURL())
       .addFields([{ name: '🆔 Group ID', value: `${group.id}` }])
       .addFields([{ name: '📅 Created On', value: `<t:${Math.floor(+new Date(group.shout.created) / 1000)}:R>` }])

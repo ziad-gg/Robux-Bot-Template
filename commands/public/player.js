@@ -25,6 +25,7 @@ async function GlobalExecute(message, interaction) {
     if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' });
     user = await roblox.users.get(user.id);
 
+    const presence = await user.fetchPresence();
     const embed = new EmbedBuilder()
       .setTitle('Roblox Player Information')
       .setColor('#0be881')
@@ -33,9 +34,9 @@ async function GlobalExecute(message, interaction) {
       .addFields([{ name: 'Display Name', value: `${user.displayName}` }])
       .addFields([{ name: 'About me', value: `${user.description}` || 'None' }]) 
       .addFields([{ name: 'Created At', value: `<t:${Math.floor(+new Date(user.created) / 1000)}:F> (<t:${Math.floor(+new Date(user.created) / 1000)}:R>)` }]) 
-      .addFields([{ name: 'Last Online', value: `<t:${Math.floor(+new Date(user.presence.lastOnline) / 1000)}:F> (<t:${Math.floor(+new Date(user.presence.lastOnline) / 1000)}:R>)` }]) 
-      .addFields([{ name: 'Status', value: `${await user. user.presence.userPresenceStatus}` }]) 
-      .addFields([{ name: 'Groups', value: `${await user.fetchGroups().then((groups) => groups.length)}` }]) 
+      .addFields([{ name: 'Last Online', value: `<t:${Math.floor(+new Date(presence.lastOnline) / 1000)}:F> (<t:${Math.floor(+new Date(presence.lastOnline) / 1000)}:R>)` }]) 
+      .addFields([{ name: 'Status', value: `${presence.userPresenceStatus}` }]) 
+      .addFields([{ name: 'Groups', value: `${await await user.fetchGroups().then((groups) => groups.length)}` }]) 
       .addFields([{ name: 'Friends Number', value: `${user.profile.friendsCount}` }]) 
       .addFields([{ name: 'Followers', value: `${user.profile.followersCount}` }]) 
       .addFields([{ name: 'Following', value: `${user.profile.followingsCount}` }]) 
