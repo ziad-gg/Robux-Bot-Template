@@ -13,6 +13,9 @@ const GuildsSchema = new mongoose.Schema({
   groupId: { 
     type: Number 
   },
+  recipient: {
+    type: String,
+  },
   price: { 
     type: Number, 
     default: 1000 

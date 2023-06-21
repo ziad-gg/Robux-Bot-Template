@@ -47,8 +47,11 @@ async function GlobalExecute(message, interaction) {
 
     const Aliases = cmd.Application.Cuts;
     
+    console.log(SubCommands)
+    
     if (cmd.description) embed.setDescription(cmd.description);
     if (Aliases && Aliases.size > 0) embed.addFields({ name: 'Aliases:', value: Aliases.map(e => e.withPrefix ? `${client.Application.prefix}${e.cutName}`: e.cutName).join(' ') })
+    if (!main && SubCommands.length > 0) embed.addFields({ name: "**Subs**", value: SubCommands.map(e => `${client.Application.prefix}${cmd.name} ${e.commandGroup ? e.commandGroup : e.commandName } ${e.commandGroup? e.commandName : null}`) });
     if (cmd.usage) embed.addFields({ name: 'Usages:' , value: cmd.usage.map(e => `${client.Application.prefix}${e.replace(/\{cmdname}/, cmd.name).replace(/\{mainName}/, main?.name).replace(/\{groupname}/, GroupName)}`).join(`\n`) });
     if (cmd.examples) embed.addFields({ name: 'Exmaples:', value: cmd.examples.map(e => `${client.Application.prefix}${e.replace(/\{cmdname}/, cmd.name).replace(/\{mainName}/, main?.name).replace(/\{groupname}/, GroupName).replace(/\{roleMention}/, `<@&${controller.guild.roles.cache.randomKey()}>`).replace(/\{roleId}/, `${controller.guild.roles.cache.randomKey()}`).replace(/\{channelId}/, `${controller.guild.channels.cache.randomKey()}`).replace(/\{channelMention}/, `<#${controller.guild.channels.cache.randomKey()}>`).replace(/\{snumber}|{lnumber}/, (math) => math.randomNum()).replace(/\{rusername}/, roblox.me.username).replace(/\{userMention}/g, `<@${controller.author.id}>`).replace(/\{userId}/g, `${controller.author.id}`)}`).join(`\n`) });
     
