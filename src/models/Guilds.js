@@ -26,6 +26,7 @@ const GuildsSchema = new mongoose.Schema({
   clientsRole: { 
     type: String 
   },
+  schannels: [{ MessageId: String, ChannelId: String }],
   buy: {
     max: { 
       type: Number, 

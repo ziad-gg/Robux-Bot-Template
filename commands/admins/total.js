@@ -6,6 +6,8 @@ module.exports = new CommandBuilder()
   .setDescription("To see everyone's balance.")
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
+  .setInteractionExecution(InteractionExecute)
+  .setMessageExecution(MessageExecute)
   .OwnersOnly()
   .setAliases([{ cut: 'all', prefix: true }])
 
@@ -15,3 +17,6 @@ async function GlobalExecute(message, interaction) {
   
   controller.replyNoMention({ content: `🪙 **عدد رصيد الكل هو \`${usersData.reduce((a, b) => a + b.balance, 0)}\`**` });
 };
+
+async function InteractionExecute(interaction, global) {};
+async function MessageExecute(message, Global) {};

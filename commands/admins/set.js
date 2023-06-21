@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName('set')
   .setDescription('Management the database.')
   .setUsage(['{cmdname} (CommandName) (GroupName)'])
-  .setExample(['{cmdname} prefix ', '{cmdname} price', '{cmdname} group', '{cmdname} clientsrole', '{cmdname} proofschannel', '{cmdname} buy max', '{cmdname} buy min', '{cmdname} transfer max', '{cmdname} transfer min' ])
+  .setExample(['{cmdname} prefix ! ', '{cmdname} price {lnumber}' ])
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
   .OwnersOnly()
@@ -13,6 +13,7 @@ module.exports = new CommandBuilder()
      { command: 'prefix' },   
      { command: 'price' },   
      { command: 'group' },
+     { command: 'recipient' },
      { command: 'clientsrole' },
      { command: 'proofschannel' },
      { command: 'max', group: 'buy' },

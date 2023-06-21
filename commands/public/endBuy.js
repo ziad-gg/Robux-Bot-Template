@@ -7,8 +7,7 @@ module.exports = new CommandBuilder()
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
-  // .setInteractionExecution(InteractionExecute)
-  // .setMessageExecution(MessageExecute)
+  .setAliases([{ cut: 'end', prefix: true }])
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;

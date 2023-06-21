@@ -2,8 +2,8 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('proofschannel')
-  .setDescription('Sets proofs channel.')
+  .setName('statusmessage')
+  .setDescription('Sets status channel.')
   .setUsage(['{mainName} {cmdname} (channel)'])
   .setExample(['{mainName} {cmdname} {channelMention}', '{mainName} {cmdname} {channelId}'])
   .InteractionOn(new SlashCommandBuilder().addChannelOption((option) => option
@@ -26,7 +26,13 @@ async function GlobalExecute(message, interaction, global) {
   
   if (!channel) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة صالحة!**' });
   if (channel.type !== 0) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة كتابية!**' });
-  if (guildData.proofsChannel === channel.id) return controller.replyNoMention({ content: '❌ **هذه القناة محددة من قبل!**' });	
+  
+  if (guildData.schannels.find(e => e.ChannelId === channel.id)) {
+    const newObject = ''
+  } else {
+    
+  } 
+  // return controller.replyNoMention({ content: '❌ **هذه القناة محددة من قبل!**' });	
   
   guildData.proofsChannel = channel.id;
   await guildData.save();

@@ -11,6 +11,8 @@ module.exports = new CommandBuilder()
      .setDescription('The clientsrole you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setInteractionExecution(InteractionExecute)
+  .setMessageExecution(MessageExecute)
   .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
@@ -30,3 +32,6 @@ async function GlobalExecute(message, interaction, global) {
   
   controller.replyNoMention({ content: '✅ **تم بنجاح تحديد رتبة العملاء!**' });
 };
+
+async function InteractionExecute(interaction, global) {};
+async function MessageExecute(message, Global) {};

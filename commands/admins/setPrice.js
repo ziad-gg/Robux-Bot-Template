@@ -11,6 +11,8 @@ module.exports = new CommandBuilder()
      .setDescription('The price of the robux you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setInteractionExecution(InteractionExecute)
+  .setMessageExecution(MessageExecute)
   .OwnersOnly()
   .isSubCommand()
 
@@ -28,3 +30,6 @@ async function GlobalExecute(message, interaction, global) {
   
   controller.replyNoMention({ content: '✅ **تم تحديد السعر بنجاح!**' });
 };
+
+async function InteractionExecute(interaction, global) {};
+async function MessageExecute(message, Global) {};

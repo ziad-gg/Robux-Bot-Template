@@ -11,6 +11,8 @@ module.exports = new CommandBuilder()
      .setDescription('The maximum you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setInteractionExecution(InteractionExecute)
+  .setMessageExecution(MessageExecute)
   .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
@@ -36,3 +38,6 @@ async function GlobalExecute(message, interaction, global) {
     controller.replyNoMention({ content: '✅ **تم تحديد الحد لأقصى بنجاح!**' });
   };
 };
+
+async function InteractionExecute(interaction, global) {};
+async function MessageExecute(message, Global) {};
