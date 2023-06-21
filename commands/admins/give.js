@@ -2,9 +2,15 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('total')
+  .setName('give')
   .setDescription('Transfer someone specific balance.')
-  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => 
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option
+     .setName('user')
+     .setDescription('The user to transfer to')
+     .setRequired(true)).addNumberOption((option) => option
+        .setName('amount')
+        .setDescription('The amount to transfer to')
+        .setRequired(true)))
   .setGlobal(GlobalExecute)
   .OwnersOnly()
 

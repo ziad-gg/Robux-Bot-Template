@@ -2,11 +2,10 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('total')
-  .setDescription("To see everyone's balance.")
+  .setName('leaderboard')
+  .setDescription('Shows top users.')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
-  .OwnersOnly()
 
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
