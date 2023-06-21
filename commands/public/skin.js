@@ -4,6 +4,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('skin')
   .setDescription('Get your roblox skin.')
+  .setUsage(['{cmdname} (username)'])
+  .setExample(['{cmdname} {rusername}'])
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
      .setName('username')

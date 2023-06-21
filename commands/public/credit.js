@@ -4,6 +4,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('credit')
   .setDescription('how much robux you can buy.')
+  .setUsage(['{cmdname} (amount)'])
+  .setExample(['{cmdname} {lnumber}'])
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option
      .setName('amount')
