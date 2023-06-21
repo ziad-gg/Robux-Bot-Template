@@ -19,11 +19,11 @@
         transferError.innerText = 'Your Balance Is not enough';
         transferError.classList.remove('d-none');
       } else {
-        transferCoinsToRobux(username, amount, currentBalance);
+        transferBalanceToRobux(username, amount, currentBalance);
       }
     });
     
-    function transferCoinsToRobux(username, amount, currentBalance) {
+    function transferBalanceToRobux(username, amount, currentBalance) {
       
       const apiUrl = 'https://bot-robux.glitch.me/api/transfer';
       const params = new URLSearchParams({
