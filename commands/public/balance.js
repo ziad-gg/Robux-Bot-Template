@@ -4,6 +4,8 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('balance')
   .setDescription('Shows user balance.')
+  .setUsage(['{cmdname}', '{cmdname} (user)'])
+  .setExample(['{cmdname}', '{cmdname} {userMention}', '{cmdname} {userId}'])
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(true).addUserOption((option) => option
      .setName('user')

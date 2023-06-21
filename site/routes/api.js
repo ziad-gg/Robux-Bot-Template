@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.post('/transfer', async (req, res) => {
   const controller = client.Application;
-  const botToken = req.headers.authorization;
+  //const botToken = req.headers.authorization;
   
   const roblox = controller.getData('roblox');
   const guildData = await controller.getData('guilds').get(DEFAULT_GUILD);

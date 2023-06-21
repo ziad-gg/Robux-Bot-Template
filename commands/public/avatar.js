@@ -4,6 +4,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('avatar')
   .setDescription('Get your roblox avatar.')
+  .setUsage(['{cmdname}', '{cmdname} (username)'])
+  .setExample(['{cmdname}', '{cmdname} {userMention}', '{cmdname} {userId}'])
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
      .setName('username')
