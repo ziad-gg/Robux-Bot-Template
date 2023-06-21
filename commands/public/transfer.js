@@ -47,6 +47,7 @@ async function GlobalExecute(message, interaction) {
   const guildData = await guildsData.get(controller_.guild?.id || DEFAULT_GUILD);
   const group = await roblox.groups.get(guildData.groupId);
   
+  if (!guildData.transfer.status) return controller.replyNoMention({ content: '❌ **نظام السحب مقفل في الوقت الحالي!**' });
   if (guildData.transfer.min > amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأدنى للتحويل هو ${guildData.transfer.min}**` });
   if (guildData.transfer.max > 0 && guildData.transfer.max < amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأقصى للتحويل هو ${guildData.transfer.max}**` });
   

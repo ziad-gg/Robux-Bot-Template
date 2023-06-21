@@ -19,8 +19,10 @@ module.exports = new CommandBuilder()
      { command: 'proofschannel' },
      { command: 'max', group: 'buy' },
      { command: 'min', group: 'buy' },
+     { command: 'status', group: 'buy' },
      { command: 'max', group: 'transfer' },
      { command: 'min', group: 'transfer' },
+     { command: 'status', group: 'transfer' },
   ]);
 
 async function GlobalExecute(message, interaction) {
