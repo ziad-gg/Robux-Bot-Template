@@ -35,13 +35,17 @@ async function GlobalExecute(message, interaction, global) {
     await Guilds.updateOne({ id: controller.guild.id }, { $pull: { schannels: { ChannelId: channel.id } } } );
     return controller.replyNoMention({ content: '✅ **تم حذف هذه القناه بنجاح**' })
   } else {
-    const Bemoji = (guildData.buy.status) ? '🟢' : '🔴' 
-    const Temoji = (guildData.transfer.status) ? '🟢' : '🔴' 
-    const msg = await channel.send({ content: '**Robux Withdrawal System : Closed**\n\**Robux Buy System : Closed**' });
     
-    const result = await Guilds.updateOne({ id: controller.guild.id }, { $push: { schannels: { MessageId: msg.id, ChannelId: channel.id } } } );
+    const Bemoji = (guildData.buy.status) ? '🟢' : '🔴';
+    const Temoji = (guildData.transfer.status) ? '🟢' : '🔴';
     
-    console.log(result)
+    const Btext = (guildData.buy.status) ? 'Open' : 'Closed';
+    const Ttext = (guildData.transfer.status) ? 'Open' : 'Closed';
+
+    const msg = await channel.send({ content: `**${Temoji} Robux Withdrawal System : ${Ttext}**\n\**${Bemoji} Robux Buy System : ${Btext}**` });
+    
+    await Guilds.updateOne({ id: controller.guild.id }, { $push: { schannels: { MessageId: msg.id, ChannelId: channel.id } } } );
+    
     return controller.replyNoMention({ content: '✅ **تم اضافه هذه القناه بنجاح**' })
     
   }; 

@@ -26,7 +26,32 @@ function replyNoMention(options) {
   };
   return this.reply(options);
 } 
+
+
+function UpdateStatusMessages (guildData, client) {
+  const data = guildData.schannels;
   
+  data.forEach(async ({ ChannelId, MessageId }) => {
+    const channel = client.channels.cache.get(ChannelId);
+    const message = await channel.messages.cache.get(MessageId);
+    
+    const Bemoji = (guildData.buy.status) ? '🟢' : '🔴';
+    const Temoji = (guildData.transfer.status) ? '🟢' : '🔴';
+    
+    const Btext = (guildData.buy.status) ? 'Open' : 'Closed';
+    const Ttext = (guildData.transfer.status) ? 'Open' : 'Closed';
+    
+    const content = `**${Temoji} Robux Withdrawal System : ${Ttext}**\n\**${Bemoji} Robux Buy System : ${Btext}**` 
+    
+    if (!message) {
+      channel.send({ content })
+    } else {
+      message.edit({ content });
+    };
+    
+  })
+}
+
 String.prototype.toId = toId;
 String.prototype.isNumber = isNumber;
 String.prototype.isInteger = isInteger;
@@ -36,3 +61,5 @@ Number.prototype.isNumber = isNumber;
 Number.prototype.isInteger = isInteger;
 
 Message.prototype.replyNoMention = replyNoMention;
+
+module.exports.UpdateStatusMessages = UpdateStatusMessages;

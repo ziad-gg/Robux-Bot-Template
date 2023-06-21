@@ -31,6 +31,9 @@ client.Application.setData({
   buy_cooldowns: new Map(),
   guilds: require('./src/models/Guilds.js'),
   users: require('./src/models/Users.js'),
+  functions: { 
+    UpdateStatusMessages: require('./src/util.js').UpdateStatusMessages    
+  }
 });
 
 process.on('unhandledRejection', (err) => console.error(err));
