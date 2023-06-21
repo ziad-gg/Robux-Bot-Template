@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UsersSchema = new mongoose.Schema({
+const Schema = new mongoose.Schema({
   id: {
     type: String,
     required: true
@@ -34,11 +34,11 @@ const UsersSchema = new mongoose.Schema({
   }
 });
 
-UsersSchema.statics.get = async function (id) {
+Schema.statics.get = async function (id) {
   const userData = await this.findOne({ id });
   return userData ? userData : new this({ id });
 };
 
-const Users = mongoose.model('Users', UsersSchema);
+const Users = mongoose.model('Users', Schema);
 
 module.exports = Users;

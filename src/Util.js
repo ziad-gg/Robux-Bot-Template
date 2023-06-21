@@ -16,7 +16,7 @@ function isInteger() {
 
 function randomNum() {
   if (this.valueOf().includes('s')) return parseInt(Math.random() * (10 - 1) + 1);
-  if (this.valueOf().includes('l')) return parseInt(Math.random() * (10000 - 20000) + 20000);
+  if (this.valueOf().includes('l')) return parseInt(Math.random() * (20000 - 10000) + 10000);
 }
 
 function replyNoMention(options) {

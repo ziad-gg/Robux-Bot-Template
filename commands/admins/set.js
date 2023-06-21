@@ -15,12 +15,13 @@ module.exports = new CommandBuilder()
      { command: 'group' },
      { command: 'recipient' },
      { command: 'clientsrole' },
+     { command: 'smessage' },
      { command: 'proofschannel' },
      { command: 'max', group: 'buy' },
      { command: 'min', group: 'buy' },
      { command: 'max', group: 'transfer' },
      { command: 'min', group: 'transfer' },
-  ])
+  ]);
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;  

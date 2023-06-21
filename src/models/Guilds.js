@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { DEFAULT_PREFIX } = require('../Constants.js');
 
-const GuildsSchema = new mongoose.Schema({
+const Schema = new mongoose.Schema({
   id: {
     type: String,
     required: true
@@ -26,7 +26,10 @@ const GuildsSchema = new mongoose.Schema({
   clientsRole: { 
     type: String 
   },
-  schannels: [{ MessageId: String, ChannelId: String }],
+  schannels: [{ 
+    MessageId: String, 
+    ChannelId: String 
+  }],
   buy: {
     max: { 
       type: Number, 
@@ -49,11 +52,11 @@ const GuildsSchema = new mongoose.Schema({
   }
 });
 
-GuildsSchema.statics.get = async function (id) {
+Schema.statics.get = async function (id) {
   const guildData = await this.findOne({ id });
   return guildData ? guildData : new this({ id });
 }
 
-const Guilds = mongoose.model('Guilds', GuildsSchema);
+const Guilds = mongoose.model('Guilds', Schema);
 
 module.exports = Guilds;
