@@ -20,11 +20,13 @@ async function GlobalExecute(message, interaction) {
 
   if (command && command !== 'help') {
     const cmd = client.Application.getCommand(command)
-    if (!cmd || !controller.author.isOwner && cmd.category === 'admins') return controller.replyNoMention({ content: `❌ **لا يمكن العثور على هذا الأمر!**` });
+    if (!cmd || (!controller.author.isOwner && cmd.category === 'admins') || command.isSubCommand) return controller.replyNoMention({ content: `❌ **لا يمكن العثور على هذا الأمر!**` });
     
-    if (cmdInfo.description) embed.setDescription(cmdInfo.description);
-    if (command.usage) fields.push({name:"**Usages**", value: command.usage.map(e => `${client.Application.prefix}${e}`).join(`\n`)});
-    if (command.examples) fields.push({name: replys.chSections[2], value: command.examples.map(e => `${client.Application.prefix}${e.replace(/\{userMention}/g, `<@${message.author.id}>`).replace(/\{userId}/g, `${message.author.id}`)}`).join(`\n`)});
+    console.log(cmd.SubCommands)
+    
+    if (cmd.description) embed.setDescription(cmd.description);
+    if (cmd.usage) embed.addFields({name:"**Usages**", value: cmd.usage.map(e => `${client.Application.prefix}${e}`).join(`\n`)});
+    if (cmd.examples) embed.addFields({name: "**Exmaples**", value: cmd.examples.map(e => `${client.Application.prefix}${e.replace(/\{userMention}/g, `<@${controller.author.id}>`).replace(/\{userId}/g, `${controller.author.id}`)}`).join(`\n`)});
     
     embed.setTitle(`Command: ${cmd.name}`); 
     embed.setDescription(cmd.description);
