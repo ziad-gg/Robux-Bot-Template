@@ -31,11 +31,11 @@ async function GlobalExecute(message, interaction, global) {
     .setDescription(data.map((e, index) => hyperlink(`message-${index + 1}`, `https://discord.com/channels/${controller.guild.id}/${e.ChannelId}/${e.MessageId}`)).join('\n'))
  
     return controller.replyNoMention({ embeds: [embed] }, true);
-  }
+  };
   // if (!channelId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد القناة!**' });
   const channel = controller.guild.channels.cache.get(channelId);
   
-  // if (!channel) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة صالحة!**' });
+  if (!channel) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة صالحة!**' });
   if (channel.type !== 0) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة كتابية!**' });
   
   if (guildData.schannels.find(e => e.ChannelId === channel.id)) {

@@ -31,6 +31,7 @@ client.Application.setData({
   buy_cooldowns: new Map(),
   guilds: require('./src/models/Guilds.js'),
   users: require('./src/models/Users.js'),
+  Constants: require('./src/Constants.js'),
   functions: { 
     UpdateStatusMessages: require('./src/Util.js').UpdateStatusMessages    
   }

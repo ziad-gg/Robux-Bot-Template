@@ -1,4 +1,4 @@
-const { EmbedBuilder, SlashCommandBuilder } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const { CommandBuilder } = require('handler.djs');
 
 module.exports = new CommandBuilder()
@@ -14,10 +14,14 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
-  const roblox = controller.getData('roblox')
   const client = controller.client;
+  
+  const roblox = controller.getData('roblox');
+  const Constants = controller.getData('Constants');
   const command = controller[0]?.toLowerCase();
+  
   const embed = new EmbedBuilder().setColor('#0be881');
+  const link = new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel(`${client.user.username} Dashboard`).setURL(Constants.PROJECT_LINK).setStyle(ButtonStyle.Link));
 
   if (command && command !== 'help') {
     let cmd = client.Application.getCommand(command) || client.Application.getCommandByCut(command);
@@ -69,5 +73,5 @@ async function GlobalExecute(message, interaction) {
     if (admins.length && controller.author.isOwner) embed.addFields([{ name: 'Admins Commands', value: admins.join(', ') }]);
   };
   
-  controller.replyNoMention({ embeds: [embed] });
+  controller.replyNoMention({ embeds: [embed], components: [link] });
 };
