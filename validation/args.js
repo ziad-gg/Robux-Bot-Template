@@ -9,11 +9,10 @@ function Exection(controller, next, end) {
   const Attr = Command.getAttr('args');
   if (Attr) {
     const Help = controller.Application.getCommand('help');
-    controller[0] = Command.name
+    controller[0] = Command.name;
     Help.global(controller);
     return end();
   } else {
     next();
   }
-  // console.log(controller.Command.getAttr('args'))
 }

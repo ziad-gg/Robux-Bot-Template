@@ -14,7 +14,7 @@ module.exports = new CommandBuilder()
         .setDescription('The amount to transfer to')
         .setRequired(true)))
   .setGlobal(GlobalExecute)
-  .OwnersOnly()
+  // .OwnersOnly()
 
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;

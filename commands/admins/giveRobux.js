@@ -18,7 +18,7 @@ module.exports = new CommandBuilder()
         .setRequired(true)))
   .setGlobal(GlobalExecute)
   .setAliases([{ cut: 'gr', prefix: true }])
-  .OwnersOnly()
+  // .OwnersOnly()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;

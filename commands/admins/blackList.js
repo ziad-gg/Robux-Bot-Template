@@ -8,7 +8,7 @@ module.exports = new CommandBuilder()
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute)
-  .OwnersOnly()
+  // .OwnersOnly()
 
 async function GlobalExecute(message, interaction) { 
 };
