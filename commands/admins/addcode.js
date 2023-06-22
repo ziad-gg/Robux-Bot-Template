@@ -21,4 +21,5 @@ module.exports = new CommandBuilder()
   
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
+  controller.replyNoMention('????');
 };

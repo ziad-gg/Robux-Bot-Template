@@ -25,6 +25,7 @@ async function GlobalExecute(message, interaction, global) {
   const isAdmin = guildData.admins.find(admin => admin.id = user.id);
   if (isAdmin) return controller.replyNoMention('❌ **هذا المستخدم مضاف بالفعل!**');
   
+  const embed = new EmbedBuilder().setDescription("> **قم بتحديد **")
   const options = controller.Application.commands.map(mapCommmands).filter(op => op?.data);
   
   const select = new StringSelectMenuBuilder()
