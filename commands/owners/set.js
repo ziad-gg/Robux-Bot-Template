@@ -13,6 +13,7 @@ module.exports = new CommandBuilder()
      { command: 'prefix' },   
      { command: 'price' },   
      { command: 'group' },
+     { command: 'admins' },
      { command: 'recipient' },
      { command: 'clientsrole' },
      { command: 'smessage' },
