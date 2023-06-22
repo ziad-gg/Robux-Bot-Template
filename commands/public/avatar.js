@@ -11,6 +11,7 @@ module.exports = new CommandBuilder()
      .setName('username')
      .setDescription('The username to get avatar for')
      .setRequired(true)))
+  .setAttr('args', 1)
   .setGlobal(GlobalExecute)
 
 async function GlobalExecute(message, interaction) {

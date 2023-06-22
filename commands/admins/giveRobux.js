@@ -17,6 +17,7 @@ module.exports = new CommandBuilder()
         .setDescription('The amount you want to transfer')
         .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setAttr('args', 2)
   .setAliases([{ cut: 'gr', prefix: true }])
   // .OwnersOnly()
 

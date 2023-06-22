@@ -11,6 +11,7 @@ module.exports = new CommandBuilder()
      .setName('username')
      .setDescription('Username to get its information')                                                            
      .setRequired(true)))
+  .setAttr('args', 1)
   .setGlobal(GlobalExecute)
 
 async function GlobalExecute(message, interaction) {

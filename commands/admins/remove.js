@@ -14,6 +14,7 @@ module.exports = new CommandBuilder()
         .setDescription('The amount to remove')
         .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setAttr('args', 2)
   // .OwnersOnly()
 
 async function GlobalExecute(message, interaction) { 

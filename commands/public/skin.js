@@ -12,6 +12,8 @@ module.exports = new CommandBuilder()
      .setDescription('The username to get skin for')                                                            
      .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setAttr('args', 1)
+
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;

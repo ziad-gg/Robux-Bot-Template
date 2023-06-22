@@ -12,6 +12,7 @@ module.exports = new CommandBuilder()
      .setDescription('The amount you would like to calculate')                                                   
      .setRequired(true))) 
   .setGlobal(GlobalExecute)
+  .setAttr('args', 1)
   .setAliases([{ cut: 'c', prefix: true }])
 
 async function GlobalExecute(message, interaction) {

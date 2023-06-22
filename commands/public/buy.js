@@ -11,6 +11,7 @@ module.exports = new CommandBuilder()
      .setName('amount')
      .setDescription('The amount you want to buy')                                                          
      .setRequired(true)))
+  .setAttr('args', 1)
   .setGlobal(GlobalExecute)
 
 async function GlobalExecute(message, interaction) {
