@@ -2,7 +2,7 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder, userMention  } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('remove')
+  .setName('remov')
   .setDescription('remove a new Admin.')
   .InteractionOn(new SlashCommandBuilder().addUserOption((option) => option
      .setName('admin')

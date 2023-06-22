@@ -7,5 +7,5 @@ module.exports = new Validation()
 function Exection(controller, next, end) {
   
   if (!controller.author.isOwner && controller.Command.category === 'owners') return end();
-  else next()
+  else next();
 }

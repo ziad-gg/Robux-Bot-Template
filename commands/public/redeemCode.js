@@ -6,7 +6,7 @@ module.exports = new CommandBuilder()
   .setDescription('To redeem a gift code.')
   .setUsage(['{cmdname} robuxfactory'])
   .setExample(['{cmdname} robuxfactory'])
-  .InteractionOn(new SlashCommandBuilder().addStringOption((option) => option
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
      .setName('code')
      .setDescription('The code you want to retrieve')
      .setRequired(true)))                                                    

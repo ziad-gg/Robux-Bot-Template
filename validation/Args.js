@@ -7,12 +7,9 @@ module.exports = new Validation()
 function Exection(controller, next, end) {
   const Command = controller.Command;
   const Attr = Command.getAttr('args');
-
-  
-  // console.log(Command)
-  
+    
   if (Attr) {
-    for (let i = 0; i < Attr; i++) {
+    for (let i=0;i<Attr;i++) {
       if (!controller[i]) {
         controller[0] = Command.name;
        
