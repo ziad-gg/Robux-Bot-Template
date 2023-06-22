@@ -51,7 +51,9 @@ async function GlobalExecute(message, interaction, global) {
   
   const msg = await controller.replyNoMention({ embeds: [embed], components: [row] }); 
   
-  const ButtonCollector = controller.createMessageComponentCollector({ componentType: ComponentType.Button, time });
+  // const CollecterHandler = interaction ? interaction.message : controller;
+  return console.log(interaction.message)
+  const ButtonCollector = interaction.createMessageComponentCollector({ componentType: ComponentType.Button, time });
   
   const MessageCollectorFilter = m => commands.includes(m.content.toLowerCase()) && m.author.id == controller.author.id;
   const MessageCollector = controller.channel.createMessageCollector({ filter: MessageCollectorFilter, time });

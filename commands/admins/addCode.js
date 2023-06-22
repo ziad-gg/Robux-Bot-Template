@@ -25,17 +25,17 @@ async function GlobalExecute(message, interaction) {
   const prize = +controller[1];
   const maxUsers = +controller[2];
   
-  if (!prize.isNumber()) return message.channel.send('❌ **يجب أن تقوم بوضع رقم صالح في الجائزة!**');
-  if (!maxUsers.isNumber()) return message.channel.send('❌ **يجب أن تقوم بوضع رقم صالح في الحد الأقصى!**');    
+  if (!prize.isNumber()) return controller.channel.send('❌ **يجب أن تقوم بوضع رقم صالح في الجائزة!**');
+  if (!maxUsers.isNumber()) return controller.channel.send('❌ **يجب أن تقوم بوضع رقم صالح في الحد الأقصى!**');    
     
   const gift = controller.getData('codes');
   const giftCode_ = await gift.findOne({ guildId: message.guild.id, code });
   const giftCode = await gift.findOrCreate({ guildId: message.guild.id, code });
     
-  if (giftCode_) return message.channel.send('❌ **هذا الكود مضاف بالفعل!**');
+  if (giftCode_) return controller.channel.send('❌ **هذا الكود مضاف بالفعل!**');
   giftCode.max = maxUsers;
   giftCode.prize = prize;
-  giftCode.createdBy = message.author.id;
+  giftCode.createdBy = controller.author.id;
   giftCode.redeemedBy = [];
   await giftCode.save();
 
@@ -46,7 +46,7 @@ async function GlobalExecute(message, interaction) {
   .addFields([{ name: 'Max', value: `${maxUsers}` }])
   .addFields([{ name: 'Robux', value: `${prize}` }]) 
   .setTimestamp()
-  .setFooter({ text: `${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) });
+  .setFooter({ text: controller.author.username, iconURL: controller.author.displayAvatarURL() });
   
   controller.channel.send({ embeds: [embed] });
 };

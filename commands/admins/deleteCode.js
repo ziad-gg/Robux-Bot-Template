@@ -1,5 +1,5 @@
 const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('deletecode')
@@ -16,10 +16,10 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
   const code = controller[0];
-  const giftsSchema = controller.getData('codes');
-  const giftsData = await giftsSchema.find();
+  const gifts = controller.getData('codes');
+  const giftsData = await gifts.find();
     
   if (!giftsData.map(e => e.code).includes(code)) return message.channel.send('❌ **هذا الكود غير مضاف!**');
-  await giftsSchema.findOneAndRemove({ guildId: message.guild.id, code });
+  await gifts.findOneAndRemove({ guildId: message.guild.id, code });
   message.channel.send('✅ **تم بنجاح حذف هذا الكود!**');
 };
