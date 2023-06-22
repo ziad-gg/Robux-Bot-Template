@@ -1,7 +1,7 @@
 const { Validation } = require('handler.djs');
 
 module.exports = new Validation()
-  .setCommnads('all")
+  .setCommnads('all')
   .setExecution(Exection);
 
 function Exection(controller, next, end) {
