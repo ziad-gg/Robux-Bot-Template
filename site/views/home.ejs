@@ -1,1 +1,53 @@
-<!DOCTYPE HTML><html lang=en><meta charset=utf-8><meta content="width=device-width,initial-scale=1"name=viewport><link href=./themes/main.css rel=stylesheet><meta content=https://cdn.discordapp.com/attachments/1116475279012003931/1120062108873281676/robux.png property=og:image><meta content="The Robux Bot Dashboard is a web-based interface that provides users with convenient access and control over various features and functionalities of a Robux bot. This dashboard serves as a centralized hub where users can manage their Robux balances, perform transfers, view group information, and interact with the bot's commands."name=description><meta content="The Robux Bot Dashboard is a web-based interface that provides users with convenient access and control over various features and functionalities of a Robux bot. This dashboard serves as a centralized hub where users can manage their Robux balances, perform transfers, view group information, and interact with the bot's commands."name=og:description><link href=https://cdn.discordapp.com/attachments/1116475279012003931/1120062108873281676/robux.png rel=icon type=image/png><link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css rel=stylesheet crossorigin=anonymous integrity=sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC><title><%= title%></title><header class="border-bottom navbar navbar-expand-lg navbar-light"><div class=container-fluid><a class="text-light fs-6 navbar-brand side-line"href=#><%= client.user.username%></a><div class="border border-secondary p-2 position-absolute rounded-pill start-50 top-50 translate-middle"id=navbarSupportedContent style=min-height:2rem!important><ul class=navbar-nav><li class=nav-item><a class="text-light nav-link active"href=# aria-current=page>Home</a><li class=nav-item><a class="text-light nav-link"href=/commands>Commands</a><li class=nav-item><a class="text-light nav-link"href=/dashboard#balance>Tranfer</a><li class=nav-item><a class="nav-link disabled text-muted"href=# aria-disabled=true tabindex=-1>Support</a></ul></div><%if (user) {%><button class="text-light btn btn-lg bg-danger bt-outline-dark"type=button><a class="text-light text-decoration-none"href=/logout>Logout</a></button><%} else {%><button class="text-light btn btn-lg bg-purple btn-outline-dark"type=button><a class="text-light text-decoration-none"href=/login/api>login</a></button><% }%></div></header><main class="container-fluid bd-highlight d-flex flex-column main-section pt-5"><section class="ps-5 text-start"><p class="text-light fs-1 fw-bold ms-5 text text-wrap w-27">A multifunctional bot for helping <span class=text-purple>Robux</span> servers!<p class="ms-5 text text-wrap text-muted w">Robux, Welcomer, Embed Messages, Logs, and more with an easy Dashboard!</p><button class="btn btn-secondary ms-5"type=button><a class="text-light text-decoration-none"href=/ >Support</a></button><%if (user) {%><button class="btn bg-purple btn-secondary ms-2"type=button><a class="text-light text-decoration-none"href=/login/api>Dashboard</a></button><%} else {%><button class="btn bg-purple btn-secondary ms-2"type=button><a class="text-light text-decoration-none"href=/login/api>login</a></button><% }%><img class="float-end rounded"src=https://cdn.discordapp.com/attachments/1116475279012003931/1120062108873281676/robux.png></section></main><footer class="border-top footer mt-auto py-3"><div class="container text-center"><span class=text-muted>Discord Bot Dashboard (Ziath | Slayver) © 2023</span></div></footer><script crossorigin=anonymous integrity=sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM src=https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js></script> 
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./themes/main.css">
+  <meta property="og:image" content="https://cdn.discordapp.com/attachments/1116475279012003931/1120062108873281676/robux.png">
+  <meta name="description" content="The Robux Bot Dashboard is a web-based interface that provides users with convenient access and control over various features and functionalities of a Robux bot. This dashboard serves as a centralized hub where users can manage their Robux balances, perform transfers, view group information, and interact with the bot's commands.">
+  <meta name="og:description" content="The Robux Bot Dashboard is a web-based interface that provides users with convenient access and control over various features and functionalities of a Robux bot. This dashboard serves as a centralized hub where users can manage their Robux balances, perform transfers, view group information, and interact with the bot's commands.">
+  <link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1116475279012003931/1120062108873281676/robux.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" crossorigin="anonymous" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC">
+  <title><%= title%></title>
+</head>
+<body>
+  <header class="border-bottom navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <a class="text-light fs-6 navbar-brand side-line" href="#"><%= client.user.username %></a>
+      <div class="border border-secondary p-2 position-absolute rounded-pill start-50 top-50 translate-middle" id="navbarSupportedContent" style="min-height: 2rem !important;">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="text-light nav-link active" href="<%= home.Header.home.url %>" aria-current="page"><%= home.Header.home.text %></a></li>
+          <li class="nav-item"><a class="text-light nav-link" href="<%= home.Header.commands.url %>" <% if (home.Header.commands.disabled) { %>disabled<% } %>><%= home.Header.commands.text %></a></li>
+          <li class="nav-item"><a class="text-light nav-link" href="<%= home.Header.tranfer.url %>" <% if (home.Header.tranfer.disabled) { %>disabled<% } %>><%= home.Header.tranfer.text %></a></li>
+          <li class="nav-item"><a class="nav-link disabled text-muted" href="<%= home.Header.support.url %>" <% if (home.Header.support.disabled) { %>disabled<% } %>><%= home.Header.support.text %></a></li>
+        </ul>
+      </div>
+      <% if (user) { %>
+        <button class="text-light btn btn-lg bg-danger bt-outline-dark" type="button"><a class="text-light text-decoration-none" href="<%= home.body.LogoutButton.url %>"><%= home.body.LogoutButton.text %></a></button>
+      <% } else { %>
+        <button class="text-light btn btn-lg bg-purple btn-outline-dark" type="button"><a class="text-light text-decoration-none" href="<%= home.body.LoginButton.url %>"><%= home.body.LoginButton.text %></a></button>
+      <% } %>
+    </div>
+  </header>
+  <main class="container-fluid bd-highlight d-flex flex-column main-section pt-5">
+    <section class="ps-5 text-start">
+      <p class="text-light fs-1 fw-bold ms-5 text text-wrap w-27"><%- home.body.p1 %></p>
+      <p class="ms-5 text text-wrap text-muted w"><%= home.body.p2 %></p>
+      <button class="btn btn-<%= home.body.SupportButton.style %> ms-5" type="button"><a class="text-light text-decoration-none" href="<%= home.body.SupportButton.url %>"><%= home.body.SupportButton.text %></a></button>
+      <% if (user) { %>
+        <button class="btn bg-<%= home.body.DashboardButton.style %> btn-secondary ms-2" type="button"><a class="text-light text-decoration-none" href="<%= home.body.DashboardButton.url %>"><%= home.body.DashboardButton.text %></a></button>
+      <% } else { %>
+        <button class="btn bg-<%= home.body.LoginButton.style %> btn-secondary ms-2" type="button"><a class="text-light text-decoration-none" href="<%= home.body.LoginButton.url %>"><%= home.body.LoginButton.text %></a></button>
+      <% } %>
+      <img class="float-end rounded" src="<%= home.body.LeftImg.url %>">
+    </section>
+  </main>
+  <footer class="border-top footer mt-auto py-3">
+    <div class="container text-center">
+      <span class="text-muted">Discord Bot Dashboard (Ziath | Slayver) © 2023</span>
+    </div>
+  </footer>
+  <script crossorigin="anonymous" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

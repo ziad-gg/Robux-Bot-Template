@@ -1,10 +1,12 @@
 const express = require('express');
 const client = require('../../index.js');
+const pages = require('../../src/Dashboard.Constants.js')
 const { ensureAuthenticated, forwardAuthenticated } = require('../auth/auth');
 const router = express.Router();
 
 router.get('/', (req, res) => {
   res.render('home', {
+    home: pages.home,
     title: client.user.username + ' | ' + 'dashboard',
     client,
     user: req.user
