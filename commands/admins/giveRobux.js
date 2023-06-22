@@ -8,7 +8,7 @@ module.exports = new CommandBuilder()
   .setDescription('Transfer robux into someone.')
   .setUsage(['{cmdname} (username) (amount)'])
   .setExample(['{cmdname} {rusername} {snumber}'])
-  .setCategory('public')
+  // .setCategory('public')
   .setCooldown('20s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(true).addStringOption((option) => option
      .setName('username')

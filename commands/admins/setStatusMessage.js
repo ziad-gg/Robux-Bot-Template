@@ -40,7 +40,7 @@ async function GlobalExecute(message, interaction, global) {
   
   if (guildData.schannels.find(e => e.ChannelId === channel.id)) {
     const { MessageId } = guildData.schannels.find(e => e.ChannelId === channel.id);
-    const msg = await channel.messages.cache.get(MessageId);
+    const msg = await channel.messages.fetch(MessageId).then(m => m).catch(e => null);
     if (msg) msg.delete();
     await Guilds.updateOne({ id: controller.guild.id }, { $pull: { schannels: { ChannelId: channel.id } } } );
     return controller.replyNoMention({ content: '✅ **تم حذف هذه القناه بنجاح**' })
