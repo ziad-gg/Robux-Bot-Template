@@ -22,7 +22,7 @@ async function GlobalExecute(message, interaction, global) {
   const channelId = controller[0]?.toId();
   
   if (!channelId) {
-    if (!guildData.codesChannel) return controller.replyNoMention({ content: '❌ **لم يتم تحديد قناه **' });
+    if (!guildData.codesChannel) return controller.replyNoMention({ content: '❌ **يجب ان تقوم بتحديد قناه للاكواد اولا حتي تتمكن من مسحها**' });
       delete guildData.codesChannel;
       await guildData.save();
     
