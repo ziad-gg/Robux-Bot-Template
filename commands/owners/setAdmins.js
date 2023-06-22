@@ -1,5 +1,5 @@
 const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ComponentType } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('admins')
@@ -27,7 +27,8 @@ async function GlobalExecute(message, interaction, global) {
 
   embed.setTitle(`الاوامر الذ يستطيع التحكم بها`);
   
-  const commands = [];
+  let time = 500000
+  let commands = [];
 
   await controller.client.Application.commands.filter(cmd => cmd.category == 'admins').forEach((value, key) => {
     commands.push(key);
@@ -48,21 +49,30 @@ async function GlobalExecute(message, interaction, global) {
   const row = new ActionRowBuilder()
     .addComponents(confirm, cancel);
   
-  const m = await controller.replyNoMention({ embeds: [embed], components: [row] }); 
+  const msg = await controller.replyNoMention({ embeds: [embed], components: [row] }); 
   
-  const collectorFilter = m => commands.includes(m.content.toLowerCase()) && m.author.id == controller.author.id;
-  const collector = controller.channel.createMessageCollector({ filter: collectorFilter, time: 500000 });
+  const ButtonCollector = controller.createMessageComponentCollector({ componentType: ComponentType.Button, time });
+  
+  const MessageCollectorFilter = m => commands.includes(m.content.toLowerCase()) && m.author.id == controller.author.id;
+  const MessageCollector = controller.channel.createMessageCollector({ filter: MessageCollectorFilter, time });
 
-  collector.on('collect', m => {
-    console.log(m.content)
-    const index = commands.indexOf(m.content.toLowerCase());
+  MessageCollector.on('collect', m => {
     if (commands.length === 1) return;
-    commands.splice(index, 1);
+    commands = commands.filter(command => command != m.content.toLowerCase());
     embed.setDescription(commands.join("\n\ ") + "\n\ \n\ لمسح اي امر من هذه الاوامر قم بكتابه اسمه فقط");
-    m.edit(embed).catch(e => {});
+    msg.edit({embeds: [embed]}).catch(console.log);
   });
   
+  MessageCollector.on('end', () => {
+    msg.delete().catch(console.log);
+    message.delete().catch(console.log);
+  });
   
+
+  ButtonCollector.on('collect', i => {
+  });
+
+
 }
 
 async function InteractionExecute(interaction, global) {};

@@ -25,14 +25,14 @@ async function GlobalExecute(message, interaction) {
   const prize = +controller[1];
   const maxUsers = +controller[2];
   
-  if (!prize.isNumber()) return message.channel.send('Prize must be a number');
-  if (!maxUsers.isNumber()) return message.channel.send('Maxusers must be a number');    
+  if (!prize.isNumber()) return message.channel.send('❌ **يجب أن تقوم بوضع رقم صالح في الجائزة!**');
+  if (!maxUsers.isNumber()) return message.channel.send('❌ **يجب أن تقوم بوضع رقم صالح في الحد الأقصى!**');    
     
   const gift = controller.getData('codes');
   const giftCode_ = await gift.findOne({ guildId: message.guild.id, code });
   const giftCode = await gift.findOrCreate({ guildId: message.guild.id, code });
     
-  if (giftCode_) return message.channel.send('The code is already added');
+  if (giftCode_) return message.channel.send('❌ **هذا الكود مضاف بالفعل!**');
   giftCode.max = maxUsers;
   giftCode.prize = prize;
   giftCode.createdBy = message.author.id;
