@@ -14,10 +14,10 @@ function Exection(controller, next, end) {
   if (Attr) {
     for (let i = 0; i < Attr; i++) {
       if (!controller[i]) {
-      controller[i] = null
-       controller[0] = Command.name;
+        controller[0] = Command.name;
        
         const Help = controller.Application.getCommand("help");
+        for (i = 1; i < 10; i++) controller[i] = null 
         Help.global(controller);
         return end();
       }
