@@ -30,6 +30,7 @@ client.Application.setData({
   roblox: zoblox, 
   buy_cooldowns: new Map(),
   guilds: require('./src/models/Guilds.js'),
+  codes: require('./src/models/Codes.js'),
   users: require('./src/models/Users.js'),
   Constants: require('./src/Constants.js'),
   functions: { 
