@@ -30,6 +30,10 @@ const Schema = new mongoose.Schema({
     MessageId: String, 
     ChannelId: String 
   }],
+  admins: [{
+    id: String,
+    commands: [String]
+  }],
   buy: {
     max: { 
       type: Number, 
