@@ -50,7 +50,15 @@ function UpdateStatusMessages (guildData, client) {
     };
     
   })
-}
+};
+
+async function FormateNumber() {
+  if (this < 1e3) return this;
+  if (this >= 1e3 && this < 1e6) return +(this / 1e3).toFixed(1) + "K";
+  if (this >= 1e6 && this < 1e9) return +(this / 1e6).toFixed(1) + "M";
+  if (this >= 1e9 && this < 1e12) return +(this / 1e9).toFixed(1) + "B";
+  if (this >= 1e12) return +(this / 1e12).toFixed(1) + "T";
+};
 
 String.prototype.toId = toId;
 String.prototype.isNumber = isNumber;
@@ -59,6 +67,7 @@ String.prototype.randomNum = randomNum;
 
 Number.prototype.isNumber = isNumber;
 Number.prototype.isInteger = isInteger;
+Number.prototype.FormateNumber = FormateNumber;
 
 Message.prototype.replyNoMention = replyNoMention;
 

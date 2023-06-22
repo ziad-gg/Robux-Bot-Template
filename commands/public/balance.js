@@ -24,7 +24,7 @@ async function GlobalExecute(message, interaction) {
   if (user.bot) return controller.replyNoMention({ content: '❌ **البوتات لا تملك حساب!**' });
   
   const userData = await usersData.get(user.id);
-  const msg = user.id === controller.author.id ? `**رصيد حسابك هو \`${userData.balance}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.balance}\`** 🪙`;
+  const msg = user.id === controller.author.id ? `**رصيد حسابك هو \`${await userData.balance.FormateNumber()}\`** 🪙` : `**رصيد ${user.username} هو \`${await userData.balance.FormateNumber()}\`** 🪙`;
   
   controller.replyNoMention({ content: msg });
 };
