@@ -10,7 +10,6 @@ const router = express.Router();
 
 router.post('/transfer', async (req, res) => {
   const controller = client.Application;
-  //const botToken = req.headers.authorization;
   
   const roblox = controller.getData('roblox');
   const guildData = await controller.getData('guilds').get(DEFAULT_GUILD);
@@ -24,6 +23,11 @@ router.post('/transfer', async (req, res) => {
 
   if (!userId || !username || !amount || !amount.isNumber()) return res.json({ error: true, message: '❌ Invalid Arguments' });
 
+  const Guild = await client.guilds.cache.get(DEFAULT_GUILD);
+  const GuildMember = await Guild.members.fetch(userId).then(u => u).catch(e => null);
+  
+  if (!GuildMember) return res.json({ error: true, message: `❌ لا يمكنني العثور عليك في ${Guild.name}` });
+  
   if (guildData.transfer.min > amount) return res.json({ error: true, message: `❌ الحد الأدنى للتحويل هو ${guildData.transfer.min}` });
   if (guildData.transfer.max > 0 && guildData.transfer.max < amount) return res.json({ error: true, message: `❌ الحد الأقصى التحويل هو ${guildData.transfer.max}` });
   
