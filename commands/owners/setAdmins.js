@@ -1,5 +1,5 @@
 const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('admins')
@@ -25,13 +25,22 @@ async function GlobalExecute(message, interaction, global) {
   const isAdmin = guildData.admins.find(admin => admin.id = user.id);
   if (isAdmin) return controller.replyNoMention('❌ **هذا المسخدم في قائمه الادمن بالفعل**');
   
+  return console.log `${controller.Application.commands.map(mapCommmands)}`
+  
   const select = new StringSelectMenuBuilder()
 			.setCustomId('starter')
 			.setPlaceholder('Make a selection!')
-			// .addOptions(...controller.Application.commands.map(cmd => cmd.category === 'admins' && ))
+			.addOptions();
+  
+  const row = new ActionRowBuilder()
+		.addComponents(select);
+  
+  controller.replyNoMention({ components: [row] })
 }
 
 async function InteractionExecute(interaction, global) {};
 async function MessageExecute(message, Global) {};
 
-functi
+function mapCommmands (cmd) {
+   return new StringSelectMenuOptionBuilder().setLabel(cmd.name).setDescription(cmd.description).setValue(cmd.name)
+}
