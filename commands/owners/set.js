@@ -17,7 +17,6 @@ module.exports = new CommandBuilder()
      { command: 'clientsrole' },
      { command: 'smessage' },
      { command: 'proofschannel' },
-     { command: 'add', group: 'admins' },
      { command: 'max', group: 'buy' },
      { command: 'min', group: 'buy' },
      { command: 'status', group: 'buy' },
