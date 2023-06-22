@@ -25,12 +25,16 @@ async function GlobalExecute(message, interaction, global) {
   const isAdmin = guildData.admins.find(admin => admin.id = user.id);
   if (isAdmin) return controller.replyNoMention('❌ **هذا المستخدم مضاف بالفعل!**');
   
-  const options = controller.Application.commands.map(mapCommmands)
+  const options = controller.Application.commands.map(mapCommmands);
   
   const select = new StringSelectMenuBuilder()
-			.setCustomId('starter')
-			.setPlaceholder('Make a selection!')
-			.addOptions(options);
+		.setCustomId('starter')
+		.setPlaceholder('Make a selection!')
+    .setMinValues(1);
+	
+  await options.forEach(op => {
+    select.addOptions(op);
+  });
   
   const row = new ActionRowBuilder()
 		.addComponents(select);
