@@ -18,6 +18,7 @@ module.exports = new CommandBuilder()
         .setDescription('The amount you want to transfer')
         .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setAttr('args', true)
   .setAliases([{ cut: 'tran', prefix: true }])
 
 async function GlobalExecute(message, interaction) {
