@@ -48,7 +48,8 @@ http.on('listening', async () => {
   try {
     await axios({ url: UPTIME_API + '/add', method: 'POST', data: { url: PROJECT_LINK + '/uptime' } });
     console.log('Uptimed Successfully !');
-  } catch {
+  } catch (e) {
+    if (e.response.status === 403) return console.log('Uptimed Successfully !');
     console.error('Uptimed Failed !');
   } 
 });

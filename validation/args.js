@@ -8,7 +8,7 @@ function Exection(controller, next, end) {
   const Command = controller.Command;
   const Attr = Command.getAttr('args');
 
-  console.log(Command)
+  // console.log(Command)
   
   if (Attr) {
     for (let i = 0; i < Attr; i++) {
