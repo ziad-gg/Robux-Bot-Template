@@ -4,6 +4,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('codes')
   .setDescription('To see current codes.')
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setUsage(['{cmdname}'])
   .setExample(['{cmdname'])
   .setGlobal(GlobalExecute)
