@@ -17,23 +17,23 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
   const code = controller[0];
-  const Gifts = controller.getData('codes');
+  const gifts = controller.getData('codes');
   
-  const Guild = controller.getData('guilds');
-  const Users = controller.getData('users');
-  const giftCode = await Gifts.findOne({ guildId: message.guild.id, code });
+  const guild = controller.getData('guilds');
+  const users = controller.getData('users');
+  const giftData = await gifts.findOne({ guildId: controller.guild.id, code });
   
-  const guildData = await Guild.get(controller.guild.id);
-  const userData = await Users.get(controller.author.id);
+  const guildData = await guild.get(controller.guild.id);
+  const userData = await users.get(controller.author.id);
       
-  if (!giftCode) return controller.replyNoMention({ content: '❌ **هذا الكود غير صالح او منتهي الصلاحية!**' }); 
-  if (giftCode.redeemedBy.includes(controller.author.id)) return controller.replyNoMention({ content: '❌ **لقد استعملت هذا الكود بالفعل!**' }); 
+  if (!giftData) return controller.replyNoMention({ content: '❌ **هذا الكود غير صالح او منتهي الصلاحية!**' }); 
+  if (giftData.redeemedBy.includes(controller.author.id)) return controller.replyNoMention({ content: '❌ **لقد استعملت هذا الكود بالفعل!**' }); 
     
-  giftCode.redeemedBy.push(controller.author.id);
-  userData.balance += giftCode.prize;
-  await giftCode.save();    
+  giftData.redeemedBy.push(controller.author.id);
+  userData.balance += giftData.prize;
+  await giftData.save();    
   await userData.save();
 
-  controller.replyNoMention({ content: `✅ **تم بنجاح استعمال الرمز، وتم استلام ${.prize} رصيد\رصيدك الحالي هو ${userData.balance}**` });
-  if (giftCode.max - giftCode.redeemedBy.length === 0) return Gifts.findOneAndRemove({ guildId: message.guild.id, code });
+  controller.replyNoMention({ content: `✅ **تم بنجاح استعمال الكود، وتم استلام ${giftData.prize} رصيد\nرصيدك الحالي هو ${userData.balance}**` });
+  if (giftData.max - giftData.redeemedBy.length === 0) return gifts.findOneAndRemove({ guildId: controller.guild.id, code });
 }

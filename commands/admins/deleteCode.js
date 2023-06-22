@@ -20,6 +20,6 @@ async function GlobalExecute(message, interaction) {
   const giftsData = await gifts.find();
     
   if (!giftsData.map(e => e.code).includes(code)) return controller.channel.send('❌ **هذا الكود غير مضاف!**');
-  await gifts.findOneAndRemove({ guildId: message.guild.id, code });
+  await gifts.findOneAndRemove({ guildId: controller.guild.id, code });
   controller.channel.send('✅ **تم بنجاح حذف هذا الكود!**');
 };

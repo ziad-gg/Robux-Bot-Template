@@ -29,8 +29,8 @@ async function GlobalExecute(message, interaction) {
   if (!maxUsers.isNumber()) return controller.channel.send('❌ **يجب أن تقوم بوضع رقم صالح في الحد الأقصى!**');    
     
   const gift = controller.getData('codes');
-  const giftCode_ = await gift.findOne({ guildId: message.guild.id, code });
-  const giftCode = await gift.findOrCreate({ guildId: message.guild.id, code });
+  const giftCode_ = await gift.findOne({ guildId: controller.guild.id, code });
+  const giftCode = await gift.findOrCreate({ guildId: controller.guild.id, code });
     
   if (giftCode_) return controller.channel.send('❌ **هذا الكود مضاف بالفعل!**');
   giftCode.max = maxUsers;
