@@ -30,8 +30,6 @@ async function GlobalExecute(message, interaction) {
   const username = controller[0];
   const amount = +controller[1];
   
-  if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسمك في روبلوكس!**' });
-  if (!controller[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
 
   const userData = await usersData.get(controller.author.id);

@@ -21,10 +21,8 @@ async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   const usersData = controller.getData('users');
   const userId = controller[0]?.toId();
-  if (!userId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد المستخدم!**' });
   
   const amount = +controller[1];
-  if (!controller[1]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
   
   const user = await controller.getUser(userId).then(u => u?.user?.id? u.user : u);

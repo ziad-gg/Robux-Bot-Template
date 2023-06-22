@@ -19,7 +19,6 @@ async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   const amount = parseInt(controller[0]);
   
-  if (!amount) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
     
   const guildsData = controller.getData('guilds');

@@ -26,7 +26,6 @@ async function GlobalExecute(message, interaction) {
   if (cooldowns.has(key)) return controller.replyNoMention({ content: '❌ **لديك عملية شراء بالفعل!**' });
 
   const amount = +controller[0];
-  if (!controller[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تريده!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
   
   const time = 3e5;

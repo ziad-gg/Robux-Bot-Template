@@ -1,5 +1,5 @@
 const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ComponentType } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ComponentType, userMention  } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('admins')
@@ -17,8 +17,10 @@ async function GlobalExecute(message, interaction, global) {
   
   const controller = message ?? interaction;
   const guildData = await global;
+  const Guilds = controller.getData('guilds')
   const userId = controller[0]?.toId();
-  // if (!userId) return
+  
+  if (!userId) return controller.replyNoMention({ content: '' })
   
   const user = await controller.getUser(userId).then(u => u?.user?.id? u.user : u);
   const isAdmin = guildData.admins.find(admin => admin.id = user.id);
@@ -27,7 +29,7 @@ async function GlobalExecute(message, interaction, global) {
 
   embed.setTitle(`الاوامر الذ يستطيع التحكم بها`);
   
-  let time = 500000
+  let time = 500000;
   let commands = [];
 
   await controller.client.Application.commands.filter(cmd => cmd.category == 'admins').forEach((value, key) => {
@@ -51,9 +53,7 @@ async function GlobalExecute(message, interaction, global) {
   
   const msg = await controller.replyNoMention({ embeds: [embed], components: [row] }); 
   
-  // const CollecterHandler = interaction ? interaction.message : controller;
-  return console.log(interaction.message)
-  const ButtonCollector = interaction.createMessageComponentCollector({ componentType: ComponentType.Button, time });
+  const ButtonCollector = msg.createMessageComponentCollector({ componentType: ComponentType.Button, time });
   
   const MessageCollectorFilter = m => commands.includes(m.content.toLowerCase()) && m.author.id == controller.author.id;
   const MessageCollector = controller.channel.createMessageCollector({ filter: MessageCollectorFilter, time });
@@ -67,11 +67,21 @@ async function GlobalExecute(message, interaction, global) {
   
   MessageCollector.on('end', () => {
     msg.delete().catch(console.log);
-    message.delete().catch(console.log);
+    controller.delete().catch(console.log);
   });
   
 
-  ButtonCollector.on('collect', i => {
+  ButtonCollector.on('collect', async i => {
+    if (i.customId == 'confirm') {
+      Guilds.updateOne({ id: controller.guild.id }, { $push: { admins: { id: userId, commands } } });
+      await i.reply({ embeds: [new EmbedBuilder().setDescription(`${userMention(userId)} added `)] });
+      msg.delete().catch(console.log);
+    }
+    
+    if (i.customId == 'cancel') {
+      msg.delete().catch(console.log);
+    }
+    
   });
 
 

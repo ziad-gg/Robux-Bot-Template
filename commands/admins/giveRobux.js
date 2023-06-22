@@ -28,8 +28,6 @@ async function GlobalExecute(message, interaction) {
   const username = controller[0];
   const amount = +controller[1];
   
-  if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الاسم!**' });
-  if (!controller[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم عدد الروبكس!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
 
   let user = await roblox.users.find({ userNames: username });

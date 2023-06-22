@@ -21,7 +21,6 @@ async function GlobalExecute(message, interaction) {
     const roblox = message ? message.getData('roblox') : interaction.getData('roblox');
     const username = controller[0];
   
-    if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسم المستخدم!**' });
     let user = await roblox.users.find({ userNames: username });
   
     if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' });
