@@ -33,7 +33,7 @@ async function GlobalExecute(message, interaction) {
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
 
   let user = await roblox.users.find({ userNames: username });
-  if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' })
+  if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' });
   user = await roblox.users.get(user.id);
 
   const guildData = await controller.getData('guilds').get(controller.guild.id);

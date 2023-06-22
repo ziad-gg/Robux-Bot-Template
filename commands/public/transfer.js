@@ -21,7 +21,7 @@ module.exports = new CommandBuilder()
   .setAliases([{ cut: 'tran', prefix: true }])
 
 async function GlobalExecute(message, interaction) {
-//  const controller = message ?? interaction;
+  const controller = message ?? interaction;
   const roblox = controller.getData('roblox');
   const guildsData = controller.getData('guilds');
   
@@ -37,7 +37,7 @@ async function GlobalExecute(message, interaction) {
   if (userData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
 
   let user = await roblox.users.find({ userNames: username });
-  if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' })
+  if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' });
   user = await roblox.users.get(user.id);
 
   const guildData = await guildsData.get(controller.guild?.id || DEFAULT_GUILD);
@@ -48,7 +48,7 @@ async function GlobalExecute(message, interaction) {
   if (guildData.transfer.max > 0 && guildData.transfer.max < amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأقصى للتحويل هو ${guildData.transfer.max}**` });
   
   const member = await group.members.get(user.id);
-  if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${group}`});
+  if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${group}` });
 
   const robux = await group.fetchCurrency().then((e) => e.robux);
   if (robux < amount) return controller.replyNoMention({ content: '❌ **عذرا ولاكن هذا العدد غير متوفر في الجروب في الوقت الحالي!**' });
