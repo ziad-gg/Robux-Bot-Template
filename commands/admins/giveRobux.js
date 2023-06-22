@@ -22,31 +22,27 @@ module.exports = new CommandBuilder()
   .OwnersOnly()
 
 async function GlobalExecute(message, interaction) {
-  let controller = {};
-  if (interaction) interaction.deferReply({ ephemeral: false });
-  const controller_ = message ?? interaction;
-  const roblox = controller_.getData('roblox');
+  const controller = message ?? interaction;
+  const roblox = controller.getData('roblox');
   
-  const username = controller_[0];
-  const amount = +controller_[1];
-
-  controller.replyNoMention = (obj) => interaction ? interaction.editReply(obj) : message.replyNoMention(obj);
+  const username = controller[0];
+  const amount = +controller[1];
   
   if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الاسم!**' });
-  if (!controller_[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم عدد الروبكس!**' });
+  if (!controller[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم عدد الروبكس!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
 
   let user = await roblox.users.find({ userNames: username });
   if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' })
   user = await roblox.users.get(user.id);
 
-  const guildData = await controller_.getData('guilds').get(controller_.guild.id);
+  const guildData = await controller.getData('guilds').get(controller.guild.id);
   const group = await roblox.groups.get(guildData.groupId);
   const member = await group.members.get(user.id);
-  if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${group}`});
+  if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${group}` });
 
   const robux = await group.fetchCurrency().then((e) => e.robux);
-  if (robux < amount) return controller.replyNoMention({ content: '❌ **عذرا ولاكن هذا العدد غير متوفر في الجروب في الوقت الحالي!**' });
+  if (robux < amount) return controller.replyNoMention({ content: '❌ **هذا العدد من الروبكس غير متوفر في الجروب في الوقت الحالي!**' });
 
   try {
   await member.payout({ amount });

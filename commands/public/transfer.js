@@ -21,33 +21,29 @@ module.exports = new CommandBuilder()
   .setAliases([{ cut: 'tran', prefix: true }])
 
 async function GlobalExecute(message, interaction) {
-  let controller = {};
-  if (interaction) interaction.deferReply({ ephemeral: false });
-  const controller_ = message ?? interaction;
-  const roblox = controller_.getData('roblox');
-  const guildsData = controller_.getData('guilds');
+//  const controller = message ?? interaction;
+  const roblox = controller.getData('roblox');
+  const guildsData = controller.getData('guilds');
   
-  const usersData = controller_.getData('users');
-  const username = controller_[0];
-  const amount = +controller_[1];
-
-  controller.replyNoMention = (obj) => interaction ? interaction.editReply(obj) : message.replyNoMention(obj);
+  const usersData = controller.getData('users');
+  const username = controller[0];
+  const amount = +controller[1];
   
   if (!username) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد اسمك في روبلوكس!**' });
-  if (!controller_[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
+  if (!controller[0]) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد الرصيد الذي تود سحبه!**' });
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
 
-  const userData = await usersData.get(controller_.author.id);
+  const userData = await usersData.get(controller.author.id);
   if (userData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
 
   let user = await roblox.users.find({ userNames: username });
   if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' })
   user = await roblox.users.get(user.id);
 
-  const guildData = await guildsData.get(controller_.guild?.id || DEFAULT_GUILD);
+  const guildData = await guildsData.get(controller.guild?.id || DEFAULT_GUILD);
   const group = await roblox.groups.get(guildData.groupId);
   
-  if (!controller_.author.isOwner && !guildData.transfer.status) return controller.replyNoMention({ content: '❌ **نظام السحب مقفل في الوقت الحالي!**' });
+  if (!controller.author.isOwner && !guildData.transfer.status) return controller.replyNoMention({ content: '❌ **نظام السحب مقفل في الوقت الحالي!**' });
   if (guildData.transfer.min > amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأدنى للتحويل هو ${guildData.transfer.min}**` });
   if (guildData.transfer.max > 0 && guildData.transfer.max < amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأقصى للتحويل هو ${guildData.transfer.max}**` });
   
@@ -87,10 +83,10 @@ async function GlobalExecute(message, interaction) {
     ctx.drawImage(userImage, 11.5,16.5,35,35);
     
     const attach = new AttachmentBuilder(canvas.toBuffer(), { name: 'payout.png' });
-    const channel = await controller_.client.channels.cache.get(guildData.proofsChannel);
+    const channel = await controller.client.channels.cache.get(guildData.proofsChannel);
     
     if (channel) {
-      channel.send({ content: `**تم الشراء بواسطة: ${controller_.author}**`, files: [attach] });
+      channel.send({ content: `**تم الشراء بواسطة: ${controller.author}**`, files: [attach] });
     } else {
       controller.replyNoMention({ files: [attach] });
     }
