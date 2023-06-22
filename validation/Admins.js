@@ -12,11 +12,10 @@ async function Exection(controller, next, end) {
     const Guild = await Guilds.get(Constants.DEFAULT_GUILD); 
     const Admins = Guild.admins;
     const isAdmin = Admins.find(admin => admin.id === controller.author.id);
-    if (!isAdmin || !isAdmin.commands.includes(controller.Command.name)) {
-      controller.replyNoMention("Your not In Admins List")
+    if ((!isAdmin || !isAdmin.commands.includes(controller.Command.name)) && !controller.author.isOwner) {
       return end()
     } else {
-            
+      return next();
     }
   };
 }

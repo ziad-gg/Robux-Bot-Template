@@ -17,6 +17,9 @@ async function GlobalExecute(message, interaction) {
   const client = controller.client;
   
   const roblox = controller.getData('roblox');
+  const Guilds = controller.getData('guilds');
+  const Guild = await controller.get(controller.guild.id);
+  const isAdmin = Guild.admins.find(admin => admin.id === controller.author.id);
   const Constants = controller.getData('Constants');
   const command = controller[0]?.toLowerCase();
   
@@ -64,13 +67,15 @@ async function GlobalExecute(message, interaction) {
 
     const general = commands.filter(cmd => cmd.category === 'public').map(cmd => cmd.name);
     const admins = commands.filter(cmd => cmd.category === 'admins').map(cmd => cmd.name);
+    const owners = commands.filter(cmd => cmd.category === 'owners').map(cmd => cmd.name);
 
     embed.setTitle(`قائمة أوامر ${controller.guild.name}`);
     embed.setDescription(`**للحصول على معلومات أكثر حول أمر معين ، اكتب : ${client.Application.prefix}help <command name>**`)
     embed.setThumbnail(controller.guild.iconURL())
 
     if (general.length) embed.addFields([{ name: 'General Commands', value: general.join(', ') }]);
-    if (admins.length && controller.author.isOwner) embed.addFields([{ name: 'Admins Commands', value: admins.join(', ') }]);
+    if (admins.length && (controller.author.isOwner || isAdmin)) embed.addFields([{ name: 'Admins Commands', value: admins.join(', ') }]);
+    if (owners.length && (controller.author.isOwner)) embed.addFields([{ name: 'owners Commands', value: admins.join(', ') }]);
   };
   
   controller.replyNoMention({ embeds: [embed], components: [link] });
