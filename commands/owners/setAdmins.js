@@ -25,15 +25,17 @@ async function GlobalExecute(message, interaction, global) {
   const isAdmin = guildData.admins.find(admin => admin.id = user.id);
   if (isAdmin) return controller.replyNoMention('❌ **هذا المستخدم مضاف بالفعل!**');
   
-  const options = controller.Application.commands.map(mapCommmands);
+  const options = controller.Application.commands.map(mapCommmands).filter(op => op?.data);
   
   const select = new StringSelectMenuBuilder()
 		.setCustomId('starter')
 		.setPlaceholder('Make a selection!')
-    .setMinValues(1);
+    .setMinValues(1)
+  	.setMaxValues(options.length);
+
 	
-  await options.forEach(op => {
-    select.addOptions(op);
+  await options.forEach(op => {    
+    if (op) select.addOptions(op); 
   });
   
   const row = new ActionRowBuilder()
@@ -46,5 +48,5 @@ async function InteractionExecute(interaction, global) {};
 async function MessageExecute(message, Global) {};
 
 function mapCommmands (cmd) {
-   if (cmd.category === 'admins') return new StringSelectMenuOptionBuilder().setLabel(cmd.name).setDescription(cmd.description).setValue(cmd.name)
+   if (cmd.category === 'admins') return new StringSelectMenuOptionBuilder().setLabel(cmd.name).setDescription(cmd.description).setValue(cmd.name).setDefault(true)
 }
