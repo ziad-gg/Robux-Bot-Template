@@ -1,7 +1,7 @@
 const { Validation } = require('handler.djs');
 
 module.exports = new Validation()
-  .setCommnads("all")
+  .setCommnads('all")
   .setExecution(Exection);
 
 function Exection(controller, next, end) {
@@ -13,8 +13,8 @@ function Exection(controller, next, end) {
       if (!controller[i]) {
         controller[0] = Command.name;
        
-        const Help = controller.Application.getCommand("help");
-        for (i = 1; i < 10; i++) controller[i] = null 
+        const Help = controller.Application.getCommand('help');
+        for (i=1;i<10;i++) controller[i] = null;
         Help.global(controller);
         return end();
       }

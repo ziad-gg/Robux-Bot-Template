@@ -10,8 +10,8 @@ module.exports = new CommandBuilder()
   .setGlobal(GlobalExecute)
   .OwnersOnly()
   .setSubcommands([
-     { command: 'add', group: 'admins' },
-     { command: 'remov', group: 'admins' },
+     { command: 'add' },
+     { command: 'remove' },
   ]);
 
 async function GlobalExecute(message, interaction) {
