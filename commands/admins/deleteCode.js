@@ -21,5 +21,5 @@ async function GlobalExecute(message, interaction) {
     
   if (!giftsData.map(e => e.code).includes(code)) return message.channel.send('❌ **هذا الكود غير مضاف!**');
   await giftsSchema.findOneAndRemove({ guildId: message.guild.id, code });
-  message.channel.send('✅ **تم بنجاح هدا**');
+  message.channel.send('✅ **تم بنجاح حذف هذا الكود!**');
 };

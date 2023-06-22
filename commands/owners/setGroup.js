@@ -4,7 +4,6 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('group')
   .setDescription('Sets the group.')
-  .setCategory('admins')
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
      .setName('group')
      .setDescription('The group ID you want')

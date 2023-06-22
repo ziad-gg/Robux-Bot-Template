@@ -25,9 +25,9 @@ async function GlobalExecute(message, interaction) {
 
   if (command && command !== 'help') {
     let cmd = client.Application.getCommand(command) || client.Application.getCommandByCut(command);
-    if (!cmd || (!controller.author.isOwner && cmd.category === 'admins') || cmd.isSubCommand) return controller.replyNoMention({ content: '❌ **هذا الأمر غير موجود!**' });
+    if (!cmd || cmd.isSubCommand) return controller.replyNoMention({ content: '❌ **هذا الأمر غير موجود!**' });
     
-    embed.setTitle(`Command: ${cmd.name}`); 
+    embed.setTitle(`Command: ${cmd.name}`);
     
     const SubCommands = cmd.SubCommands;
     const GroupName = controller[1]?.toLowerCase();

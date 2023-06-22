@@ -14,7 +14,9 @@ function Exection(controller, next, end) {
   if (Attr) {
     for (let i = 0; i < Attr; i++) {
       if (!controller[i]) {
-       controller[0] = Command.name; 
+      controller[i] = null
+       controller[0] = Command.name;
+       
         const Help = controller.Application.getCommand("help");
         Help.global(controller);
         return end();
