@@ -24,6 +24,9 @@ async function GlobalExecute(message, interaction) {
   const giftData = await gifts.findOne({ guildId: controller.guild.id, code });
   
   const guildData = await guild.get(controller.guild.id);
+  const codesChannel = controller.client.channels.cache.get(guildData.codesChannel);
+  if (codesChannel && (controller.channel.id !== codesChannel.id)) return controller.replyNoMention(`❌ **يجب أن تكتب الأكواد في روم ${codesChannel}**`);
+  
   const userData = await users.get(controller.author.id);
       
   if (!giftData) return controller.replyNoMention({ content: '❌ **هذا الكود غير صالح او منتهي الصلاحية!**' }); 
