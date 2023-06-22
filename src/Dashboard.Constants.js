@@ -8,7 +8,7 @@ module.exports = {
       },
       commands: {
         text: 'Commands',
-        url: '/',
+        url: '/commands',
         disabled: true,
       },
       tranfer: {
@@ -18,7 +18,7 @@ module.exports = {
       },
       support: {
         text: 'Support',
-        url: '',
+        url: 'https://discord.gg/vbda2fvp',
         disabled: false,
       },
     },
@@ -27,7 +27,7 @@ module.exports = {
       p2: 'Robux, Welcomer, Embed Messages, Logs, and more with an easy Dashboard!',
       SupportButton: {
         style: 'secondary',
-        url: '',
+        url: 'https://discord.gg/vbda2fvp',
         text: 'Support'
       },
       DashboardButton: {
