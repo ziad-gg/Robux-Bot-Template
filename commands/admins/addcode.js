@@ -25,9 +25,6 @@ async function GlobalExecute(message, interaction) {
   const prize = +controller[1];
   const maxUsers = +controller[2];
   
-  if (!code) return message.channel.send('Please select code');
-  if (!controller[1]) return message.channel.send('Please select a code balance');
-  if (!controller[2]) return message.channel.send('Please select limit');
   if (!prize.isNumber()) return message.channel.send('Prize must be a number');
   if (!maxUsers.isNumber()) return message.channel.send('Maxusers must be a number');    
     
@@ -49,7 +46,7 @@ async function GlobalExecute(message, interaction) {
   .addFields([{ name: 'Max', value: `${maxUsers}` }])
   .addFields([{ name: 'Robux', value: `${prize}` }]) 
   .setTimestamp()
-  .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) });
+  .setFooter({ text: `${message.author.username}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) });
   
   controller.channel.send({ embeds: [embed] });
 };

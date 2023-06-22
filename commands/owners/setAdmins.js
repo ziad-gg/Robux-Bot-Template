@@ -1,5 +1,5 @@
 const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, ComponentType } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('admins')
@@ -25,7 +25,7 @@ async function GlobalExecute(message, interaction, global) {
   const isAdmin = guildData.admins.find(admin => admin.id = user.id);
   if (isAdmin) return controller.replyNoMention('❌ **هذا المستخدم مضاف بالفعل!**');
   
-  const embed = new EmbedBuilder().setDescription("> **قم بتحديد **")
+  const embed = new EmbedBuilder().setDescription("> **قم بتحديد الاوامر التي تريد إعطاؤه للادمن **")
   const options = controller.Application.commands.map(mapCommmands).filter(op => op?.data);
   
   const select = new StringSelectMenuBuilder()
@@ -42,7 +42,17 @@ async function GlobalExecute(message, interaction, global) {
   const row = new ActionRowBuilder()
 		.addComponents(select);
   
-  controller.replyNoMention({ components: [row] })
+  controller.replyNoMention({ embeds: [embed], components: [row] });
+  
+  const collectorFilter = i => i.deferReply() && i.user.id === interaction.user.id 
+
+  controller.awaitMessageComponent({ filter: collectorFilter, componentType: ComponentType.StringSelect, time: 60000 })
+	.then(interaction => {
+    interaction.editReply(`You selected ${interaction.values.join(', ')}!`) 
+  })
+	// .catch(err => console.log('No interactions were collected.'));
+  
+  
 }
 
 async function InteractionExecute(interaction, global) {};
