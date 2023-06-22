@@ -1,5 +1,5 @@
 const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('redeemcode')
@@ -23,17 +23,17 @@ async function GlobalExecute(message, interaction) {
   const Users = controller.getData('users');
   const giftCode = await Gifts.findOne({ guildId: message.guild.id, code });
   
-  const guildData = await Guild.get(message.guild.id);
-  const userData = await Users.get(message.author.id);
+  const guildData = await Guild.get(controller.guild.id);
+  const userData = await Users.get(controller.author.id);
       
-  if (!giftCode) return message.lineReplyNoMention({ embeds: [new EmbedBuilder().setColor('#f53b57').setDescription('**هذا الكود غير صالح او منتهي**')] }); 
-  if (giftCode.redeemedBy.includes(controller.author.id)) return message.lineReplyNoMention({ embeds: [new EmbedBuilder().setColor('#f53b57').setDescription(replys.redeemcode.already)] }); 
+  if (!giftCode) return controller.replyNoMention({ content: '❌ **هذا الكود غير صالح او منتهي الصلاحية!**' }); 
+  if (giftCode.redeemedBy.includes(controller.author.id)) return controller.replyNoMention({ content: '❌ **لقد استعملت هذا الكود بالفعل!**' }); 
     
-  giftCode.redeemedBy.push(message.author.id);
-  rData.balance += giftCode.prize;
-    ait giftCode.save();    
-    ait userData.save();
- 
-    msage.lineReplyNoMention({ embeds: [new EmbedBuilder().setColor(client.color).setDescription(replys.redeemcode.robux_added(giftCode.prize, userData.balance))] });
-    i(giftCode.max - giftCode.redeemedBy.length === 0) return client.db.codes.findOneAndRemove({ guildId: message.guild.id, code });
-   
+  giftCode.redeemedBy.push(controller.author.id);
+  userData.balance += giftCode.prize;
+  await giftCode.save();    
+  await userData.save();
+
+  controller.replyNoMention({ content: `✅ **تم بنجاح استعمال الرمز، وتم استلام ${.prize} رصيد\رصيدك الحالي هو ${userData.balance}**` });
+  if (giftCode.max - giftCode.redeemedBy.length === 0) return Gifts.findOneAndRemove({ guildId: message.guild.id, code });
+}
