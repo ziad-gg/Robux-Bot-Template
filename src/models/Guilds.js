@@ -23,6 +23,12 @@ const Schema = new mongoose.Schema({
   proofsChannel: { 
     type: String 
   },
+  thxChannel: { 
+    type: String 
+  },
+  codesChannel: { 
+    type: String 
+  },
   clientsRole: { 
     type: String 
   },

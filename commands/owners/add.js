@@ -25,7 +25,7 @@ async function GlobalExecute(message, interaction, global) {
   
   const user = await controller.getUser(userId).then(u => u?.user?.id? u.user : u);
   if (!user || user.bot) return controller.replyNoMention({ content: '❌ ** قم بتحديد اي دي مستخدم صحيح**' });
-  if (controller.)
+  if (controller.Application.owners.includes(user.id)) return controller.replyNoMention('❌ **الاوانر لديه صلحيات الوصول الي جميع الاوامر بالفعل**')
   const isAdmin = guildData.admins.find(admin => admin.id = user.id);
   if (isAdmin) return controller.replyNoMention('❌ **هذا الادمن مضاف بالفعل!**');
   const embed = new EmbedBuilder().setAuthor({ name: controller.author.username, iconURL: controller.author.avatarURL() })

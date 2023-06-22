@@ -2,13 +2,13 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('proofschannel')
-  .setDescription('Sets proofs channel.')
+  .setName('thxChannel')
+  .setDescription('Sets thanks channel.')
   .setUsage(['{mainName} {cmdname} (channel)'])
   .setExample(['{mainName} {cmdname} {channelMention}', '{mainName} {cmdname} {channelId}'])
   .InteractionOn(new SlashCommandBuilder().addChannelOption((option) => option
      .addChannelTypes(0)                                                       
-     .setName('channel')
+     .setName('thxchannel')
      .setDescription('The channel you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
@@ -26,12 +26,12 @@ async function GlobalExecute(message, interaction, global) {
   
   if (!channel) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة صالحة!**' });
   if (channel.type !== 0) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة كتابية!**' });
-  if (guildData.proofsChannel === channel.id) return controller.replyNoMention({ content: '❌ **هذه القناة محددة من قبل!**' });	
+  if (guildData.thxChannel === channel.id) return controller.replyNoMention({ content: '❌ **هذه القناة محددة من قبل!**' });	
   
-  guildData.proofsChannel = channel.id;
+  guildData.thxChannel = channel.id;
   await guildData.save();
   
-  controller.replyNoMention({ content: '✅ **تم بنجاح تحديد قناة الدلائل!**' });
+  controller.replyNoMention({ content: '✅ **تم بنجاح تحديد قناة الشكر!**' });
 };
 
 async function InteractionExecute(interaction, global) {};
