@@ -4,6 +4,8 @@ const { SlashCommandBuilder, EmbedBuilder, userMention  } = require('discord.js'
 module.exports = new CommandBuilder() 
   .setName('remove')
   .setDescription('remove a new Admin.')
+  .setUsage(['{cmdname} (user)'])
+  .setExample(['{cmdname} {userMention}', '{cmdname} {userId}'])
   .InteractionOn(new SlashCommandBuilder().addUserOption((option) => option
      .setName('admin')
      .setDescription('Admin Profile to remove')

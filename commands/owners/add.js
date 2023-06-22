@@ -4,6 +4,8 @@ const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRow
 module.exports = new CommandBuilder() 
   .setName('add')
   .setDescription('Add a new Admin.')
+  .setUsage(['{cmdname} (user)'])
+  .setExample(['{cmdname} {userMention}', '{cmdname} {userId}'])
   .InteractionOn(new SlashCommandBuilder().addUserOption((option) => option
      .setName('admin')
      .setDescription('Admin Profile to Add')
@@ -23,6 +25,7 @@ async function GlobalExecute(message, interaction, global) {
   
   const user = await controller.getUser(userId).then(u => u?.user?.id? u.user : u);
   if (!user || user.bot) return controller.replyNoMention({ content: '❌ ** قم بتحديد اي دي مستخدم صحيح**' });
+  if (controller.)
   const isAdmin = guildData.admins.find(admin => admin.id = user.id);
   if (isAdmin) return controller.replyNoMention('❌ **هذا الادمن مضاف بالفعل!**');
   const embed = new EmbedBuilder().setAuthor({ name: controller.author.username, iconURL: controller.author.avatarURL() })

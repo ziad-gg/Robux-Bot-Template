@@ -15,20 +15,20 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   const client = controller.client;
-  
   const roblox = controller.getData('roblox');
-  const Guilds = controller.getData('guilds');
-  const Guild = await controller.get(controller.guild.id);
-  const isAdmin = Guild.admins.find(admin => admin.id === controller.author.id);
-  const Constants = controller.getData('Constants');
-  const command = controller[0]?.toLowerCase();
   
+  const Guilds = controller.getData('guilds');
+  const Constants = controller.getData('Constants');
+  const Guild = await Guilds.get(controller.guild.id);
+  
+  const isAdmin = Guild.admins.find(admin => admin.id === controller.author.id);
+  const command = controller[0]?.toLowerCase();
   const embed = new EmbedBuilder().setColor('#0be881');
   const link = new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel(`${client.user.username} Dashboard`).setURL(Constants.PROJECT_LINK).setStyle(ButtonStyle.Link));
 
   if (command && command !== 'help') {
     let cmd = client.Application.getCommand(command) || client.Application.getCommandByCut(command);
-    if (!cmd ||  (!controller.author.isOwner && cmd.category === 'admins') || cmd.isSubCommand) return controller.replyNoMention({ content: '❌ **هذا الأمر غير موجود!**' });
+    if (!cmd || (!controller.author.isOwner && cmd.category === 'owners') || (!isAdmin && !controller.author.isOwner && cmd.category === 'admins') || cmd.isSubCommand) return controller.replyNoMention({ content: '❌ **هذا الأمر غير موجود!**' });
     
     embed.setTitle(`Command: ${cmd.name}`);
     
@@ -75,7 +75,7 @@ async function GlobalExecute(message, interaction) {
 
     if (general.length) embed.addFields([{ name: 'General Commands', value: general.join(', ') }]);
     if (admins.length && (controller.author.isOwner || isAdmin)) embed.addFields([{ name: 'Admins Commands', value: admins.join(', ') }]);
-    if (owners.length && (controller.author.isOwner)) embed.addFields([{ name: 'owners Commands', value: admins.join(', ') }]);
+    if (owners.length && (controller.author.isOwner)) embed.addFields([{ name: 'Owners Commands', value: owners.join(', ') }]);
   };
   
   controller.replyNoMention({ embeds: [embed], components: [link] });
