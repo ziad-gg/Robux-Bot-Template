@@ -12,6 +12,8 @@ async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
   const guildsData = controller.getData('guilds');
   const guildData = await guildsData.get(controller.guild.id);
+  const [EmojiName, EmojiId] = guildData.thxEmoji?.match(/<:(.*?):(\d+)>/)?.slice(1);
+  const thxEmoji = message.guild?.emojis?.cache.get(EmojiId) ?? '❤️';  
 
   const embed = new EmbedBuilder()
     .setColor('#0be881')
@@ -21,6 +23,7 @@ async function GlobalExecute(message, interaction, global) {
     .addFields([{ name: 'Boost Discount', value: `\`\`\`${guildData.discount || 'None'}%\`\`\`` }])
     .addFields([{ name: 'Minimum', value: `\`\`\`buy: ${guildData.buy.min || 'None'}, transfer: ${guildData.transfer.min}\`\`\`` }])
     .addFields([{ name: 'Maximum', value: `\`\`\`buy: ${guildData.buy.max || 'None'}, transfer: ${guildData.transfer.min}\`\`\`` }])
+    .addFields([{ name: 'Thx Emoji', value: `${thxEmoji}` }])
     .addFields([{ name: 'Thx Channel', value: `${controller.client.channels.cache.get(guildData.thxChannel) || 'None'}` }])
     .addFields([{ name: 'Codes Channel', value: `${controller.client.channels.cache.get(guildData.codesChannel) || 'All Channels'}` }])
     .addFields([{ name: 'Logs Channel', value: `${controller.client.channels.cache.get(guildData.logsChannel) || 'None'}` }])
