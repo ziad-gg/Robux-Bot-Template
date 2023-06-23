@@ -1,8 +1,10 @@
-const client = require('../index.js');
-const roblox = client.Application.getData('roblox');
-const GuildsData = client.Application.getData('guilds');
-const RequestsData = client.Application.getData('requests');
-const { DEFAULT_GUILD } = client.Application.getData('Constants');
+//const client = require('../index.js');
+/console.log(roblox);
+const GuildsData = require('./models/Guilds.js');
+const RequestsData = require('./models/Requests.js');
+const { DEFAULT_GUILD } = require('./Constants.js');
+const roblox = require('../index.js');
+
 
 module.exports = setInterval(async () => {
   const guildData = await GuildsData.get(DEFAULT_GUILD);
@@ -13,15 +15,15 @@ module.exports = setInterval(async () => {
   
   const Requests = await Group.requests.fetch({ limit: 10 });
   
- for (let Request of Requests.data) {
+  for (let Request of Requests.data) {
     const userId = Request.requester.userId;
-    const RequestData = await RequestsData.findOne({ ugroupId: Group.id, serId });
+    const RequestData = await RequestsData.findOne({ groupId: Group.id, userId });
     Request = await Group.requests.get(userId);
-    Rif (RequestData.ban) {
-      return equestDdecline() ;
+    if (RequestData.ban) {
+      return Request.decline();
     } else {
-      equest.accept();
-
-    }    RequestData
-.create({ groupId: Group.id, userId, requestDate: Request.created, joinDate: new Date() });    
-}), 3e4;                            
+      Request.accept();
+    }
+    RequestData.create({ groupId: Group.id, userId, requestDate: Request.created, joinDate: new Date() });
+  } 
+}, 3e4);

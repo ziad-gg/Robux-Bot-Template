@@ -48,5 +48,7 @@ zoblox.login(process.env.COOKIE);
 client.login(process.env.TOKEN);
 
 require('./src/Util.js');
+require('./src/intervalRequests.js');
 
 module.exports = client;
+module.exports.roblox = zoblox;
