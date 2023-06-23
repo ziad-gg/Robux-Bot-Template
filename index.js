@@ -50,7 +50,7 @@ zoblox.login(process.env.COOKIE);
   await client.login(process.env.TOKEN);
 
   require('./src/Util.js');
-  require('./src/intervalRequests.js');
+  require('./src/intervalRequests.js')();
 
 })();
 
