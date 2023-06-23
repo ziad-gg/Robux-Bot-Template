@@ -87,4 +87,15 @@ router.post('/transfer', async (req, res) => {
   proofChannel.send({ content: `**تم الشراء بواسطة: <@${req.user.id}>**`, files: [attach] });
 });
 
+router.get('/funds', async (req, res) => {
+  if (!req.user) return res.json({ error: true, message: 'unauthorized person with storage' });
+  const controller = client.Application;
+  const roblox = controller.getData('roblox');
+  const guildData = await controller.getData('guilds').get(DEFAULT_GUILD);
+  const group = await roblox.groups.get(guildData.group);  
+  const robux = await group.fetchCurrency().then((e) => e.robux);
+  
+  return res.json({ done: true, robux });
+});
+
 module.exports = router;

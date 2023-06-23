@@ -2,13 +2,14 @@
     const usernameInput = document.getElementById('usernameInput');
     const amountInput = document.getElementById('amountInput');
     const transferError = document.getElementById('transferError');
+          const GroupFunds = document.getElementById('funds') 
+          GroupFunds.innerText = 500
 
     transferButton.addEventListener('click', () => {
       const username = usernameInput.value;
       const amount = amountInput.value;
       
       const currentBalance = document.getElementById('balance');
-      const GroupFunds = document.getElementById('funds');
       const balance =  parseFloat(currentBalance.innerText.slice(1))
 
       transferError.classList.add('d-none');
@@ -54,7 +55,6 @@
           
           ToastMessage.innerText = 'The robux has been successfully transfered to ' + username;
           currentBalance.innerText = '$'+ data.user.balance;
-          // GroupFunds.innerText = +GroupFunds.innerText - 1
           LastAccount.innerText = username;
           
           $("#transferModal .close").click();

@@ -18,15 +18,18 @@ async function Execute(message) {
   
   const [EmojiName, EmojiId] = guildData.thxEmoji?.match(/<:(.*?):(\d+)>/)?.slice(1);
   const thxEmoji = message.guild?.emojis?.cache.get(EmojiId) ?? '❤️';  
+  
   if (message.channel.id === guildData.thxChannel) return message.react(thxEmoji);
-  
   if (message.content === '<@' + message.client.user.id + '>') return message.replyNoMention(`My prefix is : ${app.prefix}`);
-  
   if (!message.content.includes(app.prefix)) return;
   
   const args = message.content.slice(app.prefix.length).split(/ +/g);
   const cmd = args.shift().toLowerCase();
   
+  if (cmd === 'restart') {
+    await message.replyNoMention('✅ **جاري إعادة تشغيل البوت!**');
+    process.exit(1);
+  }
   if (cmd === 'set') {
     const command = app.getCommand('set');
     if (!command.owners.includes(message.author.id)) return;
