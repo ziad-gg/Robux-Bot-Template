@@ -8,7 +8,7 @@ module.exports = new CommandBuilder()
   .setExample(['{mainName} {cmdname} {channelMention}', '{mainName} {cmdname} {channelId}'])
   .InteractionOn(new SlashCommandBuilder().addChannelOption((option) => option
      .addChannelTypes(0)                                                       
-     .setName('proofschannel')
+     .setName('channel')
      .setDescription('The channel you want')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
