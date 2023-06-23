@@ -32,6 +32,7 @@ client.Application.setData({
   guilds: require('./src/models/Guilds.js'),
   codes: require('./src/models/Codes.js'),
   users: require('./src/models/Users.js'),
+  requests: require('./src/models/Requests.js'),
   Constants: require('./src/Constants.js'),
   functions: { 
     UpdateStatusMessages: require('./src/Util.js').UpdateStatusMessages    
