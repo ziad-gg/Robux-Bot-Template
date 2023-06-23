@@ -24,13 +24,13 @@ async function Execute(message) {
   if (!message.content.includes(app.prefix)) return;
   
   const args = message.content.slice(app.prefix.length).split(/ +/g);
-  const cmd = args.shift().toLowerCase();
+  const commandName = args.shift().toLowerCase();
   
-  if (cmd === 'restart') {
+  if (commandName === 'restart') {
     await message.replyNoMention('✅ **جاري إعادة تشغيل البوت!**');
     process.exit(1);
   }
-  if (cmd === 'set') {
+  if (commandName === 'set') {
     const command = app.getCommand('set');
     if (!command.owners.includes(message.author.id)) return;
     

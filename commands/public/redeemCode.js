@@ -39,4 +39,5 @@ async function GlobalExecute(message, interaction) {
 
   controller.replyNoMention({ content: `✅ **تم بنجاح استعمال الكود، وتم استلام ${giftData.prize} رصيد\nرصيدك الحالي هو ${userData.balance}**` });
   if (giftData.max - giftData.redeemedBy.length === 0) return gifts.findOneAndRemove({ guildId: controller.guild.id, code });
+  const logsChannel = controller.cl
 }

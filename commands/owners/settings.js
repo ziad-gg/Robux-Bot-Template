@@ -22,6 +22,7 @@ async function GlobalExecute(message, interaction, global) {
     .addFields([{ name: 'Minimum', value: `\`\`\`buy: ${guildData.buy.min || 'None'}, transfer: ${guildData.transfer.min}\`\`\`` }])
     .addFields([{ name: 'Maximum', value: `\`\`\`buy: ${guildData.buy.max || 'None'}, transfer: ${guildData.transfer.min}\`\`\`` }])
     .addFields([{ name: 'Thx Channel', value: `<#${guildData.thxChannel || 'None'}>` }])
+    .addFields([{ name: 'Logs Channel', value: `<#${guildData.logsChannel || 'None'}>` }])
     .addFields([{ name: 'Done Channel', value: `<#${guildData.proofsChannel || 'None'}>` }])
     .addFields([{ name: 'Recipient', value: `<@${guildData.recipient || 'None'}>`}])
     .addFields([{ name: 'Boost Role', value: `<@&${guildData.boostsRole || 'None'}>` }])

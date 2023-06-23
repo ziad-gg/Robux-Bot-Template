@@ -16,7 +16,7 @@ async function GlobalExecute(message, interaction, global) {
   const Admins = guildData.admins;
   
   const embed = new EmbedBuilder()
-  .setDescription(Admins.map((admin, index) => `${(index + 1 == 1 || index + 1 == 2 || index + 1 == 3) ? `**-${index + 1}**` : `-${index + 1}`  } ${userMention(admin.id)} (${admin.id})`).join("\n"))
+  .setDescription(Admins.map((admin, index) => `${(index + 1 == 1 || index + 1 == 2 || index + 1 == 3) ? `**-${index + 1}**` : `-${index + 1}`  } ${userMention(admin.id)} (${admin.id})`).join('\n'))
   
   controller.replyNoMention({ embeds: [embed] })
 }

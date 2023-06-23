@@ -32,6 +32,9 @@ const Schema = new mongoose.Schema({
   codesChannel: { 
     type: String 
   },
+  logsChannel: { 
+    type: String 
+  },
   clientsRole: { 
     type: String 
   },
