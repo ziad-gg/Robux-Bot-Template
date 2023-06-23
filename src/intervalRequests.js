@@ -22,15 +22,14 @@ async function setup() {
       });
       Request = await Group.requests.get(userId);
       Request.accept();
-      RequestsData.create({
+      RequestsData.createNewRequest({
         groupId: Group.id,
         userId,
         requestDate: Request.created,
         joinDate: new Date()
       });
-      console.log(await RequestsData.find());
     }
-  }, 10000);
+  }, 3e4);
 };
 
 module.exports = setup;
