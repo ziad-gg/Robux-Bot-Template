@@ -61,6 +61,9 @@ async function GlobalExecute(message, interaction) {
 
     controller.channel.send({ content: `**✅ تم بنجاح شراء \`${amount}\` رصيد!\nرصيدك الحالي: \`${userData.balance}RB\`.**` });
 
+    const logsChannel = controller.client.channels.cache.get(guildData.logsChannel);
+    if (logsChannel) logsChannel.send(`**هذا العضو ${controller.author} اشتري ${amount} رصيد\nرصيده الان هو ${userData.balance}**`);
+   
     setTimeout(() => {
       controller.channel.delete();
       cooldowns.delete(key);

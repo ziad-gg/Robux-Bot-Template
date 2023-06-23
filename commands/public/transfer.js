@@ -62,6 +62,9 @@ async function GlobalExecute(message, interaction) {
     userData.lastTransactionsAccount = username;
     await userData.save();
     
+    const logsChannel = controller.client.channels.cache.get(guildData.logsChannel);
+    if (logsChannel) logsChannel.send(`**هذا العضو ${controller.author} لقد سحب ${amount} رصيد الي ${user.name}\nرصيده الان هو ${userData.balance}**`);
+   
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
     const background = await loadImage('https://cdn.glitch.global/60d2234a-7ca2-4fc7-a312-190e5d8c2e88/Picsart_23-02-24_20-56-24-896.jpg?v=1677265030940');

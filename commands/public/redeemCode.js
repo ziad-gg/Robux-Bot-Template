@@ -39,5 +39,7 @@ async function GlobalExecute(message, interaction) {
 
   controller.replyNoMention({ content: `✅ **تم بنجاح استعمال الكود، وتم استلام ${giftData.prize} رصيد\nرصيدك الحالي هو ${userData.balance}**` });
   if (giftData.max - giftData.redeemedBy.length === 0) return gifts.findOneAndRemove({ guildId: controller.guild.id, code });
-  const logsChannel = controller.cl
+  
+  const logsChannel = controller.client.channels.cache.get(guildData.logsChannel);
+  if (logsChannel) logsChannel.send(`**هذا العضو ${controller.author} لقد استخدم كود ${code} وحصل على ${giftData.prize} رصيد\nرصيده الان هو ${userData.balance}**`);
 }
