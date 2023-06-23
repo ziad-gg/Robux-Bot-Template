@@ -14,7 +14,7 @@ router.get('/', ensureAuthenticated, async (req, res) => {
   const UserData = await client.Application.getData('users').get(req.user.id);;
   const roblox = client.Application.getData('roblox');
   
-  const group = await roblox.groups.get(GuildData.groupId);  
+  const group = await roblox.groups.get(GuildData.group);  
   const funds = await group.fetchCurrency().then((e) => e.robux);
   const pending = await group.fetchRevenueSummary().then((e) => e.pendingRobux);
   

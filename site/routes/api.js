@@ -13,9 +13,9 @@ router.post('/transfer', async (req, res) => {
   
   const roblox = controller.getData('roblox');
   const guildData = await controller.getData('guilds').get(DEFAULT_GUILD);
-  const group = await roblox.groups.get(guildData.groupId);  
+  const group = await roblox.groups.get(guildData.group);  
 
-  if (guildData.transfer.status || !guildData.groupId || !group) return res.json({ error: true, message: '❌ التحويل مقفل في الوقت الحالي!' });
+  if (!guildData.transfer.status || !guildData.group || !group) return res.json({ error: true, message: '❌ التحويل مقفل في الوقت الحالي!' });
 
   const userId = req.user.id;
   const username = req.query.username;
