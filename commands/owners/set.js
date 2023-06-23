@@ -15,7 +15,6 @@ module.exports = new CommandBuilder()
      { command: 'group' },
      { command: 'recipient' },
      { command: 'clientsrole' },
-     { command: 'smessage' },
      { command: 'proofschannel' },
      { command: 'codeschannel' },
      { command: 'logschannel' },

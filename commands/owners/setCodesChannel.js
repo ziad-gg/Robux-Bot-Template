@@ -22,15 +22,12 @@ async function GlobalExecute(message, interaction, global) {
   const channelId = controller[0]?.toId();
   
   if (!channelId) {
-    if (!guildData.codesChannel) return controller.replyNoMention({ content: '❌ **يجب ان تقوم بتحديد قناه للاكواد اولا حتي تتمكن من مسحها**' });
-      delete guildData.codesChannel;
-      await guildData.save();
-    
-      return controller.replyNoMention({ content: '✅ **!تم بنجاح حذف قناة الأكواد المحدده**' });
+    if (!guildData.codesChannel) return controller.replyNoMention({ content: '❌ **لا توجد قناة محددة لحذفها!**' });
+    guildData.codesChannel = '';
+    await guildData.save();
+    return controller.replyNoMention({ content: '✅ **تم بنجاح حذف القناة!**' });
   };
-  
-  if (!channelId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد القناة!**' });
-  
+    
   const channel = controller.guild.channels.cache.get(channelId);
   
   if (!channel) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد قناة صالحة!**' });

@@ -10,7 +10,7 @@ module.exports = new CommandBuilder()
      .addChannelTypes(0)                                                       
      .setName('channel')
      .setDescription('The channel you want')
-     .setRequired(true)))
+     .setRequired(false)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute)
@@ -20,7 +20,13 @@ async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
   const guildData = await global;
   const channelId = controller[0]?.toId();
-  if (!channelId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد القناة!**' });
+  
+  if (!channelId) {
+    if (!guildData.proofsChannel) return controller.replyNoMention({ content: '❌ **لا توجد قناة محددة لحذفها!**' });
+    guildData.proofsChannel = '';
+    await guildData.save();
+    return controller.replyNoMention({ content: '✅ **تم بنجاح حذف القناة!**' });
+  };  
   
   const channel = controller.guild.channels.cache.get(channelId);
   

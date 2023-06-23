@@ -27,7 +27,6 @@ async function GlobalExecute(message, interaction, global) {
    
     controller.replyNoMention({ content: `✅ **تم بنجاح ${guildData.transfer.buy ? 'فتح' : 'قفل'} حالة الشراء بنجاح!**` });
   };
-    functions.UpdateStatusMessages(guildData, controller.client);
 };
 
 async function InteractionExecute(interaction, global) {};

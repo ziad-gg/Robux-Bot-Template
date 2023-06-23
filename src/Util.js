@@ -27,31 +27,6 @@ function replyNoMention(options) {
   return this.reply(options);
 } 
 
-
-function UpdateStatusMessages(guildData, client) {
-  const data = guildData.schannels;
-  
-  data.forEach(async ({ ChannelId, MessageId }) => {
-    const channel = client.channels.cache.get(ChannelId);
-    const message = await channel.messages.fetch(MessageId).then(m => m).catch(e => null);
-    
-    const Bemoji = (guildData.buy.status) ? '🟢' : '🔴';
-    const Temoji = (guildData.transfer.status) ? '🟢' : '🔴';
-    
-    const Btext = (guildData.buy.status) ? 'Open' : 'Closed';
-    const Ttext = (guildData.transfer.status) ? 'Open' : 'Closed';
-    
-    const content = `**${Temoji} Robux Withdrawal System : ${Ttext}**\n\**${Bemoji} Robux Buy System : ${Btext}**` 
-    
-    if (!message) {
-      channel.send({ content })
-    } else {
-      message.edit({ content });
-    };
-    
-  })
-};
-
 function formateNum() {
   if (this < 1e3) return this;
   if (this >= 1e3 && this < 1e6) return +(this / 1e3).toFixed(1) + "K";
@@ -70,5 +45,3 @@ Number.prototype.isInteger = isInteger;
 Number.prototype.formateNum = formateNum;
 
 Message.prototype.replyNoMention = replyNoMention;
-
-module.exports.UpdateStatusMessages = UpdateStatusMessages;
