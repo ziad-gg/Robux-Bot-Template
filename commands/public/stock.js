@@ -15,7 +15,7 @@ async function GlobalExecute(message, interaction) {
     const roblox = controller.getData('roblox');
     const guildData = await guildsData.get(controller.guild.id);
     
-    const group = await roblox.groups.get(guildData.groupId);  
+    const group = await roblox.groups.get(guildData.group);  
     const robux = await group.fetchCurrency().then((e) => e.robux);
     const pending = await group.fetchRevenueSummary().then((e) => e.pendingRobux);
     const embed = new EmbedBuilder().setColor('#0be881').setTitle(group.name).setDescription(`**- Total Robux : (\`${robux}\`)\n- Pending Robux : (\`${pending}\`)**`);  

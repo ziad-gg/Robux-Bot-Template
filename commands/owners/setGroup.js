@@ -24,12 +24,12 @@ async function GlobalExecute(message, interaction, global) {
   
   const group = await roblox.groups.get(groupId);
   if (!group) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف جروب صحيح!**' });
-  if (guildData.groupId === group.id) return controller.replyNoMention({ content: '❌ **يبدو أن هذا الجروب محدد من قبل!**' });
+  if (guildData.group === group.id) return controller.replyNoMention({ content: '❌ **يبدو أن هذا الجروب محدد من قبل!**' });
   
   const me = await group.members.me;
   if (!me || !me.isOwner()) return controller.replyNoMention({ content: '❌ **يجب أن تكون انت مالك الجروب!**' });
   
-  guildData.groupId = group.id;
+  guildData.group = group.id;
   await guildData.save();
   
   controller.replyNoMention({ content: '**✅ تم تحديد الجروب بنجاح!**' });

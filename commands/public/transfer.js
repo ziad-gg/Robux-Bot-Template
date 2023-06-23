@@ -40,7 +40,7 @@ async function GlobalExecute(message, interaction) {
   user = await roblox.users.get(user.id);
 
   const guildData = await guildsData.get(controller.guild?.id || DEFAULT_GUILD);
-  const group = await roblox.groups.get(guildData.groupId);
+  const group = await roblox.groups.get(guildData.group);
   
   if (!controller.author.isOwner && !guildData.transfer.status) return controller.replyNoMention({ content: '❌ **نظام السحب مقفل في الوقت الحالي!**' });
   if (guildData.transfer.min > amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأدنى للتحويل هو ${guildData.transfer.min}**` });

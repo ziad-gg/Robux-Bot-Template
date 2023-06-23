@@ -10,7 +10,7 @@ const Schema = new mongoose.Schema({
     type: String,
     default: DEFAULT_PREFIX
   },
-  groupId: { 
+  group: { 
     type: Number 
   },
   recipient: {

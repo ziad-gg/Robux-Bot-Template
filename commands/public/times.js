@@ -16,7 +16,7 @@ async function GlobalExecute(message, interaction) {
     const roblox = controller.getData('roblox');
     const guildData = await guildsData.get(controller.guild.id);
     
-    const group = await roblox.groups.get(guildData.groupId);  
+    const group = await roblox.groups.get(guildData.group);  
     const transactions = await fetchAllGroupTransactions(group);
     const embed = new EmbedBuilder()
       .setColor('#0be881')

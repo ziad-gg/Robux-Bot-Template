@@ -12,6 +12,7 @@ module.exports = new CommandBuilder()
   .setSubcommands([
      { command: 'add' },
      { command: 'remove' },
+     { command: 'list' },
   ]);
 
 async function GlobalExecute(message, interaction) {

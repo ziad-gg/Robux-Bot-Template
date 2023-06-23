@@ -12,7 +12,7 @@ async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   try {
     const guildData = await controller.getData('guilds').get(controller.guild.id);
-    const group = await controller.getData('roblox').groups.get(guildData.groupId);
+    const group = await controller.getData('roblox').groups.get(guildData.group);
     const embed = new EmbedBuilder()
       .setColor('#0be881')
       .setAuthor({ name: group.name, iconURL: group.logoURL() })
