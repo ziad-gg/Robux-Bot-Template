@@ -70,7 +70,6 @@ async function GlobalExecute(message, interaction, global) {
     controller.delete().catch(console.log);
   });
   
-
   ButtonCollector.on('collect', async i => {
     if (i.customId == 'confirm') {
       guildData.admins.push({ id: userId, commands });
@@ -82,9 +81,7 @@ async function GlobalExecute(message, interaction, global) {
     if (i.customId == 'cancel') {
       msg.delete().catch(console.log);
     }
-    
   });
-
 }
 
 async function InteractionExecute(interaction, global) {};

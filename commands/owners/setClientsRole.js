@@ -19,7 +19,12 @@ async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
   const guildData = await global;
   
-  if (!controller[0]) return controller.replyNoMention({ content: '❌ **قم بتحديد الرتبة!**' });
+  if (!controller[0]) {
+    if (!guildData.clientsChannel) return controller.replyNoMention({ content: '❌ **لا توجد رتبة محددة لحذفها!**' });
+    guildData.clientsChannel = '';
+    await guildData.save();
+    return controller.replyNoMention({ content: '✅ **تم بنجاح حذف الرتبة!**' });
+  };  
   
   const role = controller.guild.roles.cache.get(controller[0].toId());
 

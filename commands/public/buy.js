@@ -63,7 +63,10 @@ async function GlobalExecute(message, interaction) {
 
     const logsChannel = controller.client.channels.cache.get(guildData.logsChannel);
     if (logsChannel) logsChannel.send(`**هذا العضو ${controller.author} اشتري ${amount} رصيد\nرصيده الان هو ${userData.balance}**`);
-   
+      
+    const clientsRole = await controller.guild.roles.cache.get(guildData.clientsRole);
+    if (clientsRole) controller.member.roles.add(clientsRole.id).catch(() => 1);
+      
     setTimeout(() => {
       controller.channel.delete();
       cooldowns.delete(key);

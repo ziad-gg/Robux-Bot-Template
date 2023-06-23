@@ -33,7 +33,6 @@ async function GlobalExecute(message, interaction, global) {
       
   await Guilds.updateOne({ id: controller.guild.id }, { $pull: { admins: { id: userId } } } );
   await controller .reply({ embeds: [new EmbedBuilder().setDescription(`✅ **You removed ${userMention(userId)} from admins**`)] });
-  
 };
 
 async function InteractionExecute(interaction, global) {};

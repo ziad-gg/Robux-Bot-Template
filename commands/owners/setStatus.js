@@ -13,8 +13,7 @@ module.exports = new CommandBuilder()
 async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
   const guildData = await global;
-  const functions = controller.getData('functions');
-  
+
   if (controller.GroupName === 'transfer') {
     guildData.transfer.status = !guildData.transfer.status;  
     await guildData.save();
