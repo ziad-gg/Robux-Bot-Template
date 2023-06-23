@@ -2,8 +2,8 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('gptax')
-  .setDescription('GamePass tax calculation.')
+  .setName('rotax')
+  .setDescription('Roblox tax calculation.')
   .setUsage(['{cmdname} (Amount)'])
   .setExample(['{cmdname} {snumber}'])
   .setCooldown('10s')
