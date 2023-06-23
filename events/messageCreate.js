@@ -7,6 +7,8 @@ module.exports = new EventBuilder()
   .setExecution(Execute)
 
 async function Execute(message) {
+  if (message.author.bot) return;
+  
   const app = message.client.Application;
   const guildsData = app.getData('guilds');
   const guildData = await guildsData.get(message.guild?.id || DEFAULT_GUILD);
@@ -14,13 +16,12 @@ async function Execute(message) {
   const prefix = guildData.prefix;
   app.setPrefix(prefix);
   
-  console.log(guildData.thxEmoji)
-  
-  const regex = emojiRegex();
-  
-  const thxEmoji = message.client.guilds.cache.get(message.guild?.id || DEFAULT_GUILD).emojis.cache.get(guildData.thxEmoji?.match(/\d+/)[0]) ?? '❤️'
+  const [EmojiName, EmojiId] = guildData.thxEmoji?.match(/<:(.*?):(\d+)>/)?.slice(1);
+  const thxEmoji = message.guild?.emojis?.cache.get(EmojiId) ?? '❤️';  
   if (message.channel.id === guildData.thxChannel) return message.react(thxEmoji);
+  
   if (message.content === '<@' + message.client.user.id + '>') return message.replyNoMention(`My prefix is : ${app.prefix}`);
+  
   if (!message.content.includes(app.prefix)) return;
   
   const args = message.content.slice(app.prefix.length).split(/ +/g);

@@ -16,7 +16,7 @@ async function GlobalExecute(message, interaction, global) {
 
     const embed = new EmbedBuilder()
       .setColor('#0be881')
-      .setAuthor({ name: controller.author.username, iconsURL: controller.author.avatarURL() })
+      .setAuthor({ name: controller.author.username, iconURL: controller.author.avatarURL() })
       .setThumbnail(controller.guild.iconURL())
       .setTimestamp()
       .setFooter({ text: `${controller.guild.name} info` });
