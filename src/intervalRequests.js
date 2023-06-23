@@ -21,18 +21,14 @@ async function setup() {
         userId
       });
       Request = await Group.requests.get(userId);
-      if (RequestData && RequestData.ban) {
-        Request.decline();
-      } else {
-        Request.accept();
-        RequestData.create({
-          groupId: Group.id,
-          userId,
-          requestDate: Request.created,
-          joinDate: new Date()
-        });
-        console.log(RequestData);
-      }
+      Request.accept();
+      RequestsData.create({
+        groupId: Group.id,
+        userId,
+        requestDate: Request.created,
+        joinDate: new Date()
+      });
+      console.log(await RequestsData.find());
     }
   }, 10000);
 };

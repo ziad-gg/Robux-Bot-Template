@@ -6,10 +6,6 @@ const Schema = new mongoose.Schema({
     type: String
   },
   userId: String,
-  ban: { 
-    type: Boolean, 
-    default: false 
-  },
   requestDate: String, 
   joinDate: String, 
 }); 
