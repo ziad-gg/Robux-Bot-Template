@@ -54,7 +54,7 @@ async function GlobalExecute(message, interaction) {
 
   try {
   await member.payout({ amount });
-    controller.replyNoMention({ content: `✅ **تم بنجاح تحويل الروبوكس إلى ${username}**` });
+    controller.replyNoMention({ content: `✅ **تم بنجاح تحويل الروبوكس إلى ${username}${controller.client.channels.cache.get(guildData.thxChannel) ? `\nلا تنسى كتابة كلمة شكر في روم <#${guildData.thxChannel}>**` : '**' }` });
     
     userData.balance -= amount;
     userData.transactionsTotal += amount;

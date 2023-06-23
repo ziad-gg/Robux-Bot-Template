@@ -31,5 +31,6 @@ async function GlobalExecute(message, interaction) {
   userData.balance += amount;
   await userData.save();
   
+  user.send(`🥇**${controller.guild.name} Logs ATM\n\`\`\`You have recived ${amount}RB from ${controller.author.username}(${controller.author.id})\`\`\`**`).catch(() => 1);
   controller.replyNoMention({ content: `✅ **تم بنجاح تحويل ${amount} الي ${user}\nرصيده الحالي هو ${userData.balance}**` });
 };
