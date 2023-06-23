@@ -37,7 +37,7 @@ module.exports = {
       },
       LoginButton: {
         style: 'primary',
-        url: '/login',
+        url: '/api',
         text: 'Login'
       },
       LogoutButton: {

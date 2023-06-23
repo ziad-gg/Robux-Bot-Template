@@ -9,7 +9,7 @@ module.exports = new CommandBuilder()
   .setGlobal(GlobalExecute)
   
 async function GlobalExecute(message, interaction) {
-  let now = Date.now();
+  let now = message ? message.createdTimestamp : interaction.createdTimestamp;
   const controller = message ?? interaction;
   const msg = await controller.replyNoMention({ content: '**🏓 Pong...**' });
   now = Date.now() - now;
