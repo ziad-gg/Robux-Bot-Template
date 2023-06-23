@@ -14,6 +14,8 @@ async function Execute(message) {
   const prefix = guildData.prefix;
   app.setPrefix(prefix);
   
+  const thxEmoji = message.client.guilds.cache.get(message.guild?.id || DEFAULT_GUILD).emojis.cache.get(guildData.thxEmoji.toId()) ?? '❤️'
+  if (message.channel.id === guildData.thxChannel) return message.react(thxEmoji);
   if (message.content === '<@' + message.client.user.id + '>') return message.replyNoMention(`My prefix is : ${app.prefix}`);
   if (!message.content.includes(app.prefix)) return;
   

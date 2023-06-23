@@ -20,16 +20,17 @@ async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
   const guildData = await global; 
   const emoji = controller.guild.emojis.cache.find((e) => e.name === controller[0].replaceAll(':', '')) || controller.guild.emojis.cache.find((e) => e.id === controller[0]) || controller.guild.emojis.cache.find((e) => e.name === convert(controller[0])[0]) || controller.guild.emojis.cache.find((e) => e.id === convert(controller[0])[0]);
-  if (!emoji) return message.channel.send("**Sorry, I cannot find this emoji**");
+  if (!emoji) return controller.replyNoMention({ content: '❌ **هذا الايموجي غير صالح او ليس في هذا السيرفر!**' });
     
-  if (guildData.thxEmoji === `\`${emoji}\``) return message.channel.send('❌ **هذا الايموجي محدد من قبل!**');
+  if (guildData.thxEmoji === `\`${emoji}\``) return controller.replyNoMention({ content: '❌ **هذا الايموجي محدد من قبل!**' });
   guildData.thxEmoji = `\`${emoji}\``;
   await guildData.save();
-  message.channel.send('✅ **تم بنجاح إضافة هذه الايموجي!**');
+  controller.replyNoMention({ content: '✅ **تم بنجاح إضافة هذه الايموجي!**' });
 };
 
 async function InteractionExecute(interaction, global) {};
 async function MessageExecute(message, Global) {};
+
 function convert(emoji) {
   return emoji.match(/\d+/) || '';
 };
