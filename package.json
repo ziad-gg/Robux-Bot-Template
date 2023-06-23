@@ -24,7 +24,8 @@
     "cookie-parser": "^1.4.6",
     "ejs": "^3.1.9",
     "connect-mongo": "^5.0.0",
-    "axios": "^1.4.0"
+    "axios": "^1.4.0",
+    "humanize-duration": "^3.28.0"
   },
   "engines": {
     "node": "16.x"
