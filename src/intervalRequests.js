@@ -1,11 +1,12 @@
-const GuildsData = require('./models/Guilds.js');
-const RequestsData = require('./models/Requests.js');
-const { DEFAULT_GUILD } = require('./Constants.js');
-  
+const client = require('../index.js');
+const roblox = client.Application.getData('roblox');
+const GuildsData = client.Application.getData('guilds');
+const RequestsData = client.Application.getData('requests');
+const { DEFAULT_GUILD } = client.Application.getData('Constants');
+ 
 async function setup() {
-  
-  const roblox = require('../index.js');
-  const guildData = await GuildsData.get(DEFAULT_GUILD);
+  console.log('???');
+const guildData = await GuildsData.get(DEFAULT_GUILD);
   if (!guildData.group) return;
   
   const Group = await roblox.groups.get(guildData.group);
@@ -28,4 +29,6 @@ async function setup() {
 }, 3e4);*/
 };
 
-module.exports = setup;
+module.exports = async function() {
+  console.log
+};
