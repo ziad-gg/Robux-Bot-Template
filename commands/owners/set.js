@@ -19,6 +19,7 @@ module.exports = new CommandBuilder()
      { command: 'proofschannel' },
      { command: 'codeschannel' },
      { command: 'thxchannel' },
+     { command: 'emoji' },
      { command: 'max', group: 'buy' },
      { command: 'min', group: 'buy' },
      { command: 'status', group: 'buy' },

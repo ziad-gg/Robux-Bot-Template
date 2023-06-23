@@ -26,6 +26,9 @@ const Schema = new mongoose.Schema({
   thxChannel: { 
     type: String 
   },
+  thxEmoji: {
+    type: String
+  }, 
   codesChannel: { 
     type: String 
   },
