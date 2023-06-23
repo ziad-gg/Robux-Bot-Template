@@ -20,7 +20,7 @@ module.exports.CLIENT_OPTIONS = {
 
 module.exports.OWNERS = [
   '789896576402587667',
-  '860865950945378325-'
+  '860865950945378325'
 ]; //Owners
 
 
