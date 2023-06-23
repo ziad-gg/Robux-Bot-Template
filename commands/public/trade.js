@@ -15,7 +15,7 @@ module.exports = new CommandBuilder()
         .setDescription('The amount you want')                                                          
         .setRequired(true)))
   .setGlobal(GlobalExecute)
-  .setAttr('args', 1) 
+  .setAttr('args', 2) 
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
@@ -33,6 +33,7 @@ async function GlobalExecute(message, interaction) {
   if (userData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
   if (guildData.transfer.min > amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأدنى للتحويل هو ${guildData.transfer.min}**` });
   if (guildData.transfer.max > 0 && guildData.transfer.max < amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأقصى للتحويل هو ${guildData.transfer.max}**` });
+  
   
 
 };
