@@ -30,7 +30,7 @@ async function GlobalExecute(message, interaction) {
   if (user.bot) return controller.replyNoMention({ content: '❌ **لا يمكن التحويل للبوتات!**' });
   if (user.id === controller.author.id) return controller.replyNoMention({ content: '❌ **لا يمكن التحويل لنفسك!**' });
   
-  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صالح!**' }); 
+  if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' }); 
   if (authorData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
   if (guildData.transfer.min > amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأدنى للتحويل هو ${guildData.transfer.min}**` });
   if (guildData.transfer.max > 0 && guildData.transfer.max < amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأقصى للتحويل هو ${guildData.transfer.max}**` });

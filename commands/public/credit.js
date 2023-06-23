@@ -36,7 +36,7 @@ async function GlobalExecute(message, interaction) {
       new EmbedBuilder()
       .setColor('#0be881')
       .setThumbnail(controller.guild.iconURL())
-      .setTitle(`**ضريبة الكريديت**`)
+      .setTitle('ضريبة الكريديت')
       .addFields([{ name: 'يمكنك شراء :', value: `${buy} روبكس` }])
       .addFields([{ name: 'السعر :', value: `${price}` }])
       .addFields([{ name:'السعر مع الضريبة :', value: `${withtax}` }])

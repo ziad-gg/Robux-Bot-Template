@@ -32,9 +32,9 @@ async function GlobalExecute(message, interaction) {
       new EmbedBuilder()
       .setColor('#0be881')
       .setThumbnail(controller.guild.iconURL())
-      .setTitle(`**ضريبة الروبكس**`)
-      .addFields([{ name: `**المبلغ بدون ضريبة :**`, value: '' + price }])
-      .addFields([{ name: `**المبلغ بعد الضريبة :**`, value: '' + Math.ceil(price / 0.95) }])
+      .setTitle('ضريبة الروبكس')
+      .addFields([{ name: 'المبلغ بدون الضريبة :', value: '' + price }])
+      .addFields([{ name: 'المبلغ بعد الضريبة :', value: '' + Math.ceil(price / 0.95) }])
       .setTimestamp()
      ]
   })
