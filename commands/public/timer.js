@@ -33,9 +33,18 @@ async function GlobalExecute(message, interaction) {
     if (isCompleted) return controller.replyNoMention({ content: '🥳 **هذا المستخدم لقد اكمل 14 يوم بالفعل في الجروب!**' });
     
     const unix = Math.floor(+new Date(Request.joinDate) / 1000 + 1209600);
-    controller.replyNoMention({ content: `**${humanizeDuration(+new Date(Request.joinDate) + 1209600000 - Date.now(), { language: 'ar', round: true })} وتكمل اسبوعين في الجروب**`, new MessageEmbed().setColor('GREEN').setAuthor(User2.name , User2.avatarURL({type:'headshot'}) , `https://web.roblox.com/users/${User2.id}/profile`).setTitle(`ستكمل خلال:\n<t:${unix}:R>,<t:${unix}:F>\nدخلت الجروب منذ:\n<t:${unix2}:R>,<t:${unix2}:F>`).setFooter(message.author.tag , message.author.avatarURL({dynamic:true}))
+    const unix2 = Math.floor(+new Date(Request.joinDate) / 1000);
     
-    controller.replyNoMention({ embeds: [embed] });
+    const embed = new EmbedBuilder()
+      .setColor('#0be881')
+      .setAuthor({ name: user.name , iconURL: user.avatarURL({ type: 'Headshot' })
+      .setTitle(`ستكمل خلال:\n<t:${unix}:R>,<t:${unix}:F>\nدخلت الجروب منذ:\n<t:${unix2}:R>,<t:${unix2}:F>`)
+      .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
+     
+    const wait = humanizeDuration(+new Date(Request.joinDate) + 1209600000 - Date.now() )
+                  
+    controller.replyNoMention({ content: `**${wait} وتكمل اسبوعين في الجروب**`, embeds: [embed] })
+   
   } catch {
     return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
   };
