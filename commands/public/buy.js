@@ -32,8 +32,8 @@ async function GlobalExecute(message, interaction) {
   const guildData = await guildsData.get(controller.guild.id);
   
   if (!controller.author.isOwner && !guildData.transfer.buy) return controller.replyNoMention({ content: '❌ **نظام الشراء مقفل في الوقت الحالي!**' });
-  if (guildData.buy.min > amount) return message.replyNoMention({ content: `❌ **الحد الأدنى للشراء هو ${guildData.buy.min}**` });
-  if (guildData.buy.max > 0 && guildData.buy.max < amount) return message.replyNoMention({ content: `❌ **الحد الأقصى للشراء هو ${guildData.buy.max}**` });
+  if (guildData.buy.min > amount) return message.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأدنى للشراء هو ${guildData.buy.min}**` });
+  if (guildData.buy.max > 0 && guildData.buy.max < amount) return message.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأقصى للشراء هو ${guildData.buy.max}**` });
   
   const userData = await usersData.get(controller.author.id);
   const recipientId = guildData.recipient ?? await controller.guild.fetchOwner().then((owner) => owner.user.id);

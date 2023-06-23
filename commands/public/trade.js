@@ -10,20 +10,29 @@ module.exports = new CommandBuilder()
   .InteractionOn(new SlashCommandBuilder().setDMPermission(true).addUserOption((option) => option
      .setName('user')
      .setDescription('The user you want to transfer to')
-     .setRequired(false)))
+     .setRequired(true)).addNumberOption((option) => option
+        .setName('amount')
+        .setDescription('The amount you want')                                                          
+        .setRequired(true)))
   .setGlobal(GlobalExecute)
+  .setAttr('args', 1) 
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
+  const amount = controller[1];
   const usersData = controller.getData('users');
-  const args = controller[0];
+  const userData = await usersData.get(controller.author.id);
+  const guildsData = controller.getData('guilds');
+  const guildData = await guildsData.get(controller.guild.id);
+  const user = await controller.getUser(controller[0].toId());
   
-  const user = args ? await controller.getUser(args.toId()) : controller.author;
-  if (!user) return controller.replyNoMention({ content: '❌ **لا يمكنني العثور على هذا العضو!**' });
-  if (user.bot) return controller.replyNoMention({ content: '❌ **البوتات لا تملك حساب!**' });
+  if (!user) return controller.replyNoMention({ content: '❌ **هذا المستخدم غير صالح!**' });
+  if (user.bot) return controller.replyNoMention({ content: '❌ **لا يمكن التحويل للبوتات!**' });
+  if (user.id = controller.author.id) return controller.replyNoMention({ content: '❌ **لا يمكن التحويل لنفسك!**' });
   
-  const userData = await usersData.get(user.id);
-  const msg = user.id === controller.author.id ? `**رصيد حسابك هو \`${userData.balance}\`** 🪙` : `**رصيد ${user.username} هو \`${userData.balance}\`** 🪙`;
+  if (userData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
+  if (guildData.transfer.min > amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأدنى للتحويل هو ${guildData.transfer.min}**` });
+  if (guildData.transfer.max > 0 && guildData.transfer.max < amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأقصى للتحويل هو ${guildData.transfer.max}**` });
   
-  controller.replyNoMention({ content: msg });
+
 };
