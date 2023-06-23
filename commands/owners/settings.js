@@ -12,9 +12,9 @@ async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
   const guildsData = controller.getData('guilds');
   const guildData = await guildsData.get(controller.guild.id);
-  const [EmojiName, EmojiId] = guildData.thxEmoji?.match(/<:(.*?):(\d+)>/)?.slice(1);
+  const [EmojiName, EmojiId] = guildData.thxEmoji?.startsWith('<a') ? guildData.thxEmoji?.match(/<a:(.*?):(\d+)>/)?.slice(1) : guildData.thxEmoji?.match(/<:(.*?):(\d+)>/)?.slice(1);
   const thxEmoji = message.guild?.emojis?.cache.get(EmojiId) ?? '❤️';  
-
+  
   const embed = new EmbedBuilder()
     .setColor('#0be881')
     .setTitle('System Information')

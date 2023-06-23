@@ -16,8 +16,7 @@ async function Execute(message) {
   const prefix = guildData.prefix;
   app.setPrefix(prefix);
   
-  console.log(guildData.thxEmoji);
-  const [EmojiName, EmojiId] = guildData.thxEmoji?.startsWith('`<a') ? guildData.thxEmoji?.match(/<a:(.*?):(\d+)>/)?.slice(1) : guildData.thxEmoji?.match(/<:(.*?):(\d+)>/)?.slice(1);
+  const [EmojiName, EmojiId] = guildData.thxEmoji?.startsWith('<a') ? guildData.thxEmoji?.match(/<a:(.*?):(\d+)>/)?.slice(1) : guildData.thxEmoji?.match(/<:(.*?):(\d+)>/)?.slice(1);
   const thxEmoji = message.guild?.emojis?.cache.get(EmojiId) ?? '❤️';  
   
   if (message.channel.id === guildData.thxChannel) return message.react(thxEmoji);
