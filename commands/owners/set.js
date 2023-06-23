@@ -28,7 +28,6 @@ module.exports = new CommandBuilder()
      { command: 'min', group: 'transfer' },
      { command: 'status', group: 'transfer' },
   ])
- .setAttr('args', 1)
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;  

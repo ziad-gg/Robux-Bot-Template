@@ -20,32 +20,33 @@ async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   try {
     const requestsData = controller.getData('requests');
-    const guildsData = controller.getData('guilds');
-    const roblox = controller.getDate('roblox');
+    const Guilds = controller.getData('guilds');
+    const roblox = controller.getData('roblox');
     
-    let user = await roblox.users.find({ userIds: controller[0] });
+    let user = await roblox.users.find({ userNames: controller[0] });
     if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' });
     
     user = await roblox.users.get(user.id);
-    const guildData = await guildData.get(controller.guild.id);
+    const guildData = await Guilds.get(controller.guild.id);
     const requestData = await requestsData.findOne({ groupId: guildData.group, userId: user.id });
     const isCompleted = !requestData ? true : Date.now() + 1209600000 <= requestData.joinDate ? true : false;
     if (isCompleted) return controller.replyNoMention({ content: '🥳 **هذا المستخدم لقد اكمل 14 يوم بالفعل في الجروب!**' });
     
-    const unix = Math.floor(+new Date(Request.joinDate) / 1000 + 1209600);
-    const unix2 = Math.floor(+new Date(Request.joinDate) / 1000);
+    const unix = Math.floor(+new Date(requestData.joinDate) / 1000 + 1209600);
+    const unix2 = Math.floor(+new Date(requestData.joinDate) / 1000);
     
     const embed = new EmbedBuilder()
       .setColor('#0be881')
-      .setAuthor({ name: user.name , iconURL: user.avatarURL({ type: 'Headshot' })
-      .setTitle(`ستكمل خلال:\n<t:${unix}:R>,<t:${unix}:F>\nدخلت الجروب منذ:\n<t:${unix2}:R>,<t:${unix2}:F>`)
-      .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
+      .setAuthor({ name: user.name , iconURL: user.avatarURL({ type: 'Headshot' }) })
+      .setTitle(`ستكمل في:\n<t:${unix}:F>\nدخلت الجروب منذ:\n<t:${unix2}:F> (<t:${unix2}:R>)`)
+      .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() });
      
-    const wait = humanizeDuration(+new Date(Request.joinDate) + 1209600000 - Date.now() )
+    const remaining = humanizeDuration(+new Date(requestData.joinDate) + 1209600000 - Date.now(), { language: 'ar', round: true });
                   
-    controller.replyNoMention({ content: `**${wait} وتكمل اسبوعين في الجروب**`, embeds: [embed] })
+    controller.replyNoMention({ content: `**${remaining} لتكمل اسبوعين في الجروب**`, embeds: [embed] })
    
-  } catch {
+  } catch (e) {
+    console.log(e);
     return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
   };
-}
+};
