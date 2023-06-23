@@ -6,7 +6,7 @@ const { createCanvas, loadImage } = require('canvas');
 module.exports = new CommandBuilder()
   .setName('giverobux')
   .setDescription('Transfer robux into someone.')
-  .setUsage(['{cmdname} (username) (amount)'])
+  .setUsage(['{cmdname} (UserName) (Amount)'])
   .setExample(['{cmdname} {rusername} {snumber}'])
   .setCooldown('20s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option

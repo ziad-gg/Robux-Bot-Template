@@ -4,7 +4,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('robux')
   .setDescription('Robux price calculation.')
-  .setUsage(['{cmdname} (amount)'])
+  .setUsage(['{cmdname} (Amount)'])
   .setExample(['{cmdname} {snumber}'])
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option

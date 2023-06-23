@@ -6,7 +6,7 @@ const { createCanvas, loadImage } = require('canvas');
 module.exports = new CommandBuilder()
   .setName('transfer')
   .setDescription('Transfer balance to robux.')
-  .setUsage(['{cmdname} (username) (amount)'])
+  .setUsage(['{cmdname} (UserName) (Amount)'])
   .setExample(['{cmdname} {rusername} {snumber}'])
   .setCategory('public')
   .setCooldown('20s')

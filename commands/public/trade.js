@@ -2,17 +2,16 @@ const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('balance')
-  .setDescription('Shows user balance.')
+  .setName('trade')
+  .setDescription('Transfer your balance to someone else.')
   .setUsage(['{cmdname}', '{cmdname} (User)'])
   .setExample(['{cmdname}', '{cmdname} {userMention}', '{cmdname} {userId}'])
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(true).addUserOption((option) => option
      .setName('user')
-     .setDescription('User to show the his balance')
+     .setDescription('The user you want to transfer to')
      .setRequired(false)))
   .setGlobal(GlobalExecute)
-  .setAliases([{ cut: 'bal', prefix: true }])
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;

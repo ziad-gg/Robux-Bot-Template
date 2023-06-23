@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = new CommandBuilder()
   .setName('buy')
   .setDescription('Buy a balance.')
-  .setUsage(['{cmdname} (amount)'])
+  .setUsage(['{cmdname} (Amount)'])
   .setExample(['{cmdname} {snumber}'])
   .setCooldown('20s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option

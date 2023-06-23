@@ -4,7 +4,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('deletecode')
   .setDescription('To remove a specific code.')
-  .setUsage(['{cmdname} (code)'])
+  .setUsage(['{cmdname} (Code)'])
   .setExample(['{cmdname} robuxfactory'])
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
      .setName('code')

@@ -4,8 +4,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('addcode')
   .setDescription('Create a gift code.')
-  .setUsage(['{cmdname} (code) (snumber)'])
-  .setExample(['{cmdname} robuxfactory 100'])
+  .setUsage(['{cmdname} (Code) (Prize) (Max)'])
+  .setExample(['{cmdname} robuxfactory 1 100'])
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
      .setName('code')
      .setDescription('The code you want')
