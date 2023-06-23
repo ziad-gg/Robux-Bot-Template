@@ -12,8 +12,8 @@
   ],
   "dependencies": {
     "discord.js": "^14.11.0",
-    "handler.djs": "^2.6.31",
-    "zoblox.js": "^2.11.0",
+    "handler.djs": "^2.6.33",
+    "zoblox.js": "^2.12.0",
     "mongoose": "^7.3.1",
     "express": "^4.18.2",
     "canvas": "^2.11.1",
