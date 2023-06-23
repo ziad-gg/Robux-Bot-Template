@@ -24,7 +24,7 @@ async function GlobalExecute(message, interaction) {
   const isAdmin = Guild.admins.find(admin => admin.id === controller.author.id);
   const command = controller[0]?.toLowerCase();
   const embed = new EmbedBuilder().setColor('#0be881');
-  const link = new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel(`${client.user.username} Dashboard`).setURL(Constants.PROJECT_LINK).setStyle(ButtonStyle.Link));
+  //const link = new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel(`${client.user.username} Dashboard`).setURL(Constants.PROJECT_LINK).setStyle(ButtonStyle.Link));
 
   if (command && command !== 'help') {
     let cmd = client.Application.getCommand(command) || client.Application.getCommandByCut(command);
@@ -78,5 +78,5 @@ async function GlobalExecute(message, interaction) {
     if (owners.length && (controller.author.isOwner)) embed.addFields([{ name: 'Owners Commands', value: owners.join(', ') }]);
   };
   
-  controller.replyNoMention({ embeds: [embed], components: [link] });
+  controller.replyNoMention({ embeds: [embed]/*, components: [link] */ });
 };
