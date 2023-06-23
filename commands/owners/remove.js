@@ -16,7 +16,6 @@ module.exports = new CommandBuilder()
   .isSubCommand()
 
 async function GlobalExecute(message, interaction, global) {
-  
   const controller = message ?? interaction;
   const Guilds = controller.getData('guilds');
   const guildData = await global;
@@ -30,9 +29,8 @@ async function GlobalExecute(message, interaction, global) {
   const isAdmin = guildData.admins.find(admin => admin.id = user.id);
   if (!isAdmin) return controller.replyNoMention('❌ **هذا المستخدم ليس من الادمن!**');
   
-      
   await Guilds.updateOne({ id: controller.guild.id }, { $pull: { admins: { id: userId } } } );
-  await controller .reply({ embeds: [new EmbedBuilder().setDescription(`✅ **You removed ${userMention(userId)} from admins**`)] });
+  await controller.reply({ embeds: [new EmbedBuilder().setDescription(`✅ **You removed ${userMention(userId)} from admins**`)] });
 };
 
 async function InteractionExecute(interaction, global) {};

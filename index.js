@@ -34,9 +34,6 @@ client.Application.setData({
   users: require('./src/models/Users.js'),
   requests: require('./src/models/Requests.js'),
   Constants: require('./src/Constants.js'),
-  functions: { 
-    UpdateStatusMessages: require('./src/Util.js').UpdateStatusMessages    
-  }
 });
 
 process.on('unhandledRejection', (err) => console.error(err));

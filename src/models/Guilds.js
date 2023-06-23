@@ -38,10 +38,6 @@ const Schema = new mongoose.Schema({
   clientsRole: { 
     type: String 
   },
-  schannels: [{ 
-    MessageId: String, 
-    ChannelId: String 
-  }],
   admins: [{
     id: String,
     commands: [String]
