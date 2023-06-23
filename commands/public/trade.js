@@ -21,19 +21,27 @@ async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   const amount = controller[1];
   const usersData = controller.getData('users');
-  const userData = await usersData.get(controller.author.id);
+  const authorData = await usersData.get(controller.author.id);
   const guildsData = controller.getData('guilds');
   const guildData = await guildsData.get(controller.guild.id);
   const user = await controller.getUser(controller[0].toId());
   
   if (!user) return controller.replyNoMention({ content: '❌ **هذا المستخدم غير صالح!**' });
   if (user.bot) return controller.replyNoMention({ content: '❌ **لا يمكن التحويل للبوتات!**' });
-  if (user.id = controller.author.id) return controller.replyNoMention({ content: '❌ **لا يمكن التحويل لنفسك!**' });
+  if (user.id === controller.author.id) return controller.replyNoMention({ content: '❌ **لا يمكن التحويل لنفسك!**' });
   
-  if (userData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
+  if (authorData.balance < amount) return controller.replyNoMention({ content: '❌ **ليس لديك رصيد كافي!**' });
   if (guildData.transfer.min > amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأدنى للتحويل هو ${guildData.transfer.min}**` });
   if (guildData.transfer.max > 0 && guildData.transfer.max < amount) return controller.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأقصى للتحويل هو ${guildData.transfer.max}**` });
   
+  const userData = await usersData.get(user.id);
   
-
+  authorData.balance -= amount;
+  userData.balance += amount;
+   
+  await authorData.save();
+  await userData.save();
+  
+  user.send(`🥇**${controller.guild.name} Logs ATM\n\`\`\`You have recived ${amount}RB from ${controller.author.username}(${controller.author.id})\`\`\`**`).catch(() => 1);
+  controller.replyNoMention({ content: `✅ **تم بنجاح تحويل ${amount} رصيد من حسابك إلى ${user}\nرصيدك الان هو ${authorData.balance}\nرصيده الان هو ${userData.balance}**` });
 };
