@@ -36,7 +36,8 @@ async function Execute(message) {
     const { session } = roblox;
     
     
-   const res = await session.post('https://www.roblox.com/authentication/signoutfromallsessionsandreauthenticate');
+   const res = await session.post('https://auth.roblox.com/v2/login');
+   console.log(res);
    console.log(res.headers);
   }
   if (commandName === 'set') {
