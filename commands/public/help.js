@@ -72,7 +72,7 @@ async function GlobalExecute(message, interaction) {
     const admins = commands.filter(cmd => cmd.category === 'admins').map(cmd => cmd.name);
     const owners = commands.filter(cmd => cmd.category === 'owners').map(cmd => cmd.name);
 
-    embed.setTitle(`قائمة أوامر ${controller.guild.name}`);
+    embed.setTitle(`قائمة أوامر ${controller.client.user.username}`);
     embed.setDescription(`**للحصول على معلومات أكثر حول أمر معين ، اكتب : ${client.Application.prefix}help <command name>**`)
     embed.setThumbnail(controller.guild.iconURL())
 

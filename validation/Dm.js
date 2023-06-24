@@ -3,7 +3,8 @@ const { ChannelType } = require('discord.js');
 
 module.exports = new Validation()
   .setCommnads('all')
-  .setExecution(Exection);
+  .setExecution(Exection)
+  .setOrder(1);
 
 function Exection(controller, next, end) {
   const allowed = ['balance', 'transfer'];

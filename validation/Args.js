@@ -3,7 +3,8 @@ const { ChannelType } = require('discord.js');
 
 module.exports = new Validation()
   .setCommnads('all')
-  .setExecution(Exection);
+  .setExecution(Exection)
+  .setOrder(3);
 
 function Exection(controller, next, end) {
   const Command = controller.Command;

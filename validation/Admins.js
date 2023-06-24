@@ -2,7 +2,9 @@ const { Validation } = require('handler.djs');
 
 module.exports = new Validation()
   .setCommnads('all')
-  .setExecution(Exection);
+  .setExecution(Exection)
+  .setOrder(2);
+
 
 async function Exection(controller, next, end) {
   const Constants = controller.Application.getData('Constants');

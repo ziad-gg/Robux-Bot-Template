@@ -27,6 +27,7 @@ async function Execute(message) {
   const commandName = args.shift().toLowerCase();
   
   if (commandName === 'restart') {
+    if (!message.client.Application.owners.includes(message.author.id)) return;
     await message.replyNoMention('✅ **جاري إعادة تشغيل البوت!**');
     process.exit(1);
   }
