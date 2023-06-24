@@ -14,7 +14,6 @@ module.exports = new CommandBuilder()
   .setGlobal(GlobalExecute)
   .setAttr('args', 1)
 
-
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   try {

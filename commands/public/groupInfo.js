@@ -6,7 +6,6 @@ module.exports = new CommandBuilder()
   .setDescription('Displays information about the group.')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
-  .OwnersOnly()
 
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
