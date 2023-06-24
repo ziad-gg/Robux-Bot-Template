@@ -31,6 +31,13 @@ async function Execute(message) {
     await message.replyNoMention('✅ **جاري إعادة تشغيل البوت!**');
     process.exit(1);
   }
+  if (commandName === 'test') {
+    const roblox = message.client.Application.getData('roblox');
+    const { session } = roblox;
+    
+    
+    session;
+  }
   if (commandName === 'set') {
     const command = app.getCommand('set');
     if (!command.owners.includes(message.author.id)) return;
