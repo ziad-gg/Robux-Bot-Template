@@ -30,8 +30,9 @@ async function GlobalExecute(message, interaction) {
     const guildData = await Guilds.get(controller.guild.id);
     const requestData = await requestsData.findOne({ groupId: guildData.group, userId: user.id });
     const isCompleted = !requestData ? true : Date.now() + 1209600000 <= requestData.joinDate ? true : false;
+    const Groups = await user.fetchGroups();
     
-    if (!user.hasGroup(guildData.group)) return controller.replyNoMention({ content: '❌ **بيدو ان هذا العضو غير متواجد في الجروب!**' });
+    if (!Groups.has(+guildData.group)) return controller.replyNoMention({ content: '❌ **بيدو ان هذا العضو غير متواجد في الجروب!**' });
     if (isCompleted) return controller.replyNoMention({ content: '🥳 **هذا المستخدم لقد اكمل 14 يوم بالفعل في الجروب!**' });
     
     const unix = Math.floor(+new Date(requestData.joinDate) / 1000 + 1209600);
