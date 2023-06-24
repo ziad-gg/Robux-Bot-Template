@@ -10,7 +10,7 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
-  controller.channel.sendTyping();
+  if (message) controller.channel.sendTyping();
 
   try {
     if (interaction) interaction.deferReply({ ephemeral: false });

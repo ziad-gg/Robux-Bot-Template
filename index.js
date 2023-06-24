@@ -43,6 +43,7 @@ mongoose.connection.on('connected', () => console.log('Connected to database !')
 mongoose.connect(process.env.MONGO_URL);
 zoblox.login(process.env.COOKIE);
 
+////ل
 (async () => {
   await client.login(process.env.TOKEN);
 
