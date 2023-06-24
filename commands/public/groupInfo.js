@@ -12,6 +12,7 @@ async function GlobalExecute(message, interaction) {
   try {
     const guildData = await controller.getData('guilds').get(controller.guild.id);
     const group = await controller.getData('roblox').groups.get(guildData.group);
+    const roblox = controller.getData('roblox');
     const embed = new EmbedBuilder()
       .setColor('#0be881')
       .setAuthor({ name: group.name, iconURL: group.logoURL() })
@@ -24,7 +25,7 @@ async function GlobalExecute(message, interaction) {
       .addFields([{ name: '🤴 Group Owner', value: `${group.owner.username} (${group.owner.userId})` }])
       .addFields([{ name: '🕒 Pending Robux', value: `${await group.fetchRevenueSummary().then((e) => e.pendingRobux)}` }])
       .addFields([{ name: '💎 Total Robux', value: `${await group.fetchCurrency().then((e) => e.robux)}` }])
-      .addFields([{ name: '🔺 Cashed Out', value: `${await group.fetchRevenueSummary().then((e) => e.groupPayoutRobux.toString().replace('-', ''))}` }]);
+      .addFields([{ name: '🔺 Cashed Out', value: `${await group.fetchRevenueSummary({ timeFrame: 'Year' }).then((e) => e.groupPayoutRobux.toString().replace('-', ''))}` }]);
     controller.replyNoMention({ embeds: [embed] });
   } catch {
     controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
