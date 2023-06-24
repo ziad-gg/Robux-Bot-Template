@@ -36,7 +36,7 @@ async function GlobalExecute(message, interaction) {
       .addFields([{ name: 'Created At', value: `<t:${Math.floor(+new Date(user.created) / 1000)}:F> (<t:${Math.floor(+new Date(user.created) / 1000)}:R>)` }]) 
       .addFields([{ name: 'Last Online', value: `<t:${Math.floor(+new Date(presence.lastOnline) / 1000)}:F> (<t:${Math.floor(+new Date(presence.lastOnline) / 1000)}:R>)` }]) 
       .addFields([{ name: 'Status', value: `${presence.userPresenceStatus}` }]) 
-      .addFields([{ name: 'Groups', value: `${await await user.fetchGroups().then((groups) => groups.length)}` }]) 
+      .addFields([{ name: 'Groups', value: `${await await user.fetchGroups().then((groups) => groups.size)}` }]) 
       .addFields([{ name: 'Friends Number', value: `${user.profile.friendsCount}` }]) 
       .addFields([{ name: 'Followers', value: `${user.profile.followersCount}` }]) 
       .addFields([{ name: 'Following', value: `${user.profile.followingsCount}` }]) 
