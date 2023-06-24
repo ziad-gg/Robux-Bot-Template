@@ -6,7 +6,7 @@ module.exports = new CommandBuilder()
   .setDescription('Feeling lost?')
   .setCooldown('10s')
   .setCategory('help')
-  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addStringOption((option) => option
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(true).addStringOption((option) => option
      .setName('command')
      .setDescription('Shows details about how to use a command')                                                           
      .setRequired(false)))
@@ -19,10 +19,10 @@ async function GlobalExecute(message, interaction) {
   
   if (controller.channel?.type === ChannelType.DM) {
     const embed = new EmbedBuilder().setColor('#0be881')
-      .setTitle('قائمة الاوامر')
+      .setTitle('قائمة الأوامر')
       .setThumbnail(client.user.displayAvatarURL())
       .addFields([{ name: client.Application.prefix + 'balance', value: '**رصيدك من الروبكس.**' }])
-      .addFields([{ name: client.Application.prefix + 'transfer (UserName) (Amount)', value: '**لتحويل رصيدك الى روبكس.**' }])
+      .addFields([{ name: client.Application.prefix + 'transfer (username) (robux)', value: '**لتحويل رصيدك الى روبكس.**' }])
       .setTimestamp() 
     
    controller.replyNoMention({ embeds: [embed] });
