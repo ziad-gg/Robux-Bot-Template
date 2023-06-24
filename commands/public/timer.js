@@ -41,11 +41,12 @@ async function GlobalExecute(message, interaction) {
       .setColor('#0be881')
       .setAuthor({ name: user.name , iconURL: user.avatarURL({ type: 'Headshot' }) })
       .setTitle(`ستكمل في:\n<t:${unix}:F>\nدخلت الجروب منذ:\n<t:${unix2}:F> (<t:${unix2}:R>)`)
-      .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() });
+      .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
+      .setTimestamp();
      
     const remaining = humanizeDuration(+new Date(requestData.joinDate) + 1209600000 - Date.now(), { language: 'ar', round: true });
                   
-    controller.replyNoMention({ content: `**${remaining} لتكمل اسبوعين في الجروب**`, embeds: [embed] })
+    controller.replyNoMention({ content: `**${remaining} لتكمل اسبوعين في الجروب**`, embeds: [embed] });
    
   } catch {
     return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
