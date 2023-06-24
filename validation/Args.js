@@ -1,4 +1,5 @@
 const { Validation } = require('handler.djs');
+const { ChannelType } = require('discord.js');
 
 module.exports = new Validation()
   .setCommnads('all')

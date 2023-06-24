@@ -1,4 +1,4 @@
-const { EmbedBuilder, SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
+const { EmbedBuilder, SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ChannelType } = require('discord.js');
 const { CommandBuilder } = require('handler.djs');
 
 module.exports = new CommandBuilder()
@@ -16,6 +16,9 @@ async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   const client = controller.client;
   const roblox = controller.getData('roblox');
+  
+  if (controller.channel?.type === ChannelType.DM) return; 
+  
   
   const Guilds = controller.getData('guilds');
   const Constants = controller.getData('Constants');
