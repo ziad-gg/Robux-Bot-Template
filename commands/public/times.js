@@ -10,6 +10,8 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
+  controller.channel.sendTyping();
+
   try {
     if (interaction) interaction.deferReply({ ephemeral: false });
     const guildsData = controller.getData('guilds');
