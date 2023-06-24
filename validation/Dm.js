@@ -7,7 +7,7 @@ module.exports = new Validation()
   .setOrder(1);
 
 function Exection(controller, next, end) {
-  const allowed = ['balance', 'transfer'];
+  const allowed = ['balance', 'transfer', 'help'];
   
   if (!controller.author.isOwner && controller.Command.category === 'admins') return;
   if (controller.channel?.type === ChannelType.DM && !allowed.includes(controller.Command.name)) {

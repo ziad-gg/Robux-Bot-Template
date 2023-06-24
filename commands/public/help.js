@@ -17,9 +17,16 @@ async function GlobalExecute(message, interaction) {
   const client = controller.client;
   const roblox = controller.getData('roblox');
   
-  if (controller.channel?.type === ChannelType.DM) return; 
-  
-  
+  if (controller.channel?.type === ChannelType.DM) {
+    const embed = new EmbedBuilder().setColor('#0be881')
+      .setTitle('قائمة الاوامر')
+      .setThumbnail(client.user.displayAvatarURL())
+      .addFields([{ name: client.Application.prefix + 'balance', value: '**رصيدك من الروبكس.**' }])
+      .addFields([{ name: client.Application.prefix + 'transfer (UserName) (Amount)', value: '**لتحويل رصيدك الى روبكس.**' }])
+      .setTimestamp() 
+    
+   controller.replyNoMention({ embeds: [embed] });
+  }
   const Guilds = controller.getData('guilds');
   const Constants = controller.getData('Constants');
   const Guild = await Guilds.get(controller.guild.id);
