@@ -26,7 +26,7 @@ const { CommandBuilder } = require('handler.djs');
    const user = await controller.getUser(userId).then(u => u?.user?.id? u.user : u); 
    if (!user || user.bot) return controller.replyNoMention({ content: '❌ ** قم بتحديد اي دي مستخدم صحيح**' }); 
   
-   const isAdmin = guildData.admins.find(admin => admin.id = user.id); 
+   const isAdmin = guildData.admins.find(admin => admin.id === user.id); 
    if (!isAdmin) return controller.replyNoMention('❌ **هذا المستخدم ليس من الادمن!**'); 
   
    await Guilds.updateOne({ id: controller.guild.id }, { $pull: { admins: { id: userId } } } ); 

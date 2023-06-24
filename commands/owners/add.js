@@ -26,7 +26,7 @@ async function GlobalExecute(message, interaction, global) {
   if (!user || user.bot) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد مستخدم صال!**' });
   if (controller.Application.owners.includes(user.id)) return controller.replyNoMention('❌ **الاونرات لديهم صلاحيات بالفعل!**');
   
-  const isAdmin = guildData.admins.find(admin => admin.id = user.id);
+  const isAdmin = guildData.admins.find(admin => admin.id === user.id);
   if (isAdmin) return controller.replyNoMention('❌ **هذا الادمن مضاف بالفعل!**');
   
   const embed = new EmbedBuilder().setAuthor({ name: controller.author.username, iconURL: controller.author.avatarURL() });
