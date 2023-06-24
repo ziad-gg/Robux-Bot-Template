@@ -1,8 +1,8 @@
-const { CommandBuilder } = require('handler.djs');
+/*const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder, userMention  } = require('discord.js');
 
 module.exports = new CommandBuilder() 
-  .setName('remove')
+  .setName('removee')
   .setDescription('remove a new Admin.')
   .setUsage(['{cmdname} (user)'])
   .setExample(['{cmdname} {userMention}', '{cmdname} {userId}'])
@@ -34,4 +34,4 @@ async function GlobalExecute(message, interaction, global) {
 };
 
 async function InteractionExecute(interaction, global) {};
-async function MessageExecute(message, Global) {};
+async function MessageExecute(message, Global) {};*/
