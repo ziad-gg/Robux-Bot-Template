@@ -7,7 +7,7 @@ module.exports = new CommandBuilder()
   .setUsage(['{cmdname}', '{cmdname} (User)'])
   .setExample(['{cmdname}', '{cmdname} {userMention}', '{cmdname} {userId}'])
   .setCooldown('10s')
-  .InteractionOn(new SlashCommandBuilder().setDMPermission(true).addUserOption((option) => option
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option
      .setName('user')
      .setDescription('The user you want to transfer to')
      .setRequired(true)).addNumberOption((option) => option

@@ -4,7 +4,7 @@ const { SlashCommandBuilder, EmbedBuilder, roleMention } = require('discord.js')
 module.exports = new CommandBuilder() 
   .setName('settings')
   .setDescription('Displays system information.')
-  .InteractionOn(new SlashCommandBuilder())
+  .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)
   .OwnersOnly()
 
