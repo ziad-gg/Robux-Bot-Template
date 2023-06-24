@@ -65,7 +65,7 @@ async function GlobalExecute(message, interaction, global) {
   
   ButtonCollector.on('collect', async i => {
     if (i.customId == 'confirm') {
-      guildData.admins.push({ id: userId, commands });
+      guildData.admins.push({ id: userId.toString(), commands: commands.map(cmd => cmd.toString()) });
       await guildData.save();
       await i.reply({ embeds: [new EmbedBuilder().setDescription(`✅ **You gave ${userMention(userId)} admin permissions**`)] });
       msg.delete().catch(console.log);

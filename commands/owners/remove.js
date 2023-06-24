@@ -2,7 +2,7 @@ const { CommandBuilder } = require('handler.djs');
  const { SlashCommandBuilder, EmbedBuilder, userMention  } = require('discord.js'); 
   
  module.exports = new CommandBuilder()  
-   .setName('delete') 
+   .setName('remove') 
    .setDescription('remove a new Admin.') 
    .setUsage(['{cmdname} (user)']) 
    .setExample(['{cmdname} {userMention}', '{cmdname} {userId}']) 

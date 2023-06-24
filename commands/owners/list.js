@@ -14,9 +14,9 @@ async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
   const guildData = await global;
   const Admins = guildData.admins;
-  
+  const list = Admins.map((admin, index) => `${(index + 1 == 1 || index + 1 == 2 || index + 1 == 3) ? `**-${index + 1}**` : `-${index + 1}`  } ${userMention(admin.id)} (${admin.id})`)
   const embed = new EmbedBuilder()
-  .setDescription(Admins.map((admin, index) => `${(index + 1 == 1 || index + 1 == 2 || index + 1 == 3) ? `**-${index + 1}**` : `-${index + 1}`  } ${userMention(admin.id)} (${admin.id})`).join('\n'))
+  .setDescription(list.length > 1 ? list.join('\n') : "there is no admins")
   
   controller.replyNoMention({ embeds: [embed] })
 }

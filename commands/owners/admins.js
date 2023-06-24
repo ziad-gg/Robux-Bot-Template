@@ -11,7 +11,7 @@ module.exports = new CommandBuilder()
   .OwnersOnly()
   .setSubcommands([
      { command: 'add' },
-     { command: 'delete' },
+     { command: 'remove' },
      { command: 'list' },
   ]);
 
