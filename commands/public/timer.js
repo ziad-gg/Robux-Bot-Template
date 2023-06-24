@@ -15,7 +15,6 @@ module.exports = new CommandBuilder()
   .setGlobal(GlobalExecute)
   .setAttr('args', 1)
 
-
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
   try {
@@ -48,8 +47,7 @@ async function GlobalExecute(message, interaction) {
                   
     controller.replyNoMention({ content: `**${remaining} لتكمل اسبوعين في الجروب**`, embeds: [embed] })
    
-  } catch (e) {
-    console.log(e);
+  } catch {
     return controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
   };
 };
