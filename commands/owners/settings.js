@@ -1,5 +1,6 @@
 const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder, roleMention } = require('discord.js');
+const { DEFAULT_THXEMOJI } = require('../../src/Constants.js');
 
 module.exports = new CommandBuilder() 
   .setName('settings')
@@ -12,7 +13,7 @@ async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
   const guildsData = controller.getData('guilds');
   const guildData = await guildsData.get(controller.guild.id);
-  const thxEmoji = controller.guild.emojis.cache.get(guildData.thxEmoji) ?? '❤️';  
+  const thxEmoji = controller.guild.emojis.cache.get(guildData.thxEmoji) ?? DEFAULT_THXEMOJI;  
   
   const embed = new EmbedBuilder()
     .setColor('#0be881')

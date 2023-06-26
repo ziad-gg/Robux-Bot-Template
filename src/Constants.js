@@ -4,7 +4,7 @@ module.exports.DEFAULT_PREFIX = '-'; // Default Prefix
 
 module.exports.DEFAULT_GUILD = '936974185421475864'; //Server Id
 
-module.exports.DEFAULT_THXEMOJI = '; //Default The Emoji
+module.exports.DEFAULT_THXEMOJI = '❤️';//Default The Emoji
 
 module.exports.PROJECT_LINK = 'https://' + 'bot-robux' + '.glitch.me' // Your Project Web Url 
 

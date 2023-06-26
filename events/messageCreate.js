@@ -1,6 +1,6 @@
 const { EventBuilder } = require('handler.djs');
 const { Events } = require('discord.js')
-const { DEFAULT_GUILD } = require('../src/Constants.js');
+const { DEFAULT_GUILD, DEFAULT_THXEMOJI } = require('../src/Constants.js');
 
 module.exports = new EventBuilder()
   .setEvent(Events.MessageCreate)
@@ -16,7 +16,7 @@ async function Execute(message) {
   const prefix = guildData.prefix;
   app.setPrefix(prefix);
   
-  const thxEmoji = message.guild?.emojis?.cache.get(guildData.thxEmoji) ?? '❤️'; 
+  const thxEmoji = message.guild?.emojis?.cache.get(guildData.thxEmoji) ?? DEFAULT_THXEMOJI;
   
   if (message.channel.id === guildData.thxChannel) return message.react(thxEmoji);
   if (message.content === '<@' + message.client.user.id + '>') return message.replyNoMention(`My prefix is : ${app.prefix}`);
