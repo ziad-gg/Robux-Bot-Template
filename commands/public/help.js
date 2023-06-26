@@ -25,7 +25,7 @@ async function GlobalExecute(message, interaction) {
       .addFields([{ name: client.Application.prefix + 'transfer (username) (robux)', value: '**لتحويل رصيدك الى روبكس.**' }])
       .setTimestamp() 
     
-   controller.replyNoMention({ embeds: [embed] });
+   return controller.replyNoMention({ embeds: [embed] });
   }
   const Guilds = controller.getData('guilds');
   const Constants = controller.getData('Constants');
