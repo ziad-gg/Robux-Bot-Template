@@ -17,6 +17,7 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction, global) {
   const controller = message ?? interaction;
+  console.log(controller);
   const guildData = await global;
   const userId = controller[0]?.toId();
   
