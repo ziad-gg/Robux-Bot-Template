@@ -22,8 +22,8 @@ async function GlobalExecute(message, interaction, global) {
   const emoji = controller.guild.emojis.cache.find((e) => e.name === controller[0].replaceAll(':', '')) || controller.guild.emojis.cache.find((e) => e.id === controller[0]) || controller.guild.emojis.cache.find((e) => e.name === convert(controller[0])[0]) || controller.guild.emojis.cache.find((e) => e.id === convert(controller[0])[0]);
   if (!emoji) return controller.replyNoMention({ content: '❌ **هذا الايموجي غير صالح او ليس في هذا السيرفر!**' });
     
-  if (guildData.thxEmoji === `${emoji}`) return controller.replyNoMention({ content: '❌ **هذا الايموجي محدد من قبل!**' });
-  guildData.thxEmoji = `${emoji}`;
+  if (guildData.thxEmoji === emoji.id) return controller.replyNoMention({ content: '❌ **هذا الايموجي محدد من قبل!**' });
+  guildData.thxEmoji = emoji.id;
   await guildData.save();
   controller.replyNoMention({ content: '✅ **تم بنجاح إضافة هذه الايموجي!**' });
 };
