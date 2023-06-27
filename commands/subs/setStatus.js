@@ -24,7 +24,7 @@ async function GlobalExecute(message, interaction, global) {
     guildData.buy.status = !guildData.buy.status;  
     await guildData.save();
    
-    controller.replyNoMention({ content: `✅ **تم بنجاح ${guildData.transfer.buy ? 'فتح' : 'قفل'} حالة الشراء بنجاح!**` });
+    controller.replyNoMention({ content: `✅ **تم بنجاح ${guildData.buy.status ? 'فتح' : 'قفل'} حالة الشراء بنجاح!**` });
   };
 };
 
