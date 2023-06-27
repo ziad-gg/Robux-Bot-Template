@@ -35,7 +35,7 @@ async function GlobalExecute(message, interaction) {
   user = await roblox.users.get(user.id);
 
   const guildData = await controller.getData('guilds').get(controller.guild.id);
-  const group = await roblox.groups.get(guildData.groupId);
+  const group = await roblox.groups.get(guildData.group);
   const member = await group.members.get(user.id);
   if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${group}` });
 
