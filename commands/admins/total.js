@@ -8,7 +8,6 @@ module.exports = new CommandBuilder()
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
   .setMessageExecution(MessageExecute)
-  .OwnersOnly()
   .setAliases([{ cut: 'all', prefix: true }])
 
 async function GlobalExecute(message, interaction) { 
