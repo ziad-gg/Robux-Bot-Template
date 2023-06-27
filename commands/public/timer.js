@@ -26,7 +26,12 @@ async function GlobalExecute(message, interaction) {
     if (!user) return controller.replyNoMention({ content: '❌ **يبدو أن هذا اللاعب غير متواجد في روبلوكس!**' });
     
     user = await roblox.users.get(user.id);
+    
     const guildData = await Guilds.get(controller.guild.id);
+    const requests = await requestsData.find();
+    
+    if (!requests.length) return controller.replyNoMention({ content: '❌ **لا يمكن استخدام هذا الأمر بسبب عدم وجود طلابات في المجموعة!**' });
+    
     const requestData = await requestsData.findOne({ groupId: guildData.group, userId: user.id });
     const isCompleted = !requestData ? true : Date.now() + 1209600000 <= requestData.joinDate ? true : false;
     const Groups = await user.fetchGroups();
