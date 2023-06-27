@@ -10,6 +10,8 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) { 
   const controller = message ?? interaction;
+  if (interaction) await interaction.deferReply({ ephemeral: false });
+  
   const MAX_LENGTH = 10;
   let data = await controller.getData('users').find();
   
@@ -31,6 +33,7 @@ async function GlobalExecute(message, interaction) {
     return user ? user.toString() : `<@${userId}>`
   }
 
-  controller.replyNoMention({
+  controller.editMsg = (obj) => interaction ? interaction.editReply(obj) : message.replyNoMention(obj);
+  controller.editMsg({
    embeds: [embed] });
 };
