@@ -36,7 +36,8 @@ async function GlobalExecute(message, interaction) {
   if (guildData.buy.max > 0 && guildData.buy.max < amount) return message.replyNoMention({ content: `❌ **عذرا ولاكن الحد الأقصى للشراء هو ${guildData.buy.max}**` });
   
   const userData = await usersData.get(controller.author.id);
-  const recipientId = guildData.recipient ?? await controller.guild.fetchOwner().then((owner) => owner.user.id);
+  const recipient = controller.client.users.cache.get(guildData.recipient);
+  const recipientId = recipient?.id ?? await controller.guild.fetchOwner().then((owner) => owner.user.id);
   const price = guildData.price * amount;
   const tax = Math.ceil(price * 20 / 19);
   
