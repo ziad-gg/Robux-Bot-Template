@@ -4,8 +4,8 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('trade')
   .setDescription('Transfer your balance to someone else.')
-  .setUsage(['{cmdname}', '{cmdname} (User)'])
-  .setExample(['{cmdname}', '{cmdname} {userMention}', '{cmdname} {userId}'])
+  .setUsage(['{cmdname} (User) (Amount)'])
+  .setExample(['{cmdname} {userMention} 5', '{cmdname} {userId} 5'])
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option
      .setName('user')
