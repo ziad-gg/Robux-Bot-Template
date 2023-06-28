@@ -16,9 +16,12 @@ function isInteger() {
 
 function toNumber() {
   const units = {
-    k: 1000,
-    m: 1000000,
-    b: 1000000000
+    'k': 1e3,
+    'm': 1e6,
+    'b': 1e9,
+    't': 1e12,
+    'q': 1e15,
+    's': 1e18,
   };
 
   const lastChar = this.charAt(this.length - 1);
