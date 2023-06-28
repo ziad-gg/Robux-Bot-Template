@@ -34,7 +34,7 @@ async function GlobalExecute(message, interaction) {
       .setThumbnail(controller.guild.iconURL())
       .setTitle('ضريبة الروبكس')
       .addFields([{ name: 'المبلغ بدون الضريبة :', value: '' + price }])
-      .addFields([{ name: 'المبلغ بعد الضريبة :', value: '' + Math.ceil(price / 0.95) }])
+      .addFields([{ name: 'المبلغ بعد الضريبة :', value: Math.ceil(price / 0.95) == 2 ? '1' : '' + Math.ceil(price / 0.95) }])
       .setTimestamp()
      ]
   })
