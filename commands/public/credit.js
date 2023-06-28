@@ -25,7 +25,7 @@ async function GlobalExecute(message, interaction) {
   const guildData = await guildsData.get(controller.guild.id);
   const guildPrice = guildData.price;
 
-  if (amount * 0.95 < guildPrice * 1) return controller.replyNoMention({ content: `❌ **يجب أن يكون عدد الكريديت \`${Math.ceil((guildPrice * 1) / 0.95)}\` على الأقل!**` });
+  if (amount * 0.95 == 2 ? 1 : amount < guildPrice * 1) return controller.replyNoMention({ content: `❌ **يجب أن يكون عدد الكريديت \`${Math.ceil((guildPrice * 1) / 0.95)}\` على الأقل!**` });
 
   const buy = Math.floor((amount * 0.95) / guildPrice);
   const price = buy * guildPrice;
@@ -37,9 +37,9 @@ async function GlobalExecute(message, interaction) {
       .setColor('#0be881')
       .setThumbnail(controller.guild.iconURL())
       .setTitle('ضريبة الكريديت')
-      .addFields([{ name: 'يمكنك شراء :', value: `${buy} روبكس` }])
-      .addFields([{ name: 'السعر :', value: `${price}` }])
-      .addFields([{ name:'السعر مع الضريبة :', value: `${withtax}` }])
+      .addFields([{ name: 'يمكنك شراء :', value: `${amount == 1 ? 1 : buy} روبكس` }])
+      .addFields([{ name: 'السعر :', value: `${amount == 1 ? 1 : price}` }])
+      .addFields([{ name:'السعر مع الضريبة :', value: `${amount == 1 ? 1 : price == 1 ? 1 : withtax}` }])
       .setTimestamp()
      ]
   })
