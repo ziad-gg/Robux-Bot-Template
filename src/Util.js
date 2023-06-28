@@ -14,6 +14,24 @@ function isInteger() {
   return true;
 } 
 
+function toNumber() {
+  const units = {
+    k: 1000,
+    m: 1000000,
+    b: 1000000000
+  };
+
+  const lastChar = this.charAt(this.length - 1);
+  const unit = units[lastChar];
+
+  if (unit) {
+    const numericPart = parseFloat(this.slice(0, this.length - 1));
+    return numericPart * unit;
+  }
+
+  return this;
+}
+
 function randomNum() {
   if (this.valueOf().includes('s')) return parseInt(Math.random() * (10 - 1) + 1);
   if (this.valueOf().includes('l')) return parseInt(Math.random() * (20000 - 10000) + 10000);
@@ -37,10 +55,12 @@ function formateNum() {
 
 String.prototype.toId = toId;
 String.prototype.isNumber = isNumber;
+String.prototype.toNumber = toNumber;
 String.prototype.isInteger = isInteger;
 String.prototype.randomNum = randomNum;
 
 Number.prototype.isNumber = isNumber;
+Number.prototype.toNumber = toNumber;
 Number.prototype.isInteger = isInteger;
 Number.prototype.formateNum = formateNum;
 

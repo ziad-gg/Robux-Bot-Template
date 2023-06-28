@@ -39,7 +39,7 @@ async function GlobalExecute(message, interaction) {
   const recipient = controller.client.users.cache.get(guildData.recipient);
   const recipientId = recipient?.id ?? await controller.guild.fetchOwner().then((owner) => owner.user.id);
   const price = guildData.price * amount;
-  const tax = Math.ceil(price * 20 / 19);
+  const tax = Math.ceil(price * 20 / 19) == 2 ? 1 : Math.ceil(price * 20 / 19);
   
   await controller.replyNoMention({ content : `\`\`\`c ${recipientId} ${tax}\`\`\`` });
   const filter = m => m.author.id == '282859044593598464' && m.content.includes(`${price}`) & m.content.includes(`${recipientId}`) && m.content.includes(`${controller.author.username}`);

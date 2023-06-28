@@ -16,7 +16,7 @@ module.exports = new CommandBuilder()
 
 async function GlobalExecute(message, interaction) {
   const controller = message ?? interaction;
-  const amount = +controller[0];
+  const amount = +controller[0].toNumber();
   
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
     
@@ -29,8 +29,8 @@ async function GlobalExecute(message, interaction) {
       .setColor('#0be881')
       .setThumbnail(controller.guild.iconURL())
       .setTitle('ضريبة بروبوت')
-      .addFields([{ name: 'المبلغ بدون الضريبة :', value: '' + transformation == 0 ? '1' : transformation }])
-      .addFields([{ name: 'المبلغ بعد الضريبة :', value: '' + tax == 2 ? '1' : tax }])
+      .addFields([{ name: 'المبلغ بدون الضريبة :', value: transformation == 0 ? '1' : '' + transformation }])
+      .addFields([{ name: 'المبلغ بعد الضريبة :', value: tax == 2 ? '1' : '' + tax }])
       .setTimestamp()
      ]
   })
