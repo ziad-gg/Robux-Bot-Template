@@ -29,8 +29,8 @@ async function GlobalExecute(message, interaction) {
       .setColor('#0be881')
       .setThumbnail(controller.guild.iconURL())
       .setTitle('ضريبة بروبوت')
-      .addFields([{ name: 'المبلغ بدون الضريبة :', value: '' + transformation }])
-      .addFields([{ name: 'المبلغ بعد الضريبة :', value: '' + tax }])
+      .addFields([{ name: 'المبلغ بدون الضريبة :', value: '' + transformation == 0 ? '1' : transformation }])
+      .addFields([{ name: 'المبلغ بعد الضريبة :', value: '' + tax == 2 ? '1' : tax }])
       .setTimestamp()
      ]
   })
