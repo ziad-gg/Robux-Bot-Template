@@ -25,9 +25,8 @@ async function GlobalExecute(message, interaction) {
   const prize = +controller[1];
   const maxUsers = +controller[2];
   
-  if (!prize.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بوضع رقم صالح في الجائزة!**' } 
-                                                         );
-  if (!maxUsers.isNumber()) return controller.channel.send('❌ **يجب أن تقوم بوضع رقم صالح في الحد الأقصى!**');    
+  if (!prize.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بوضع رقم صالح في الجائزة!**' });
+  if (!maxUsers.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بوضع رقم صالح في الحد الأقصى!**' });    
     
   const gift = controller.getData('codes');
   const giftCode_Old = await gift.findOne({ guildId: controller.guild.id, code });
@@ -49,5 +48,5 @@ async function GlobalExecute(message, interaction) {
   .setTimestamp()
   .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() });
   
-  controller.replyNoMention({ embeds: [embed] });
+  controller.channel.send({ embeds: [embed] });
 };

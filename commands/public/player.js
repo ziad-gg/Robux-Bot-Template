@@ -40,7 +40,7 @@ async function GlobalExecute(message, interaction) {
       .addFields([{ name: 'Friends Number', value: `${user.profile.friendsCount}` }]) 
       .addFields([{ name: 'Followers', value: `${user.profile.followersCount}` }]) 
       .addFields([{ name: 'Following', value: `${user.profile.followingsCount}` }]) 
-      .setFooter({ text: controller.author.username, iconURL: controller.author.displayAvatarURL({ dynamic: true }) })
+      .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
       .setTimestamp()
     
     controller.replyNoMention({ embeds: [embed] });

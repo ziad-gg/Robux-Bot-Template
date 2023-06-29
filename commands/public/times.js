@@ -19,12 +19,12 @@ async function GlobalExecute(message, interaction) {
     const guildData = await guildsData.get(controller.guild.id);
     
     const group = await roblox.groups.get(guildData.group);  
-    const transactions = await fetchAllGroupTransactions(group);
+    const transactions = await group.fetchTransactions({ limit: 100 });
     const embed = new EmbedBuilder()
       .setColor('#0be881')
       .setTitle(group.name)
       .setThumbnail(controller.guild.iconURL({ dynamic: true })) 
-      .setDescription(transactions.filter(e => e.isPending).sort((a, b) => Math.floor((new Date(a.created).getTime() + 432e6) / 1000) - Math.floor((new Date(b.created).getTime() + 432e6) / 1000)).map(e => `**- Amount : ${Math.ceil(e.currency.amount)}\n- Arrival time : <t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:F> \n<t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:R>**`).join('\n\n') || ' ')
+      .setDescription(transactions.data.filter(e => e.isPending).sort((a, b) => Math.floor((new Date(a.created).getTime() + 432e6) / 1000) - Math.floor((new Date(b.created).getTime() + 432e6) / 1000)).map(e => `**- Amount : ${Math.ceil(e.currency.amount)}\n- Arrival time : <t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:F> \n<t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:R>**`).join('\n\n') || ' ')
       .setFooter({ text: controller.author.username, iconURL: controller.author.displayAvatarURL({ dynamic: true }) })
       .setTimestamp()
     
@@ -36,7 +36,7 @@ async function GlobalExecute(message, interaction) {
   };
 };
 
-async function fetchAllGroupTransactions(Group) {
+/*async function fetchAllGroupTransactions(Group) {
   let transactions = [];
   let nextPageCursor = null;
 
@@ -49,4 +49,4 @@ async function fetchAllGroupTransactions(Group) {
   } while (nextPageCursor !== null);
 
   return transactions;
-}
+}*/
