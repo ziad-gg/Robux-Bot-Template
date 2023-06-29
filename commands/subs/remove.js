@@ -3,12 +3,12 @@ const { CommandBuilder } = require('handler.djs');
   
  module.exports = new CommandBuilder()  
    .setName('remove') 
-   .setDescription('remove a new Admin.') 
+   .setDescription('remove a admins.') 
    .setUsage(['{cmdname} (user)']) 
    .setExample(['{cmdname} {userMention}', '{cmdname} {userId}']) 
    .InteractionOn(new SlashCommandBuilder().addUserOption((option) => option 
       .setName('admin') 
-      .setDescription('Admin Profile to remove') 
+      .setDescription('Admin user to remove') 
       .setRequired(true))) 
    .setGlobal(GlobalExecute) 
    .setInteractionExecution(InteractionExecute) 

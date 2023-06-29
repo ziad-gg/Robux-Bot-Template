@@ -3,8 +3,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('admins')
-  .setDescription('Management Admins.')
-  .setUsage(['{cmdname} (GroupName) (CommandName)'])
+  .setDescription('Management admins.')
+  .setUsage(['{cmdname} (CommandName)'])
   .setExample(['{cmdname} add {userMention} ', '{cmdname} add {userId}' ])
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setGlobal(GlobalExecute)

@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName('remove')
   .setDescription('Remove someone specific balance.')
   .setUsage(['{cmdname} (User) (Amount)'])
-  .setExample(['{cmdname} {userMention} 100', '{cmdname} {userId} 10'])
+  .setExample(['{cmdname} {userMention} 10', '{cmdname} {userId} 10'])
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option
      .setName('user')
      .setDescription('The user from whom the balance is to be removed')
