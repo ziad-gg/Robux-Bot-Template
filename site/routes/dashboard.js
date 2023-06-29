@@ -11,7 +11,7 @@ router.get('/', ensureAuthenticated, async (req, res) => {
   if (!guild) return res.redirect('/');
   
   const GuildData = await client.Application.getData('guilds').get(guild.id);
-  const UserData = await client.Application.getData('users').get(req.user.id);;
+  const UserData = await client.Application.getData('users').get(req.user.id);
   const roblox = client.Application.getData('roblox');
   
   const group = await roblox.groups.get(GuildData.group);  
@@ -28,10 +28,8 @@ router.get('/', ensureAuthenticated, async (req, res) => {
       pending,
       funds
     },
-    recipientId: GuildData.recipient ?? await guild.fetchOwner((owner) => owner.user.id),
-    recipientName: client.users.cache.get(GuildData.recipient ?? await guild.fetchOwner((owner) => owner.user.id)).username, 
-    guild: guild,
-    owner: await guild.fetchOwner().then((owner) => owner.user.username),
+    recipientId: client.users.cache.get(GuildData.recipient)?.id ?? await guild.fetchOwner((owner) => owner.user.id),
+    recipientName: client.users.cache.get(GuildData.recipient)?.username ?? await guild.fetchOwner((owner) => owner.user.username), 
     data: GuildData,
     user: UserData
   });
