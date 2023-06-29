@@ -35,19 +35,19 @@ function toNumber() {
   return this;
 }
 
-function formateNum() {
-  if (this >= 1e3) {
-    return (this / 1e3).toFixed(1) + 'k';
-  } else if (this >= 1e6) {
-    return (this / 1e6).toFixed(1) + 'm';
-  } else if (this >= 1e9) {
-    return (this / 1e9).toFixed(1) + 'b';
-  } else if (this >= 1e12) {
-    return (this / 1e12).toFixed(1) + 't';
+function formateNum(num) {
+  if (this >= 1e18) {
+    return (this / 1e18).toFixed(1) + 's';
   } else if (this >= 1e15) {
     return (this / 1e15).toFixed(1) + 'q';
-  } else if (this >= 1e18) {
-    return (this / 1e18).toFixed(1) + 's';
+  } else if (this >= 1e12) {
+    return (this / 1e12).toFixed(1) + 't';
+  } else if (this >= 1e9) {
+    return (this / 1e9).toFixed(1) + 'b';
+  } else if (this >= 1e6) {
+    return (this / 1e6).toFixed(1) + 'm';
+  } else if (this >= 1e3) {
+    return (this / 1e3).toFixed(1) + 'k';
   } else {
     return +this;
   }

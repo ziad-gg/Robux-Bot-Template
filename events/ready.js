@@ -9,8 +9,6 @@ module.exports = new EventBuilder()
   .setExecution(Execute)
 
 async function Execute(client) {
-  const num = 1e6
-  console.log(num.formateNum())
   console.log(`${client.user.username} Is Online !`);
   require('../site/index.js');
   // app.listen(PORT);
