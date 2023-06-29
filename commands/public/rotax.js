@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName('rotax')
   .setDescription('Roblox tax calculation.')
   .setUsage(['{cmdname} (Amount)'])
-  .setExample(['{cmdname} {snumber}'])
+  .setExample(['{cmdname} 1000'])
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option
      .setName('amount')

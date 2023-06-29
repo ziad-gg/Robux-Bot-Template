@@ -35,11 +35,6 @@ function toNumber() {
   return this;
 }
 
-function randomNum() {
-  if (this.valueOf().includes('s')) return parseInt(Math.random() * (10 - 1) + 1);
-  if (this.valueOf().includes('l')) return parseInt(Math.random() * (20000 - 10000) + 10000);
-}
-
 function replyNoMention(options) {
   options = typeof options === 'string' ? { content: options } : options;
   options.allowedMentions = {
@@ -50,17 +45,16 @@ function replyNoMention(options) {
 
 function formateNum() {
   if (this < 1e3) return this;
-  if (this >= 1e3 && this < 1e6) return +(this / 1e3).toFixed(1) + "k";
-  if (this >= 1e6 && this < 1e9) return +(this / 1e6).toFixed(1) + "m";
-  if (this >= 1e9 && this < 1e12) return +(this / 1e9).toFixed(1) + "b";
-  if (this >= 1e12) return +(this / 1e12).toFixed(1) + "t";
+  if (this >= 1e3 && this < 1e6) return +(this / 1e3).toFixed(1) + 'k';
+  if (this >= 1e6 && this < 1e9) return +(this / 1e6).toFixed(1) + 'm';
+  if (this >= 1e9 && this < 1e12) return +(this / 1e9).toFixed(1) + 'b';
+  if (this >= 1e12) return +(this / 1e12).toFixed(1) + 't';
 };
 
 String.prototype.toId = toId;
 String.prototype.isNumber = isNumber;
 String.prototype.toNumber = toNumber;
 String.prototype.isInteger = isInteger;
-String.prototype.randomNum = randomNum;
 
 Number.prototype.isNumber = isNumber;
 Number.prototype.toNumber = toNumber;

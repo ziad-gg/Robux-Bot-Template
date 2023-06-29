@@ -4,8 +4,8 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('max')
   .setDescription('Sets the maximum.')
-  .setUsage(['{mainName} {groupname} {cmdname} (amount)'])
-  .setExample(['{mainName} {groupname}  {cmdname} {lnumber}'])
+  .setUsage(['{mainName} {groupname} {cmdname} (Maximum)'])
+  .setExample(['{mainName} {groupname}  {cmdname} 1000'])
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
      .setName('max')
      .setDescription('The maximum you want')

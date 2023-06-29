@@ -6,7 +6,7 @@ module.exports = new CommandBuilder()
   .setDescription('To see current codes.')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false))
   .setUsage(['{cmdname}'])
-  .setExample(['{cmdname'])
+  .setExample(['{cmdname}'])
   .setGlobal(GlobalExecute)
   
 async function GlobalExecute(message, interaction) { 

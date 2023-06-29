@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName('buy')
   .setDescription('Buy a balance.')
   .setUsage(['{cmdname} (Amount)'])
-  .setExample(['{cmdname} {snumber}'])
+  .setExample(['{cmdname} 100'])
   .setCooldown('20s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option
      .setName('amount')

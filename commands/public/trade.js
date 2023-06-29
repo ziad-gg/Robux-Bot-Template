@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName('trade')
   .setDescription('Transfer your balance to someone else.')
   .setUsage(['{cmdname} (User) (Amount)'])
-  .setExample(['{cmdname} {userMention} 5', '{cmdname} {userId} 5'])
+  .setExample(['{cmdname} {userMention} 10', '{cmdname} {userId} 10'])
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option
      .setName('user')

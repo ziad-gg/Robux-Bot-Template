@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName('robux')
   .setDescription('Robux price calculation.')
   .setUsage(['{cmdname} (Amount)'])
-  .setExample(['{cmdname} {snumber}'])
+  .setExample(['{cmdname} 100'])
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addNumberOption((option) => option
      .setName('amount')
