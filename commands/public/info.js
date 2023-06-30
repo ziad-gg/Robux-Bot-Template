@@ -9,7 +9,7 @@ module.exports = new CommandBuilder()
   .setCooldown('10s')
   .InteractionOn(new SlashCommandBuilder().setDMPermission(false).addUserOption((option) => option
      .setName('user')
-     .setDescription('User to show the information')
+     .setDescription('User to show the his information')
      .setRequired(false)))
   .setGlobal(GlobalExecute)
 
@@ -27,9 +27,10 @@ async function GlobalExecute(message, interaction) {
     .setAuthor({ name: user.username, iconURL: user.avatarURL() })
     .setColor('#0be881')
     .addFields([{ name: 'عدد مرات شراء الروبكس:', value: `${userData.buyedCount}` }]) 
-    .addFields([{ name: 'مجموع الشراء:', value: `${userData.buyedTotal}` }]) 
+    .addFields([{ name: 'اجمالي الشراء:', value: `${userData.buyedTotal}` }]) 
     .addFields([{ name: 'عدد مرات سحب الروبكس:', value: `${userData.transactionsCount}` }]) 
-    .addFields([{ name: 'مجموع السحب:', value: `${userData.transactionsTotal}` }]) 
+    .addFields([{ name: 'اجمالي السحب:', value: `${userData.transactionsTotal}` }]) 
+    .addFields([{ name: 'اخر حساب تم السحب اليه:', value: `${userData.lastTransactionsAccount}` }]) 
     .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
     .setTimestamp();
   
