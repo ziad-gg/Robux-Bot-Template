@@ -87,7 +87,6 @@ async function GlobalExecute(message, interaction) {
   
   collector.on('collect', async (button) => {
     if (button.customId === 'end') {
-      
     await cooldowns.delete(key);
     button.reply({ content: '✅ **تم بنجاح إنهاء عملية الشراء!**' });
     }
