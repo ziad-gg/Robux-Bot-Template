@@ -57,7 +57,7 @@ async function GlobalExecute(message, interaction) {
     
     if (subs) {
       main = cmd;
-      cmd = client.Application.getCommand(subs.commandName);
+      cmd = client.Application.subs.get(subs.commandName);
     }
 
     const Aliases = cmd.Application.Cuts;
