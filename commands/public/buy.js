@@ -60,6 +60,9 @@ async function GlobalExecute(message, interaction) {
     if (cooldowns.has(key)) {
     if (cooldowns.get(key).transactionId !== transactionId) return;
 
+    row.components[0].setDisabled(true);
+    msg.edit({ components: [row] });
+      
     userData.balance += amount;
     userData.buyedTotal += amount;
     userData.buyedCount += 1;
@@ -75,7 +78,7 @@ async function GlobalExecute(message, interaction) {
     if (clientsRole) controller.member.roles.add(clientsRole.id).catch(() => 1);
       
     setTimeout(() => {
-      //controller.channel.delete();
+      controller.channel.delete();
       cooldowns.delete(key);
     }, 5000);
   }
@@ -89,13 +92,18 @@ async function GlobalExecute(message, interaction) {
    }
  });
   
+ collector.on('end', () => {
+   row.components[0].setDisabled(true);
+   msg.edit({ components: [row] });
+ });
+  
  pay.on('end', async () => {
    if (buyed) return;
    if (cooldowns.has(key)) {
    if (cooldowns.get(key).transactionId !== transactionId) return;
   
    await cooldowns.delete(key); 
-   controller.channel.send({ content: '🕓 **لقد انتهى وقت التحويل المسموح لك بالتحويل!**' });
+   controller.channel.send({ content: '🕓 **لقد انتهى وقت التحويل!**' });
    }
  });
 };
