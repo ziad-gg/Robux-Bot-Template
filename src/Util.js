@@ -61,11 +61,20 @@ function replyNoMention(options) {
   return this.reply(options);
 } 
 
-String.prototype.toId = toId;
-String.prototype.isNumber = isNumber;
-String.prototype.toNumber = toNumber;
-String.prototype.isInteger = isInteger;
-String.prototype.formateNum = formateNum;
+Object.prototype.extends = function(obj) {
+  for (var key in obj) {
+    console.log(this[key]);
+    this[key] = obj[key];
+  }
+}
+
+String.prototype.extends({
+  toId, 
+  isNumber, 
+  toNumber, 
+  isInteger,
+  formateNum
+});
 
 Number.prototype.isNumber = isNumber;
 Number.prototype.toNumber = toNumber;
