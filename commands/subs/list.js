@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder, userMention } = require('discord.js')
 
 module.exports = new CommandBuilder() 
   .setName('list')
-  .setDescription('Show admins list.')
+  .setDescription('Shows admins list.')
   .InteractionOn(new SlashCommandBuilder())
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
@@ -15,9 +15,10 @@ async function GlobalExecute(message, interaction, global) {
   const guildData = await global;
   const Admins = guildData.admins;
   
-  const list = Admins.map((admin, index) => `${(index + 1 == 1 || index + 1 == 2 || index + 1 == 3) ? `**-${index + 1}**` : `-${index + 1}`  } ${userMention(admin.id)} (${admin.id})`)
+  const list = Admins.map((admin, index) => `${(index + 1 == 1 || index + 1 == 2 || index + 1 == 3) ? `**-${index + 1}**` : `-${index + 1}`  } ${userMention(admin.id)} (${admin.id})`);
   const embed = new EmbedBuilder()
-  .setDescription(list.length > 0 ? list.join('\n') : ' ')
+  .setTitle('📃 مجموعة الادمنز المضافة')
+  .setDescription(list.join('\n') || ' ')
   
   controller.replyNoMention({ embeds: [embed] })
 }
