@@ -21,8 +21,8 @@ module.exports.CLIENT_OPTIONS = {
 }; //Client Options
 
 module.exports.PROBOT_IDS = [
-  '282859044593598464', 
-  '567703512763334685', 
+  '282859044593598464',
+  '567703512763334685',
 ]; //ProBot Ids
 
 module.exports.OWNERS = [
