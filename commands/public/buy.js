@@ -60,6 +60,7 @@ async function GlobalExecute(message, interaction) {
     if (cooldowns.has(key)) {
     if (cooldowns.get(key).transactionId !== transactionId) return;
 
+    console.log(row.components.data)
     userData.balance += amount;
     userData.buyedTotal += amount;
     userData.buyedCount += 1;
@@ -75,7 +76,7 @@ async function GlobalExecute(message, interaction) {
     if (clientsRole) controller.member.roles.add(clientsRole.id).catch(() => 1);
       
     setTimeout(() => {
-      controller.channel.delete();
+      //controller.channel.delete();
       cooldowns.delete(key);
     }, 5000);
   }
