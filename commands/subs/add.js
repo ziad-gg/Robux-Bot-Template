@@ -1,5 +1,5 @@
 const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ComponentType, userMention  } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, ComponentType, userMention } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('add')
@@ -8,7 +8,7 @@ module.exports = new CommandBuilder()
   .setExample(['{mainName} {cmdname} {userMention}', '{mainName} {cmdname} {userId}'])
   .InteractionOn(new SlashCommandBuilder().addUserOption((option) => option
      .setName('admin')
-     .setDescription('Admin Profile to Add')
+     .setDescription('The user to add it to the admins')
      .setRequired(true)))
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
@@ -23,8 +23,8 @@ async function GlobalExecute(message, interaction, global) {
   if (!userId) return controller.replyNoMention({ content: '❌ **يحب أن تقوم بتحديد المستخدم!**' });
   const user = await controller.getUser(userId).then(u => u?.user?.id? u.user : u);
   
-  if (!user || user.bot) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد مستخدم صال!**' });
-  if (controller.Application.owners.includes(user.id)) return controller.replyNoMention('❌ **الاونرات لديهم صلاحيات بالفعل!**');
+  if (!user || user.bot) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد مستخدم صالح!**' });
+  if (controller.Application.owners.includes(user.id)) return controller.replyNoMention({ content: '❌ **الاونرات لديهم صلاحيات بالفعل!**' });
   
   const isAdmin = guildData.admins.find(admin => admin.id === user.id);
   if (isAdmin) return controller.replyNoMention('❌ **هذا الادمن مضاف بالفعل!**');
@@ -54,7 +54,7 @@ async function GlobalExecute(message, interaction, global) {
   MessageCollector.on('collect', m => {
     if (commands.length === 1) return;
     commands = commands.filter(command => command != m.content.toLowerCase());
-    embed.setDescription(commands.join("\n\ ") + "\n\ \n\ لمسح اي امر من هذه الاوامر قم بكتابه اسمه فقط");
+    embed.setDescription(commands.join('\n\ ') + "\n\ \n\ لمسح اي امر من هذه الاوامر قم بكتابة اسمه فقط");
     msg.edit({ embeds: [embed] }).catch(console.log);
   });
   
@@ -67,10 +67,9 @@ async function GlobalExecute(message, interaction, global) {
     if (i.customId == 'confirm') {
       guildData.admins.push({ id: userId.toString(), commands: commands.map(cmd => cmd.toString()) });
       await guildData.save();
-      await i.reply({ embeds: [new EmbedBuilder().setDescription(`✅ **You gave ${userMention(userId)} admin permissions**`)] });
+      await i.reply({ content: '✅ **تم بنجاح إضافة هذا المستخدم الي الادمنز!**' });
       msg.delete().catch(console.log);
     }
-    
     if (i.customId == 'cancel') {
       msg.delete().catch(console.log);
     }
