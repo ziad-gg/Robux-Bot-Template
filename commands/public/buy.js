@@ -42,19 +42,27 @@ async function GlobalExecute(message, interaction) {
   const tax = Math.ceil(price * 20 / 19) == 2 ? 1 : Math.ceil(price * 20 / 19);
   
   const embed = new EmbedBuilder().setColor('#0be881').setTitle('لديك 5 دقائق لتحويل المبلغ:').setDescription(`\`\`\`c ${recipientId} ${tax}\`\`\``);
-  const row = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId('yes').setStyle(ButtonStyle.Danger).setLabel('إلغاء عملية الشراء'));
-  await controller.replyNoMention({ embeds: [embed], components: [row] });
+  const row = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId('end').setStyle(ButtonStyle.Danger).setLabel('إلغاء عملية الشراء'));
+  const msg = await controller.replyNoMention({ embeds: [embed], components: [row] });
   
   const filter_button = (button) => button.user.id === message.author.id;
-  const collector = contr.createMessageComponentCollector({ filter, time: 60000, max: 1 });
+  const collector = msg.createMessageComponentCollector({ filter: filter_button, time, max: 1 });
+  
   const filter = m => m.author.id == '282859044593598464' && m.content.includes(`${price}`) & m.content.includes(`${recipientId}`) && m.content.includes(`${controller.author.username}`);
-  const pay = controller.channel.createMessageCollector({ filter, time, max: 1 });
+  const pay = msg.channel.createMessageCollector({ filter, time, max: 1 });
   const transactionId = 'xxxx-xxxx-xxxx-xxxx'.replace(/x/g, () => Math.floor(Math.random() * 16).toString(16));
   
   cooldowns.set(key, {
     transactionId
   });
 
+  collector.on('collect', async (button) => {
+    if (button.customId === 'end') { 
+    await cooldowns.delete(key);
+    button.reply({ content: '✅ **تم بنجاح إنهاء عملية الشراء!**' });
+    }
+  });
+  
   pay.on('collect', async () => {
     if (cooldowns.has(key)) {
     if (cooldowns.get(key).transactionId !== transactionId) return;
