@@ -30,7 +30,7 @@ async function GlobalExecute(message, interaction) {
     .addFields([{ name: 'اجمالي الشراء:', value: `${userData.buyedTotal}` }]) 
     .addFields([{ name: 'عدد مرات سحب الروبكس:', value: `${userData.transactionsCount}` }]) 
     .addFields([{ name: 'اجمالي السحب:', value: `${userData.transactionsTotal}` }]) 
-    .addFields([{ name: 'اخر حساب تم السحب اليه:', value: `${userData.lastTransactionsAccount}` }]) 
+  if (userData.lastTransactionsAccount) embed.addFields([{ name: 'اخر حساب تم السحب اليه:', value: `${userData.lastTransactionsAccount}` }]) 
     .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
     .setTimestamp();
   
