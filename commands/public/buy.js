@@ -60,7 +60,6 @@ async function GlobalExecute(message, interaction) {
     if (cooldowns.has(key)) {
     if (cooldowns.get(key).transactionId !== transactionId) return;
 
-    console.log(row.components.data)
     userData.balance += amount;
     userData.buyedTotal += amount;
     userData.buyedCount += 1;
@@ -85,6 +84,7 @@ async function GlobalExecute(message, interaction) {
  collector.on('collect', async (button) => {
    if (button.customId === 'end') { 
    await cooldowns.delete(key);
+     
    button.reply({ content: '✅ **تم بنجاح إنهاء عملية الشراء!**' });
    }
  });
