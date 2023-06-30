@@ -1,5 +1,5 @@
 const { CommandBuilder } = require('handler.djs');
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 module.exports = new CommandBuilder()
   .setName('buy')
@@ -41,7 +41,12 @@ async function GlobalExecute(message, interaction) {
   const price = guildData.price * amount;
   const tax = Math.ceil(price * 20 / 19) == 2 ? 1 : Math.ceil(price * 20 / 19);
   
-  await controller.replyNoMention({ content : `\`\`\`c ${recipientId} ${tax}\`\`\`` });
+  const embed = new EmbedBuilder().setColor('#0be881').setTitle('لديك 5 دقائق لتحويل المبلغ:').setDescription(`\`\`\`c ${recipientId} ${tax}\`\`\``);
+  const row = new ActionRowBuilder().addComponents(new ButtonBuilder().setCustomId('yes').setStyle(ButtonStyle.Danger).setLabel('إلغاء عملية الشراء'));
+  await controller.replyNoMention({ embeds: [embed], components: [row] });
+  
+  const filter_button = (button) => button.user.id === message.author.id;
+  const collector = contr.createMessageComponentCollector({ filter, time: 60000, max: 1 });
   const filter = m => m.author.id == '282859044593598464' && m.content.includes(`${price}`) & m.content.includes(`${recipientId}`) && m.content.includes(`${controller.author.username}`);
   const pay = controller.channel.createMessageCollector({ filter, time, max: 1 });
   const transactionId = 'xxxx-xxxx-xxxx-xxxx'.replace(/x/g, () => Math.floor(Math.random() * 16).toString(16));
