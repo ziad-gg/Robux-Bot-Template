@@ -6,12 +6,12 @@ function toId() {
 
 function isNumber() {
   if (isNaN(this) || parseInt(this) != this || parseInt(this) <= 0) return false;
-  return true;
+  else return true;
 } 
 
 function isInteger() {
   if (isNaN(this) || parseInt(this) != this || parseInt(this) < 0) return false;
-  return true;
+  else return true;
 } 
 
 function toNumber() {
@@ -32,7 +32,7 @@ function toNumber() {
     return numericPart * unit;
   }
 
-  return this;
+  return +this;
 }
 
 function formateNum(num) {
@@ -62,8 +62,7 @@ function replyNoMention(options) {
 } 
 
 Object.prototype.extends = function(obj) {
-  for (var key in obj) {
-    console.log(this[key]);
+  for (const key in obj) {
     this[key] = obj[key];
   }
 }
@@ -76,9 +75,13 @@ String.prototype.extends({
   formateNum
 });
 
-Number.prototype.isNumber = isNumber;
-Number.prototype.toNumber = toNumber;
-Number.prototype.isInteger = isInteger;
-Number.prototype.formateNum = formateNum;
+Number.prototype.extends({
+  isNumber, 
+  toNumber, 
+  isInteger, 
+  formateNum
+});
 
-Message.prototype.replyNoMention = replyNoMention;
+Message.prototype.extends({
+  replyNoMention
+});
