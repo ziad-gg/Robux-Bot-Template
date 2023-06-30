@@ -25,7 +25,7 @@ async function GlobalExecute(message, interaction) {
       .setTitle(group.name)
       .setThumbnail(controller.guild.iconURL({ dynamic: true })) 
       .setDescription(transactions.data.filter(e => e.isPending).sort((a, b) => Math.floor((new Date(a.created).getTime() + 432e6) / 1000) - Math.floor((new Date(b.created).getTime() + 432e6) / 1000)).map(e => `**- Amount : ${Math.ceil(e.currency.amount)}\n- Arrival time : <t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:F> \n<t:${Math.floor((new Date(e.created).getTime() + 432e6) / 1000)}:R>**`).join('\n\n') || ' ')
-      .setFooter({ text: controller.author.username, iconURL: controller.author.displayAvatarURL({ dynamic: true }) })
+      .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
       .setTimestamp()
     
    controller.editMsg = (obj) => interaction ? interaction.editReply(obj) : message.replyNoMention(obj);

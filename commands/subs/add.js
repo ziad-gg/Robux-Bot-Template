@@ -3,9 +3,9 @@ const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRow
 
 module.exports = new CommandBuilder() 
   .setName('add')
-  .setDescription('Add a new Admin.')
-  .setUsage(['{cmdname} (user)'])
-  .setExample(['{cmdname} {userMention}', '{cmdname} {userId}'])
+  .setDescription('Add a new admin.')
+  .setUsage(['{mainName} {cmdname} (User)'])
+  .setExample(['{mainName} {cmdname} {userMention}', '{mainName} {cmdname} {userId}'])
   .InteractionOn(new SlashCommandBuilder().addUserOption((option) => option
      .setName('admin')
      .setDescription('Admin Profile to Add')
