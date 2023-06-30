@@ -1,5 +1,6 @@
 const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { PROBOT_IDS } = require('../../src/Constants.js');
 
 module.exports = new CommandBuilder()
   .setName('buy')
@@ -48,7 +49,7 @@ async function GlobalExecute(message, interaction) {
   const msg = await controller.replyNoMention({ embeds: [embed], components: [row] });
   
   const collector = msg.createMessageComponentCollector({ filter: filter_button, time, max: 1 });
-  const filter = m => m.author.id == '282859044593598464' && m.content.includes(`${price}`) & m.content.includes(`${recipientId}`) && m.content.includes(`${controller.author.username}`);
+  const filter = m => PROBOT_IDS.includes(m.author.id) && m.content.includes(`${price}`) & m.content.includes(`${recipientId}`) && m.content.includes(`${controller.author.username}`);
   const pay = controller.channel.createMessageCollector({ filter, time, max: 1 });
   const transactionId = 'xxxx-xxxx-xxxx-xxxx'.replace(/x/g, () => Math.floor(Math.random() * 16).toString(16));
   
