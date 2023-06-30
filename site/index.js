@@ -50,7 +50,7 @@ http.on('listening', async () => {
     console.log('Uptimed Successfully !');
   } catch (e) {
     if (e.response.status === 403) return console.log('Uptimed Successfully !');
-    console.error('Uptimed Failed !');
+    else console.error('Uptimed Failed !');
   } 
 });
 
