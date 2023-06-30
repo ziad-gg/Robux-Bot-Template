@@ -24,7 +24,7 @@ module.exports = {
     },
     body: {
       p1: 'A multifunctional bot for helping <span class="text-purple">Robux</span> servers!',
-      p2: 'Robux, Welcomer, Embed Messages, Logs, and more with an easy Dashboard!',
+      p2: 'Robux, Logs, and more with an easy Dashboard!',
       SupportButton: {
         style: 'secondary',
         url: 'https://discord.gg/vbda2fvp',

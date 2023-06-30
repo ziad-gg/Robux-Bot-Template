@@ -25,6 +25,7 @@ async function GlobalExecute(message, interaction, global) {
   if (guildData.thxEmoji === emoji.id) return controller.replyNoMention({ content: '❌ **هذا الايموجي محدد من قبل!**' });
   guildData.thxEmoji = emoji.id;
   await guildData.save();
+  
   controller.replyNoMention({ content: '✅ **تم بنجاح إضافة هذه الايموجي!**' });
 };
 
