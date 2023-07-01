@@ -20,6 +20,7 @@ async function GlobalExecute(message, interaction) {
   
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
     
+  const amountWithTax = controller.getData('roblox').getTax(amount);
   const tax = Math.round(amount / 0.7);
   const transformation = Math.floor(amount * 0.7);
   
