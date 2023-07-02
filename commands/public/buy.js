@@ -87,6 +87,10 @@ async function GlobalExecute(message, interaction) {
   
   collector.on('collect', async (button) => {
     if (button.customId === 'end') {
+    if (!cooldowns.has(key)) {
+      row.components[0].setDisabled(true);
+      return msg.edit({ components: [row] }).catch(() => 1);
+    } 
     await cooldowns.delete(key);
     button.reply({ content: '✅ **تم بنجاح إنهاء عملية الشراء!**' });
     }
