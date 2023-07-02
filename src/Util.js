@@ -1,4 +1,5 @@
-const { Mesage }
+const { Message } = require('discord.js');
+
 function toId() {
   return this.replace(/[<@#&!>]/g, '');
 }
