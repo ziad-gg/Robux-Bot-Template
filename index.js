@@ -27,6 +27,7 @@ client.Application.setCooldown({
 
 client.Application.build();
 client.Application.setData({
+  events: new EventEmitter(), 
   roblox: zoblox, 
   buy_cooldowns: new Map(),
   guilds: require('./src/models/Guilds.js'),

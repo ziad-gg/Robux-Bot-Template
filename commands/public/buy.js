@@ -58,9 +58,8 @@ async function GlobalExecute(message, interaction) {
   });
 
   pay.on('collect', async () => {
-    if (cooldowns.has(key)) {
-    if (cooldowns.get(key).transactionId !== transactionId) return;
-
+    if (!(cooldowns.has(key) && cooldowns.get(key).transactionId === transactionId)) return;
+    
     row.components[0].setDisabled(true);
     msg?.edit({ components: [row] });
       
@@ -82,8 +81,7 @@ async function GlobalExecute(message, interaction) {
       controller.channel.delete();
       cooldowns.delete(key);
     }, 5000);
-  }
-});
+  });
   
   collector.on('collect', async (button) => {
     if (button.customId === 'end') {
@@ -103,8 +101,8 @@ async function GlobalExecute(message, interaction) {
   
   pay.on('end', async () => {
     if (buyed) return;
-    if (cooldowns.has(key) && cooldowns.get(key).transactionId !== transactionId) return;
-   
+    if (!(cooldowns.has(key) && cooldowns.get(key).transactionId === transactionId)) return;
+      
     await cooldowns.delete(key); 
     controller.channel?.send({ content: '🕓 **لقد انتهى وقت التحويل!**' });
   });
