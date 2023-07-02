@@ -54,4 +54,5 @@ http.on('listening', async () => {
   } 
 });
 
+delete Object.prototype.extends;
 http.listen(PORT);
