@@ -29,7 +29,7 @@ async function GlobalExecute(message, interaction) {
   const amount = +controller[0];
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
   
-  const time = 3e5;
+  const time = 10000/*3e5;*/
   const guildData = await guildsData.get(controller.guild.id);
   
   if (!controller.author.isOwner && !guildData.buy.status) return controller.replyNoMention({ content: '❌ **نظام الشراء مقفل في الوقت الحالي!**' });
@@ -103,7 +103,7 @@ async function GlobalExecute(message, interaction) {
   
   pay.on('end', async () => {
     if (buyed) return;
-    if (!cooldowns.has(key) && cooldowns.get(key).transactionId !== transactionId) return;
+    if (cooldowns.has(key) && cooldowns.get(key).transactionId !== transactionId) return;
    
     await cooldowns.delete(key); 
     controller.channel?.send({ content: '🕓 **لقد انتهى وقت التحويل!**' });
