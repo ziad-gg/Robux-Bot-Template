@@ -103,7 +103,7 @@ async function GlobalExecute(message, interaction) {
   
   pay.on('end', async () => {
     if (buyed) return;
-    if (cooldowns.has(key) && cooldowns.get(key).transactionId !== transactionId) return;
+    if (!cooldowns.has(key) && cooldowns.get(key).transactionId !== transactionId) return;
    
     await cooldowns.delete(key); 
     controller.channel?.send({ content: '🕓 **لقد انتهى وقت التحويل!**' });
