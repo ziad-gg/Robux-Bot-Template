@@ -88,13 +88,13 @@ async function GlobalExecute(message, interaction) {
   collector.on('collect', async (button) => {
     if (button.customId === 'end') {
     await cooldowns.delete(key);
-    button?.reply({ content: '✅ **تم بنجاح إنهاء عملية الشراء!**' });
+    button.reply({ content: '✅ **تم بنجاح إنهاء عملية الشراء!**' });
     }
   });
   
   collector.on('end', () => {
     row.components[0].setDisabled(true);
-    msg?.edit({ components: [row] });
+    msg.edit({ components: [row] }).catch(() => 1);
   });
   
   pay.on('end', async () => {
