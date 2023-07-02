@@ -1,18 +1,17 @@
-const { Message } = require('discord.js/src/structures/Message.js');
-
+const { Mesage }
 function toId() {
   return this.replace(/[<@#&!>]/g, '');
-} 
+}
 
 function isNumber() {
   if (isNaN(this) || parseInt(this) != this || parseInt(this) <= 0) return false;
   else return true;
-} 
+}
 
 function isInteger() {
   if (isNaN(this) || parseInt(this) != this || parseInt(this) < 0) return false;
   else return true;
-} 
+}
 
 function toNumber() {
   const units = {
@@ -36,7 +35,7 @@ function toNumber() {
   return +this;
 }
 
-function formateNum(num) {
+function formateNum() {
   if (this >= 1e18) {
     return (this / 1e18).toFixed(1) + 's';
   } else if (this >= 1e15) {
@@ -60,29 +59,23 @@ function replyNoMention(options) {
     repliedUser: false
   };
   return this.reply(options);
-} 
-
-Object.prototype.extends = function(obj) {
-  for (const key in obj) {
-    this[key] = obj[key];
-  }
 }
 
-String.prototype.extends({
-  toId, 
-  isNumber, 
-  toNumber, 
-  isInteger,
-  formateNum
-});
+// Object.prototype.extends = function(obj) {
+//   for (const key in obj) {
+//     this[key] = obj[key];
+//   }
+// };
 
-Number.prototype.extends({
-  isNumber, 
-  toNumber, 
-  isInteger, 
-  formateNum
-});
+String.prototype.toId = toId;
+String.prototype.isNumber = isNumber;
+String.prototype.toNumber = toNumber;
+String.prototype.isInteger = isInteger;
+String.prototype.formateNum = formateNum;
 
-Message.prototype.extends({
-  replyNoMention
-});
+Number.prototype.isNumber = isNumber;
+Number.prototype.toNumber = toNumber;
+Number.prototype.isInteger = isInteger;
+Number.prototype.formateNum = formateNum;
+
+Message.prototype.replyNoMention = replyNoMention;
