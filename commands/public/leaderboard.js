@@ -24,7 +24,7 @@ async function GlobalExecute(message, interaction) {
   .setColor('#0be881')
   .setTitle('Leaderboard') 
   .setDescription(data.join('\n') || ' ') 
-  .setFooter({ text: controller.author.username, iconURL: controller.author.displayAvatarURL({ dynamic: true }) })
+  .setFooter({ text: controller.author.username, iconURL: controller.author.avatarURL() })
   .setTimestamp();
 
   function getUser(userId) {
