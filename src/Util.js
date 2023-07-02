@@ -24,11 +24,12 @@ function toNumber() {
     's': 1e18,
   };
 
-  const lastChar = this.charAt(this.length - 1);
+  const str = this.toString();
+  const lastChar = str.charAt(str.length - 1);
   const unit = units[lastChar];
 
   if (unit) {
-    const numericPart = parseFloat(this.slice(0, this.length - 1));
+    const numericPart = parseFloat(str.slice(0, str.length - 1));
     return numericPart * unit;
   }
 
