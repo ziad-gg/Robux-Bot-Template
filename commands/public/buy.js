@@ -29,6 +29,7 @@ async function GlobalExecute(message, interaction) {
   const amount = +controller[0];
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
   
+  const events = controller.getData('events');
   const time = 10000/*3e5;*/
   const guildData = await guildsData.get(controller.guild.id);
   
@@ -60,8 +61,7 @@ async function GlobalExecute(message, interaction) {
   pay.on('collect', async () => {
     if (!(cooldowns.has(key) && cooldowns.get(key).transactionId === transactionId)) return;
     
-    row.components[0].setDisabled(true);
-    msg?.edit({ components: [row] });
+    events.emit('buy-end');
       
     userData.balance += amount;
     userData.buyedTotal += amount;
@@ -85,16 +85,13 @@ async function GlobalExecute(message, interaction) {
   
   collector.on('collect', async (button) => {
     if (button.customId === 'end') {
-    if (!cooldowns.has(key)) {
-      row.components[0].setDisabled(true);
-      return msg.edit({ components: [row] }).catch(() => 1);
-    } 
-    await cooldowns.delete(key);
-    button.reply({ content: '✅ **تم بنجاح إنهاء عملية الشراء!**' });
+      await cooldowns.delete(key);
+      events.emit('buy-end');
+      button.reply({ content: '✅ **تم بنجاح إنهاء عملية الشراء!**' });
     }
   });
   
-  collector.on('end', () => {
+  events.on('buy-end', () => {
     row.components[0].setDisabled(true);
     msg.edit({ components: [row] }).catch(() => 1);
   });
@@ -103,7 +100,8 @@ async function GlobalExecute(message, interaction) {
     if (buyed) return;
     if (!(cooldowns.has(key) && cooldowns.get(key).transactionId === transactionId)) return;
       
-    await cooldowns.delete(key); 
+    await cooldowns.delete(key);
+    events.emit('buy-end');
     controller.channel?.send({ content: '🕓 **لقد انتهى وقت التحويل!**' });
   });
 };

@@ -2,6 +2,7 @@ const { Client } = require('discord.js');
 const { Zoblox, Events } = require('zoblox.js');
 const { Application } = require('handler.djs');
 const { DEFAULT_PREFIX, OWNERS, CLIENT_OPTIONS } = require('./src/Constants.js');
+const EventEmitter = require('node:events');
 const mongoose = require('mongoose');
 const path = require('node:path');
 
