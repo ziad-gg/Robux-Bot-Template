@@ -30,7 +30,7 @@ async function GlobalExecute(message, interaction) {
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
   
   const events = controller.getData('events');
-  const time = 10000/*3e5;*/
+  const time = 3e5;
   const guildData = await guildsData.get(controller.guild.id);
   
   if (!controller.author.isOwner && !guildData.buy.status) return controller.replyNoMention({ content: '❌ **نظام الشراء مقفل في الوقت الحالي!**' });
