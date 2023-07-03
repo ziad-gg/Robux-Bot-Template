@@ -45,16 +45,15 @@ app.use(function (req, res) {
 });
 
 http.on('listening', async () => {
-  setInterval(async () => {
   await axios({ url: UPTIME_API + '/add', method: 'POST', data: { url: PROJECT_LINK + '/uptime' } })
   .then(() => {
      console.log('Uptimed Successfully !');
    })
   .catch((e) => {
-     console.log(e)
+     if (e.response?.status === 403) console.log('Uptimed Successfully !');
      console.error('Uptimed Failed !');
    });
 });
-}, 1000)
+
 delete Object.prototype.extends;
 http.listen(PORT);
