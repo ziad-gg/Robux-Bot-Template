@@ -47,10 +47,11 @@ app.use(function (req, res) {
 http.on('listening', async () => {
   await axios({ url: UPTIME_API + '/add', method: 'POST', data: { url: PROJECT_LINK + '/uptime' } })
   .then(() => {
-    console.log('Uptimed Successfully !');
-  }).catch(() => {
-    console.error('Uptimed Failed !');
-  });
+     console.log('Uptimed Successfully !');
+   })
+  .catch(() => {
+     console.error('Uptimed Failed !');
+   });
 });
 
 delete Object.prototype.extends;
