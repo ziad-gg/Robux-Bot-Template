@@ -20,9 +20,9 @@ async function GlobalExecute(message, interaction) {
   
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
     
-  const amount_tax = controller.getData('roblox').getTax(amount);
-  const tax = amount_tax.tax;
-  const transformation = amount_tax.transformation;
+  const robux = controller.getData('roblox').getTax(amount);
+  const tax = robux.tax;
+  const transformation = robux.transformation;
   
   return controller.replyNoMention({
     embeds: [
