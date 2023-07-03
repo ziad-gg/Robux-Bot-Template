@@ -45,13 +45,12 @@ app.use(function (req, res) {
 });
 
 http.on('listening', async () => {
-  try {
-    await axios({ url: UPTIME_API + '/add', method: 'POST', data: { url: PROJECT_LINK + '/uptime' } });
+  await axios({ url: UPTIME_API + '/add', method: 'POST', data: { url: PROJECT_LINK + '/uptime' } })
+  .then(() => {
     console.log('Uptimed Successfully !');
-  } catch (e) {
-    if (e.response.status === 403) return console.log('Uptimed Successfully !');
-    else console.error('Uptimed Failed !');
-  } 
+  }).catch(() => {
+    console.error('Uptimed Failed !');
+  });
 });
 
 delete Object.prototype.extends;
