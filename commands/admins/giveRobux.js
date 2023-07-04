@@ -43,7 +43,7 @@ async function GlobalExecute(message, interaction) {
   if (robux < amount) return controller.replyNoMention({ content: '❌ **هذا العدد من الروبكس غير متوفر في الجروب في الوقت الحالي!**' });
 
   try {
-  //await member.payout({ amount });
+  await member.payout({ amount });
     
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
