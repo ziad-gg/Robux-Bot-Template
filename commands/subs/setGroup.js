@@ -19,6 +19,7 @@ async function GlobalExecute(message, interaction, global) {
   const guildData = await global;
   
   const groupId = controller[0];
+  if (!roblox.me) return controller.replyNoMention({ content: '❌ **يحب أن تحدد الكوكيز اولا!**' });
   if (!groupId) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد معرف الجروب!**' });
   if (!groupId.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن يكون معرف المجموعة رقمآ!**' });
   
