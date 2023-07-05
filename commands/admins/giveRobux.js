@@ -40,10 +40,10 @@ async function GlobalExecute(message, interaction) {
   if (!member) return controller.replyNoMention({ content: `❌ **هذا اللاعب غير متواجد في الجروب\nرابط الجروب:**\n${group}` });
 
   const robux = await group.fetchCurrency().then((e) => e.robux);
-  if (robux < amount) return controller.replyNoMention({ content: '❌ **هذا العدد من الروبكس غير متوفر في الجروب في الوقت الحالي!**' });
+  //if (robux < amount) return controller.replyNoMention({ content: '❌ **هذا العدد من الروبكس غير متوفر في الجروب في الوقت الحالي!**' });
 
   try {
-  await member.payout({ amount });
+  //await member.payout({ amount });
     
     const canvas = createCanvas(991, 172);
     const ctx = canvas.getContext('2d')
