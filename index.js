@@ -38,12 +38,6 @@ client.Application.setData({
   Constants: require('./src/Constants.js'),
 });
 
-process.on('warning', (warn) => {
-  console.log(warn);
-  //if (warn.message === 'buffer.Blob is an experimental feature. This feature could change at any time') return;
-  //else console.log(warn.message);
-});
-
 process.on('unhandledRejection', (err) => console.error(err));
 zoblox.on(Events.UserReady, () => console.log(`Logged is as: ${zoblox.me.username} !`));
 mongoose.connection.on('connected', () => console.log('Connected to database !'));
