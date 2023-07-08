@@ -34,7 +34,7 @@ async function GlobalExecute(message, interaction, global) {
   embed.setTitle('الاوامر الذ يستطيع التحكم بها');
   
   const time = 500000;
-  const commands = [];
+  let commands = [];
 
   await controller.client.Application.commands.filter(cmd => cmd.category == 'admins').forEach((value, key) => {
     commands.push(key);
@@ -49,7 +49,7 @@ async function GlobalExecute(message, interaction, global) {
   const msg = await controller.replyNoMention({ embeds: [embed], components: [row] }); 
   const filter = (button) => button.user.id === controller.author.id;
   const ButtonCollector = msg.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time });
-  const MessageCollectorFilter = m => mcommands.includes(m.content.toLowerCase()) && m.author.id == controller.author.id;
+  const MessageCollectorFilter = m => m.author.id === controller.author.id && commands.includes(m.content.toLowerCase());
   const MessageCollector = controller.channel.createMessageCollector({ filter: MessageCollectorFilter, time });
 
   MessageCollector.on('collect', m => {
