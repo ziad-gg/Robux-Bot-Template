@@ -45,7 +45,7 @@ async function GlobalExecute(message, interaction) {
     const SubCommands = cmd.SubCommands;
     const GroupName = message ? message[1]?.toLowerCase() : interaction[0].split(' ')[1].trim().toLowerCase();
     console.log(GroupName);
-    const GroupChildName = message ? message[2]?.toLowerCase() : interaction[0].split(' ')[0].trim().toLowerCase();
+    const GroupChildName = message ? message[2]?.toLowerCase() : interaction[0].split(' ')[2].trim?.() ? interaction[0].split(' ')[2].trim().toLowerCase() : interaction[0].split(' ');
     console.log(GroupChildName);
 
     
