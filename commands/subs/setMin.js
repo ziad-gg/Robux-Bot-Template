@@ -5,7 +5,7 @@ module.exports = new CommandBuilder()
   .setName('min')
   .setDescription('Sets the minimum.')
   .setUsage(['{mainName} {groupname} {cmdname} (Minimum)'])
-  .setExample(['{mainName} {groupname} {cmdname} 5'])
+  .setExample(['{mainName} {groupname}  {cmdname} 5'])
   .InteractionOn(new SlashCommandBuilder().addNumberOption((option) => option
      .setName('min')
      .setDescription('The minimum you want')
