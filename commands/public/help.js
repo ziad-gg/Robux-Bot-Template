@@ -43,8 +43,9 @@ async function GlobalExecute(message, interaction) {
     embed.setTitle(`Command: ${cmd.name}`);
     
     const SubCommands = cmd.SubCommands;
-    const GroupName = controller[1]?.toLowerCase();
-    const GroupChildName = controller[2]?.toLowerCase();
+    const GroupName = message ? controller[1]?.toLowerCase() : controller[0].replace(cmd.name,'');
+    const GroupChildName = message ? controller[2]?.toLowerCase() : controller[0].replace(GroupName, '');
+    console.log(GroupName,GroupChildName);
       
     let subs;
     let main;
