@@ -4,7 +4,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('recipient')
   .setDescription('Sets Recipient.')
-  .setUsage(['{mainName} {cmdname} (user)'])
+  .setUsage(['{mainName} {cmdname} (User)'])
   .setExample(['{mainName} {cmdname} {userMention}', '{mainName} {cmdname} {userId}'])
   .InteractionOn(new SlashCommandBuilder().addUserOption((option) => option
      .setName('user')

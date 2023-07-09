@@ -5,8 +5,8 @@ const { DEFAULT_PREFIX } = require('../../src/Constants.js');
 module.exports = new CommandBuilder()
   .setName('prefix')
   .setDescription('Change the prefix.')
-  .setUsage(['{mainName} {cmdname} (prefix)'])
-  .setExample(['{mainName} {cmdname} -'])
+  .setUsage(['{mainName} {cmdname} (Prefix)'])
+  .setExample(['{mainName} {cmdname} !'])
   .InteractionOn(new SlashCommandBuilder().addStringOption((option) => option
      .setName('prefix')
      .setDescription('The new prefix do you want')

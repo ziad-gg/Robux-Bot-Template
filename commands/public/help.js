@@ -33,7 +33,6 @@ async function GlobalExecute(message, interaction) {
   
   const isAdmin = Guild.admins.find(admin => admin.id === controller.author.id);
   const command = message ? message[0]?.toLowerCase() : interaction[0]?.split(' ')[0];
-  console.log(command);
   const embed = new EmbedBuilder().setColor('#0be881');
   //const link = new ActionRowBuilder().addComponents(new ButtonBuilder().setLabel(`${client.user.username} Dashboard`).setURL(Constants.PROJECT_LINK).setStyle(ButtonStyle.Link));
 
@@ -44,9 +43,8 @@ async function GlobalExecute(message, interaction) {
     embed.setTitle(`Command: ${cmd.name}`);
     
     const SubCommands = cmd.SubCommands;
-    const GroupName = message ? message[1]?.toLowerCase() : interaction[0]?.split(' ')[1].toLowerCase();
-    console.log(GroupName);
-    const GroupChildName = message ? message[2]?.toLowerCase() : interaction[0;
+    const GroupName = message ? message[1]?.toLowerCase() : interaction[0].split(' ')[1]?.toLowerCase();
+    const GroupChildName = message ? message[2]?.toLowerCase() : interaction[0].split(' ')[2]?.toLowerCase();
       
     let subs;
     let main;

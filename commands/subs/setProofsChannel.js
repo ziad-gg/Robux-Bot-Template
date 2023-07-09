@@ -4,7 +4,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = new CommandBuilder() 
   .setName('proofschannel')
   .setDescription('Sets proofs channel.')
-  .setUsage(['{mainName} {cmdname} (channel)'])
+  .setUsage(['{mainName} {cmdname} (Channel)'])
   .setExample(['{mainName} {cmdname} {channelMention}', '{mainName} {cmdname} {channelId}'])
   .InteractionOn(new SlashCommandBuilder().addChannelOption((option) => option
      .addChannelTypes(0)                                                       
