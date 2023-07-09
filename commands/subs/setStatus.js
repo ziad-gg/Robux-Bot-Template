@@ -3,7 +3,9 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = new CommandBuilder() 
   .setName('status')
-  .setDescription('Sets status.')
+  .setDescription('Sets status to reverse status.')
+  .setUsage(['{mainName} {groupname} {cmdname}'])
+  .setExample(['{mainName} {groupname} {cmdname}'])
   .InteractionOn(new SlashCommandBuilder())
   .setGlobal(GlobalExecute)
   .setInteractionExecution(InteractionExecute)
