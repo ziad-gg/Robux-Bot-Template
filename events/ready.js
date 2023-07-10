@@ -10,7 +10,6 @@ module.exports = new EventBuilder()
 
 async function Execute(client) {
   const zoblox = client.Application.getData('roblox');
-  console.log(zoblox.getSession());
   console.log(`${client.user.username} Is Online !`);
   require('../site/index.js');
   // app.listen(PORT);
