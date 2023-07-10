@@ -28,6 +28,6 @@
     "humanize-duration": "^3.29.0"
   },
   "engines": {
-    "node": "16.x"
+    "node": ">=16.9.0"
   }
 }
