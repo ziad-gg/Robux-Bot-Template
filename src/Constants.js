@@ -9,10 +9,10 @@ module.exports.DEFAULT_THXEMOJI = '❤️'; //Default Thx Emoji
 module.exports.PROJECT_LINK = 'https://' + 'bot-robux' + '.glitch.me' //Replace bot-robux with the project name
 
 module.exports.CLIENT_OPTIONS = {
-  intents: 3276799,
+  intents: 3276799 | 32767,
   partials: [Partials.Channel, Partials.User, Partials.Message, Partials.Reaction, Partials.GuildMember],
   presence: {
-    status: 'Online',
+    status: 'dnd',
     activities: [{
       type: ActivityType.Playing,
       name: '/help | Robux Factory'
