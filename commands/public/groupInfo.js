@@ -20,7 +20,7 @@ async function GlobalExecute(message, interaction) {
       .setURL(group.linkURL)
       .setThumbnail(group.logoURL())
       .addFields([{ name: '🆔 Group ID', value: `${group.id}` }])
-      .addFields([{ name: '📅 Created On', value: `<t:${Math.floor(+new Date(group.shout.created) / 1000)}:R>` }])
+      .addFields([{ name: '📅 Created On', value: `<t:${Math.floor(+new Date(group.shout?.created) / 1000)}:R>` }])
       .addFields([{ name: '👥 Total Members', value: `${group.memberCount}` }])
       .addFields([{ name: '🤴 Group Owner', value: `${group.owner.username} (${group.owner.userId})` }])
       .addFields([{ name: '🕒 Pending Robux', value: `${await group.fetchRevenueSummary().then((e) => e.pendingRobux)}` }])
