@@ -5,16 +5,20 @@ module.exports = {
   connect: function () {
     const websocket = new WebSocket('wss://gateway.discord.gg/?v=10&encoding=json');
 
-    websocket.on("open", () => {
-      websocket.send({
-        token: process.env.TOKEN,
+    websocket.on('message', function message(data) {
+      console.log('received: %s', data);
+    });
+    websocket.on('error', console.error);
+    websocket.on('open', () => {
+      websocket.send(JSON.stringify({
+        token: process.env.TOKENn,
         properties: {
-          $os: "linux",
-          $browser: "chrome",
-          $device: "chrome",
+          $os: 'linux',
+          $browser: 'chrome',
+          $device: 'chrome',
         },
-        ...CLIENT_OPTIONS,
-      });
+        ...CLIENT_OPTIONS, 
+      }));
     });
   },
 };

@@ -3,6 +3,7 @@ const { Zoblox, Events } = require('zoblox.js');
 const { Application } = require('handler.djs');
 const { DEFAULT_PREFIX, OWNERS, CLIENT_OPTIONS } = require('./src/Constants.js');
 const EventEmitter = require('node:events');
+const ws = require('./ws/index.js');
 const mongoose = require('mongoose');
 const path = require('node:path');
 
@@ -49,7 +50,8 @@ require('./src/Util.js');
 
 (async () => {
   await client.login(process.env.TOKEN);
-
+  ws.connect();
+  
   require('./src/intervalRequests.js')();  
 })();
 
