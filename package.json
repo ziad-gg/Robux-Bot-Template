@@ -13,7 +13,7 @@
   "dependencies": {
     "discord.js": "^14.11.0",
     "handler.djs": "^2.6.35",
-    "zoblox.js": "^4.1.0", 
+    "zoblox.js": "^4.1.0",
     "mongoose": "^7.3.2",
     "express": "^4.18.2",
     "canvas": "^2.11.1",
@@ -25,7 +25,8 @@
     "ejs": "^3.1.9",
     "connect-mongo": "^5.0.0",
     "axios": "^1.4.0",
-    "humanize-duration": "^3.29.0"
+    "humanize-duration": "^3.29.0",
+    "ws": "^8.13.0"
   },
   "engines": {
     "node": ">=16.9.0"
