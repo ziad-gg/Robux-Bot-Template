@@ -46,7 +46,7 @@ mongoose.connect(process.env.MONGO_URL);
 zoblox.login(process.env.COOKIE);
 
 require('./src/Util.js');
-  
+
 (async () => {
   await client.login(process.env.TOKEN);
 
