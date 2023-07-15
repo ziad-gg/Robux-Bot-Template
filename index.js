@@ -50,7 +50,7 @@ require('./src/Util.js');
 (async () => {
   await client.login(process.env.TOKEN);
 
-  require('./src/intervalRequests.js')();
+  require('./src/intervalRequests.js')();  
 })();
 
 module.exports = client;

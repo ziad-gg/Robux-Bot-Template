@@ -9,7 +9,6 @@ module.exports = new EventBuilder()
   .setExecution(Execute)
 
 async function Execute(client) {
-  client.user.setStatus('idle');
   console.log(`${client.user.username} Is Online !`);
   require('../site/index.js');
   // app.listen(PORT);
