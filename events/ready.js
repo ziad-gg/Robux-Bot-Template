@@ -1,5 +1,6 @@
 const { EventBuilder } = require('handler.djs');
 const { Events } = require('discord.js');
+const { CLIENT_OPTIONS: { presence } = require('../src/Constants.js');
 // const { PORT } = require('../src/Constants.js');
 // const express = require('express');
 // const app = express();
