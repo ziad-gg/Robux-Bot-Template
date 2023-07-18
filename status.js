@@ -13,4 +13,4 @@ client.on('ready', (client) => {
 
 // console.log(process.env.token);
 
-client.login('MTExODE3ODA4MTM0MTk2ODM4Ng.GqG5Ao.i2qzT4T_FR93jRJbWvJOxl_biyIdJbozxhtzbE');
+// client.login('MTExODE3ODA4MTM0MTk2ODM4Ng.GqG5Ao.i2qzT4T_FR93jRJbWvJOxl_biyIdJbozxhtzbE');

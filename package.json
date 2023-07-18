@@ -25,7 +25,8 @@
     "ejs": "^3.1.9",
     "connect-mongo": "^5.0.0",
     "axios": "^1.4.0",
-    "humanize-duration": "^3.29.0"
+    "humanize-duration": "^3.29.0",
+    "nodemon": "^3.0.1"
   },
   "engines": {
     "node": ">=16.9.0"
