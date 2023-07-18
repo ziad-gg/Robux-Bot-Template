@@ -26,7 +26,13 @@ client.Application.setCooldown({
   once: true
 })
 
-client.Application.build();
+
+client.on('ready', (client) => {
+  client.user.setPresence({ activities: [{ name: 'with discord.js' }], status: 'idle' });
+  
+});
+
+// client.Application.build();
 client.Application.setData({
   events: new EventEmitter(), 
   roblox: zoblox, 

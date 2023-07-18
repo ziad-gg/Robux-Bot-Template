@@ -11,6 +11,5 @@ module.exports = new EventBuilder()
 async function Execute(client) {
   console.log(`${client.user.username} Is Online !`);
   require('../site/index.js');
-  // await client.user.setPresence({ activities: [{ name: 'with discord.js' }], status: 'idle' });
   console.log(client.user.presence)
 }

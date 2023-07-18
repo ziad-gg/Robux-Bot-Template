@@ -12,7 +12,7 @@ module.exports.CLIENT_OPTIONS = {
   intents: 3276799,
   partials: [Partials.Channel, Partials.User, Partials.Message, Partials.Reaction, Partials.GuildMember],
   presence: {
-    status: 'idel',
+    status: 'dnd',
     activities: [{
       type: ActivityType.Playing,
       name: '/help | Robux Factory'
