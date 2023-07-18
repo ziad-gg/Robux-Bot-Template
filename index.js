@@ -24,15 +24,10 @@ client.Application.setCooldown({
   Mdelete: 2500,
   EphemeralReply: true,
   once: true
-})
-
-
-client.on('ready', (client) => {
-  client.user.setPresence({ activities: [{ name: 'with discord.js' }], status: 'idle' });
-  
 });
 
-// client.Application.build();
+
+client.Application.build();
 client.Application.setData({
   events: new EventEmitter(), 
   roblox: zoblox, 

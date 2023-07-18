@@ -11,5 +11,4 @@ module.exports = new EventBuilder()
 async function Execute(client) {
   console.log(`${client.user.username} Is Online !`);
   require('../site/index.js');
-  console.log(client.user.presence)
 }
