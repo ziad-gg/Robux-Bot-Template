@@ -9,7 +9,7 @@ const path = require('node:path');
 const client = new Client(CLIENT_OPTIONS);
 const zoblox = new Zoblox();
 
-const command = `node status.js ${JSON.stringify({ TOKEN: process.env.TOKEN })}`
+const command = `node status.js ${process.env.TOKEN}`
 
 exec(command, (error, stdout, stderr) => {
    if (error) {
@@ -35,7 +35,7 @@ new Application(client, {
   EventsPath: path.join(__dirname, 'events'),
   owners: OWNERS,
   prefix: DEFAULT_PREFIX
-})
+});
 
 client.Application.setCooldown({   
   message: '**{Username}**, Cooldown (**{counter}** left)', 
@@ -45,7 +45,6 @@ client.Application.setCooldown({
   EphemeralReply: true,
   once: true
 });
-
 
 client.Application.build();
 client.Application.setData({
