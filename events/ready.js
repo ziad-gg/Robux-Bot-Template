@@ -11,5 +11,10 @@ module.exports = new EventBuilder()
 async function Execute(client) {
   console.log(`${client.user.username} Is Online !`);
   require('../site/index.js');
-  // app.listen(PORT);
+  
+  setTimeout(async () => {
+     console.log('activities is here')
+     await client.user.setPresence({ activities: [{ name: 'with discord.js' }], status: 'idle' });
+    console.log(client.user.presence)
+  }, 5000)
 }
