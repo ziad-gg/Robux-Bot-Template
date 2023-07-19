@@ -9,26 +9,6 @@ const path = require('node:path');
 const client = new Client(CLIENT_OPTIONS);
 const zoblox = new Zoblox();
 
-const command = `node status.js ${process.env.TOKEN}`
-
-exec(command, (error, stdout, stderr) => {
-   if (error) {
-    console.error(`Error occurred: ${error.message}`);
-    return;
-  };
-
-  if (stdout) {
-    console.log("Child process output:", stdout);
-    return
-  }; 
-  
-  if (stderr) {
-    console.error("Child process errors:", stderr);
-    return
-  };
-  
-})
-
 new Application(client, {
   commandsPath: path.join(__dirname, 'commands'),
   validationPath: path.join(__dirname, 'validation'),
