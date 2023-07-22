@@ -13,8 +13,8 @@
   "dependencies": {
     "discord.js": "^14.11.0",
     "handler.djs": "^2.6.35",
-    "zoblox.js": "^4.4.0",
-    "mongoose": "^7.3.2",
+    "zoblox.js": "^4.5.0",
+    "mongoose": "^7.4.0",
     "express": "^4.18.2",
     "canvas": "^2.11.1",
     "connect-flash": "^0.1.1",

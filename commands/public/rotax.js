@@ -1,5 +1,6 @@
 const { CommandBuilder } = require('handler.djs');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { calculateTax } = require('zoblox.js');
 
 module.exports = new CommandBuilder() 
   .setName('rotax')
@@ -20,7 +21,7 @@ async function GlobalExecute(message, interaction) {
   
   if (!amount.isNumber()) return controller.replyNoMention({ content: '❌ **يجب أن تقوم بتحديد رقم صحيح!**' });
     
-  const robux = controller.getData('roblox').getTax(amount);
+  const robux = calculateTax(amount);
   const tax = robux.tax;
   const transformation = robux.transformation;
   
