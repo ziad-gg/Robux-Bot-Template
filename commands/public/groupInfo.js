@@ -23,9 +23,9 @@ async function GlobalExecute(message, interaction) {
       .addFields([{ name: '📅 Created On', value: `<t:${Math.floor(+new Date(group.shout?.created) / 1000)}:R>` }])
       .addFields([{ name: '👥 Total Members', value: `${group.memberCount}` }])
       .addFields([{ name: '🤴 Group Owner', value: `${group.owner.username} (${group.owner.userId})` }])
-      .addFields([{ name: '🕒 Pending Robux', value: `${await group.fetchRevenueSummary().then((e) => e.pendingRobux)}` }])
-      .addFields([{ name: '💎 Total Robux', value: `${await group.fetchCurrency().then((e) => e.robux)}` }])
-      .addFields([{ name: '🔺 Cashed Out', value: `${await group.fetchRevenueSummary({ timeFrame: 'Year' }).then((e) => e.groupPayoutRobux.toString().replace('-', ''))}` }]);
+      .addFields([{ name: '🕒 Pending Robux', value: `${await group.fetchRevenueSummary().then(({ pendingRobux }) => pendingRobux)}` }])
+      .addFields([{ name: '💎 Total Robux', value: `${await group.fetchCurrency()}` }])
+      .addFields([{ name: '🔺 Cashed Out', value: `${await group.fetchRevenueSummary({ timeFrame: 'Year' }).then(({ groupPayoutRobux }) => Math.abs(groupPayoutRobux))}` }]);
     controller.replyNoMention({ embeds: [embed] });
   } catch {
     controller.replyNoMention({ content: '❌ **حدث خطأ ما**' });
