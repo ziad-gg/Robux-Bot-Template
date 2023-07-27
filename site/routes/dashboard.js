@@ -15,7 +15,7 @@ router.get('/', ensureAuthenticated, async (req, res) => {
   const roblox = client.Application.getData('roblox');
   
   const group = await roblox.groups.get(GuildData.group);  
-  const funds = await group.fetchCurrency().then((e) => e.robux);
+  const funds = await group.fetchCurrency();
   const pending = await group.fetchRevenueSummary().then((e) => e.pendingRobux);
   
   res.render('dashboard', {
